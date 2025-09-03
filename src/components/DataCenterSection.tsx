@@ -13,7 +13,7 @@ const DataCenterSection = () => {
       <div className="container mx-auto">
         <div className="text-center mb-16 animate-fade-in">
           <div className="mb-6">
-            <svg className="mx-auto h-12 w-12 text-brand-orange animate-scale-in" viewBox="0 0 24 24" fill="none">
+            <svg className="mx-auto h-12 w-12 text-[#123F55] animate-scale-in" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.3"/>
               <circle cx="12" cy="4" r="2" fill="currentColor"/>
               <circle cx="12" cy="20" r="2" fill="currentColor"/>
@@ -22,7 +22,7 @@ const DataCenterSection = () => {
             </svg>
           </div>
           
-          <h2 className="text-sm text-brand-orange uppercase tracking-wide mb-4">
+          <h2 className="text-sm text-[#123F55] uppercase tracking-wide mb-4">
             DigiPowerX Data Centers
           </h2>
           
@@ -46,7 +46,7 @@ const DataCenterSection = () => {
         </div>
 
         <div className="text-center animate-fade-in animation-delay-500">
-          <Button className="bg-brand-orange hover:bg-brand-orange-hover text-white px-8 py-3 font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg">
+          <Button className="text-[#123F55] hover:bg-brand-white-hover text-white px-8 py-3 font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg">
             DigiPowerX Data Center
           </Button>
         </div>

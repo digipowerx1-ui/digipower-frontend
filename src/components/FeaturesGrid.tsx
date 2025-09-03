@@ -25,9 +25,12 @@ const FeaturesGrid = () => {
       <div className="container mx-auto">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="text-center group hover:scale-105 transition-all duration-300 cursor-pointer">
+            <div
+              key={index}
+              className="text-center group hover:scale-105 transition-all duration-300 cursor-pointer"
+            >
               <div className="flex justify-center mb-4">
-                <feature.icon className="h-8 w-8 text-brand-orange group-hover:scale-110 transition-transform duration-300" />
+                <feature.icon className="h-8 w-8 text-[#123F55] group-hover:scale-110 transition-transform duration-300" />
               </div>
               <p className="text-brand-dark leading-relaxed group-hover:text-brand-orange transition-colors duration-300">
                 {feature.title}
@@ -37,6 +40,7 @@ const FeaturesGrid = () => {
         </div>
       </div>
     </section>
+
   );
 };
 

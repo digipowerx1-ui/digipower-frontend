@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import AboutUs from "./pages/AboutUs";
-import Facilities from "./pages/Facilities";
+import Facilities from "./pages/Projects";
 import InvestorRelations from "./pages/InvestorRelations";
 import Technology from "./pages/Technology";
 import Contact from "./pages/Contact";

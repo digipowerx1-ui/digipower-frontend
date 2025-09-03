@@ -7,15 +7,15 @@ const HeroSection = () => {
     <section className="py-20 px-4 bg-white">
       <div className="container mx-auto text-center">
         <div className="mb-6 animate-fade-in">
-          <span className="text-brand-orange font-medium text-sm uppercase tracking-wide">
+          <span className="text-[#000000] font-medium text-sm uppercase tracking-wide">
             THE AI INFRASTRUCTURE COMPANY
           </span>
         </div>
-        
+
         <h1 className="text-5xl md:text-6xl font-bold text-brand-dark mb-6 leading-tight animate-slide-up">
           AI INFRASTRUCTURE<br />FOR INNOVATION
         </h1>
-        
+
         <p className="text-xl text-brand-gray max-w-4xl mx-auto mb-16 animate-fade-in animation-delay-300">
           Data center and cloud solutions for scaling training, inference, and other demanding high-performance compute workloads.
         </p>
@@ -30,8 +30,8 @@ const HeroSection = () => {
               <p className="text-brand-gray mb-8">
                 Custom colocation and managed infrastructure for sovereign AI and HPC.
               </p>
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 className="text-brand-dark hover:text-brand-orange font-medium group/btn"
               >
                 Take me there
@@ -49,8 +49,8 @@ const HeroSection = () => {
               <p className="text-brand-gray mb-8">
                 The GPU cloud built and optimized for AI workloads.
               </p>
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 className="text-brand-dark hover:text-brand-orange font-medium group/btn"
               >
                 Take me there
