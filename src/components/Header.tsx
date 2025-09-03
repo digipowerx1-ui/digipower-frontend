@@ -13,63 +13,31 @@ const Header = () => {
     <header className="bg-white border-b border-gray-200 animate-slide-up">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center">
-          <h1 className="text-2xl font-bold text-brand-dark hover:text-brand-orange transition-colors duration-300 cursor-pointer">
+          <a href="/" className="text-2xl font-bold text-brand-dark hover:text-brand-orange transition-colors duration-300">
             DIGIPOWERX
-          </h1>
+          </a>
         </div>
         
         <nav className="hidden lg:flex items-center space-x-8">
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center space-x-1 text-brand-dark hover:text-brand-orange transition-all duration-200 group">
-              <span>Data Center</span>
-              <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-white border border-gray-200 shadow-2xl animate-slide-up">
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">AI HPC Colocation</DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">Custom Infrastructure</DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">Managed Services</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center space-x-1 text-brand-dark hover:text-brand-orange transition-all duration-200 group">
-              <span>Cloud</span>
-              <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-white border border-gray-200 shadow-2xl animate-slide-up">
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">GPU Compute</DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">Networking</DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">Storage</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center space-x-1 text-brand-dark hover:text-brand-orange transition-all duration-200 group">
-              <span>Solutions</span>
-              <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-white border border-gray-200 shadow-2xl animate-slide-up">
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">AI Training</DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">Machine Learning</DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">HPC Workloads</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <a href="#partners" className="text-brand-dark hover:text-brand-orange transition-all duration-200 hover:scale-105">
-            Partners
+          <a href="/about" className="text-brand-dark hover:text-brand-orange transition-all duration-200 hover:scale-105">
+            About Us
           </a>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center space-x-1 text-brand-dark hover:text-brand-orange transition-all duration-200 group">
-              <span>Resources</span>
-              <ChevronDown className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-white border border-gray-200 shadow-2xl animate-slide-up">
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">Documentation</DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">Case Studies</DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-brand-light-gray transition-colors duration-200">Blog</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <a href="/facilities" className="text-brand-dark hover:text-brand-orange transition-all duration-200 hover:scale-105">
+            Facilities
+          </a>
+
+          <a href="/investor-relations" className="text-brand-dark hover:text-brand-orange transition-all duration-200 hover:scale-105">
+            Investor Relations
+          </a>
+
+          <a href="/technology" className="text-brand-dark hover:text-brand-orange transition-all duration-200 hover:scale-105">
+            Technology
+          </a>
+
+          <a href="/contact" className="text-brand-dark hover:text-brand-orange transition-all duration-200 hover:scale-105">
+            Contact
+          </a>
         </nav>
 
         <div className="flex items-center space-x-4">
@@ -89,43 +57,11 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent className="w-[300px] bg-white">
               <div className="flex flex-col space-y-6 mt-8">
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-brand-dark">Data Center</h4>
-                  <div className="pl-4 space-y-2">
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">AI HPC Colocation</a>
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">Custom Infrastructure</a>
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">Managed Services</a>
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-brand-dark">Cloud</h4>
-                  <div className="pl-4 space-y-2">
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">GPU Compute</a>
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">Networking</a>
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">Storage</a>
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-brand-dark">Solutions</h4>
-                  <div className="pl-4 space-y-2">
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">AI Training</a>
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">Machine Learning</a>
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">HPC Workloads</a>
-                  </div>
-                </div>
-                
-                <a href="#partners" className="font-semibold text-brand-dark hover:text-brand-orange transition-colors">Partners</a>
-                
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-brand-dark">Resources</h4>
-                  <div className="pl-4 space-y-2">
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">Documentation</a>
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">Case Studies</a>
-                    <a href="#" className="block text-sm text-brand-gray hover:text-brand-orange transition-colors">Blog</a>
-                  </div>
-                </div>
+                <a href="/about" className="font-semibold text-brand-dark hover:text-brand-orange transition-colors">About Us</a>
+                <a href="/facilities" className="font-semibold text-brand-dark hover:text-brand-orange transition-colors">Facilities</a>
+                <a href="/investor-relations" className="font-semibold text-brand-dark hover:text-brand-orange transition-colors">Investor Relations</a>
+                <a href="/technology" className="font-semibold text-brand-dark hover:text-brand-orange transition-colors">Technology</a>
+                <a href="/contact" className="font-semibold text-brand-dark hover:text-brand-orange transition-colors">Contact</a>
                 
                 <Button className="bg-brand-orange hover:bg-brand-orange-hover text-white w-full">
                   Contact us
