@@ -103,7 +103,7 @@ const AboutUs = () => {
                       Building the foundation for tomorrow's energy ecosystem through
                       innovative infrastructure and sustainable practices.
                     </p>
-                  </CardContent>
+                  </CardContent>     
                 </Card>
               </div>
             </div>
