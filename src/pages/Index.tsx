@@ -1,5 +1,3 @@
-// Update this page (the content is just a fallback if you fail to update the page)
-
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
