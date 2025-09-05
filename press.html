@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <title>Digipower X — Press Releases (White Theme)</title>
+  <style>
+    :root {
+      --bg: #fff;
+      /* page background */
+      --panel: #f9f9f9;
+      /* card background */
+      --muted: #555;
+      /* muted text */
+      --accent: #000;
+      /* main text */
+      --radius: 14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--accent);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.45;
+    }
+
+    .navigation {
+      background-color: #ffffff;
+
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+
+    }
+
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4rem;
+      padding-top: 20px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #3d4c5c;
+    }
+
+    /* Mobile menu hidden by default */
+    .desktop-menu {
+      display: none;
+      flex-direction: column;
+      background: #111;
+      /* dark bg for mobile */
+      position: absolute;
+      top: 70px;
+      /* navbar ke niche */
+      left: 0;
+      right: 0;
+      padding: 20px;
+      gap: 15px;
+      z-index: 1000;
+    }
+
+    .desktop-menu.active {
+      display: flex;
+    }
+
+    /* Desktop view me menu hamesha visible ho */
+    @media (min-width: 992px) {
+      .desktop-menu {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        background: transparent;
+        padding: 0;
+      }
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #3d4c5c;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #074173;
+    }
+
+    .dropdown-icon {
+      width: 1rem;
+      height: 1rem;
+      transition: transform 0.3s ease;
+      color: #074173;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      min-width: 200px;
+      z-index: 100;
+
+    }
+
+    .nav-item:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-item:hover .dropdown-icon {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+      padding: 0.5rem;
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #3d4c5c;
+      text-decoration: none;
+      border-radius: 0.375rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f8fafc;
+      color: #074173;
+    }
+
+    .contact-btn {
+      background-color: #3d4c5c;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-weight: 500;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      background-color: rgba(61, 76, 92, 0.9);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 0.25rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mobile-menu-btn span {
+      width: 1.5rem;
+      height: 0.125rem;
+      background-color: #3d4c5c;
+      transition: all 0.3s ease;
+    }
+
+    /* ================= RESPONSIVE BREAKPOINTS ================= */
+
+    /* Mobile: up to 767px */
+    @media (max-width: 767px) {
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .desktop-menu {
+        display: none;
+        background: #111;
+      }
+
+      .desktop-menu.active {
+        display: flex;
+      }
+
+      .desktop-menu .nav-link {
+        color: #fff;
+      }
+
+      .dropdown-menu {
+        position: static;
+        background: #222;
+        border: none;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+
+      .dropdown-item {
+        color: #fff;
+      }
+
+      .dropdown-item:hover {
+        background: #333;
+        color: #f8fafc;
+      }
+    }
+
+
+    /* Hero */
+    .hero {
+      background-image: url(./src/assets/ChatGPT\ Image\ Sep\ 2\,\ 2025\,\ 09_39_23\ PM.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin: 0 0 12px;
+      color: var(--accent);
+      letter-spacing: 0.5px
+    }
+
+    .hero p {
+      margin: 0 auto;
+      color: var(--muted);
+      max-width: 800px
+    }
+
+    /* Filters + Search */
+    .controls {
+      display: flex;
+      gap: 24px;
+      flex-direction: column;
+      align-items: center;
+      padding: 36px 20px
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .2s
+    }
+
+    .btn.active {
+      background: #000;
+      color: #fff;
+      border-color: #000
+    }
+
+    .search-wrap {
+      width: 100%;
+      max-width: 720px;
+      margin-top: 18px
+    }
+
+    .search {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid #ccc
+    }
+
+    .search input {
+      flex: 1;
+      background: transparent;
+      border: 0;
+      outline: none;
+      color: var(--accent);
+      font-size: 15px
+    }
+
+    .search .icon {
+      stroke: #000
+    }
+
+    /* Grid */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 20px 80px
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px
+    }
+
+    @media (max-width:980px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media (max-width:640px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .card {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid #e5e5e5;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08)
+    }
+
+    .card .meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px
+    }
+
+    .card h3 {
+      font-size: 15px;
+      margin: 0 0 10px;
+      color: var(--accent)
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    .card a.read {
+      display: inline-block;
+      margin-top: 12px;
+      color: #000;
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    /* ✅ Stylish Read More button */
+    .read-more {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(135deg, #000000, #444444);
+      /* black gradient */
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .read-more:hover {
+      background: linear-gradient(135deg, #444444, #000000);
+      transform: translateY(-2px);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .read-more:active {
+      transform: translateY(1px);
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .footer {
+      background-color: white;
+      padding: 60px 80px 30px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+
+    }
+
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .footer-left {
+      max-width: 280px;
+    }
+
+    .footer-left h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .footer-left .stock {
+      margin: 10px 0;
+      font-size: 14px;
+      color: #f05b44;
+      font-weight: 600;
+    }
+
+    .footer-left button {
+      margin-top: 15px;
+      background: transparent;
+      border: 1px solid #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .footer-left button:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .footer-center {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 60px;
+      flex: 1;
+    }
+
+    .footer-center ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+    }
+
+    .footer-center ul li {
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: black;
+      cursor: pointer;
+    }
+
+    .footer-center ul li:hover {
+      color: #fff;
+    }
+
+    .footer-center ul li.title {
+      font-weight: 600;
+      color: black;
+      margin-bottom: 18px;
+    }
+
+    .footer-right img {
+      width: 140px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: #bbb;
+    }
+
+    .footer-bottom a {
+      color: #bbb;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+
+    .footer-bottom a:hover {
+      color: #fff;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+    }
+
+    .socials a img {
+      width: 20px;
+      height: 20px;
+      filter: invert(1);
+    }
+
+    .social-links {
+      margin-top: 15px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-links a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #111;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+
+    .social-links a:hover {
+      background: #ff6600;
+      /* DigiPower X orange theme */
+      color: #fff;
+    }
+
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .footer-center {
+        grid-template-columns: repeat(2, auto);
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer {
+        padding: 40px 20px;
+      }
+
+      .footer-center {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="navigation">
+    <div class="nav-container">
+      <div class="nav-content">
+        <!-- Logo -->
+        <div class="logo">
+          <a href="./index.html"><img src="./src/assets/digilogo.png" height="40px"></a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <nav class="desktop-menu">
+          <div class="nav-item dropdown">
+            <a href="./index.html" class="nav-link">
+              Home
+
+            </a>
+            <div class="dropdown-menu">
+
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="./whitefiber-standalone.html" class="nav-link">
+              Projects
+
+            </a>
+
+          </div>
+
+          <a href="./Aboutus.html" class="nav-link">About us</a>
+
+          <a href="./inf.html" class="nav-link">Infrastructure</a>
+          <a href="./investor.html" class="nav-link">Investors </a>
+          <a href="./press.html" class="nav-link">Press Release </a>
+          <a href="./contact.html" class="nav-link">Contact
+
+
+          </a>
+        </nav>
+
+        <!-- Contact Button -->
+
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-overlay">
+      <h1>Press Releases</h1>
+      <p>Stay updated with our latest company announcements, financial reports and strategic initiatives shaping the
+        future.</p>
+    </div>
+  </section>
+
+  <section class="controls">
+    <div class="filters" role="tablist">
+      <button class="btn active" data-filter="all">All</button>
+      <button class="btn" data-filter="2025">2025</button>
+      <button class="btn" data-filter="2020">2020</button>
+      <button class="btn" data-filter="events">Events</button>
+      <button class="btn" data-filter="partnerships">Partnerships</button>
+    </div>
+
+    <div class="search-wrap">
+      <div class="search">
+        <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 21l-4.35-4.35" stroke="#000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="11" cy="11" r="6" stroke="#000" stroke-width="1.6" />
+        </svg>
+        <input id="search" placeholder="Search press releases..." />
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <!-- Left -->
+      <div class="footer-left">
+        <img src="./src/assets/digilogo.png" height="40px">
+
+        <!-- 🔗 Social Links -->
+        <div class="social-links">
+          <a href="https://www.linkedin.com/company/digipowerx" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://twitter.com/digipowerx" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.youtube.com/@digipowerx" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Center -->
+      <div class="footer-center">
+        <ul>
+          <li class="title">Company</li>
+          <li>Home</li>
+          <li>Investor Relations</li>
+          <li>News</li>
+          <li>Presentations</li>
+        </ul>
+
+        <ul>
+          <li class="title">Financials
+          </li>
+          <li>Stock Information</li>
+          <li>SEC Filings</li>
+
+        </ul>
+
+        <ul>
+          <li class="title">Governance
+          </li>
+          <li>Documents & Charters</li>
+          <li>Leadership & Committees</li>
+
+        </ul>
+
+        <ul>
+          <li class="title">IR Resources
+          </li>
+          <li>Email Alerts</li>
+          <li>Insights</li>
+          <li>Contact</li>
+
+      </div>
+
+      <!-- Right -->
+
+    </div>
+
+    <!-- Bottom -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const grid = document.getElementById("grid");
+        const searchInput = document.getElementById("search");
+        const filterButtons = document.querySelectorAll(".filters .btn");
+
+        let allReleases = [];
+
+        // ✅ Fetch data from Strapi API (your JSON structure)
+        async function fetchReleases() {
+          try {
+            const response = await fetch("https://artistic-eggs-9d7a8f2a5f.strapiapp.com/api/press-releases?populate=*");
+            const result = await response.json();
+
+            // Your API returns fields directly (no attributes wrapper)
+            allReleases = result.data.map(item => ({
+              id: item.id,
+              title: item.title || "Untitled",
+              date: item.date || "",
+              document: item.document || null
+            }));
+
+            console.log("✅ All releases loaded:", allReleases);
+            renderReleases(allReleases);
+          } catch (error) {
+            console.error("❌ Error fetching releases:", error);
+          }
+        }
+
+        // ✅ Render cards with "Read More" button
+        function renderReleases(releases) {
+          grid.innerHTML = "";
+
+          releases.forEach(item => {
+            console.log("Rendering item:", item);
+
+            const title = item.title;
+            const date = item.date ? new Date(item.date).toLocaleDateString() : "";
+            const pdfUrl = item.document?.url || null;
+
+            const card = document.createElement("div");
+            card.className = "card";
+
+            card.innerHTML = `
+        <h3>${title}</h3>
+        <p>${date}</p>
+        ${pdfUrl
+                ? `<button class="read-more" data-pdf="${pdfUrl}">Read More</button>`
+                : `<p class="no-pdf">PDF not available</p>`
+              }
+      `;
+
+            grid.appendChild(card);
+          });
+
+          // ✅ Attach event listeners to Read More buttons
+          document.querySelectorAll(".read-more").forEach(button => {
+            button.addEventListener("click", (e) => {
+              const pdfUrl = e.target.dataset.pdf;
+              if (pdfUrl) {
+                console.log("📂 Opening PDF:", pdfUrl);
+                window.open(pdfUrl, "_blank");
+              } else {
+                console.warn("⚠️ No PDF available for this release");
+              }
+            });
+          });
+        }
+
+        // ✅ Search functionality
+        searchInput.addEventListener("input", (e) => {
+          const query = e.target.value.toLowerCase();
+          const filtered = allReleases.filter(item =>
+            item.title.toLowerCase().includes(query)
+          );
+          renderReleases(filtered);
+        });
+
+        // ✅ Filter buttons
+        filterButtons.forEach(button => {
+          button.addEventListener("click", () => {
+            filterButtons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            const filter = button.getAttribute("data-filter");
+
+            if (filter === "all") {
+              renderReleases(allReleases);
+            } else if (filter === "events" || filter === "partnerships") {
+              const filtered = allReleases.filter(item =>
+                item.title.toLowerCase().includes(filter)
+              );
+              renderReleases(filtered);
+            } else {
+              const filtered = allReleases.filter(item =>
+                item.date.startsWith(filter)
+              );
+              renderReleases(filtered);
+            }
+          });
+        });
+
+        // ✅ Initial load
+        fetchReleases();
+      });
+    </script>
+
+
+
+    <script src="./script.js"></script>
+
+
+</body>
+
+</html>

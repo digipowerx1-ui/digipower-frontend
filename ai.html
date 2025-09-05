@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    color: #3d4c5c;
+    line-height: 1.6;
+}
+
+.container {
+      max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.containers {
+     background-image: url(./src/assets/ChatGPT\ Image\ Sep\ 2\,\ 2025\,\ 08_43_53\ PM.png);
+}
+
+/* Top Banner */
+.top-banner {
+    background-color: #ff6b35;
+    color: #ffffff;
+    padding: 0.85rem 0;
+}
+
+.top-banner .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.895rem;
+}
+
+.banner-text {
+    text-align: center;
+    margin-right: 1rem;
+}
+
+.banner-btn {
+    background-color: #ffffff;
+    color: #ff6b35;
+    border: none;
+    padding: 0.25rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.banner-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Navigation */
+.navigation {
+    background-color: #ffffff;
+  
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+    padding-top: 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3d4c5c;
+}
+
+.desktop-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #3d4c5c;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ff6b35;
+}
+
+.dropdown-icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.3s ease;
+    color: #ff6b35;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    min-width: 200px;
+    z-index: 100;
+}
+
+.nav-item:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-item:hover .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    padding: 0.5rem;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #3d4c5c;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f8fafc;
+    color: #ff6b35;
+}
+
+.contact-btn {
+    background-color: #3d4c5c;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+    background-color: rgba(61, 76, 92, 0.9);
+}
+
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-menu-btn span {
+    width: 1.5rem;
+    height: 0.125rem;
+    background-color: #3d4c5c;
+    transition: all 0.3s ease;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 5rem 0;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.hero-tagline {
+    color: #ff6b35;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+}
+
+.hero-heading {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #3d4c5c;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #64748b;
+    max-width: 64rem;
+    margin: 0 auto 4rem auto;
+    line-height: 1.6;
+}
+
+/* Service Cards */
+.service-cards {
+    padding: 4rem 0;
+    background-color: #ffffff;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    max-width: 64rem;
+    margin: 0 auto;
+}
+
+.service-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    group: true;
+}
+
+.service-card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card-icon {
+    margin-bottom: 1.5rem;
+}
+
+.card-icon img {
+    width: 3rem;
+    height: 3rem;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3d4c5c;
+    margin-bottom: 1rem;
+}
+
+.card-description {
+    color: #64748b;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.card-cta {
+    display: flex;
+    align-items: center;
+    color: #3d4c5c;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .card-cta {
+    color: #ff6b35;
+}
+
+.card-cta span {
+    margin-right: 0.5rem;
+}
+
+.arrow-icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .arrow-icon {
+    transform: translateX(0.25rem);
+}
+    .performance-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .performance-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .performance-header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.3;
+      max-width: 600px;
+    }
+
+    .performance-header .right {
+      text-align: right;
+      font-size: 16px;
+      color: #555;
+      max-width: 350px;
+    }
+
+    .performance-header img {
+      height: 24px;
+      margin-bottom: 10px;
+    }
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .stat-box {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 30px 20px;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+
+    .stat-box small {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: #9ca3af;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .stat-box h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .stat-box p {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .performance-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .performance-header .right {
+        text-align: left;
+        margin-top: 20px;
+      }
+    }
+     .services-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .services-section h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 50px;
+      color: #1a1a1a;
+      letter-spacing: 1px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 25px;
+      text-align: left;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #1a1a1a;
+    }
+
+    .service-card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #444;
+      margin: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .services-section h2 {
+        font-size: 24px;
+      }
+    }
+    /* Top Hero Section */
+    .hero {
+      
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .hero h2 {
+     letter-spacing: .1rem;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.13;
+    
+    }
+    .hero p {
+      font-size: 18px;
+      color: #555;
+      max-width: 620px;
+      line-height: 1.6;
+      margin: 0 auto;
+    }
+
+    /* Environments Section */
+    .environments {
+      background: #1e1e1e;
+      color: #fff;
+      padding: 50px 20px;
+     
+    }
+    .text{
+      display: flex;
+     
+      align-items: center;
+    justify-content: space-around;
+    }
+    
+    .environments h3 {
+     letter-spacing: .1rem;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.13;
+    }
+    .environments p {
+      font-size: 17px;
+      color: #ccc;
+      max-width: 300px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    /* Diagram */
+   .container-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+
+    /* Text inside SVG */
+    text {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      fill: #fff;
+    }
+    .label-dark {
+      fill: #000;
+    }
+    .section {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .card-content {
+      padding: 20px 24px;
+    }
+
+    .card-content h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #333;
+    }
+
+    .icon {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background: #fff0e6;
+      color: #ff6633;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .card-content p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #555;
+      margin: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .section {
+        grid-template-columns: 1fr;
+      }
+    }
+        .section {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 40px;
+      align-items: flex-start;
+    }
+
+    .section h2 {
+         letter-spacing: .1rem;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.13;
+    }
+
+    .section img {
+      width: 80%;
+      border-radius: 6px;
+      display: block;
+    }
+
+    /* Accordion Styles */
+    .accordion {
+      width: 100%;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid #ccc;
+      padding: 16px 0;
+    }
+
+    .accordion-header {
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .accordion-header span {
+      font-size: 20px;
+      font-weight: 400;
+      color: #333;
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-header.active span {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+      font-size: 14px;
+      color: #444;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    .accordion-content.open {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .accordion-content ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .accordion-content ul li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .accordion-content ul li::before {
+      content: "✔";
+      color: #0c7;
+      font-weight: bold;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .section {
+        grid-template-columns: 1fr;
+      }
+    }
+    .container11{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cpu-section {
+    background: #2e3640;
+    border-radius: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 34px 36px;
+    margin: 20px;
+    max-width: 1040px;
+}
+
+.cpu-content {
+    flex: 1;
+    color: #f3f6f9;
+    padding-right: 36px;
+}
+
+.cpu-content h1 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 23px;
+    margin-top: 0;
+}
+
+.cpu-content .desc {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.cpu-image {
+    flex-basis: 340px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ecf0f3;
+    border-radius: 18px;
+    height: 350px;
+    width: 380px;
+    overflow: hidden;
+}
+
+.cpu-image img {
+    
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+/* footer */
+    .footer {
+      background-color: #1b252d;
+      padding: 60px 80px 30px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .footer-left {
+      max-width: 280px;
+    }
+
+    .footer-left h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .footer-left .stock {
+      margin: 10px 0;
+      font-size: 14px;
+      color: #f05b44;
+      font-weight: 600;
+    }
+
+    .footer-left button {
+      margin-top: 15px;
+      background: transparent;
+      border: 1px solid #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .footer-left button:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .footer-center {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 60px;
+      flex: 1;
+    }
+
+    .footer-center ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer-center ul li {
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: #cfd5db;
+      cursor: pointer;
+    }
+
+    .footer-center ul li:hover {
+      color: #fff;
+    }
+
+    .footer-center ul li.title {
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .footer-right img {
+      width: 140px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: #bbb;
+    }
+
+    .footer-bottom a {
+      color: #bbb;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+
+    .footer-bottom a:hover {
+      color: #fff;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+    }
+
+    .socials a img {
+      width: 20px;
+      height: 20px;
+      filter: invert(1);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .footer-center {
+        grid-template-columns: repeat(2, auto);
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer {
+        padding: 40px 20px;
+      }
+
+      .footer-center {
+        grid-template-columns: 1fr;
+      }
+    }
+/* CTA Section */
+ .cta-section {
+      background: url("./src/assets/ChatGPT\ Image\ Sep\ 2\,\ 2025\,\ 09_39_23\ PM.png") no-repeat center center/cover;
+      text-align: center;
+      padding: 120px 20px;
+      color: #111;
+      position: relative;
+    }
+
+    .cta-section h2 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .cta-section button {
+      background: transparent;
+      border: 1px solid #111;
+      border-radius: 25px;
+      padding: 12px 25px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .cta-section button:hover {
+      background: #111;
+      color: #fff;
+    }
+    </style>
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <span class="banner-text">
+                Network and learn how to build smarter GPU infrastructure - join us September 9 in San Jose
+            </span>
+            <button class="banner-btn">Register now</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="navigation">
+        <div class="nav-container">
+            <div class="nav-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <img src="./src/assets/logo.svg">
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="desktop-menu">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link">
+                            Products
+                            <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-content">
+                                <a href="#" class="dropdown-item">Cloud Computing</a>
+                                <a href="#" class="dropdown-item">Data Centers</a>
+                                <a href="#" class="dropdown-item">HPC Solutions</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link">
+                            Solutions
+                            <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-content">
+                                <a href="#" class="dropdown-item">AI Training</a>
+                                <a href="#" class="dropdown-item">AI Inference</a>
+                                <a href="#" class="dropdown-item">Private AI</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-link">Company</a>
+                    <a href="#" class="nav-link">Resources</a>
+                </nav>
+
+                <!-- Contact Button -->
+                <button class="contact-btn">Contact us</button>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <p class="hero-tagline">THE AI INFRASTRUCTURE COMPANY</p>
+            <h1 class="hero-heading">ENGINEERED FOR</h1>
+             <h1 class="hero-heading">EXCELLENCE IN PRIVATE AI</h1>
+            <p class="hero-subtitle">
+                Data center and cloud solutions for scaling training, inference, and other 
+                demanding high-performance compute workloads.
+            </p>
+        </div>
+    </section>
+     <section class="performance-section">
+    <div class="performance-header">
+      <h1>UNPARALLELED PERFORMANCE FOR AMBITIOUS AI/ML BUILDS</h1>
+      <div class="right">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Nvidia_logo.svg" alt="NVIDIA Logo">
+        <p>High performance NVIDIA H200,<br> GB200, and B200 GPU clusters</p>
+      </div>
+    </div>
+
+    <div class="stats-container">
+      <div class="stat-box">
+        <small>Up to</small>
+        <h2>3.20 TB/S</h2>
+        <p>Infiniband and RoCE GPU Fabric</p>
+      </div>
+      <div class="stat-box">
+        <small>Average</small>
+        <h2>99.95%</h2>
+        <p>Uptime</p>
+      </div>
+      <div class="stat-box">
+        <small>Up to</small>
+        <h2>800 GB/S</h2>
+        <p>Ethernet Networking</p>
+      </div>
+      <div class="stat-box">
+        <small>Up to</small>
+        <h2>300 GB/S</h2>
+        <p>I/O Storage Clusters</p>
+      </div>
+    </div>
+  </section>
+  <section class="services-section">
+    <h2>COMPLEMENTARY CLOUD SERVICES</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="./src/assets/img1.avif" alt="Service 1">
+        <h3>Industry-leading performance &amp; scalability</h3>
+        <p>From small operations to supercluster scalability: we enable everything from prototyping to massive AI model training without compromise.</p>
+      </div>
+      <div class="service-card">
+        <img src="./src/assets/img2.avif" alt="Service 1">
+        <h3>Fine-grained flexibility</h3>
+        <p>WhiteFiber compute offers baremetal, containers and virtualized workload solutions, ensuring adaptability for any business.</p>
+      </div>
+      <div class="service-card">
+  <img src="./src/assets/img3.avif" alt="Service 1">
+        <h3>Next Era Compute</h3>
+        <p>Get access to the latest generation of NVIDIA GPUs including H200, B200, GB200s, paired with the most modern network and storage hardware.</p>
+      </div>
+      <div class="service-card">
+       <img src="./src/assets/img4.avif" alt="Service 1">
+        <h3>Expert-level support</h3>
+        <p>Build a relationship with seasoned AI support experts, ensuring you have reliable backup as your operations grow. 24/7 365.</p>
+      </div>
+    </div>
+  </section>
+   <div class="hero">
+    <h2>BEST-IN-CLASS TIME TO VALUE</h2>
+    <p>
+      Get access to any capacity, any time. WhiteFiber is built for super-compute scale 
+      with elastic capabilities as your business grows.
+    </p>
+  </div>
+
+  <!-- Environments Section -->
+  <div class="environments">
+    <div class="text">
+       <h3>ENVIRONMENTS</h3>
+    <p>
+      Our diverse set of superclusters leverage NVIDIA HGX H100, H200, B200 and GB200 GPUs, 
+      backed by GPU-Direct RDMA, offering unparalleled performance.
+    </p>
+    </div>
+   
+
+    <!-- Diagram with SVG -->
+   <div class="container-img">
+    <img src="./src/assets/hommmm.avif" height="800px">
+   </div>
+  </div>
+   <div class="section">
+    <!-- Left Image -->
+    <div class="card">
+      <img src="./src/assets/coloum1.avif" alt="Server Rack">
+    </div>
+
+    <!-- Infrastructure Card -->
+    <div class="card">
+      <div class="card-content">
+        <h3>
+          <span class="icon">☁</span> Infrastructure
+        </h3>
+        <p>
+          WhiteFiber’s compute platform offers on-demand virtual machines, 
+          containerized workloads, and bare metal compute. We provide a dynamic 
+          range of compute solutions so that you can focus on solving problems 
+          without the burden of maintaining infrastructure.
+        </p>
+      </div>
+    </div>
+
+    <!-- Deployment Card -->
+    <div class="card">
+      <div class="card-content">
+        <h3>
+          <span class="icon">⚙</span> Deployment
+        </h3>
+        <p>
+          Deploy AI workloads across our multiple proprietary data centers and 
+          manage bare metal and virtualized instances from easy-to-use, 
+          developer-friendly API/CLI tooling.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Image -->
+    <div class="card">
+      <img src="./src/assets/colum2.avif" alt="Developers Working">
+    </div>
+  </div>
+  <div class="section">
+    <!-- Left Side Image -->
+    <div>
+      <h2>EQUIPMENT</h2>
+      <img src="./src/assets/serverrr.avif" alt="Server Racks">
+    </div>
+
+    <!-- Right Side Accordion -->
+    <div class="accordion">
+
+      <!-- Item 1 -->
+      <div class="accordion-item">
+        <div class="accordion-header active">
+          NVIDIA DGX™ GB200 <span>−</span>
+        </div>
+        <div class="accordion-content open">
+          <ul>
+            <li>Enterprise-grade AI infrastructure designed for mission-critical workloads with constant uptime and exceptional performance.</li>
+            <li>Features NVIDIA GB200 Superchips with Grace CPUs, Blackwell GPUs, and 1.8 TB/s GPU-to-GPU bandwidth.</li>
+            <li>Seamlessly scales to tens of thousands of chips with NVIDIA Quantum InfiniBand.</li>
+            <li>Accelerates innovation for trillion-parameter generative AI models at an unparalleled scale.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          NVIDIA DGX™ B200 <span>+</span>
+        </div>
+        <div class="accordion-content">
+          <ul>
+            <li>Details about B200 here...</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          NVIDIA DGX™ H200 <span>+</span>
+        </div>
+        <div class="accordion-content">
+          <ul>
+            <li>Details about H200 here...</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          NVIDIA DGX™ H100 <span>+</span>
+        </div>
+        <div class="accordion-content">
+          <ul>
+            <li>Details about H100 here...</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+   <div class="container11">
+<div class="cpu-section">
+        <div class="cpu-content">
+            <h1>LATEST GEN CPU<br>COMPUTE</h1>
+            <p class="desc">
+                Manage virtual or containerized CPU workloads from the WhiteFiber platform.<br><br>
+                WhiteFiber offers equitable pricing on large memory spaces and high core count with our general purpose CPU compute platform.
+            </p>
+        </div>
+        <div class="cpu-image">
+            <img src="./src/assets/chip22.avif" alt="CPU Chip Image">
+        </div>
+    </div>
+  </div>
+   <section class="cta-section">
+    <h2>READY TO MAKE HPC<br>INFRASTRUCTURE YOUR STRATEGIC ADVANTAGE?</h2>
+    <button>Schedule a PoC</button>
+  </section>
+      <footer class="footer">
+    <div class="footer-top">
+      <!-- Left -->
+      <div class="footer-left">
+        <h2>WHITEFIBER</h2>
+        <div class="stock">NASDAQ: WYFI</div>
+        <button>Discuss your needs</button>
+      </div>
+
+      <!-- Center -->
+      <div class="footer-center">
+        <ul>
+          <li class="title">Data Center</li>
+          <li>AI + HPC Colocation</li>
+          <li>Enterprise Colocation</li>
+        </ul>
+
+        <ul>
+          <li class="title">Cloud</li>
+          <li>Compute</li>
+          <li>Storage</li>
+          <li>Networking</li>
+          <li>Observability</li>
+          <li>Security</li>
+          <li>GPU Pricing</li>
+        </ul>
+
+        <ul>
+          <li class="title">Solutions</li>
+          <li>AI</li>
+          <li>Infrastructure</li>
+          <li>Hybrid AI</li>
+          <li>Private AI</li>
+        </ul>
+
+        <ul>
+          <li class="title">Resources</li>
+          <li>Blog</li>
+          <li>Insights</li>
+          <li>News Releases</li>
+          <li style="color:#fff; font-weight:600;">Contact us</li>
+          <li style="color:#fff; font-weight:600;">Partners</li>
+          <li style="color:#fff; font-weight:600;">Investors</li>
+          <li style="color:#fff; font-weight:600;">Investor's FAQ</li>
+        </ul>
+      </div>
+
+      <!-- Right -->
+      <div class="footer-right">
+        <img src="nvidia.png" alt="Nvidia Partner">
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      <div>Press inquiries: michael@whitefiber.com © 2025. All rights reserved.</div>
+      <div>
+        <a href="#">Privacy Policy</a>
+      
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

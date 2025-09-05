@@ -1,27 +1,29 @@
-import AnnouncementBar from "@/components/AnnouncementBar";
-import Header from "@/components/Header";
+import TopBanner from "@/components/TopBanner";
+import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
-import HardwareShowcase from "@/components/HardwareShowcase";
-import DifferencesSection from "@/components/DifferencesSection";
-import FeaturesGrid from "@/components/FeaturesGrid";
+import ServiceCards from "@/components/ServiceCards";
+import HardwareGallery from "@/components/HardwareGallery";
+import DifferenceSection from "@/components/DifferenceSection";
+import FeatureGrid from "@/components/FeatureGrid";
 import DataCenterSection from "@/components/DataCenterSection";
 import CloudSection from "@/components/CloudSection";
 import IntegratedSolutions from "@/components/IntegratedSolutions";
-import Footer from "@/components/Footer";
+import CTASection from "@/components/CTASection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
-      <AnnouncementBar />
-      <Header />
+    <div className="min-h-screen bg-background">
+      <TopBanner />
+      <Navigation />
       <HeroSection />
-      <HardwareShowcase />
-      <DifferencesSection />
-      <FeaturesGrid />
+      <ServiceCards />
+      <HardwareGallery />
+      <DifferenceSection />
+      <FeatureGrid />
       <DataCenterSection />
       <CloudSection />
       <IntegratedSolutions />
-      <Footer />
+      <CTASection />
     </div>
   );
 };
