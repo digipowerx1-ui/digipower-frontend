@@ -623,6 +623,7 @@
           <a href="./inf.html" class="nav-link">Infrastructure</a>
           <a href="./investor.html" class="nav-link">Investors </a>
           <a href="./press.html" class="nav-link">Press Release </a>
+             <a href="./Leader.html" class="nav-link">Leadership </a>
           <a href="./contact.html" class="nav-link">Contact
 
 
@@ -678,58 +679,70 @@
     <div class="footer-top">
       <!-- Left -->
       <div class="footer-left">
-        <img src="./src/assets/digilogo.png" height="40px">
-
-        <!-- 🔗 Social Links -->
-        <div class="social-links">
-          <a href="https://www.linkedin.com/company/digipowerx" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://twitter.com/digipowerx" target="_blank"><i class="fab fa-twitter"></i></a>
-          <a href="https://www.youtube.com/@digipowerx" target="_blank"><i class="fab fa-youtube"></i></a>
-        </div>
+       <img src="./src/assets/digilogo.png" height="40px">
+       
+           <!-- 🔗 Social Links -->
+      <div class="social-links">
+        <a href="https://www.linkedin.com/company/digipowerx" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://twitter.com/digipowerx" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.youtube.com/@digipowerx" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
       </div>
 
       <!-- Center -->
       <div class="footer-center">
         <ul>
           <li class="title">Company</li>
-          <li>Home</li>
-          <li>Investor Relations</li>
-          <li>News</li>
-          <li>Presentations</li>
+         <a href="./Aboutus.html"><li>About us</li></a> 
+         <a href="./inf.html"> <li>Infrastructure </li></a>
+           <a href="./investor.html"><li>Investors </li></a> 
+             <a href="./press.html"><li>News </li></a> 
+              <a href="./contact.html"><li>Contact
+
+
+ </li></a>
         </ul>
 
         <ul>
           <li class="title">Financials
-          </li>
+</li>
           <li>Stock Information</li>
           <li>SEC Filings</li>
-
+         
         </ul>
 
         <ul>
           <li class="title">Governance
-          </li>
+</li>
           <li>Documents & Charters</li>
           <li>Leadership & Committees</li>
-
+         
         </ul>
 
         <ul>
           <li class="title">IR Resources
-          </li>
+</li>
           <li>Email Alerts</li>
           <li>Insights</li>
-          <li>Contact</li>
-
+         <a href="./contact.html"> <li>Contact</li></a>
+         
       </div>
 
       <!-- Right -->
-
+     
     </div>
 
     <!-- Bottom -->
+   
 
-   <script>
+      
+      </div>
+    </div>
+  </footer>
+
+    <!-- Bottom -->
+
+  <script>
   document.addEventListener("DOMContentLoaded", async () => {
     const grid = document.getElementById("grid");
     const searchInput = document.getElementById("search");
@@ -739,21 +752,14 @@
     const CACHE_KEY = "pressReleasesCache";
     const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
-    // ✅ Load from cache if valid
+    // ✅ Load from cache (even if expired)
     function loadFromCache() {
       const cached = localStorage.getItem(CACHE_KEY);
       if (!cached) return null;
 
       try {
         const parsed = JSON.parse(cached);
-        if (Date.now() - parsed.timestamp < CACHE_TTL) {
-          console.log("✅ Loaded from cache");
-          return parsed.data;
-        } else {
-          console.log("⚠️ Cache expired, fetching new data");
-          localStorage.removeItem(CACHE_KEY);
-          return null;
-        }
+        return parsed; // always return data
       } catch (err) {
         console.warn("⚠️ Failed to parse cache", err);
         return null;
@@ -762,45 +768,43 @@
 
     // ✅ Save to cache
     function saveToCache(data) {
-      localStorage.setItem(CACHE_KEY, JSON.stringify({
-        timestamp: Date.now(),
-        data
-      }));
+      localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify({
+          timestamp: Date.now(),
+          data,
+        })
+      );
     }
 
-    // ✅ Fetch data from Strapi API
-    async function fetchReleases() {
-      const cachedData = loadFromCache();
-      if (cachedData) {
-        allReleases = cachedData;
-        renderReleases(allReleases);
-        return;
-      }
-
+    // ✅ Fetch data from backend (refresh cache)
+    async function fetchFreshData() {
       try {
-        const response = await fetch("https://artistic-eggs-9d7a8f2a5f.strapiapp.com/api/press-releases?populate=*");
+        const response = await fetch(
+          "https://artistic-eggs-9d7a8f2a5f.strapiapp.com/api/press-releases?populate=*"
+        );
         const result = await response.json();
 
-        allReleases = result.data.map(item => ({
+        allReleases = result.data.map((item) => ({
           id: item.id,
           title: item.title || "Untitled",
           date: item.date || "",
-          document: item.document || null
+          document: item.document || null,
         }));
 
-        console.log("✅ Fresh data loaded:", allReleases);
+        console.log("🌍 Fresh data loaded:", allReleases);
         saveToCache(allReleases);
         renderReleases(allReleases);
       } catch (error) {
-        console.error("❌ Error fetching releases:", error);
+        console.error("❌ Error fetching fresh releases:", error);
       }
     }
 
-    // ✅ Render cards with "Read More" button
+    // ✅ Render cards with "Read More"
     function renderReleases(releases) {
       grid.innerHTML = "";
 
-      releases.forEach(item => {
+      releases.forEach((item) => {
         const title = item.title;
         const date = item.date ? new Date(item.date).toLocaleDateString() : "";
         const pdfUrl = item.document?.url || null;
@@ -811,17 +815,18 @@
         card.innerHTML = `
           <h3>${title}</h3>
           <p>${date}</p>
-          ${pdfUrl
-            ? `<button class="read-more" data-pdf="${pdfUrl}">Read More</button>`
-            : `<p class="no-pdf">PDF not available</p>`
+          ${
+            pdfUrl
+              ? `<button class="read-more" data-pdf="${pdfUrl}">Read More</button>`
+              : `<p class="no-pdf">PDF not available</p>`
           }
         `;
 
         grid.appendChild(card);
       });
 
-      // ✅ Attach event listeners
-      document.querySelectorAll(".read-more").forEach(button => {
+      // Add listeners
+      document.querySelectorAll(".read-more").forEach((button) => {
         button.addEventListener("click", (e) => {
           const pdfUrl = e.target.dataset.pdf;
           if (pdfUrl) {
@@ -837,16 +842,16 @@
     // ✅ Search functionality
     searchInput.addEventListener("input", (e) => {
       const query = e.target.value.toLowerCase();
-      const filtered = allReleases.filter(item =>
+      const filtered = allReleases.filter((item) =>
         item.title.toLowerCase().includes(query)
       );
       renderReleases(filtered);
     });
 
     // ✅ Filter buttons
-    filterButtons.forEach(button => {
+    filterButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        filterButtons.forEach(btn => btn.classList.remove("active"));
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
         button.classList.add("active");
 
         const filter = button.getAttribute("data-filter");
@@ -854,12 +859,12 @@
         if (filter === "all") {
           renderReleases(allReleases);
         } else if (filter === "events" || filter === "partnerships") {
-          const filtered = allReleases.filter(item =>
+          const filtered = allReleases.filter((item) =>
             item.title.toLowerCase().includes(filter)
           );
           renderReleases(filtered);
         } else {
-          const filtered = allReleases.filter(item =>
+          const filtered = allReleases.filter((item) =>
             item.date.startsWith(filter)
           );
           renderReleases(filtered);
@@ -868,9 +873,18 @@
     });
 
     // ✅ Initial load
-    fetchReleases();
+    const cached = loadFromCache();
+    if (cached?.data?.length) {
+      console.log("✅ Showing cached press releases");
+      allReleases = cached.data;
+      renderReleases(allReleases);
+    }
+
+    // Always refresh in background
+    fetchFreshData();
   });
 </script>
+
 
 
 

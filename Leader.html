@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leadership Team - DigiPower X</title>
+
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* MAIN BODY DIV */
+    .main-body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      position: relative;
+      background: white;
+      color: black;
+    }
+
+    /* HEADER */
+.navigation {
+    background-color: #ffffff;
+  
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+
+
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+   
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+    padding-top: 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3d4c5c;
+}
+
+/* Mobile menu hidden by default */
+.desktop-menu {
+  display: none;
+  flex-direction: column;
+  background: #111; /* dark bg for mobile */
+  position: absolute;
+  top: 70px; /* navbar ke niche */
+  left: 0;
+  right: 0;
+  padding: 20px;
+  gap: 15px;
+  z-index: 1000;
+}
+
+.desktop-menu.active {
+  display: flex;
+}
+
+/* Desktop view me menu hamesha visible ho */
+@media (min-width: 992px) {
+  .desktop-menu {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    background: transparent;
+    padding: 0;
+  }
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #3d4c5c;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.dropdown-icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.3s ease;
+    color: #074173;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    min-width: 200px;
+    z-index: 100;
+    
+}
+
+.nav-item:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-item:hover .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    padding: 0.5rem;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #3d4c5c;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f8fafc;
+    color:#074173;
+}
+
+.contact-btn {
+    background-color: #3d4c5c;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+    background-color: rgba(61, 76, 92, 0.9);
+}
+
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-menu-btn span {
+    width: 1.5rem;
+    height: 0.125rem;
+    background-color: #3d4c5c;
+    transition: all 0.3s ease;
+}
+/* ================= RESPONSIVE BREAKPOINTS ================= */
+
+/* Mobile: up to 767px */
+@media (max-width: 767px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .desktop-menu {
+    display: none;
+    background: #111;
+  }
+
+  .desktop-menu.active {
+    display: flex;
+  }
+
+  .desktop-menu .nav-link {
+    color: #fff;
+  }
+
+  .dropdown-menu {
+    position: static;
+    background: #222;
+    border: none;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .dropdown-item {
+    color: #fff;
+  }
+
+  .dropdown-item:hover {
+    background: #333;
+    color: #f8fafc;
+  }
+}
+
+    /* MAIN CONTENT AREA */
+    .content-wrapper {
+      min-height: calc(100vh - 80px);
+      background: linear-gradient(135deg, #ffffff, #f8f8f8, #ffffff);
+    }
+
+    /* BANNER SECTIONS */
+    .banner {
+      background: rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .banner h1 {
+      font-size: 36px;
+      color: black;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      font-weight: 700;
+    }
+
+    .sub-banner {
+      background: rgba(0, 0, 0, 0.05);
+      color: #333;
+      text-align: center;
+      padding: 15px 20px;
+      font-size: 16px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* TEAM SECTION - FIXED GRID */
+    .team-section {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 40px 20px;
+    }
+
+    .team-card {
+      display: flex;
+      background: rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 16px;
+      overflow: hidden;
+      height: 240px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .team-card img {
+      width: 240px;
+      height: 240px;
+      object-fit: cover;
+      border-right: 2px solid rgba(0, 0, 0, 0.2);
+      filter: none;
+      transition: filter 0.3s ease;
+    }
+
+    .team-card:hover img {
+      filter: brightness(1.1);
+    }
+
+    .team-info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 0 16px 16px 0;
+      flex: 1;
+    }
+
+    .team-info h3 {
+      margin-bottom: 5px;
+      font-size: 20px;
+      color: black;
+      font-weight: 600;
+    }
+
+    .team-info .title {
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .team-info p {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.7);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .read-more {
+      margin-top: 12px;
+      padding: 6px 12px;
+      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      color: black;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: fit-content;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .read-more:hover {
+      background: rgba(0, 0, 0, 0.2);
+      border-color: rgba(0, 0, 0, 0.5);
+      transform: translateY(-1px);
+    }
+
+    /* POPUP STYLING WITH GLASS EFFECT */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100vw; 
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: linear-gradient(135deg, #ffffff, #f8f8f8);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      padding: 35px;
+      max-width: 700px;
+      width: 90%;
+      border-radius: 20px;
+      position: relative;
+      box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(0, 0, 0, 0.1);
+      animation: glassSlideIn 0.4s ease;
+    }
+
+    .popup-content img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      border: 2px solid rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .popup-content h2 {
+      font-size: 26px;
+      margin: 15px 0 8px;
+      color: black;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      font-weight: 700;
+    }
+
+    .popup-content .popup-title {
+      font-weight: 600;
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 20px;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .popup-content p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(0, 0, 0, 0.85);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .close-btn:hover {
+      transform: scale(1.2);
+      color: black;
+      text-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes glassSlideIn {
+      from { 
+        opacity: 0; 
+        transform: scale(0.9) translateY(20px);
+        backdrop-filter: blur(0px);
+      }
+      to { 
+        opacity: 1; 
+        transform: scale(1) translateY(0);
+        backdrop-filter: blur(25px);
+      }
+    }
+
+    /* FOOTER */
+     .footer {
+      background-color: white;
+      padding: 60px 80px 30px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      
+    }
+   
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .footer-left {
+      max-width: 280px;
+    }
+
+    .footer-left h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .footer-left .stock {
+      margin: 10px 0;
+      font-size: 14px;
+      color: #f05b44;
+      font-weight: 600;
+    }
+
+    .footer-left button {
+      margin-top: 15px;
+      background: transparent;
+      border: 1px solid #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .footer-left button:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .footer-center {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 60px;
+      flex: 1;
+    }
+
+    .footer-center ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+     
+    }
+
+    .footer-center ul li {
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: black;
+      cursor: pointer;
+    }
+
+    .footer-center ul li:hover {
+      color: #fff;
+    }
+
+    .footer-center ul li.title {
+      font-weight: 600;
+      color: black;
+      margin-bottom: 18px;
+    }
+
+    .footer-right img {
+      width: 140px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: #bbb;
+    }
+
+    .footer-bottom a {
+      color: #bbb;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+
+    .footer-bottom a:hover {
+      color: #fff;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+    }
+
+    .socials a img {
+      width: 20px;
+      height: 20px;
+      filter: invert(1);
+    }
+    .social-links {
+  margin-top: 15px;
+  display: flex;
+  gap: 12px;
+}
+
+.social-links a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.social-links a:hover {
+  background: #ff6600; /* DigiPower X orange theme */
+  color: #fff;
+}
+
+/* CTA Section */
+ .cta-section {
+      background: url("./src/assets/ChatGPT\ Image\ Sep\ 2\,\ 2025\,\ 09_39_23\ PM.png") no-repeat center center/cover;
+      text-align: center;
+      padding: 120px 20px;
+      color: #111;
+      position: relative;
+    }
+
+    .cta-section h2 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .cta-section button {
+      background: transparent;
+      border: 1px solid #111;
+      border-radius: 25px;
+      padding: 12px 25px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .cta-section button:hover {
+      background: #111;
+      color: #fff;
+    }
+  
+    /* Responsive */
+    @media (max-width: 900px) {
+      .footer-center {
+        grid-template-columns: repeat(2, auto);
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer {
+        padding: 40px 20px;
+      }
+
+      .footer-center {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+      .nav-menu {
+        width: 90%;     
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px 25px;
+        padding: 15px;
+      }
+      .nav-menu a {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+
+      .team-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .team-card {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        text-align: center;
+      }
+
+      .team-card img {
+        width: 100%;
+        height: 414px;
+        border-right: none;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+      }
+
+      .team-info {
+        padding: 15px;
+        border-radius: 0 0 16px 16px;
+      }
+
+      .popup-content {
+        padding: 25px;
+        margin: 20px;
+      }
+
+      .popup-content h2 {
+        font-size: 22px;
+      }
+
+      .popup-content img {
+        width: 100px;
+        height: 100px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+      }
+      .footer-columns {
+        flex-direction: column;
+        gap: 30px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-menu {
+        width: 95%;     
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 12px;
+      }
+      .nav-menu a {
+        font-size: 13px;
+        padding: 6px 10px;
+      }
+      .logo img {
+        height: 28px;
+      }
+      .menu-btn {
+        width: 35px;
+        height: 35px;
+      }
+
+      .team-section {
+        padding: 20px 10px;
+      }
+
+      .banner h1 {
+        font-size: 28px;
+      }
+
+      .banner {
+        padding: 30px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-body">
+
+    <!-- HEADER -->
+    <header class="navigation">
+        <div class="nav-container">
+            <div class="nav-content">
+                <!-- Logo -->
+                <div class="logo">
+                  <a href="./index.html"><img src="./src/assets/digilogo.png" height="40px"></a>  
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="desktop-menu">
+                    <div class="nav-item dropdown">
+                        <a href="./index.html" class="nav-link">
+                            Home
+                           
+                        </a>
+                        <div class="dropdown-menu">
+                           
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="./whitefiber-standalone.html" class="nav-link">
+                            Projects
+                            
+                        </a>
+                       
+                    </div>
+                    
+                    <a href="./Aboutus.html" class="nav-link">About us</a>
+                     
+                    <a href="./inf.html" class="nav-link">Infrastructure</a>
+                     <a href="./investor.html" class="nav-link">Investors </a>
+                      <a href="./press.html" class="nav-link">Press Release </a>
+                         <a href="./Leader.html" class="nav-link">Leadership </a>
+                    <a href="./contact.html" class="nav-link">Contact
+
+
+</a>
+                </nav>
+
+                <!-- Contact Button -->
+              
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAV MENU -->
+   
+
+    <!-- CONTENT WRAPPER -->
+    <div class="content-wrapper">
+      <!-- BANNER -->
+      <section class="banner">
+        <h1>Leadership & Committees</h1>
+      </section>
+      <section class="sub-banner">
+      Meet the visionaries driving innovation and excellence at DigiPower X.
+      </section>
+
+      <!-- TEAM SECTION -->
+      <section class="team-section">
+        <!-- Michel Amar -->
+        <div class="team-card" onclick="openPopup('errol')">
+          <img src="./src/assets/g.jpg" alt="Michel">
+          <div class="team-info">
+            <h3>Michel Amar</h3>
+            <p class="title">Chief Executive Officer</p>
+            <p>French-American entrepreneur in tech, blockchain, electronics, fashion; Chair of Disclosure and Governance Committees.</p>
+            <button class="read-more">Read more</button>
+          </div>
+        </div>
+
+        <!-- Alec Amar -->
+        <div class="team-card" onclick="openPopup('ashley')">
+          <img src="./src/assets/e.jpg" alt="Alec">
+          <div class="team-info">
+            <h3>Alec Amar</h3>
+            <p class="title">President</p>
+            <p>Entrepreneur with expertise in blockchain and consumer electronics; member of the Compensation Committee.</p>
+            <button class="read-more">Read more</button>
+          </div>
+        </div>
+
+        <!-- Paul Ciullo -->
+        <div class="team-card" onclick="openPopup('steve')">
+          <img src="./src/assets/f.jpg" alt="Alec">
+          <div class="team-info">
+            <h3>Paul Ciullo</h3>
+            <p class="title">Independent Director</p>
+            <p>Paul Ciullo, DigiPower X CFO, manages financial strategy, reporting, and operations to drive growth.</p>
+            <button class="read-more">Read more</button>
+          </div>
+        </div>
+
+        <!-- Daniel Rotunno -->
+        <div class="team-card" onclick="openPopup('birks')">
+          <img src="./src/assets/d.jpg" alt="Alec">
+          <div class="team-info">
+            <h3>Daniel Rotunno</h3>
+            <p class="title">VP of Operations </p>
+            <p>Daniel Rotunno, VP of Operations at DigiPower X, oversees operations, efficiency, and strategic execution.</p>
+            <button class="read-more">Read more</button>
+          </div>
+        </div>
+
+        <!-- Luke Marchiori -->
+        <div class="team-card" onclick="openPopup('robert')">
+           <img src="./src/assets/luke.jpg" alt="Luke">
+          <div class="team-info">
+            <h3>Luke Marchiori</h3>
+            <p class="title">Chief Renewable Energy Officer</p>
+            <p>Luke Marchiori, Chief Renewable Energy Officer, leads DigiPower X's clean energy projects and innovation.</p>
+            <button class="read-more">Read more</button>
+          </div>
+        </div>
+
+        <!-- Adam S.Rossman -->
+        <div class="team-card" onclick="openPopup('jean')">
+           <img src="./src/assets/ad.jpg" alt="Adam">
+          <div class="team-info">
+            <h3>Adam S.Rossman</h3>
+            <p class="title">Director</p>
+            <p>Rossman, attorney since 1995, handles real estate and trademarks; serves on multiple committees.</p>
+            <button class="read-more">Read more</button>
+          </div>
+        </div>
+        
+        <!-- Dennis Elsenbeck -->
+        <div class="team-card" onclick="openPopup('dennis')">
+          <img src="./src/assets/denis.jpg" alt="Dennis">
+          <div class="team-info">
+            <h3>Dennis Elsenbeck</h3>
+            <p class="title">Director</p>
+            <p>Dennis Elsenbeck, a Timmins, Ontario native, advised on the acquisition of the Detour Lake gold deposit and the discovery of the Blackwater gold deposit in Canada.</p>
+            <button class="read-more">Read more</button>
+          </div>
+        </div>
+        
+        <!-- Gerard Rotonda -->
+        <div class="team-card" onclick="openPopup('gerard')">
+          <img src="./src/assets/ger.jpg" alt="Gerard">
+          <div class="team-info">
+            <h3>Gerard Rotonda</h3>
+            <p class="title">Director</p>
+            <p>Gerard Rotonda, a Timmins, Ontario native, advised on the acquisition of the Detour Lake gold deposit and the discovery of the Blackwater gold deposit in Canada.</p>
+            <button class="read-more">Read more</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- POPUPS -->
+    <!-- Michel Popup -->
+    <div class="popup" id="popup-errol">
+      <div class="popup-content">
+        <span class="close-btn" onclick="closePopup('errol')">&times;</span>
+        <img src="./src/assets/g.jpg" alt="Michel Amar">
+        <h2>Michel Amar</h2>
+        <p class="popup-title">Chairman</p>
+        <p>Michel Amar is a French-American businessman and entrepreneur known for his success in innovative technology, such as blockchain and electronics, as well as developing branded fashion. With a Bachelor's degree in accounting and business management, Michel has worked and consulted with some of the most famous international brands, playing a vital role in their profitability and continued relevance. In 2019, Michel partnered with Brookstone, a novelty retailer, in developing exclusive, technologically advanced products for their consumer electronics market.
+‍
+<br><strong>Committee Role(s): </strong>
+‍
+• Chair of the Disclosure Committee<br>
+• Member of the Governance and Nominating Committee</p>
+      </div>
+    </div>
+
+    <!-- Alec Popup -->
+    <div class="popup" id="popup-ashley">
+      <div class="popup-content">
+        <span class="close-btn" onclick="closePopup('ashley')">&times;</span>
+         <img src="./src/assets/e.jpg" alt="Michel Amar">
+        <h2>Alec Amar</h2>
+        <p class="popup-title">Director</p>
+        <p>Alec Amar is an entrepreneur who has achieved success in both product development and licensing, as well as blockchain solutions. After graduating from the University of Southern California, with a degree in economics and digital entrepreneurship, Alec devised and headed a blockchain operation, building out highly efficient and productive mining facilities. In addition to blockchain success, Alec's product licensing company, MAT, a versatile R&D incubator, has partnered with notable brands such as Brookstone, in developing innovative electronics. As one of the sole licensees of Brookstone, Alec is actively curating a collection of intelligent, proprietary consumer electronics.
+
+<br><strong>Committee Role(s): </strong>
+‍
+• Member of the Compensation Committee</p>
+      </div>
+    </div>
+
+    <!-- Paul Popup -->
+    <div class="popup" id="popup-steve">
+      <div class="popup-content">
+        <span class="close-btn" onclick="closePopup('steve')">&times;</span>
+         <img src="./src/assets/f.jpg" alt="Michel Amar">
+        <h2>Paul Ciullo</h2>
+        <p class="popup-title">Chief Financial Officer</p>
+        <p>Paul Ciullo is a finance executive with extensive experience in financial management and strategic planning. As Chief Financial Officer of DigiPower X, he oversees accounting, reporting, budgeting, and fiscal operations to support the company's growth and ensure strong financial performance.<br><strong>Committee Role(s)</strong>:<br>
+• Member of the Compensation Committee</p>
+      </div>
+    </div>
+
+    <!-- Daniel Popup -->
+    <div class="popup" id="popup-birks">
+      <div class="popup-content">
+        <span class="close-btn" onclick="closePopup('birks')">&times;</span>
+        <img src="./src/assets/d.jpg" alt="Michel Amar">
+        <h2>Daniel Rotunno</h2>
+        <p class="popup-title">VP of Operations</p>
+        <p>Daniel Rotunno is an operations executive with extensive experience in managing and optimizing business operations. As Vice President of Operations at DigiPower X, he oversees day-to-day operations, process efficiency, and strategic execution to ensure the company meets its operational goals and supports growth initiatives.
+
+<br><strong>Committee Role(s):</strong><br>
+• Member of the Operations Committee</p>
+      </div>
+    </div>
+
+    <!-- Luke Popup -->
+    <div class="popup" id="popup-robert">
+      <div class="popup-content">
+      <img src="./src/assets/luke.jpg" alt="Michel Amar">
+        <span class="close-btn" onclick="closePopup('robert')">&times;</span>
+        <h2>Luke Marchiori</h2>
+        <p class="popup-title">Chief Renewable Energy Officer</p>
+        <p>Luke Marchiori is a renewable energy executive with extensive experience in sustainable power solutions. As Chief Renewable Energy Officer at DigiPower X, he leads the development and implementation of clean energy projects, driving innovation and efficiency in the company's renewable initiatives.
+
+<br><strong>Committee Role(s):</strong><br>
+• Member of the Sustainability Committee</p>
+      </div>
+    </div>
+
+    <!-- Adam Popup -->
+    <div class="popup" id="popup-jean">
+      <div class="popup-content">
+         <img src="./src/assets/ad.jpg" alt="Michel Amar">
+        <span class="close-btn" onclick="closePopup('jean')">&times;</span>
+        <h2>Adam S.Rossman</h2>
+        <p class="popup-title">Independent Advisor</p>
+        <p>Mr. Rossman is a business and real estate attorney. He has been a member of the California Bar since 1995. Mr. Rossman has handled transactions throughout the United States relating to commercial real estate and trademark licensing. Mr. Rossman maintains offices in Beverly Hills, CA. Mr. Rossman received his JD from Loyola Law School, Los Angeles in 1994, a MA in Rhetoric in 1990 and a BA in Rhetoric in 1988 both from University of California at Berkeley.<br><br><strong>Committee Role(s): </strong><br>• Member of the Audit Committee<br>• Member of the Disclosure Committee<br>• Chair of the Compensation Committee<br>• Chair of the Governance and Nominating Committee</p>
+      </div>
+    </div>
+
+    <!-- Dennis Popup -->
+    <div class="popup" id="popup-dennis">
+      <div class="popup-content">
+        <span class="close-btn" onclick="closePopup('dennis')">&times;</span>
+         <img src="./src/assets/denis.jpg" alt="Michel Amar">
+        <h2>Dennis Elsenbeck</h2>
+        <p class="popup-title">Director</p>
+        <p>Dennis Elsenbeck is an energy and sustainability expert with nearly 30 years of leadership experience in U.S. utilities and energy startups. He provides consulting on energy supply, distribution, regulatory compliance, and economic incentives. Dennis serves on several boards and councils, including New York's Climate Action Council, and focuses on shaping sustainable energy policy and local green infrastructure. He holds a Bachelor's in Industrial Engineering Technology, an MBA, and a Master's in Engineering.</p>
+      </div>
+    </div>
+
+    <!-- Gerard Popup -->
+    <div class="popup" id="popup-gerard">
+      <div class="popup-content">
+        <span class="close-btn" onclick="closePopup('gerard')">&times;</span>
+         <img src="./src/assets/ger.jpg" alt="Michel Amar">
+        <h2>Gerard Rotonda</h2>
+        <p class="popup-title">Director</p>
+        <p>Mr. Rotonda was the Chief Financial Officer and Executive Committee Member for Deutsche Bank Wealth, Management Americas from 2011 through 2018. Mr. Rotonda has over 30 years of experience in business development and financial analysis, most recently as Co-Founder and Partner at MMR Development, a real estate company which develops or repositions office, residential and hotel properties. Mr. Rotonda has also been Senior Business Leader and Director Strategy and Planning at MasterCard Incorporated, Director Strategic Planning at Credit Suisse Group, and Vice President Investment Finance and Structured Lending at Citigroup. Mr. Rotonda holds a BSBA in Accounting and MBA from Boston University.
+‍
+<br><strong>Committee Role(s): </strong><br>
+
+• Chair of the Audit Committee<br>
+• Member of the Disclosure Committee<br>
+• Member of the Compensation Committee</p>
+      </div>
+    </div>
+
+
+    <!-- FOOTER -->
+     <section class="cta-section">
+    <h2>READY TO MAKE HPC<br>INFRASTRUCTURE YOUR STRATEGIC ADVANTAGE?</h2>
+    <button>Schedule a PoC</button>
+  </section>
+     <footer class="footer">
+    <div class="footer-top">
+      <!-- Left -->
+      <div class="footer-left">
+       <img src="./src/assets/digilogo.png" height="40px">
+       
+           <!-- 🔗 Social Links -->
+      <div class="social-links">
+        <a href="https://www.linkedin.com/company/digipowerx" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://twitter.com/digipowerx" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.youtube.com/@digipowerx" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
+      </div>
+
+      <!-- Center -->
+      <div class="footer-center">
+        <ul>
+          <li class="title">Company</li>
+         <a href="./Aboutus.html"><li>About us</li></a> 
+         <a href="./inf.html"> <li>Infrastructure </li></a>
+           <a href="./investor.html"><li>Investors </li></a> 
+             <a href="./press.html"><li>News </li></a> 
+              <a href="./contact.html"><li>Contact
+
+
+ </li></a>
+        </ul>
+
+        <ul>
+          <li class="title">Financials
+</li>
+          <li>Stock Information</li>
+          <li>SEC Filings</li>
+         
+        </ul>
+
+        <ul>
+          <li class="title">Governance
+</li>
+          <li>Documents & Charters</li>
+          <li>Leadership & Committees</li>
+         
+        </ul>
+
+        <ul>
+          <li class="title">IR Resources
+</li>
+          <li>Email Alerts</li>
+          <li>Insights</li>
+         <a href="./contact.html"> <li>Contact</li></a>
+         
+      </div>
+
+      <!-- Right -->
+     
+    </div>
+
+    <!-- Bottom -->
+   
+
+      
+      </div>
+    </div>
+  </footer>
+
+  </div> <!-- END main-body -->
+
+  <script>
+    // Menu functionality
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
+    const links = navMenu.querySelectorAll("a");
+
+    // Toggle menu on button click
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      navMenu.classList.toggle("show");
+      menuBtn.classList.toggle("open");
+
+      if (navMenu.classList.contains("show")) {
+        links.forEach((link, i) => {
+          link.style.transitionDelay = `${i * 0.1}s`;
+        });
+      } else {
+        links.forEach(link => {
+          link.style.transitionDelay = "0s";
+        });
+      }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (navMenu.classList.contains("show") && !navMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+        navMenu.classList.remove("show");
+        menuBtn.classList.remove("open");
+      }
+    });
+
+    // Close menu on link click + set active class
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        links.forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
+        navMenu.classList.remove("show");
+        menuBtn.classList.remove("open");
+      });
+    });
+
+    // Popup functionality
+    function openPopup(id) {
+      document.getElementById('popup-' + id).style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePopup(id) {
+      document.getElementById('popup-' + id).style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close popup when clicking outside
+    window.addEventListener('click', function(e) {
+      document.querySelectorAll('.popup').forEach(popup => {
+        if (e.target === popup) {
+          popup.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.popup').forEach(popup => {
+          if (popup.style.display === 'flex') {
+            popup.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+        });
+      }
+    });
+
+    // Smooth scroll animation for team cards
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all team cards
+    document.querySelectorAll('.team-card').forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+      observer.observe(card);
+    });
+
+    // Add loading animation
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '1';
+    });
+  </script>
+  <script src="./script.js"></script>
+
+</body>
+</html>

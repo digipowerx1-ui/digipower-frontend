@@ -377,6 +377,8 @@ body {
 
 .container2{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 /* Hardware Gallery */
 .hardware-gallery {
@@ -388,22 +390,24 @@ body {
 
 
 .gallery-item {
-    aspect-ratio: 2/ 2;   /* 1 ki jagah 16/9 ya 4/3 ratio de do */
+    aspect-ratio: 7 / 8;   /* change ratio as per your need */
     border-radius: 0.5rem;
     overflow: hidden;
+    flex: 0 0 80%;          /* controls size of each slide (increase or decrease %) */
+    margin: 0 auto;         /* center the slide */
 }
-
 
 .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
 }
 
 .gallery-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.1);  /* zoom-in effect */
 }
+
 
 /* Difference Section */
 .difference-section {

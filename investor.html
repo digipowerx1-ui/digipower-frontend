@@ -760,7 +760,7 @@
       align-items: center;
       position: relative;
       overflow: hidden;
-      max-width: 1200px;
+     
       margin: 0 auto 60px;
     }
 
@@ -779,83 +779,229 @@
     }
 
     .sec-table-wrapper {
-      max-width: 1200px;
-      margin: 0 auto;
-      background-color: #ffffff;
-      border: 1px solid #cccccc;
-      border-radius: 8px;
-      overflow: hidden;
-    }
+  background-color: #374151;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  font-family: "Segoe UI", Roboto, sans-serif;
+  color: #fff;
+  backdrop-filter: blur(12px);
+  overflow-x: auto; /* fallback scroll for small devices */
+}
 
-    .sec-controls {
-      text-align: right;
-      padding: 8px 10px;
-      background-color: #ffffff;
-      border-bottom: 1px solid #cccccc;
-      font-size: 11px;
-    }
+/* Controls */
+.sec-controls {
+  display: flex;
+  flex-wrap: wrap; /* allow wrapping */
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
 
-    .sec-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 11px;
-      background: #ffffff;
-    }
+.sec-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
 
-    .sec-table thead {
-      background-color: #e6e6e6;
-    }
+.sec-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #f1f1f1;
+  flex-wrap: wrap;
+}
 
-    .sec-table th {
-      padding: 8px;
-      text-align: left;
-      font-weight: bold;
-      color: #000000;
-      border: 1px solid #999999;
-    }
+.sec-filters select {
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
 
-    .sec-table td {
-      padding: 8px;
-      border: 1px solid #cccccc;
-      vertical-align: top;
-      color: #000000;
-    }
+.sec-filters select:hover {
+  background: rgba(255,255,255,0.25);
+}
 
-    .sec-table tbody tr:nth-child(even) {
-      background-color: #f0f8ff;
-    }
+/* Table */
+.sec-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+  min-width: 600px; /* keeps structure, scrolls on small screens */
+ 
+}
 
-    .form-link {
-      color: #0000ee;
-      text-decoration: underline;
-      cursor: pointer;
-    }
+.sec-table thead th {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-weight: 600;
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  
+}
 
-    .format-links {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+.sec-table tbody tr {
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
 
-    .format-link {
-      text-decoration: underline;
-      font-size: 10px;
-      padding: 2px 4px;
-    }
+.sec-table tbody tr:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.15);
+}
 
-    .format-link.html {
-      color: #0000ee;
-    }
+.sec-table td {
+  padding: 14px 18px;
+  font-size: 0.85rem;
+  color: #f5f7fa;
+}
 
-    .format-link.pdf {
-      color: #ff0000;
-    }
+.sec-table td:first-child {
+  font-weight: 700;
+  color: #ffcc00;
+}
 
-    .format-link.xls {
-      color: #008000;
-    }
+/* Links */
+.form-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.form-link:hover {
+  color: #ffd84d;
+}
+
+/* Format badges */
+.format-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.format-link {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.format-link.html { background: black; color: #fff; }
+.format-link.pdf { background: black; color: #fff; }
+.format-link.xls { background: white; color: black; }
+
+.format-link:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* Pagination */
+.sec-pagination {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.sec-pagination a {
+  margin: 0 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.sec-pagination a:hover {
+  background: #ffcc00;
+  color: #000;
+}
+
+/* ========================= */
+/* RESPONSIVE BREAKPOINTS */
+/* ========================= */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .sec-title {
+    font-size: 1.1rem;
+  }
+
+  .sec-filters {
+    font-size: 0.85rem;
+  }
+
+  .sec-table td, 
+  .sec-table thead th {
+    font-size: 0.8rem;
+    padding: 12px 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .sec-table-wrapper {
+    padding: 16px;
+  }
+
+  .sec-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .sec-title {
+    font-size: 1rem;
+  }
+
+  .sec-filters {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sec-filters select {
+    width: 100%;
+  }
+
+  .sec-table {
+    font-size: 0.75rem;
+    min-width: 100%; /* allow shrink with scroll */
+  }
+
+  .sec-table td,
+  .sec-table thead th {
+    padding: 10px 12px;
+  }
+
+  .format-links {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sec-pagination a {
+    margin: 4px;
+    padding: 5px 10px;
+  }
+}
+
+
 
     /* Governance Section */
     .governance-section {
@@ -1866,6 +2012,7 @@
           <a href="./inf.html" class="nav-link">Infrastructure</a>
           <a href="./investor.html" class="nav-link">Investors </a>
           <a href="./press.html" class="nav-link">Press Release </a>
+             <a href="./Leader.html" class="nav-link">Leadership </a>
           <a href="./contact.html" class="nav-link">Contact
 
 
@@ -1899,11 +2046,13 @@
       <div class="btn-row">
         <a href="#governance" class="btn">Governance at a Glance</a>
         <a href="#sec-filings" class="btn">SEC Filings</a>
-        <a href="#news" class="btn">News</a>
+        <a href="#transfer" class="btn">Transfer Agent</a>
+        
       </div>
       <div class="btn-row">
-        <a href="#transfer" class="btn">Transfer Agent</a>
+        
         <a href="#faq" class="btn">FAQ</a>
+        <a href="#news" class="btn">News</a>
       </div>
     </div>
   </section>
@@ -2070,87 +2219,91 @@
       <p class="sec-subtitle">View and download below</p>
     </div>
 
-    <div class="sec-table-wrapper">
-      <div class="sec-controls">
-        <div style="margin-bottom: 5px;">NASDAQ: DGXX</div>
-        <div style="display: flex; justify-content: flex-end; align-items: center; gap: 10px;">
-          <span>View</span>
-          <select style="font-size: 11px; padding: 2px;">
-            <option>All Filings</option>
-          </select>
-          <span>Year</span>
-          <select style="font-size: 11px; padding: 2px;">
-            <option>Trailing 12 Months</option>
-          </select>
-        </div>
-      </div>
-
-      <table class="sec-table">
-        <thead>
-          <tr>
-            <th>Form</th>
-            <th>Description</th>
-            <th>Date</th>
-            <th>Format</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><a href="#" class="form-link">8-K</a></td>
-            <td>Report of unscheduled material events or corporate event</td>
-            <td>Aug 28, 2025</td>
-            <td>
-              <div class="format-links">
-                <a href="#" class="format-link html">HTM</a>
-                <a href="#" class="format-link pdf">PDF</a>
-                <a href="#" class="format-link xls">XLS</a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="#" class="form-link">424B1</a></td>
-            <td>Quarterly report pursuant to Section 13 or 15(d)</td>
-            <td>Aug 14, 2025</td>
-            <td>
-              <div class="format-links">
-                <a href="#" class="format-link html">HTM</a>
-                <a href="#" class="format-link pdf">PDF</a>
-                <a href="#" class="format-link xls">XLS</a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="#" class="form-link">S-1</a></td>
-            <td>Registration statement under the Securities Act of 1933</td>
-            <td>Jul 30, 2025</td>
-            <td>
-              <div class="format-links">
-                <a href="#" class="format-link html">HTM</a>
-                <a href="#" class="format-link pdf">PDF</a>
-                <a href="#" class="format-link xls">XLS</a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="#" class="form-link">4</a></td>
-            <td>Statement of changes in beneficial ownership of securities</td>
-            <td>Aug 9, 2025</td>
-            <td>
-              <div class="format-links">
-                <a href="#" class="format-link html">HTM</a>
-                <a href="#" class="format-link pdf">PDF</a>
-                <a href="#" class="format-link xls">XLS</a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div style="padding: 10px; font-size: 11px; color: #666;">
-        <a href="#" style="color: #0000ee; text-decoration: underline;">1-25</a>
-        <a href="#" style="color: #0000ee; text-decoration: underline; margin-left: 10px;">26-50</a>
-      </div>
+   <div class="sec-table-wrapper">
+  <!-- Controls -->
+  <div class="sec-controls">
+    <div class="sec-title">📊 NASDAQ: DGXX</div>
+    <div class="sec-filters">
+      <span>View</span>
+      <select>
+        <option>All Filings</option>
+      </select>
+      <span>Year</span>
+      <select>
+        <option>Trailing 12 Months</option>
+      </select>
     </div>
+  </div>
+
+  <!-- Table -->
+  <table class="sec-table">
+    <thead>
+      <tr>
+        <th>Form</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Format</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="#" class="form-link">8-K</a></td>
+        <td>Report of unscheduled material events or corporate event</td>
+        <td>Aug 28, 2025</td>
+        <td>
+          <div class="format-links">
+            <a href="#" class="format-link html">HTM</a>
+            <a href="#" class="format-link pdf">PDF</a>
+            <a href="#" class="format-link xls">XLS</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="#" class="form-link">424B1</a></td>
+        <td>Quarterly report pursuant to Section 13 or 15(d)</td>
+        <td>Aug 14, 2025</td>
+        <td>
+          <div class="format-links">
+            <a href="#" class="format-link html">HTM</a>
+            <a href="#" class="format-link pdf">PDF</a>
+            <a href="#" class="format-link xls">XLS</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="#" class="form-link">S-1</a></td>
+        <td>Registration statement under the Securities Act of 1933</td>
+        <td>Jul 30, 2025</td>
+        <td>
+          <div class="format-links">
+            <a href="#" class="format-link html">HTM</a>
+            <a href="#" class="format-link pdf">PDF</a>
+            <a href="#" class="format-link xls">XLS</a>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><a href="#" class="form-link">4</a></td>
+        <td>Statement of changes in beneficial ownership of securities</td>
+        <td>Aug 9, 2025</td>
+        <td>
+          <div class="format-links">
+            <a href="#" class="format-link html">HTM</a>
+            <a href="#" class="format-link pdf">PDF</a>
+            <a href="#" class="format-link xls">XLS</a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="sec-pagination">
+    <a href="#">1-25</a>
+    <a href="#">26-50</a>
+  </div>
+</div>
+
   </section>
 
   <!-- Governance Section -->
@@ -2302,64 +2455,68 @@
   </section>
 
 
-  <footer class="footer">
+ <footer class="footer">
     <div class="footer-top">
       <!-- Left -->
       <div class="footer-left">
-        <img src="./src/assets/digilogo.png" height="40px">
-
-        <!-- 🔗 Social Links -->
-        <div class="social-links">
-          <a href="https://www.linkedin.com/company/digipowerx" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://twitter.com/digipowerx" target="_blank"><i class="fab fa-twitter"></i></a>
-          <a href="https://www.youtube.com/@digipowerx" target="_blank"><i class="fab fa-youtube"></i></a>
-        </div>
+       <img src="./src/assets/digilogo.png" height="40px">
+       
+           <!-- 🔗 Social Links -->
+      <div class="social-links">
+        <a href="https://www.linkedin.com/company/digipowerx" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://twitter.com/digipowerx" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.youtube.com/@digipowerx" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
       </div>
 
       <!-- Center -->
       <div class="footer-center">
         <ul>
           <li class="title">Company</li>
-          <li>Home</li>
-          <li>Investor Relations</li>
-          <li>News</li>
-          <li>Presentations</li>
+         <a href="./Aboutus.html"><li>About us</li></a> 
+         <a href="./inf.html"> <li>Infrastructure </li></a>
+           <a href="./investor.html"><li>Investors </li></a> 
+             <a href="./press.html"><li>News </li></a> 
+              <a href="./contact.html"><li>Contact
+
+
+ </li></a>
         </ul>
 
         <ul>
           <li class="title">Financials
-          </li>
+</li>
           <li>Stock Information</li>
           <li>SEC Filings</li>
-
+         
         </ul>
 
         <ul>
           <li class="title">Governance
-          </li>
+</li>
           <li>Documents & Charters</li>
           <li>Leadership & Committees</li>
-
+         
         </ul>
 
         <ul>
           <li class="title">IR Resources
-          </li>
+</li>
           <li>Email Alerts</li>
           <li>Insights</li>
-          <li>Contact</li>
-
+         <a href="./contact.html"> <li>Contact</li></a>
+         
       </div>
 
       <!-- Right -->
-
+     
     </div>
 
     <!-- Bottom -->
+   
 
-
-
-    </div>
+      
+      </div>
     </div>
   </footer>
 
@@ -2425,23 +2582,14 @@
 
     document.getElementById("view-presentation").addEventListener("click", async () => {
       const CACHE_KEY = "presentationCache";
-      const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
-      // ✅ Load from cache
+      // ✅ Load from cache (even if expired)
       function loadFromCache() {
         const cached = localStorage.getItem(CACHE_KEY);
         if (!cached) return null;
 
         try {
-          const parsed = JSON.parse(cached);
-          if (Date.now() - parsed.timestamp < CACHE_TTL) {
-            console.log("✅ Presentation loaded from cache");
-            return parsed.data;
-          } else {
-            console.log("⚠️ Presentation cache expired");
-            localStorage.removeItem(CACHE_KEY);
-            return null;
-          }
+          return JSON.parse(cached); // always return
         } catch (err) {
           console.warn("⚠️ Failed to parse presentation cache", err);
           return null;
@@ -2459,10 +2607,9 @@
         );
       }
 
-      try {
-        let presentation = loadFromCache();
-
-        if (!presentation) {
+      // ✅ Fetch fresh data from API
+      async function fetchFreshPresentation() {
+        try {
           console.log("🌍 Fetching presentation from API...");
           const res = await fetch(
             "https://artistic-eggs-9d7a8f2a5f.strapiapp.com/api/presentations?populate=*"
@@ -2470,11 +2617,20 @@
           const json = await res.json();
 
           if (json.data && json.data.length > 0) {
-            presentation = json.data[0];
-            saveToCache(presentation); // ✅ cache it
+            const presentation = json.data[0];
+            saveToCache(presentation);
+            openPresentation(presentation);
+          } else {
+            alert("No presentation PDF found.");
           }
+        } catch (error) {
+          console.error("❌ Error fetching presentation:", error);
+          alert("Failed to load presentation.");
         }
+      }
 
+      // ✅ Open PDF
+      function openPresentation(presentation) {
         if (presentation && presentation.file && presentation.file.url) {
           const pdfUrl = presentation.file.url;
           console.log("📂 Opening presentation:", pdfUrl);
@@ -2482,12 +2638,18 @@
         } else {
           alert("No presentation PDF found.");
         }
-      } catch (error) {
-        console.error("❌ Error fetching presentation:", error);
-        alert("Failed to load presentation.");
       }
-    });
 
+      // ✅ Initial load (SWR strategy)
+      const cached = loadFromCache();
+      if (cached?.data) {
+        console.log("✅ Showing cached presentation");
+        openPresentation(cached.data);
+      }
+
+      // Always refresh in background
+      fetchFreshPresentation();
+    });
 
   </script>
   <script src="./script.js"></script>

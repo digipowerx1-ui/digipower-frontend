@@ -403,10 +403,12 @@ body {
 /* Hero Section */
 /* ✅ Base (mobile-first) styles */
 .hero {
-   background-image: url("./src/assets/ChatGPT Image Sep 2, 2025, 09_39_23 PM.png");
+   background-image: url("./src/assets/digiaboutbanner.png");
    background-size: cover;
    background-position: center;
    padding: 3rem 1rem;   /* Mobile: less padding */
+   height: 100vh;
+  
 }
 
 .hero-content {
@@ -433,14 +435,16 @@ body {
    font-size: 1.8rem;   /* Mobile smaller */
    font-weight: 700;
    line-height: 1.2;
-   color: var(--whitefiber-dark);
+   /* color: var(--whitefiber-dark); */
+   color: black;
    margin-bottom: 1rem;
 }
 
 .hero-description {
    font-size: 1rem;     /* Mobile base font */
    line-height: 1.5;
-color: white;
+color:white;
+font-weight: bold;
    max-width: 90%;
    margin: 0 auto;
 }
@@ -458,6 +462,7 @@ color: white;
    .hero-title {
       font-size: 2.8rem;
       margin-bottom: 1.5rem;
+      color: black;
    }
 
    .hero-description {
@@ -477,7 +482,7 @@ color: white;
    }
 
    .hero-title {
-      font-size: 5rem;    /* Large heading */
+      font-size: 4rem;    /* Large heading */
       color: black;
    }
 
@@ -490,7 +495,8 @@ color: white;
 /* ✅ Large screens (≥1440px) - optional */
 @media (min-width: 1440px) {
    .hero-title {
-      font-size: 6rem;
+      font-size: 4rem;
+      color: black;
    }
 }
 
@@ -522,10 +528,10 @@ color: white;
 }
 
 .story-image img {
-    width: 100%;
+    width: 111%;
     height: auto;
     border-radius: 1rem;
-    max-width: 500px;      /* Prevent too wide images on mobile */
+    max-width: 700px;      /* Prevent too wide images on mobile */
     margin: 0 auto;        /* Center on mobile */
 }
 
