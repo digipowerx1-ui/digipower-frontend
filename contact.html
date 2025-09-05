@@ -308,8 +308,8 @@
             e.preventDefault();
 
             const responseEl = document.getElementById("formResponse");
-            responseEl.textContent = "⏳ Sending...";
-            responseEl.style.color = "#555";
+            responseEl.textContent = "✅ Message queued! We’ll process it shortly.";
+            responseEl.style.color = "green";
 
             const data = {
                 firstName: document.getElementById("firstName").value,
@@ -318,9 +318,25 @@
                 email: document.getElementById("businessEmail").value,
                 subject: document.getElementById("subject").value,
                 message: document.getElementById("message").value
-                // ❌ Removed marketingConsent because Strapi doesn't allow it
             };
 
+            // reset form immediately for fast UX
+            e.target.reset();
+
+            // save pending message locally
+            savePendingMessage(data);
+
+            // try sending immediately in background
+            sendMessage(data);
+        });
+
+        function savePendingMessage(data) {
+            let pending = JSON.parse(localStorage.getItem("pendingContacts") || "[]");
+            pending.push(data);
+            localStorage.setItem("pendingContacts", JSON.stringify(pending));
+        }
+
+        async function sendMessage(data) {
             try {
                 const res = await fetch("https://artistic-eggs-9d7a8f2a5f.strapiapp.com/api/contacts", {
                     method: "POST",
@@ -335,16 +351,34 @@
                     throw new Error(result.error?.message || "Failed to send message");
                 }
 
-                responseEl.textContent = "✅ Message sent successfully!";
-                responseEl.style.color = "green";
-                e.target.reset();
+                console.log("✅ Message sent successfully:", result);
+
+                // remove from pending if exists
+                let pending = JSON.parse(localStorage.getItem("pendingContacts") || "[]");
+                pending = pending.filter(
+                    msg =>
+                        !(
+                            msg.firstName === data.firstName &&
+                            msg.lastName === data.lastName &&
+                            msg.email === data.email &&
+                            msg.message === data.message
+                        )
+                );
+                localStorage.setItem("pendingContacts", JSON.stringify(pending));
             } catch (err) {
-                console.error("Error:", err);
-                responseEl.textContent = "❌ Failed to send message. Please try again.";
-                responseEl.style.color = "red";
+                console.error("❌ Error sending message, will retry:", err);
             }
-        });
+        }
+
+        // retry pending messages every 30s
+        setInterval(async () => {
+            let pending = JSON.parse(localStorage.getItem("pendingContacts") || "[]");
+            for (const msg of pending) {
+                await sendMessage(msg);
+            }
+        }, 30000);
     </script>
+
 
     <script src="./contact-script.js"></script>
     <script src="./script.js"></script>

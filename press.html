@@ -729,112 +729,149 @@
 
     <!-- Bottom -->
 
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const grid = document.getElementById("grid");
-        const searchInput = document.getElementById("search");
-        const filterButtons = document.querySelectorAll(".filters .btn");
+   <script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    const grid = document.getElementById("grid");
+    const searchInput = document.getElementById("search");
+    const filterButtons = document.querySelectorAll(".filters .btn");
 
-        let allReleases = [];
+    let allReleases = [];
+    const CACHE_KEY = "pressReleasesCache";
+    const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
-        // ✅ Fetch data from Strapi API (your JSON structure)
-        async function fetchReleases() {
-          try {
-            const response = await fetch("https://artistic-eggs-9d7a8f2a5f.strapiapp.com/api/press-releases?populate=*");
-            const result = await response.json();
+    // ✅ Load from cache if valid
+    function loadFromCache() {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (!cached) return null;
 
-            // Your API returns fields directly (no attributes wrapper)
-            allReleases = result.data.map(item => ({
-              id: item.id,
-              title: item.title || "Untitled",
-              date: item.date || "",
-              document: item.document || null
-            }));
+      try {
+        const parsed = JSON.parse(cached);
+        if (Date.now() - parsed.timestamp < CACHE_TTL) {
+          console.log("✅ Loaded from cache");
+          return parsed.data;
+        } else {
+          console.log("⚠️ Cache expired, fetching new data");
+          localStorage.removeItem(CACHE_KEY);
+          return null;
+        }
+      } catch (err) {
+        console.warn("⚠️ Failed to parse cache", err);
+        return null;
+      }
+    }
 
-            console.log("✅ All releases loaded:", allReleases);
-            renderReleases(allReleases);
-          } catch (error) {
-            console.error("❌ Error fetching releases:", error);
+    // ✅ Save to cache
+    function saveToCache(data) {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({
+        timestamp: Date.now(),
+        data
+      }));
+    }
+
+    // ✅ Fetch data from Strapi API
+    async function fetchReleases() {
+      const cachedData = loadFromCache();
+      if (cachedData) {
+        allReleases = cachedData;
+        renderReleases(allReleases);
+        return;
+      }
+
+      try {
+        const response = await fetch("https://artistic-eggs-9d7a8f2a5f.strapiapp.com/api/press-releases?populate=*");
+        const result = await response.json();
+
+        allReleases = result.data.map(item => ({
+          id: item.id,
+          title: item.title || "Untitled",
+          date: item.date || "",
+          document: item.document || null
+        }));
+
+        console.log("✅ Fresh data loaded:", allReleases);
+        saveToCache(allReleases);
+        renderReleases(allReleases);
+      } catch (error) {
+        console.error("❌ Error fetching releases:", error);
+      }
+    }
+
+    // ✅ Render cards with "Read More" button
+    function renderReleases(releases) {
+      grid.innerHTML = "";
+
+      releases.forEach(item => {
+        const title = item.title;
+        const date = item.date ? new Date(item.date).toLocaleDateString() : "";
+        const pdfUrl = item.document?.url || null;
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+          <h3>${title}</h3>
+          <p>${date}</p>
+          ${pdfUrl
+            ? `<button class="read-more" data-pdf="${pdfUrl}">Read More</button>`
+            : `<p class="no-pdf">PDF not available</p>`
           }
-        }
+        `;
 
-        // ✅ Render cards with "Read More" button
-        function renderReleases(releases) {
-          grid.innerHTML = "";
+        grid.appendChild(card);
+      });
 
-          releases.forEach(item => {
-            console.log("Rendering item:", item);
+      // ✅ Attach event listeners
+      document.querySelectorAll(".read-more").forEach(button => {
+        button.addEventListener("click", (e) => {
+          const pdfUrl = e.target.dataset.pdf;
+          if (pdfUrl) {
+            console.log("📂 Opening PDF:", pdfUrl);
+            window.open(pdfUrl, "_blank");
+          } else {
+            console.warn("⚠️ No PDF available");
+          }
+        });
+      });
+    }
 
-            const title = item.title;
-            const date = item.date ? new Date(item.date).toLocaleDateString() : "";
-            const pdfUrl = item.document?.url || null;
+    // ✅ Search functionality
+    searchInput.addEventListener("input", (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = allReleases.filter(item =>
+        item.title.toLowerCase().includes(query)
+      );
+      renderReleases(filtered);
+    });
 
-            const card = document.createElement("div");
-            card.className = "card";
+    // ✅ Filter buttons
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
 
-            card.innerHTML = `
-        <h3>${title}</h3>
-        <p>${date}</p>
-        ${pdfUrl
-                ? `<button class="read-more" data-pdf="${pdfUrl}">Read More</button>`
-                : `<p class="no-pdf">PDF not available</p>`
-              }
-      `;
+        const filter = button.getAttribute("data-filter");
 
-            grid.appendChild(card);
-          });
-
-          // ✅ Attach event listeners to Read More buttons
-          document.querySelectorAll(".read-more").forEach(button => {
-            button.addEventListener("click", (e) => {
-              const pdfUrl = e.target.dataset.pdf;
-              if (pdfUrl) {
-                console.log("📂 Opening PDF:", pdfUrl);
-                window.open(pdfUrl, "_blank");
-              } else {
-                console.warn("⚠️ No PDF available for this release");
-              }
-            });
-          });
-        }
-
-        // ✅ Search functionality
-        searchInput.addEventListener("input", (e) => {
-          const query = e.target.value.toLowerCase();
+        if (filter === "all") {
+          renderReleases(allReleases);
+        } else if (filter === "events" || filter === "partnerships") {
           const filtered = allReleases.filter(item =>
-            item.title.toLowerCase().includes(query)
+            item.title.toLowerCase().includes(filter)
           );
           renderReleases(filtered);
-        });
-
-        // ✅ Filter buttons
-        filterButtons.forEach(button => {
-          button.addEventListener("click", () => {
-            filterButtons.forEach(btn => btn.classList.remove("active"));
-            button.classList.add("active");
-
-            const filter = button.getAttribute("data-filter");
-
-            if (filter === "all") {
-              renderReleases(allReleases);
-            } else if (filter === "events" || filter === "partnerships") {
-              const filtered = allReleases.filter(item =>
-                item.title.toLowerCase().includes(filter)
-              );
-              renderReleases(filtered);
-            } else {
-              const filtered = allReleases.filter(item =>
-                item.date.startsWith(filter)
-              );
-              renderReleases(filtered);
-            }
-          });
-        });
-
-        // ✅ Initial load
-        fetchReleases();
+        } else {
+          const filtered = allReleases.filter(item =>
+            item.date.startsWith(filter)
+          );
+          renderReleases(filtered);
+        }
       });
-    </script>
+    });
+
+    // ✅ Initial load
+    fetchReleases();
+  });
+</script>
+
 
 
 

@@ -1987,20 +1987,20 @@
         <p class="presentation-subtitle">Our investor presentation is available for viewing</p>
         <button id="view-presentation" class="cta-button">View Presentation</button>
       </div>
-    
 
-    <div class="presentation-right">
-      <div class="brand-card">
-        <div class="brand-logo">
-          <div class="brand-text">
-            DigiPower x<span class="brand-square"></span>
+
+      <div class="presentation-right">
+        <div class="brand-card">
+          <div class="brand-logo">
+            <div class="brand-text">
+              DigiPower x<span class="brand-square"></span>
+            </div>
+          </div>
+          <div class="earth-container">
+            <div class="earth-image"></div>
           </div>
         </div>
-        <div class="earth-container">
-          <div class="earth-image"></div>
-        </div>
       </div>
-    </div>
     </div>
   </section>
 
@@ -2358,7 +2358,7 @@
     <!-- Bottom -->
 
 
- 
+
     </div>
     </div>
   </footer>
@@ -2423,22 +2423,70 @@
 
     // for fetching presenatation
 
-     document.getElementById("view-presentation").addEventListener("click", async () => {
-    try {
-      const res = await fetch("https://artistic-eggs-9d7a8f2a5f.strapiapp.com/api/presentations?populate=*");
-      const json = await res.json();
+    document.getElementById("view-presentation").addEventListener("click", async () => {
+      const CACHE_KEY = "presentationCache";
+      const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
-      if (json.data && json.data.length > 0 && json.data[0].file && json.data[0].file.url) {
-        const pdfUrl = json.data[0].file.url;
-        window.open(pdfUrl, "_blank");
-      } else {
-        alert("No presentation PDF found.");
+      // ✅ Load from cache
+      function loadFromCache() {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (!cached) return null;
+
+        try {
+          const parsed = JSON.parse(cached);
+          if (Date.now() - parsed.timestamp < CACHE_TTL) {
+            console.log("✅ Presentation loaded from cache");
+            return parsed.data;
+          } else {
+            console.log("⚠️ Presentation cache expired");
+            localStorage.removeItem(CACHE_KEY);
+            return null;
+          }
+        } catch (err) {
+          console.warn("⚠️ Failed to parse presentation cache", err);
+          return null;
+        }
       }
-    } catch (error) {
-      console.error("Error fetching presentation:", error);
-      alert("Failed to load presentation.");
-    }
-  });
+
+      // ✅ Save to cache
+      function saveToCache(data) {
+        localStorage.setItem(
+          CACHE_KEY,
+          JSON.stringify({
+            timestamp: Date.now(),
+            data,
+          })
+        );
+      }
+
+      try {
+        let presentation = loadFromCache();
+
+        if (!presentation) {
+          console.log("🌍 Fetching presentation from API...");
+          const res = await fetch(
+            "https://artistic-eggs-9d7a8f2a5f.strapiapp.com/api/presentations?populate=*"
+          );
+          const json = await res.json();
+
+          if (json.data && json.data.length > 0) {
+            presentation = json.data[0];
+            saveToCache(presentation); // ✅ cache it
+          }
+        }
+
+        if (presentation && presentation.file && presentation.file.url) {
+          const pdfUrl = presentation.file.url;
+          console.log("📂 Opening presentation:", pdfUrl);
+          window.open(pdfUrl, "_blank");
+        } else {
+          alert("No presentation PDF found.");
+        }
+      } catch (error) {
+        console.error("❌ Error fetching presentation:", error);
+        alert("Failed to load presentation.");
+      }
+    });
 
 
   </script>
