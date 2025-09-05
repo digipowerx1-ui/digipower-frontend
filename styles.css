@@ -263,6 +263,8 @@ body {
     background-color: #ffffff;
     text-align: center;
     background-image: url(./src/assets/ChatGPT\ Image\ Sep\ 2\,\ 2025\,\ 09_39_23\ PM.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 100vh;
 }
 
