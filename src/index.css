@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 210 90% 8%;
+    --background: 220 50% 9%;
     --foreground: 210 20% 98%;
 
     --card: 220 30% 12%;
@@ -17,41 +17,46 @@ All colors MUST be HSL.
     --popover: 220 30% 12%;
     --popover-foreground: 210 20% 98%;
 
-    --primary: 210 90% 15%;
+    --primary: 220 50% 9%;
     --primary-foreground: 210 20% 98%;
 
-    --secondary: 220 25% 20%;
+    --secondary: 262 29% 42%;
     --secondary-foreground: 210 20% 98%;
 
     --muted: 220 20% 25%;
     --muted-foreground: 210 15% 65%;
 
-    --accent: 190 100% 50%;
-    --accent-foreground: 210 90% 8%;
+    --accent: 168 100% 60%;
+    --accent-foreground: 220 50% 9%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 20% 98%;
 
     --border: 220 25% 25%;
     --input: 220 25% 18%;
-    --ring: 190 100% 50%;
+    --ring: 168 100% 60%;
 
     --radius: 0.75rem;
 
-    /* Custom design tokens */
-    --electric-cyan: 190 100% 50%;
-    --bright-blue: 210 100% 55%;
-    --deep-navy: 210 90% 15%;
-    --slate-dark: 220 25% 20%;
+    /* Custom design tokens - Animation Palette */
+    --cool-teal: 168 100% 60%;
+    --rose-gold: 7 79% 80%;
+    --lavender: 262 29% 42%;
+    --midnight-blue: 220 50% 9%;
+    --glow-white: 0 0% 100%;
     
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(210 90% 8%), hsl(220 30% 12%));
+    --gradient-hero: linear-gradient(135deg, hsl(168 100% 60% / 0.1), hsl(7 79% 80% / 0.1), hsl(262 29% 42% / 0.1));
+    --gradient-waves: linear-gradient(90deg, hsl(168 100% 60%), hsl(7 79% 80%), hsl(262 29% 42%));
     --gradient-card: linear-gradient(180deg, hsl(220 30% 12%), hsl(220 30% 10%));
-    --gradient-accent: linear-gradient(90deg, hsl(190 100% 50%), hsl(210 100% 55%));
+    --gradient-accent: linear-gradient(90deg, hsl(168 100% 60%), hsl(7 79% 80%));
+    --gradient-footer: linear-gradient(180deg, hsl(220 50% 9%), hsl(262 29% 42% / 0.3));
     
-    /* Shadows */
-    --glow-cyan: 0 0 40px hsl(190 100% 50% / 0.3);
-    --shadow-elevated: 0 20px 60px hsl(210 90% 5% / 0.5);
+    /* Shadows & Glows */
+    --glow-cyan: 0 0 40px hsl(168 100% 60% / 0.4);
+    --glow-rose: 0 0 40px hsl(7 79% 80% / 0.4);
+    --glow-lavender: 0 0 40px hsl(262 29% 42% / 0.4);
+    --shadow-elevated: 0 20px 60px hsl(220 50% 5% / 0.5);
 
     --sidebar-background: 0 0% 98%;
 
