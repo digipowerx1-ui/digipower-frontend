@@ -13,80 +13,32 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
 
-      {/* Hero Section - Animated Gradient Waves */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-background">
-        {/* Animated Gradient Background */}
-        <div className="absolute inset-0 opacity-30">
-          <div 
-            className="absolute inset-0 animate-gradient-wave"
-            style={{ 
-              background: 'linear-gradient(90deg, hsl(168 100% 60%), hsl(7 79% 80%), hsl(262 29% 42%))',
-              backgroundSize: '200% 200%'
-            }}
-          />
-        </div>
-        
-        {/* Floating Particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full blur-xl animate-float"
-              style={{
-                width: `${60 + i * 20}px`,
-                height: `${60 + i * 20}px`,
-                background: i % 3 === 0 
-                  ? 'hsl(168 100% 60% / 0.2)' 
-                  : i % 3 === 1 
-                  ? 'hsl(7 79% 80% / 0.2)' 
-                  : 'hsl(262 29% 42% / 0.2)',
-                left: `${(i * 13) % 100}%`,
-                top: `${(i * 17) % 100}%`,
-                animationDelay: `${i * 0.5}s`,
-                animationDuration: `${8 + i * 2}s`
-              }}
-            />
-          ))}
-        </div>
-        
-        {/* Network Grid Overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `
-              linear-gradient(hsl(168 100% 60% / 0.3) 1px, transparent 1px),
-              linear-gradient(90deg, hsl(168 100% 60% / 0.3) 1px, transparent 1px)
-            `,
-            backgroundSize: '60px 60px'
-          }} />
-        </div>
-        <div className="container mx-auto px-6 py-20 relative z-10">
+      {/* Hero Section - Equinix Style */}
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+        <div className="container mx-auto px-6 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
             {/* Left Content */}
-            <div className="space-y-8 animate-fade-in-up">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                <span className="inline-block animate-glow-breathing">Powering the Future of{" "}</span>
-                <span className="text-accent inline-block animate-scale-in" style={{ animationDelay: '0.3s' }}>
+            <div className="space-y-8 animate-fade-in">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-slate-900 dark:text-white">
+                Powering the Future of{" "}
+                <span className="text-accent">
                   AI & Cloud Infrastructure
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl" style={{ animationDelay: '0.5s' }}>
+              <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-2xl">
                 Learn how DigiPowerX delivers enterprise-grade data centers with revolutionary ARMS 200 technology to accelerate innovation and scale your business.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button 
                   size="lg" 
-                  className="group relative overflow-hidden bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg px-8 py-6 transition-all hover:scale-105 hover:shadow-[0_0_30px_hsl(168_100%_60%/0.5)]"
+                  className="bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 font-semibold text-lg px-8 py-6"
                 >
-                  <span className="relative z-10 flex items-center">
-                    Get Started 
-                    <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent to-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  Get Started <ArrowRight className="ml-2" />
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="group border-2 border-accent text-foreground hover:bg-accent/10 hover:border-accent/80 font-semibold text-lg px-8 py-6 transition-all hover:scale-105"
+                  className="border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-lg px-8 py-6"
                 >
                   Explore Solutions
                 </Button>
@@ -95,19 +47,17 @@ const Index = () => {
 
             {/* Right Visual */}
             <div className="relative animate-slide-in-right">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-accent/30 group cursor-pointer animate-glow-pulse">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 group cursor-pointer">
                 <img 
                   src={heroImage} 
                   alt="DigiPowerX Data Center Infrastructure" 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
                 {/* Play Button Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-20 h-20 bg-accent/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-xl animate-glow-pulse">
-                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-accent-foreground border-b-[12px] border-b-transparent ml-1 group-hover:animate-scale-bounce"></div>
-                    {/* Pulse Ring */}
-                    <div className="absolute inset-0 rounded-full border-2 border-accent animate-ripple opacity-0 group-hover:animate-ripple"></div>
+                  <div className="w-20 h-20 bg-white/90 dark:bg-slate-900/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xl">
+                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-slate-900 dark:border-l-white border-b-[12px] border-b-transparent ml-1"></div>
                   </div>
                 </div>
               </div>
@@ -153,54 +103,42 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div className="animate-slide-in-left" style={{ animationDelay: '0s' }}>
-              <FeatureCard
-                icon={Zap}
-                title="Lightning-Fast Deployment"
-                description="Deploy infrastructure in weeks, not years. Our modular ARMS 200 system enables rapid scalability without compromising quality."
-                delay={0}
-              />
-            </div>
-            <div className="animate-slide-in-right" style={{ animationDelay: '0.1s' }}>
-              <FeatureCard
-                icon={Shield}
-                title="Enterprise Security"
-                description="Military-grade security protocols, multi-layer redundancy, and 24/7 monitoring keep your data safe and accessible."
-                delay={100}
-              />
-            </div>
-            <div className="animate-slide-in-left" style={{ animationDelay: '0.2s' }}>
-              <FeatureCard
-                icon={Network}
-                title="Carrier-Neutral Connectivity"
-                description="Connect to any provider seamlessly. Our strategic U.S. locations ensure optimal network performance."
-                delay={200}
-              />
-            </div>
-            <div className="animate-slide-in-right" style={{ animationDelay: '0.3s' }}>
-              <FeatureCard
-                icon={Boxes}
-                title="Modular Scalability"
-                description="Scale on demand with our innovative ARMS 200 pods. Add capacity as you grow without infrastructure overhaul."
-                delay={300}
-              />
-            </div>
-            <div className="animate-slide-in-left" style={{ animationDelay: '0.4s' }}>
-              <FeatureCard
-                icon={Leaf}
-                title="Sustainable Operations"
-                description="100% renewable energy commitment. Advanced cooling systems reduce environmental impact while maximizing efficiency."
-                delay={400}
-              />
-            </div>
-            <div className="animate-slide-in-right" style={{ animationDelay: '0.5s' }}>
-              <FeatureCard
-                icon={Zap}
-                title="AI-Optimized Infrastructure"
-                description="Purpose-built for AI workloads with high-density compute, GPU support, and ultra-low latency networking."
-                delay={500}
-              />
-            </div>
+            <FeatureCard
+              icon={Zap}
+              title="Lightning-Fast Deployment"
+              description="Deploy infrastructure in weeks, not years. Our modular ARMS 200 system enables rapid scalability without compromising quality."
+              delay={0}
+            />
+            <FeatureCard
+              icon={Shield}
+              title="Enterprise Security"
+              description="Military-grade security protocols, multi-layer redundancy, and 24/7 monitoring keep your data safe and accessible."
+              delay={100}
+            />
+            <FeatureCard
+              icon={Network}
+              title="Carrier-Neutral Connectivity"
+              description="Connect to any provider seamlessly. Our strategic U.S. locations ensure optimal network performance."
+              delay={200}
+            />
+            <FeatureCard
+              icon={Boxes}
+              title="Modular Scalability"
+              description="Scale on demand with our innovative ARMS 200 pods. Add capacity as you grow without infrastructure overhaul."
+              delay={300}
+            />
+            <FeatureCard
+              icon={Leaf}
+              title="Sustainable Operations"
+              description="100% renewable energy commitment. Advanced cooling systems reduce environmental impact while maximizing efficiency."
+              delay={400}
+            />
+            <FeatureCard
+              icon={Zap}
+              title="AI-Optimized Infrastructure"
+              description="Purpose-built for AI workloads with high-density compute, GPU support, and ultra-low latency networking."
+              delay={500}
+            />
           </div>
         </div>
       </section>
@@ -243,11 +181,8 @@ const Index = () => {
                   </span>
                 </li>
               </ul>
-              <Button size="lg" className="group bg-accent hover:bg-accent/90 text-accent-foreground font-semibold transition-all hover:scale-105 hover:shadow-[0_0_30px_hsl(168_100%_60%/0.6)]">
-                <span className="flex items-center">
-                  Download Technical Specs
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">
+                Download Technical Specs
               </Button>
             </div>
 
@@ -264,55 +199,30 @@ const Index = () => {
       </section>
 
       {/* NeoCloudz Coming Soon */}
-      <section className="py-24 relative overflow-hidden bg-gradient-to-r from-primary via-secondary to-accent">
-        <div className="absolute inset-0 opacity-10 animate-gradient-wave" style={{ backgroundSize: '200% 200%' }}>
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] animate-spin-slow"></div>
-        </div>
-        
-        {/* Floating particles for this section */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full blur-2xl animate-particle-drift"
-              style={{
-                width: `${80 + i * 30}px`,
-                height: `${80 + i * 30}px`,
-                background: 'hsl(168 100% 60% / 0.15)',
-                left: `${20 + (i * 15) % 70}%`,
-                top: `${10 + (i * 20) % 80}%`,
-                animationDelay: `${i * 1.2}s`,
-                animationDuration: `${6 + i}s`
-              }}
-            />
-          ))}
+      <section className="py-24 bg-gradient-to-r from-primary via-secondary to-primary relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] animate-pulse"></div>
         </div>
         
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-3xl mx-auto text-center space-y-8 animate-scale-in">
-            <div className="inline-block px-4 py-2 bg-accent/20 rounded-full border border-accent/30 text-accent font-semibold mb-4 animate-glow-pulse">
+          <div className="max-w-3xl mx-auto text-center space-y-8 animate-fade-in">
+            <div className="inline-block px-4 py-2 bg-accent/20 rounded-full border border-accent/30 text-accent font-semibold mb-4">
               Coming Soon
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold animate-fade-in-up">
-              Introducing <span className="text-accent animate-glow-breathing">NeoCloudz</span>
+            <h2 className="text-4xl md:text-6xl font-bold">
+              Introducing <span className="text-accent">NeoCloudz</span>
             </h2>
-            <p className="text-xl animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <p className="text-xl text-muted-foreground">
               The next generation of cloud orchestration. Seamless multi-cloud management, 
               AI-powered optimization, and unparalleled performance. Be the first to experience the future.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto pt-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto pt-4">
               <Input 
                 placeholder="Enter your email" 
-                className="bg-background/50 border-accent/30 focus:border-accent focus:ring-2 focus:ring-accent/50 transition-all"
+                className="bg-background/50 border-accent/30 text-foreground"
               />
-              <Button 
-                size="lg" 
-                className="group bg-accent hover:bg-accent/90 text-accent-foreground font-semibold whitespace-nowrap transition-all hover:scale-105 hover:shadow-[0_0_30px_hsl(168_100%_60%/0.6)]"
-              >
-                <span className="flex items-center">
-                  Notify Me
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold whitespace-nowrap">
+                Notify Me
               </Button>
             </div>
           </div>
@@ -393,23 +303,17 @@ const Index = () => {
             {["NVIDIA", "AMD", "Intel", "Cisco", "Dell", "HPE", "Lenovo", "Juniper"].map((partner, index) => (
               <div 
                 key={partner}
-                className="group bg-card border border-border/50 rounded-xl p-8 flex items-center justify-center hover:border-accent transition-all duration-500 hover:shadow-[0_0_30px_hsl(168_100%_60%/0.3)] animate-scale-in cursor-pointer hover:scale-105"
+                className="bg-card border border-border/50 rounded-xl p-8 flex items-center justify-center hover:border-accent/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,229,255,0.2)] animate-scale-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <span className="text-xl font-bold text-muted-foreground group-hover:text-accent transition-colors duration-300">{partner}</span>
+                <span className="text-xl font-bold text-muted-foreground">{partner}</span>
               </div>
             ))}
           </div>
 
           <div className="text-center">
-            <Button 
-              size="lg" 
-              className="group bg-accent hover:bg-accent/90 text-accent-foreground font-semibold transition-all hover:scale-105 hover:shadow-[0_0_30px_hsl(168_100%_60%/0.6)]"
-            >
-              <span className="flex items-center">
-                Become a Partner
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
+            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">
+              Become a Partner
             </Button>
           </div>
         </div>
@@ -443,53 +347,46 @@ const Index = () => {
                   <label className="block text-sm font-medium mb-2 text-foreground">Message</label>
                   <Textarea placeholder="Tell us about your project" rows={6} className="bg-card border-border" />
                 </div>
-              <Button 
-                size="lg" 
-                className="group w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold transition-all hover:scale-105 hover:shadow-[0_0_30px_hsl(168_100%_60%/0.6)] relative overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center justify-center">
+                <Button size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">
                   Send Message
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-accent to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </Button>
+                </Button>
               </div>
 
               {/* Contact Info */}
               <div className="space-y-8 animate-slide-in-right">
-                <div className="group bg-card border border-border/50 rounded-xl p-6 hover:border-accent transition-all duration-500 hover:shadow-[0_0_30px_hsl(168_100%_60%/0.2)] cursor-pointer">
+                <div className="bg-card border border-border/50 rounded-xl p-6 hover:border-accent/50 transition-all duration-300">
                   <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-500">
+                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
                       <Mail className="w-6 h-6 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg mb-1 text-foreground group-hover:text-accent transition-colors">Email Us</h3>
+                      <h3 className="font-semibold text-lg mb-1 text-foreground">Email Us</h3>
                       <p className="text-muted-foreground">info@digipowerx.com</p>
                       <p className="text-muted-foreground">sales@digipowerx.com</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="group bg-card border border-border/50 rounded-xl p-6 hover:border-accent transition-all duration-500 hover:shadow-[0_0_30px_hsl(168_100%_60%/0.2)] cursor-pointer">
+                <div className="bg-card border border-border/50 rounded-xl p-6 hover:border-accent/50 transition-all duration-300">
                   <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-500">
+                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
                       <Phone className="w-6 h-6 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg mb-1 text-foreground group-hover:text-accent transition-colors">Call Us</h3>
+                      <h3 className="font-semibold text-lg mb-1 text-foreground">Call Us</h3>
                       <p className="text-muted-foreground">+1 (555) 123-4567</p>
                       <p className="text-sm text-muted-foreground">Mon-Fri, 9am-6pm EST</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="group bg-card border border-border/50 rounded-xl p-6 hover:border-accent transition-all duration-500 hover:shadow-[0_0_30px_hsl(168_100%_60%/0.2)] cursor-pointer">
+                <div className="bg-card border border-border/50 rounded-xl p-6 hover:border-accent/50 transition-all duration-300">
                   <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-500">
+                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
                       <MapPin className="w-6 h-6 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg mb-1 text-foreground group-hover:text-accent transition-colors">Headquarters</h3>
+                      <h3 className="font-semibold text-lg mb-1 text-foreground">Headquarters</h3>
                       <p className="text-muted-foreground">Silicon Valley, CA</p>
                       <p className="text-sm text-muted-foreground">United States</p>
                     </div>
@@ -502,39 +399,22 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-12 bg-background border-t border-accent/20 overflow-hidden">
-        {/* Floating Light Pulses */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 rounded-full bg-accent/30 animate-particle-drift"
-              style={{
-                height: `${30 + i * 10}px`,
-                left: `${10 + i * 15}%`,
-                bottom: '0',
-                animationDelay: `${i * 0.8}s`,
-                animationDuration: `${4 + i}s`
-              }}
-            />
-          ))}
-        </div>
-        
-        <div className="container mx-auto px-6 relative z-10">
+      <footer className="py-12 bg-primary border-t border-border/40">
+        <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-2 group cursor-pointer">
-              <div className="w-8 h-8 bg-gradient-to-br from-accent to-secondary rounded-lg flex items-center justify-center animate-glow-breathing">
-                <span className="text-lg font-bold text-accent-foreground">D</span>
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center">
+                <span className="text-lg font-bold text-primary-foreground">D</span>
               </div>
-              <span className="font-bold text-foreground group-hover:text-accent transition-colors">DigiPowerX</span>
+              <span className="font-bold text-foreground">DigiPowerX</span>
             </div>
             <p className="text-muted-foreground text-sm">
               © 2024 DigiPowerX. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="text-muted-foreground hover:text-accent transition-all hover:scale-110 inline-block">Privacy</a>
-              <a href="#" className="text-muted-foreground hover:text-accent transition-all hover:scale-110 inline-block">Terms</a>
-              <a href="#" className="text-muted-foreground hover:text-accent transition-all hover:scale-110 inline-block">Careers</a>
+              <a href="#" className="text-muted-foreground hover:text-accent transition-colors">Privacy</a>
+              <a href="#" className="text-muted-foreground hover:text-accent transition-colors">Terms</a>
+              <a href="#" className="text-muted-foreground hover:text-accent transition-colors">Careers</a>
             </div>
           </div>
         </div>
