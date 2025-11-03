@@ -13,52 +13,55 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={heroImage} 
-            alt="Data Center Infrastructure" 
-            className="w-full h-full object-cover opacity-40"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background"></div>
-        </div>
-
-        {/* Hero Content */}
-        <div className="container mx-auto px-6 z-10 text-center">
-          <div className="max-w-4xl mx-auto space-y-8 animate-fade-in-up">
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-              Powering the Future of{" "}
-              <span className="bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
-                AI & Cloud Infrastructure
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-              Enterprise-grade data centers built for scalability, innovation, and American excellence
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button 
-                size="lg" 
-                className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg px-8 py-6 animate-pulse-glow"
-              >
-                Get Started <ArrowRight className="ml-2" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="border-accent/50 text-foreground hover:bg-accent/10 font-semibold text-lg px-8 py-6"
-              >
-                Learn More
-              </Button>
+      {/* Hero Section - Equinix Style */}
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+        <div className="container mx-auto px-6 py-20">
+          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+            {/* Left Content */}
+            <div className="space-y-8 animate-fade-in">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-slate-900 dark:text-white">
+                Powering the Future of{" "}
+                <span className="text-accent">
+                  AI & Cloud Infrastructure
+                </span>
+              </h1>
+              <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-2xl">
+                Learn how DigiPowerX delivers enterprise-grade data centers with revolutionary ARMS 200 technology to accelerate innovation and scale your business.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Button 
+                  size="lg" 
+                  className="bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 font-semibold text-lg px-8 py-6"
+                >
+                  Get Started <ArrowRight className="ml-2" />
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-lg px-8 py-6"
+                >
+                  Explore Solutions
+                </Button>
+              </div>
             </div>
-          </div>
-        </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
-          <div className="w-6 h-10 border-2 border-accent rounded-full flex justify-center">
-            <div className="w-1.5 h-3 bg-accent rounded-full mt-2 animate-pulse"></div>
+            {/* Right Visual */}
+            <div className="relative animate-slide-in-right">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 group cursor-pointer">
+                <img 
+                  src={heroImage} 
+                  alt="DigiPowerX Data Center Infrastructure" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                {/* Play Button Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 bg-white/90 dark:bg-slate-900/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-xl">
+                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-slate-900 dark:border-l-white border-b-[12px] border-b-transparent ml-1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
