@@ -6,11 +6,12 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
+    { label: "Project", href: "#Project" },
     { label: "About", href: "#about" },
-    { label: "Solutions", href: "#solutions" },
-    { label: "Technology", href: "#technology" },
-    { label: "Sustainability", href: "#sustainability" },
-    { label: "Partners", href: "#partners" },
+    { label: "Infrastructure", href: "#Infrastructure" },
+    { label: "Investors", href: "#Investors" },
+    { label: "Press Release", href: "#Press Release" },
+    { label: "Leadership", href: "#Leadership" },
   ];
 
   return (
@@ -19,10 +20,13 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center">
-              <span className="text-2xl font-bold text-primary-foreground">D</span>
-            </div>
-            <span className="text-xl font-bold text-foreground">DigiPowerX</span>
+            <span className="text-xl font-bold text-white">
+              <img
+                src="src/assets/Group1.png"
+                alt="DigiPowerX Logo"
+                className="h-10 w-auto object-contain"
+              />
+            </span>
           </div>
 
           {/* Desktop Navigation */}
@@ -31,20 +35,23 @@ const Navigation = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="text-white hover:text-accent transition-colors duration-200 font-medium"
               >
                 {item.label}
               </a>
             ))}
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">
-              Contact Us
-            </Button>
+            <Button
+  size="lg"
+  className="bg-gradient-to-r from-[#334152] to-[#01d3ff] hover:from-[#01b4e5] hover:to-[#334152] text-white font-medium text-base px-6 py-3 rounded-lg shadow-md transition-all duration-300"
+>
+ Contact us
+</Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-foreground"
+            className="md:hidden text-white"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -57,15 +64,19 @@ const Navigation = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="block text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="block text-white hover:text-accent transition-colors duration-200 font-medium"
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
               </a>
             ))}
-            <Button size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">
-              Contact Us
-            </Button>
+          <Button
+  size="lg"
+  className="w-full bg-gradient-to-r from-[#334152] to-[#01d3ff] hover:from-[#01b4e5] hover:to-[#334152] text-white font-semibold rounded-lg shadow-md transition-all duration-300"
+>
+  Contact Us
+</Button>
+
           </div>
         )}
       </div>
