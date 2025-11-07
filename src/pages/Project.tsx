@@ -153,6 +153,8 @@ export default function USDataCentersPage() {
           </StaggerContainer>
         </div>
       </section>
+      <Projects slides={slides} />
+
  
       {/* ✅ MAP SECTION */}
       <section className="py-20 px-6">
@@ -171,7 +173,6 @@ export default function USDataCentersPage() {
       </section>
  
       {/* ✅ ✅ ✅ USE THE COMPONENT HERE */}
-      <Projects slides={slides} />
  
       {/* ✅ FEATURES */}
       <section className="py-20 px-6">

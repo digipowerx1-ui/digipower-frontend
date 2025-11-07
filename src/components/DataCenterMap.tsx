@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import { Icon, DivIcon } from 'leaflet';
+import { useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { DivIcon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { motion } from 'framer-motion';
 import { Building2, Zap, MapPin } from 'lucide-react';
@@ -51,8 +51,6 @@ const dataCenters: DataCenter[] = [
 
 // Custom marker component
 const CustomMarker = ({ center }: { center: DataCenter }) => {
-  const map = useMap();
-
   // Create custom HTML marker
   const customIcon = new DivIcon({
     className: 'custom-marker',
@@ -136,7 +134,8 @@ export default function DataCenterMap() {
         <MapContainer
           center={[centerLat, centerLng]}
           zoom={5}
-          scrollWheelZoom={true}
+          scrollWheelZoom={false}
+          dragging={true}
           className="w-full h-full z-0"
           ref={mapRef}
         >

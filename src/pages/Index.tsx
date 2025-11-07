@@ -78,6 +78,27 @@ const Index = () => {
     }
     return null;
   };
+
+  const heroStats = [
+    {
+      icon: Zap,
+      label: "Power density",
+      value: "400MW+",
+      helper: "Available across campuses",
+    },
+    {
+      icon: Shield,
+      label: "Tier III uptime",
+      value: "99.998%",
+      helper: "Backed by redundant grids",
+    },
+    {
+      icon: TrendingUp,
+      label: "Latency",
+      value: "<4ms",
+      helper: "Avg. coast-to-core transit",
+    },
+  ];
   return (
     <div className="min-h-screen bg-background scroll-smooth">
       <Navigation />
@@ -334,27 +355,61 @@ const Index = () => {
         />
 
         <div className="container mx-auto px-6 py-20 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center justify-center max-w-[1400px] mx-auto">
             {/* Left Content with Stagger Animation */}
-            <StaggerContainer className="space-y-8">
+            <StaggerContainer className="space-y-8 flex flex-col items-center justify-center text-center">
               <StaggerItem>
-                <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold leading-snug text-slate-900 dark:text-white transition-colors duration-300">
-                  Powering the Future of
-                  <span className="block mt-3">
-                    <GradientText>AI & Cloud Infrastructure</GradientText>
+                <div className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 dark:border-white/10 bg-white/80 dark:bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-slate-600 dark:text-slate-200 shadow-lg shadow-brand-cyan/10 backdrop-blur">
+                  <span className="inline-flex h-2 w-2 rounded-full bg-gradient-to-r from-brand-cyan to-brand-navy animate-pulse"></span>
+                  Live capacity expansion
+                </div>
+              </StaggerItem>
+              <StaggerItem>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight text-slate-900 dark:text-white transition-colors duration-300">
+                 <GradientText>Powering the Future of AI & Cloud Infrastructure</GradientText>
+                  <span className="block text-slate-500 dark:text-slate-300 text-base md:text-lg tracking-[0.4em] uppercase mt-3">
+                    data infrastructure
                   </span>
+                  {/* <span className="block mt-4">
+                    <GradientText>Built for hyperscale AI velocity.</GradientText>
+                  </span> */}
                 </h1>
               </StaggerItem>
 
               <StaggerItem>
-                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl text-justify transition-colors duration-300">
-                  DigiPowerX builds, owns, and operates Tier III-certified modular data-center infrastructure across the United States — engineered for speed, scalability, and reliability.
+                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed transition-colors duration-300 text-center mx-auto">
+                  DigiPowerX architects Tier III modular campuses that deliver extreme density, sub-4ms latency, and turnkey immersion cooling so AI teams can deploy faster without compromising resiliency or sustainability.
                 </p>
+              </StaggerItem>
+
+              <StaggerItem>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full">
+                  {heroStats.map((stat) => {
+                    const Icon = stat.icon;
+                    return (
+                      <div
+                        key={stat.label}
+                        className="rounded-2xl border border-slate-200/60 dark:border-white/5 bg-white/80 dark:bg-slate-900/60 p-4 shadow-lg shadow-brand-cyan/5 backdrop-blur text-center"
+                      >
+                        <div className="mb-3 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
+                          <Icon className="h-4 w-4 text-brand-cyan" />
+                          {stat.label}
+                        </div>
+                        <p className="text-2xl font-semibold text-slate-900 dark:text-white">
+                          {stat.value}
+                        </p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                          {stat.helper}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
               </StaggerItem>
 
               {/* Enhanced Button Section */}
               <StaggerItem>
-                <div className="flex flex-col sm:flex-row gap-4 pt-6 justify-start items-start">
+                <div className="flex flex-col sm:flex-row gap-4 pt-6 justify-center items-center">
                   <a href="/projects">
                     <motion.div
                       whileHover={{ scale: 1.05, translateY: -2 }}
@@ -401,24 +456,57 @@ const Index = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 group cursor-pointer h-96 sm:h-[450px] md:h-[520px]">
-  <motion.video
-    src={backgroundVideo}
-    autoPlay
-    muted
-    loop
-    playsInline
-    preload="metadata"
-    className="w-full h-full object-cover"
-    whileHover={{ scale: 1.05 }}
-    transition={{ duration: 0.6, ease: "easeOut" }}
-  >
-    <source src={backgroundVideo} type="video/mp4" />
-    Your browser does not support the video tag.
-  </motion.video>
+                <div className="pointer-events-none absolute -inset-6 rounded-[40px] bg-gradient-to-r from-brand-navy/30 via-brand-cyan/30 to-white/20 blur-3xl opacity-60 animate-pulse"></div>
+                <div className="relative rounded-[32px] overflow-hidden shadow-[0_25px_80px_rgba(15,23,42,0.45)] border border-slate-200/60 dark:border-white/10 bg-slate-900 group cursor-pointer h-[420px] sm:h-[520px] xl:h-[640px]">
+                  <motion.video
+                    src={backgroundVideo}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    <source src={backgroundVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </motion.video>
 
-  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent group-hover:from-slate-900/40 transition-all duration-500"></div>
-</div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-900/10 to-transparent opacity-70 group-hover:opacity-40 transition-opacity duration-700"></div>
+
+                  <div className="absolute top-6 left-6 rounded-2xl border border-white/50 dark:border-white/10 bg-white/80 dark:bg-slate-900/70 px-5 py-4 backdrop-blur-md shadow-xl space-y-2 max-w-xl">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Live feed</p>
+                    <p className="text-lg font-semibold text-slate-900 dark:text-white">Phoenix Modular Campus</p>
+                    <p className="flex items-center gap-2 text-xs font-medium text-emerald-500">
+                      <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+                      Cooling load active · 72%
+                    </p>
+                  </div>
+
+                  <div className="absolute bottom-6 right-6 w-60 rounded-2xl border border-white/40 dark:border-white/10 bg-slate-900/80 backdrop-blur-xl p-5 text-white shadow-2xl space-y-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.4em] text-white/70">Immersion ready</p>
+                    <div className="flex items-end justify-between gap-4">
+                      <div>
+                        <p className="text-sm text-white/60">Instant capacity</p>
+                        <p className="text-3xl font-semibold">48MW</p>
+                      </div>
+                      <div className="flex items-center gap-1 text-emerald-400 text-sm font-semibold">
+                        <TrendingUp className="w-4 h-4" />
+                        +12%
+                      </div>
+                    </div>
+                    <div>
+                      <div className="mb-1 flex items-center justify-between text-[11px] text-white/50">
+                        <span>Deployment runway</span>
+                        <span>72%</span>
+                      </div>
+                      <div className="h-1.5 rounded-full bg-white/15">
+                        <span className="block h-full w-[72%] rounded-full bg-gradient-to-r from-brand-cyan to-brand-navy"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
               </motion.div>
             </SlideIn>
@@ -1266,7 +1354,7 @@ const Index = () => {
             {/* RIGHT IMAGE */}
             <FadeIn direction="right">
               <img
-                src="/image.jpeg"
+                src="./super.jpg"
                 alt="Partner Collaboration"
                 className="w-full h-auto rounded-2xl shadow-xl object-cover"
               />

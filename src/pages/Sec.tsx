@@ -33,11 +33,11 @@ export default function Sec() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white scroll-smooth">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900 scroll-smooth transition-colors duration-300">
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative py-32 px-6 bg-gradient-to-br from-blue-50 via-white to-blue-100 overflow-hidden">
+      <section className="relative py-32 px-6 bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 overflow-hidden transition-colors duration-300">
         {/* Animated background elements */}
         <motion.div
           className="absolute top-20 right-20 w-64 h-64 bg-brand-cyan/10 rounded-full blur-3xl"
@@ -129,7 +129,7 @@ export default function Sec() {
                 whileTap={{ scale: 0.98 }}
                 className="h-full"
               >
-                <Card className="group h-full border border-gray-200 dark:border-slate-700 shadow-md hover:shadow-2xl rounded-2xl p-6 bg-white dark:bg-slate-900 transition-all duration-500 cursor-pointer relative overflow-hidden transition-colors duration-300">
+                <Card className="group h-full border border-gray-200 dark:border-slate-700 shadow-md hover:shadow-2xl rounded-2xl p-6 bg-white dark:bg-slate-900 transition-all duration-500 cursor-pointer relative overflow-hidden">
                   {/* Animated background gradient on hover */}
                   <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 group-hover:from-brand-cyan/10 group-hover:to-brand-navy/10 transition-all duration-500" />
 
@@ -144,14 +144,14 @@ export default function Sec() {
                         <Calendar className="w-5 h-5 text-brand-cyan" />
                       </motion.div>
                       <div>
-                        <p className="text-xs text-slate-500 font-medium">Filing Date</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium transition-colors duration-300">Filing Date</p>
                         <p className="text-sm font-bold text-slate-900 dark:text-white transition-colors duration-300">{filing.date}</p>
                       </div>
                     </div>
 
                     {/* Form Type */}
-                    <div className="bg-gradient-to-r from-brand-navy/5 to-brand-cyan/5 rounded-xl p-4 border border-brand-cyan/20">
-                      <p className="text-xs text-slate-500 mb-1">Form Type</p>
+                    <div className="bg-gradient-to-r from-brand-navy/5 to-brand-cyan/5 dark:from-brand-navy/20 dark:to-brand-cyan/20 rounded-xl p-4 border border-brand-cyan/20 dark:border-brand-cyan/30 transition-colors duration-300">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-1 transition-colors duration-300">Form Type</p>
                       <p className="text-2xl font-bold bg-gradient-to-r from-brand-navy to-brand-cyan bg-clip-text text-transparent">
                         {filing.form}
                       </p>
@@ -159,8 +159,8 @@ export default function Sec() {
 
                     {/* Description */}
                     <div>
-                      <p className="text-xs text-slate-500 mb-2">Description</p>
-                      <p className="text-slate-700 leading-relaxed font-medium">{filing.desc}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-2 transition-colors duration-300">Description</p>
+                      <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-medium transition-colors duration-300">{filing.desc}</p>
                     </div>
 
                     {/* Download Button */}
@@ -192,13 +192,13 @@ export default function Sec() {
                 View All Filings
               </Button>
             </motion.div>
-            <p className="text-slate-500 text-sm mt-4">
+            <p className="text-slate-500 dark:text-slate-400 text-sm mt-4 transition-colors duration-300">
               Or visit our{" "}
               <a
                 href="https://www.sec.gov"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-brand-cyan hover:text-brand-navy font-semibold underline"
+                className="text-brand-cyan hover:text-brand-navy dark:hover:text-brand-cyan font-semibold underline"
               >
                 SEC.gov profile
               </a>
@@ -208,7 +208,7 @@ export default function Sec() {
       </section>
 
       {/* Info Banner */}
-      <section className="py-16 px-6 bg-gradient-to-r from-brand-navy/5 to-brand-cyan/5 border-y border-brand-cyan/20">
+      <section className="py-16 px-6 bg-gradient-to-r from-brand-navy/5 to-brand-cyan/5 dark:from-brand-navy/20 dark:to-brand-cyan/20 border-y border-brand-cyan/20 dark:border-brand-cyan/30 transition-colors duration-300">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <div className="flex flex-col md:flex-row items-center gap-8">

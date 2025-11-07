@@ -27,7 +27,7 @@ export default function PressRelease() {
  
   // ✅ Fetch Strapi Data
   useEffect(() => {
-    fetch("https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/press-releases?populate=*")
+    fetch("https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/press-releases?fields=title,date,content&populate[pdf_file][fields]=url,name&sort[0]=date:desc")
       .then(res => res.json())
       .then(data => {
         const formatted = data.data.map((item: any) => ({
