@@ -22,7 +22,7 @@ import bannerLogo from "@/assets/USDC-logo.png";
 import logo from "@/assets/logo.png";
 import Projects from "@/components/Projects";
 
-interface StockDataPoint {
+interface StockDataPoint {   
   date: string;
   price: number;
   volume: number;
