@@ -1,0 +1,572 @@
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import Splide from "@splidejs/splide";
+import "@splidejs/splide/dist/css/splide.min.css";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import GradientText from "@/components/GradientText";
+import { FadeIn } from "@/components/animations/FadeIn";
+import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
+import DataCenterMap from "@/components/DataCenterMap";
+import { Building2, Zap, Server, Gauge, MapPin, TrendingUp, Shield, Leaf } from "lucide-react";
+
+interface SlideData {
+  imageUrl: string;
+  imageAlt: string;
+  title: string;
+  description: string;
+  capacity: string;
+  location: string;
+  status: 'Operational' | 'Development' | 'Expansion';
+}
+
+interface Stat {
+  icon: typeof Building2;
+  value: string;
+  label: string;
+  color: string;
+}
+
+interface Feature {
+  icon: typeof Shield;
+  title: string;
+  description: string;
+  color: string;
+}
+
+export default function USDataCentersSlider() {
+  const splideRootRef = useRef<HTMLDivElement | null>(null);
+  const splideInstanceRef = useRef<Splide | null>(null);
+
+  useEffect(() => {
+    if (!splideRootRef.current) return;
+
+    splideInstanceRef.current = new Splide(splideRootRef.current, {
+      type: "fade",
+      rewind: true,
+      autoplay: true,
+      interval: 4000,
+      speed: 1000,
+      pauseOnHover: true,
+      arrows: true,
+      pagination: true,
+      drag: true,
+      keyboard: true,
+    });
+
+    splideInstanceRef.current.mount();
+
+    return () => {
+      if (splideInstanceRef.current) {
+        splideInstanceRef.current.destroy();
+        splideInstanceRef.current = null;
+      }
+    };
+  }, []);
+
+  const slides: SlideData[] = [
+    {
+      imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672193ab70dde9c6e62ee75f_Unknown.avif",
+      imageAlt: "North Tonawanda Power Plant",
+      title: "North Tonawanda Power Plant",
+      capacity: "60 MW",
+      location: "New York",
+      status: "Operational",
+      description: "State-of-the-art 60 MW combined cycle power plant utilizing both gas and steam turbines for maximum efficiency. Features advanced cooling systems and redundant power distribution.",
+    },
+    {
+      imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672193aa5666f763dd3c6466_Unknown-1.avif",
+      imageAlt: "Buffalo Hydropower Facility",
+      title: "Buffalo Hydropower Data Center",
+      capacity: "18.7 MW",
+      location: "Buffalo, NY",
+      status: "Operational",
+      description: "Located at a repurposed industrial site, leveraging sustainable hydropower infrastructure. Tier III-compliant with 99.982% uptime guarantee and advanced environmental controls.",
+    },
+    {
+      imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672533504e766ccec981b09a_Unknown.jpeg",
+      imageAlt: "Alabama Data Center",
+      title: "Alabama Utility-Powered Facility",
+      capacity: "22 MW",
+      location: "Alabama",
+      status: "Operational",
+      description: "This Alabama location features a 22 MW substation with direct utility connectivity. Optimized for high-density AI computing workloads with cutting-edge power distribution and cooling.",
+    },
+    {
+      imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672533504e766ccec981b09a_Unknown.jpeg",
+      imageAlt: "North Carolina Development Site",
+      title: "North Carolina Development Site",
+      capacity: "200 MW",
+      location: "North Carolina",
+      status: "Development",
+      description: "Adjacent to one of North Carolina's largest substations, this flagship development project will deliver 200 MW of AI-optimized infrastructure using our ARMS 200 modular platform.",
+    },
+  ];
+
+  const stats: Stat[] = [
+    {
+      icon: Building2,
+      value: "4",
+      label: "Active Facilities",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: Zap,
+      value: "300+",
+      label: "Total MW Capacity",
+      color: "from-green-500 to-teal-500",
+    },
+    {
+      icon: Server,
+      value: "99.982%",
+      label: "Uptime SLA",
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: Gauge,
+      value: "Tier III",
+      label: "Compliance Standard",
+      color: "from-orange-500 to-red-500",
+    },
+  ];
+
+  const features: Feature[] = [
+    {
+      icon: Shield,
+      title: "Enterprise-Grade Security",
+      description: "24/7 monitoring, biometric access controls, and SOC 2 Type II compliance ensure maximum data protection.",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: Leaf,
+      title: "Sustainable Operations",
+      description: "Carbon-neutral facilities powered by renewable energy sources with advanced cooling for 40% energy savings.",
+      color: "from-green-500 to-teal-500",
+    },
+    {
+      icon: TrendingUp,
+      title: "Scalable Infrastructure",
+      description: "Modular ARMS 200 platform enables rapid deployment and seamless capacity expansion as your needs grow.",
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: Server,
+      title: "AI-Optimized Hardware",
+      description: "Purpose-built for demanding AI/ML workloads with high-density GPU clusters and low-latency networking.",
+      color: "from-orange-500 to-red-500",
+    },
+  ];
+
+  const getStatusColor = (status: string) => {
+    const colors: Record<string, string> = {
+      'Operational': 'from-green-500 to-teal-500',
+      'Development': 'from-orange-500 to-red-500',
+      'Expansion': 'from-blue-500 to-cyan-500',
+    };
+    return colors[status] || 'from-gray-500 to-slate-500';
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white scroll-smooth">
+      <Navigation />
+
+      {/* Hero Section */}
+      <section className="relative py-32 px-6 bg-gradient-to-br from-blue-50 via-white to-blue-100 overflow-hidden">
+        {/* Animated background elements */}
+        <motion.div
+          className="absolute top-20 left-20 w-72 h-72 bg-brand-cyan/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-20 w-72 h-72 bg-brand-navy/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.5, 0.3, 0.5],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <FadeIn delay={0.2}>
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-block p-4 bg-white rounded-2xl shadow-lg mb-6"
+            >
+              <Building2 className="w-12 h-12 text-brand-cyan" />
+            </motion.div>
+          </FadeIn>
+
+          <FadeIn delay={0.3}>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <GradientText>U.S. Data Centers</GradientText>
+            </h1>
+          </FadeIn>
+
+          <FadeIn delay={0.4}>
+            <div className="w-40 h-1.5 bg-gradient-to-r from-brand-navy to-brand-cyan rounded-full mx-auto mb-8" />
+          </FadeIn>
+
+          <FadeIn delay={0.5}>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-10">
+              DigiPowerX operates Tier III-compliant data centers across the United States, powered by our ARMS 200 modular platform for rapid deployment and efficient operations
+            </p>
+          </FadeIn>
+
+          <FadeIn delay={0.6}>
+            <div className="flex flex-wrap justify-center gap-4">
+              <motion.div className="px-6 py-3 bg-white rounded-full shadow-lg border border-brand-cyan/20">
+                <span className="text-brand-cyan font-semibold">{slides.length} Locations</span>
+              </motion.div>
+              <motion.div className="px-6 py-3 bg-white rounded-full shadow-lg border border-brand-cyan/20">
+                <span className="text-slate-600 font-medium">Nationwide Coverage</span>
+              </motion.div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <FadeIn>
+            <h2 className="text-4xl font-bold text-center mb-4">
+              <GradientText>Infrastructure at Scale</GradientText>
+            </h2>
+            <p className="text-center text-slate-600 text-lg mb-16 max-w-2xl mx-auto">
+              Enterprise-grade infrastructure delivering unmatched performance and reliability
+            </p>
+          </FadeIn>
+
+          <StaggerContainer className="grid md:grid-cols-4 gap-6">
+            {stats.map((stat, index) => {
+              const StatIcon = stat.icon;
+              return (
+                <StaggerItem key={index}>
+                  <motion.div
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    className="group p-8 bg-white rounded-2xl border border-gray-200 shadow-md hover:shadow-2xl transition-all duration-500 text-center relative overflow-hidden"
+                  >
+                    {/* Animated background gradient on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 group-hover:from-brand-cyan/10 group-hover:to-brand-navy/10 transition-all duration-500" />
+
+                    <div className="relative z-10">
+                      <motion.div
+                        className={`inline-flex p-4 mb-4 rounded-xl bg-gradient-to-br ${stat.color} bg-opacity-10`}
+                        whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <StatIcon className="w-8 h-8 text-white" />
+                      </motion.div>
+                      <p className={`text-4xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                        {stat.value}
+                      </p>
+                      <p className="text-slate-600 font-medium">{stat.label}</p>
+                    </div>
+                  </motion.div>
+                </StaggerItem>
+              );
+            })}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Interactive Map Section */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <FadeIn>
+            <div className="text-center mb-12">
+              <div className="inline-block p-3 bg-white rounded-2xl shadow-lg mb-4">
+                <MapPin className="w-10 h-10 text-brand-cyan" />
+              </div>
+              <h2 className="text-4xl font-bold mb-4">
+                <GradientText>Nationwide Coverage</GradientText>
+              </h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                Interactive 3D map showcasing our strategically located data centers across the United States
+              </p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.3}>
+            <DataCenterMap />
+          </FadeIn>
+
+          {/* Quick Stats Below Map */}
+          <FadeIn delay={0.5}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+              <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border border-brand-cyan/20">
+                <p className="text-3xl font-bold text-brand-navy">3</p>
+                <p className="text-sm text-slate-600 mt-1">Operational Sites</p>
+              </div>
+              <div className="text-center p-4 bg-gradient-to-br from-green-50 to-teal-50 rounded-xl border border-green-500/20">
+                <p className="text-3xl font-bold text-green-700">100+ MW</p>
+                <p className="text-sm text-slate-600 mt-1">Current Capacity</p>
+              </div>
+              <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-xl border border-orange-500/20">
+                <p className="text-3xl font-bold text-orange-700">1</p>
+                <p className="text-sm text-slate-600 mt-1">In Development</p>
+              </div>
+              <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-500/20">
+                <p className="text-3xl font-bold text-purple-700">200 MW</p>
+                <p className="text-sm text-slate-600 mt-1">Future Capacity</p>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Slider Section */}
+      <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto">
+          <FadeIn>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">
+                <GradientText>Our Facilities</GradientText>
+              </h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                Explore our state-of-the-art data centers across the United States
+              </p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.3}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="rounded-3xl overflow-hidden shadow-2xl border-2 border-gray-200"
+            >
+              <div
+                ref={splideRootRef}
+                className="splide relative w-full"
+                aria-label="U.S. Data Centers slider"
+              >
+                <div className="splide__track">
+                  <ul className="splide__list">
+                    {slides.map((slide, index) => (
+                      <li key={index} className="splide__slide relative">
+                        {/* Image with overlay */}
+                        <div className="relative h-[500px] md:h-[600px]">
+                          <img
+                            src={slide.imageUrl}
+                            alt={slide.imageAlt}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                        </div>
+
+                        {/* Content overlay */}
+                        <div className="absolute inset-0 flex items-end">
+                          <div className="w-full p-8 md:p-12 lg:p-16">
+                            <div className="max-w-3xl">
+                              {/* Location & Status Badges */}
+                              <div className="flex flex-wrap gap-3 mb-4">
+                                <motion.div
+                                  className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20"
+                                  whileHover={{ scale: 1.05 }}
+                                >
+                                  <MapPin className="w-4 h-4 text-brand-cyan" />
+                                  <span className="text-white text-sm font-medium">{slide.location}</span>
+                                </motion.div>
+                                <motion.div
+                                  whileHover={{ scale: 1.05 }}
+                                  className={`px-4 py-2 bg-gradient-to-r ${getStatusColor(slide.status)} rounded-full`}
+                                >
+                                  <span className="text-white text-sm font-bold">{slide.status}</span>
+                                </motion.div>
+                              </div>
+
+                              {/* Title with capacity */}
+                              <h2 className="text-3xl md:text-5xl font-bold mb-3 text-white">
+                                {slide.title}
+                              </h2>
+                              <div className="flex items-center gap-2 mb-4">
+                                <Zap className="w-5 h-5 text-brand-cyan" />
+                                <span className="text-2xl font-bold text-brand-cyan">{slide.capacity}</span>
+                              </div>
+
+                              {/* Description */}
+                              <p className="text-gray-200 text-base md:text-lg leading-relaxed max-w-2xl">
+                                {slide.description}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          </FadeIn>
+        </div>
+
+        {/* Enhanced Splide Styling */}
+        <style>{`
+          .splide {
+            z-index: 0 !important;
+            position: relative !important;
+          }
+          .splide__slide {
+            z-index: 0 !important;
+          }
+          .splide__arrow {
+            top: 50% !important;
+            transform: translateY(-50%);
+            background: rgba(1, 211, 255, 0.9);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+          }
+          .splide__arrow:hover {
+            background: rgba(51, 65, 82, 0.9);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 20px rgba(1, 211, 255, 0.3);
+          }
+          .splide__arrow svg {
+            fill: white;
+            width: 20px;
+            height: 20px;
+          }
+          .splide__pagination {
+            bottom: 24px !important;
+          }
+          .splide__pagination .splide__pagination__page {
+            width: 12px;
+            height: 12px;
+            margin: 0 6px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+          }
+          .splide__pagination .splide__pagination__page.is-active {
+            background: rgba(1, 211, 255, 1);
+            border-color: rgba(255, 255, 255, 0.5);
+            width: 36px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(1, 211, 255, 0.4);
+          }
+          .splide__pagination .splide__pagination__page:hover {
+            background: rgba(1, 211, 255, 0.7);
+            transform: scale(1.2);
+          }
+        `}</style>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <FadeIn>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">
+                <GradientText>Why Choose DigiPowerX</GradientText>
+              </h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                Industry-leading infrastructure designed for the future of AI computing
+              </p>
+            </div>
+          </FadeIn>
+
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => {
+              const FeatureIcon = feature.icon;
+              return (
+                <StaggerItem key={index}>
+                  <motion.div
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="group h-full p-6 bg-white rounded-2xl border border-gray-200 shadow-md hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
+                  >
+                    {/* Animated background gradient on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 group-hover:from-brand-cyan/10 group-hover:to-brand-navy/10 transition-all duration-500" />
+
+                    <div className="relative z-10">
+                      <motion.div
+                        className={`inline-flex p-3 mb-4 rounded-xl bg-gradient-to-br ${feature.color}`}
+                        whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <FeatureIcon className="w-6 h-6 text-white" />
+                      </motion.div>
+                      <h3 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-brand-navy transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      <p className="text-slate-600 text-sm leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                </StaggerItem>
+              );
+            })}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-6 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <FadeIn>
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="inline-block p-4 bg-white/10 rounded-2xl mb-6 backdrop-blur-sm"
+            >
+              <Building2 className="w-12 h-12 text-brand-cyan" />
+            </motion.div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Ready to Scale Your Infrastructure?
+            </h2>
+            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+              Partner with DigiPowerX for enterprise-grade data center solutions powered by cutting-edge technology
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.a
+                href="/contact-us"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <button className="px-8 py-4 bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300">
+                  Contact Our Team
+                </button>
+              </motion.a>
+              <motion.a
+                href="/investor"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <button className="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-full border-2 border-white/20 hover:border-white/40 transition-all duration-300">
+                  Learn More
+                </button>
+              </motion.a>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}

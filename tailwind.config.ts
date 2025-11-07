@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -14,6 +15,12 @@ export default {
     },
     extend: {
       colors: {
+        brand: {
+          navy: "#334152",
+          cyan: "#01d3ff",
+          "cyan-light": "#33e0ff",
+          "navy-dark": "#1a2633",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -109,5 +116,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
