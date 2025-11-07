@@ -83,348 +83,138 @@ const Index = () => {
       <Navigation />
 
       {/* Hero Section with Enhanced Animations */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-black transition-colors duration-300">
-        {/* Tron Grid Background */}
-        <div className="absolute inset-0 opacity-10 dark:opacity-20">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `
-              linear-gradient(rgba(1, 211, 255, 0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(1, 211, 255, 0.2) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}></div>
-        </div>
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-12 
+  bg-white dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-black transition-colors duration-300">
 
-        {/* Logo 1 - Moving in Rectangular Path (Clockwise) */}
-        {/* <motion.div
-          className="absolute z-0"
-          animate={{
-            x: ["0%", "80%", "80%", "0%", "0%"],
-            y: ["20%", "20%", "70%", "70%", "20%"],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          <motion.div
-            className="relative"
-            animate={{
-              filter: [
-                "drop-shadow(0 0 20px rgba(1, 211, 255, 0.8)) drop-shadow(0 0 40px rgba(1, 211, 255, 0.5))",
-                "drop-shadow(0 0 30px rgba(1, 211, 255, 1)) drop-shadow(0 0 60px rgba(1, 211, 255, 0.7))",
-                "drop-shadow(0 0 20px rgba(1, 211, 255, 0.8)) drop-shadow(0 0 40px rgba(1, 211, 255, 0.5))",
-              ]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <img
-              src={logo}
-              alt="DigiPowerX Logo 1"
-              className="h-20 w-auto brightness-150 contrast-125"
-              style={{
-                filter: 'brightness(2) saturate(1.5)',
-              }}
-            />
-          </motion.div>
-        </motion.div> */}
+  {/* Tron Background Grid */}
+  <div className="absolute inset-0 opacity-10 dark:opacity-20">
+    <div
+      className="absolute inset-0"
+      style={{
+        backgroundImage: `
+          linear-gradient(rgba(1, 211, 255, 0.2) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(1, 211, 255, 0.2) 1px, transparent 1px)
+        `,
+        backgroundSize: "40px 40px",
+      }}
+    ></div>
+  </div>
 
-        {/* Logo 2 - Moving in Rectangular Path (Counter-clockwise) */}
-        {/* <motion.div
-          className="absolute z-0"
-          animate={{
-            x: ["80%", "80%", "0%", "0%", "80%"],
-            y: ["70%", "20%", "20%", "70%", "70%"],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          <motion.div
-            className="relative"
-            animate={{
-              filter: [
-                "drop-shadow(0 0 20px rgba(255, 94, 0, 0.8)) drop-shadow(0 0 40px rgba(255, 94, 0, 0.5))",
-                "drop-shadow(0 0 30px rgba(255, 94, 0, 1)) drop-shadow(0 0 60px rgba(255, 94, 0, 0.7))",
-                "drop-shadow(0 0 20px rgba(255, 94, 0, 0.8)) drop-shadow(0 0 40px rgba(255, 94, 0, 0.5))",
-              ]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <img
-              src={logo}
-              alt="DigiPowerX Logo 2"
-              className="h-20 w-auto brightness-150 contrast-125"
-              style={{
-                filter: 'brightness(2) saturate(1.5) hue-rotate(180deg)',
-              }}
-            />
-          </motion.div>
-        </motion.div> */}
+  {/* Glow Orbs */}
+  <motion.div
+    className="absolute top-10 right-5 w-40 h-40 sm:w-64 sm:h-64 md:w-96 md:h-96 
+    bg-cyan-500/10 rounded-full blur-3xl"
+    animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+  />
 
-        {/* Connection Point 1 - Top Right */}
-        <motion.div
-          className="absolute z-0"
-          style={{ left: '80%', top: '20%' }}
-          animate={{
-            scale: [1, 2, 1],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            times: [0, 0.25, 0.5]
-          }}
-        >
-          <div className="w-8 h-8 bg-gradient-to-r from-cyan-400 to-orange-400 rounded-full blur-md"></div>
-        </motion.div>
+  <motion.div
+    className="absolute bottom-10 left-5 w-40 h-40 sm:w-64 sm:h-64 md:w-96 md:h-96 
+    bg-blue-500/10 rounded-full blur-3xl"
+    animate={{ scale: [1.1, 1, 1.1], opacity: [0.5, 0.3, 0.5] }}
+    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+  />
 
-        {/* Connection Point 2 - Bottom Left */}
-        <motion.div
-          className="absolute z-0"
-          style={{ left: '0%', top: '70%' }}
-          animate={{
-            scale: [1, 2, 1],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            times: [0, 0.25, 0.5],
-            delay: 1.5
-          }}
-        >
-          <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-cyan-400 rounded-full blur-md"></div>
-        </motion.div>
+  <div className="container mx-auto px-4 sm:px-6 py-10 relative z-10">
+    
+    {/* ✅ Responsive Grid */}
+    <div className="grid gap-10 lg:grid-cols-2 items-center max-w-7xl mx-auto">
 
-        {/* Energy Beam Connection - Animated Line */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" style={{ opacity: 0.6 }}>
-          <motion.line
-            x1="10%"
-            y1="20%"
-            x2="80%"
-            y2="20%"
-            stroke="url(#gradient1)"
-            strokeWidth="2"
-            animate={{
-              strokeDashoffset: [0, -100],
-              opacity: [0.3, 0.8, 0.3]
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            strokeDasharray="10 5"
-          />
-          <motion.line
-            x1="80%"
-            y1="30%"
-            x2="80%"
-            y2="70%"
-            stroke="url(#gradient2)"
-            strokeWidth="2"
-            animate={{
-              strokeDashoffset: [0, -100],
-              opacity: [0.3, 0.8, 0.3]
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear",
-              delay: 0.75
-            }}
-            strokeDasharray="10 5"
-          />
-          <motion.line
-            x1="10%"
-            y1="70%"
-            x2="80%"
-            y2="70%"
-            stroke="url(#gradient3)"
-            strokeWidth="2"
-            animate={{
-              strokeDashoffset: [0, -100],
-              opacity: [0.3, 0.8, 0.3]
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear",
-              delay: 1.5
-            }}
-            strokeDasharray="10 5"
-          />
-          <motion.line
-            x1="10%"
-            y1="20%"
-            x2="10%"
-            y2="70%"
-            stroke="url(#gradient4)"
-            strokeWidth="2"
-            animate={{
-              strokeDashoffset: [0, -100],
-              opacity: [0.3, 0.8, 0.3]
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear",
-              delay: 2.25
-            }}
-            strokeDasharray="10 5"
-          />
-          <defs>
-            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#01d3ff" />
-              <stop offset="100%" stopColor="#ff5e00" />
-            </linearGradient>
-            <linearGradient id="gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#ff5e00" />
-              <stop offset="100%" stopColor="#01d3ff" />
-            </linearGradient>
-            <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#01d3ff" />
-              <stop offset="100%" stopColor="#ff5e00" />
-            </linearGradient>
-            <linearGradient id="gradient4" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#ff5e00" />
-              <stop offset="100%" stopColor="#01d3ff" />
-            </linearGradient>
-          </defs>
-        </svg>
+      {/* LEFT CONTENT */}
+      <StaggerContainer className="space-y-6 sm:space-y-8">
 
-        {/* Ambient Glow Orbs */}
-        <motion.div
-          className="absolute top-20 right-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.5, 0.3, 0.5]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+        <StaggerItem>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold leading-snug 
+            text-slate-900 dark:text-white transition-colors duration-300">
 
-        <div className="container mx-auto px-6 py-20 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
-            {/* Left Content with Stagger Animation */}
-            <StaggerContainer className="space-y-8">
-              <StaggerItem>
-                <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold leading-snug text-slate-900 dark:text-white transition-colors duration-300">
-                  Powering the Future of
-                  <span className="block mt-3">
-                    <GradientText>AI & Cloud Infrastructure</GradientText>
-                  </span>
-                </h1>
-              </StaggerItem>
+            Powering the Future of
+            <span className="block mt-2 sm:mt-3">
+              <GradientText>AI & Cloud Infrastructure</GradientText>
+            </span>
+          </h1>
+        </StaggerItem>
 
-              <StaggerItem>
-                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl text-justify transition-colors duration-300">
-                  DigiPowerX builds, owns, and operates Tier III-certified modular data-center infrastructure across the United States — engineered for speed, scalability, and reliability.
-                </p>
-              </StaggerItem>
+        <StaggerItem>
+          <p className="text-base sm:text-lg md:text-xl text-slate-600 
+            dark:text-slate-300 max-w-xl text-justify">
+            DigiPowerX builds, owns, and operates Tier III-certified modular 
+            data-center infrastructure across the United States — engineered 
+            for speed, scalability, and reliability.
+          </p>
+        </StaggerItem>
 
-              {/* Enhanced Button Section */}
-              <StaggerItem>
-                <div className="flex flex-col sm:flex-row gap-4 pt-6 justify-start items-start">
-                  <a href="/projects">
-                    <motion.div
-                      whileHover={{ scale: 1.05, translateY: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    >
-                      <Button
-                        size="md"
-                        className="bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-medium text-base px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
-                      >
-                        Explore Our Data Centers
-                        <ArrowRight className="ml-2 w-4 h-4 inline-block" />
-                      </Button>
-                    </motion.div>
-                  </a>
+        {/* ✅ BUTTONS (center on mobile, left elsewhere) */}
+        <StaggerItem>
+          <div className="
+            flex flex-col sm:flex-row gap-4 pt-4 
+            items-center sm:items-start justify-center sm:justify-start 
+            text-center sm:text-left">
 
-                  <motion.div
-                    whileHover={{ scale: 1.05, translateY: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    <Button
-                      size="md"
-                      variant="outline"
-                      onClick={() => {
-                        const section = document.getElementById("technology");
-                        if (section) {
-                          section.scrollIntoView({ behavior: "smooth" });
-                        }
-                      }}
-                      className="border border-blue-600 text-white hover:bg-blue-50 hover:border-blue-700 font-medium text-base px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-lg"
-                    >
-                      Learn About ARMS 200 Modular Systems
-                    </Button>
-                  </motion.div>
-                </div>
-              </StaggerItem>
-            </StaggerContainer>
-
-            {/* Right Video Section with Parallax Effect */}
-            <SlideIn direction="right" delay={0.2}>
-              <motion.div
-                className="relative"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 group cursor-pointer h-96 sm:h-[450px] md:h-[520px]">
-  <motion.video
-    src={backgroundVideo}
-    autoPlay
-    muted
-    loop
-    playsInline
-    preload="metadata"
-    className="w-full h-full object-cover"
-    whileHover={{ scale: 1.05 }}
-    transition={{ duration: 0.6, ease: "easeOut" }}
-  >
-    <source src={backgroundVideo} type="video/mp4" />
-    Your browser does not support the video tag.
-  </motion.video>
-
-  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent group-hover:from-slate-900/40 transition-all duration-500"></div>
-</div>
-
+            <a href="/projects">
+              <motion.div whileHover={{ scale: 1.05, y: -2 }}>
+                <Button
+                  size="md"
+                  className="bg-gradient-to-r from-brand-navy to-brand-cyan 
+                  hover:from-brand-cyan hover:to-brand-navy text-white text-base px-6 py-3 rounded-lg"
+                >
+                  Explore Our Data Centers
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
               </motion.div>
-            </SlideIn>
+            </a>
+
+            <motion.div whileHover={{ scale: 1.05, y: -2 }}>
+              <Button
+                size="md"
+                variant="outline"
+                onClick={() => {
+                  document.getElementById("technology")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="border border-blue-600 text-white hover:bg-blue-50 
+                hover:border-blue-700 text-base px-6 py-3 rounded-lg"
+              >
+                Learn About ARMS 200 Modular Systems
+              </Button>
+            </motion.div>
+
           </div>
-        </div>
-      </section>
+        </StaggerItem>
+
+      </StaggerContainer>
+
+      {/* ✅ Right Video — Fully Responsive */}
+      <SlideIn direction="right" delay={0.2}>
+        <motion.div
+          className="relative"
+          whileHover={{ scale: 1.02 }}
+        >
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl 
+            border border-slate-200 dark:border-slate-700 group cursor-pointer
+            h-56 sm:h-72 md:h-[420px] lg:h-[520px]">
+
+            <motion.video
+              src={backgroundVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="w-full h-full object-cover"
+              whileHover={{ scale: 1.05 }}
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-t 
+              from-slate-900/60 via-transparent to-transparent 
+              group-hover:from-slate-900/40 transition-all duration-500">
+            </div>
+          </div>
+        </motion.div>
+      </SlideIn>
+
+    </div>
+  </div>
+</section>
+
 
       {/* Banner Section with Slide Animation */}
       <FadeIn direction="up" duration={0.8}>
