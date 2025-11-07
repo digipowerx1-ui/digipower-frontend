@@ -32,14 +32,35 @@ export default function ContactUs() {
     resolver: zodResolver(contactFormSchema),
   });
 
+  // ✅ UPDATED: Submit to Strapi API
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    try {
-      // TODO: Implement actual API call
-      console.log("Form data:", data);
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch(
+        "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/contact-forms",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            data: {
+              firstName: data.firstName,
+              lastName: data.lastName,
+              companyName: data.companyName,
+              workEmail: data.email, // ✅ mapped to Strapi field
+              title: data.title,
+              phoneNumber: data.phone || "",
+              message: data.message,
+            },
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
 
       toast({
         title: "Message sent successfully!",
@@ -64,7 +85,6 @@ export default function ContactUs() {
 
       {/* ---------- HERO SECTION ---------- */}
       <section className="relative bg-gradient-to-br dark:from-slate-900 dark:to-slate-950 text-white py-20 px-6 transition-colors duration-300">
-        {/* Radial Background Overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,200,255,0.08),transparent_70%)] pointer-events-none"></div>
 
         <div className="relative max-w-5xl mx-auto text-center">
@@ -209,7 +229,7 @@ export default function ContactUs() {
               />
             </div>
 
-            {/* Message (Full Width) */}
+            {/* Message */}
             <div className="col-span-1 md:col-span-2 flex flex-col">
               <label htmlFor="message" className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1 transition-colors duration-300">
                 Message *
@@ -230,7 +250,7 @@ export default function ContactUs() {
               )}
             </div>
 
-            {/* Submit Button (Full Width) */}
+            {/* Submit Button */}
             <div className="col-span-1 md:col-span-2 mt-4">
               <button
                 type="submit"
