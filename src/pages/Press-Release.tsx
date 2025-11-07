@@ -125,56 +125,92 @@ export default function PressRelease() {
       </section>
  
       {/* ✅ Filters Section */}
-      <section className="py-12 px-6 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
-        <div className="max-w-7xl mx-auto">
-          <FadeIn delay={0.2}>
-            <div className="grid md:grid-cols-3 gap-6">
- 
-              {/* Search */}
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                <Input
-                  type="text"
-                  placeholder="Search press releases..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 py-6 rounded-xl border-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-white"
-                />
-              </div>
- 
-              {/* Year */}
-              <div className="relative">
-                <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                <select
-                  value={selectedYear}
-                  onChange={(e) => setSelectedYear(e.target.value)}
-                  className="w-full pl-12 pr-4 py-6 rounded-xl border-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-white"
-                >
-                  {years.map((year) => (
-                    <option key={year}>{year}</option>
-                  ))}
-                </select>
-              </div>
- 
-              {/* Category */}
-              <div className="relative">
-                <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full pl-12 pr-4 py-6 rounded-xl border-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-white"
-                >
-                  {categories.map((cat) => (
-                    <option key={cat}>{cat}</option>
-                  ))}
-                </select>
-              </div>
- 
-            </div>
-          </FadeIn>
+     <section className="py-12 px-6 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
+  <div className="max-w-7xl mx-auto">
+    <FadeIn delay={0.2}>
+      <div className="grid md:grid-cols-3 gap-6">
+
+        {/* Search */}
+        <div className="relative flex items-center w-full">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+
+          {/* If your Input is a custom component it will accept className */}
+          <Input
+            type="text"
+            placeholder="Search press releases..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className={
+              "w-full pl-12 pr-4 h-14 rounded-xl border-2 bg-white dark:bg-slate-900 " +
+              "text-slate-800 dark:text-white text-sm leading-tight focus:outline-none"
+            }
+          />
         </div>
-      </section>
- 
+
+        {/* Year */}
+        <div className="relative flex items-center w-full">
+          <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+
+          <select
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(e.target.value)}
+            className={
+              "w-full pl-12 pr-10 h-14 rounded-xl border-2 bg-white dark:bg-slate-900 " +
+              "text-slate-800 dark:text-white text-sm leading-tight appearance-none focus:outline-none"
+            }
+          >
+            {years.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+
+          {/* Right chevron to match native arrow and stay consistent */}
+          <svg
+            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+          </svg>
+        </div>
+
+        {/* Category */}
+        <div className="relative flex items-center w-full">
+          <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className={
+              "w-full pl-12 pr-10 h-14 rounded-xl border-2 bg-white dark:bg-slate-900 " +
+              "text-slate-800 dark:text-white text-sm leading-tight appearance-none focus:outline-none"
+            }
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+
+          <svg
+            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+          </svg>
+        </div>
+
+      </div>
+    </FadeIn>
+  </div>
+</section>
+
       {/* ✅ Press Release Cards */}
       <section className="py-20 px-6 bg-gradient-to-b from-white to-gray-50 dark:from-slate-900 dark:to-slate-950">
         <div className="max-w-7xl mx-auto">

@@ -39,8 +39,17 @@ export default function Footer() {
           <div>
             <h3 className="font-bold mb-4 text-white transition-colors duration-300">Financials</h3>
             <ul className="space-y-2 text-gray-400 dark:text-gray-300 text-sm">
+              
               <li><Link to="/Investor#stock-info" className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300">Stock Information</Link></li>
-              <li><Link to="/sec" className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300">SEC Filings</Link></li>
+              <li>
+  <Link 
+    to="/sec" 
+    className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300"
+  >
+    SEC Filings
+  </Link>
+</li>
+
             </ul>
           </div>
 

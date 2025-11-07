@@ -40,30 +40,7 @@ export default function PresentationsEvents() {
       downloadLink: 'https://cdn.prod.website-files.com/66f727b0f2cf943df67f317e/68e859482fb517e9da2babdc_DigiPower%20X%20Deck%20October%202025.pdf',
       thumbnail: 'https://cdn.prod.website-files.com/66f727b0f2cf943df67f317e/68e859410eec6662078e2426_Screenshot%202025-10-09%20at%208.54.21%E2%80%AFPM.png',
     },
-    {
-      id: 2,
-      date: 'September 15, 2025',
-      title: 'Q3 2025 Earnings Call Presentation',
-      description: 'Third quarter financial results, strategic initiatives update, and market outlook discussion.',
-      type: 'Earnings Call',
-      downloadLink: '#',
-    },
-    {
-      id: 3,
-      date: 'August 20, 2025',
-      title: 'ARMS 200 Technology Deep Dive',
-      description: 'Technical presentation showcasing the next generation of our modular AI infrastructure solutions.',
-      type: 'Webcast',
-      downloadLink: '#',
-    },
-    {
-      id: 4,
-      date: 'July 10, 2025',
-      title: '2025 Mid-Year Strategic Update',
-      description: 'Comprehensive review of first-half performance and updated guidance for remainder of fiscal year.',
-      type: 'Investor Presentation',
-      downloadLink: '#',
-    },
+    
   ];
 
   const upcomingEvents: UpcomingEvent[] = [

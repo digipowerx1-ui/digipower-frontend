@@ -15,7 +15,7 @@ interface Filing {
   link: string;
 }
 
-export default function SecFilings() {
+export default function Sec() {
   const filings: Filing[] = [
     { date: "Nov 3, 2025", form: "6-K", desc: "Current Report", link: "https://s3.amazonaws.com/sec.irpass.cc/2998/0001213900-25-104911.pdf" },
     { date: "Oct 30, 2025", form: "6-K", desc: "Current Report", link: "https://s3.amazonaws.com/sec.irpass.cc/2998/0001213900-25-104116.pdf" },
@@ -88,22 +88,22 @@ export default function SecFilings() {
           <FadeIn delay={0.4}>
             <div className="flex flex-wrap justify-center gap-4 mt-10">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
+                {/* <Button
                   variant="outline"
                   className="bg-white dark:bg-slate-900 hover:bg-gray-50 dark:bg-slate-950 border-2 border-brand-cyan text-brand-navy font-semibold px-6 py-3 rounded-full transition-colors duration-300"
                 >
                   <Calendar className="w-5 h-5 mr-2" />
                   Filter by Date
-                </Button>
+                </Button> */}
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
+                {/* <Button
                   variant="outline"
                   className="bg-white dark:bg-slate-900 hover:bg-gray-50 dark:bg-slate-950 border-2 border-brand-cyan text-brand-navy font-semibold px-6 py-3 rounded-full transition-colors duration-300"
                 >
                   <FileText className="w-5 h-5 mr-2" />
                   Filter by Form Type
-                </Button>
+                </Button> */}
               </motion.div>
             </div>
           </FadeIn>
@@ -227,13 +227,13 @@ export default function SecFilings() {
                   Our investor relations team is here to assist you with any questions or document requests.
                 </p>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
+                  {/* <Button
                     variant="outline"
                     className="border-2 border-brand-cyan text-brand-navy hover:bg-brand-cyan hover:text-white font-semibold"
                   >
                     <Mail className="w-4 h-4 mr-2" />
                     Contact Investor Relations
-                  </Button>
+                  </Button> */}
                 </motion.div>
               </div>
             </div>

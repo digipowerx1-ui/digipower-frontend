@@ -476,38 +476,72 @@ const Index = () => {
       </FadeIn>
 
       {/* NeoCloudz Coming Soon Section */}
-      <section className="relative py-24 bg-white dark:bg-slate-900 overflow-hidden transition-colors duration-300">
-        {/* Subtle Animated Background Pattern */}
+      {/* NeoCloudz Coming Soon Section */}
+<section className="relative py-24 bg-white dark:bg-slate-900 overflow-hidden transition-colors duration-300">
+  {/* React State + Email Handler */}
+  {(() => {
+    // We embed logic inside an IIFE block so the section still works standalone
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
+
+    const handleNotifySubmit = async () => {
+      if (!email) {
+        setMessage("Please enter an email.");
+        return;
+      }
+
+      setLoading(true);
+      setMessage("");
+
+      try {
+        const res = await fetch(
+          "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/notify-mes",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              data: {
+                email: email,
+              },
+            }),
+          }
+        );
+
+        if (!res.ok) throw new Error("Failed to submit");
+
+        setMessage("✅ You will be notified!");
+        setEmail("");
+      } catch (err) {
+        setMessage("❌ Something went wrong. Try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    return (
+      <>
+        {/* Animated Background */}
         <motion.div
           className="absolute inset-0 opacity-10"
-          animate={{
-            opacity: [0.05, 0.15, 0.05],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ opacity: [0.05, 0.15, 0.05] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzIzMjMyMyIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')]"></div>
         </motion.div>
 
-        {/* Glowing Accent Orb */}
+        {/* Glowing Orb */}
         <motion.div
           className="absolute -top-32 right-0 w-72 h-72 bg-[#01d3ff]/20 rounded-full blur-3xl opacity-40"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-8">
+
             {/* Tagline */}
             <ScaleIn delay={0.1}>
               <div className="inline-block px-5 py-2 bg-[#01d3ff]/10 rounded-full border border-[#01d3ff]/30 text-[#245592] font-semibold tracking-wide shadow-sm">
@@ -517,7 +551,7 @@ const Index = () => {
 
             {/* Heading */}
             <FadeIn delay={0.2} direction="up">
-              <h2 className="text-4xl md:text-6xl font-bold leading-tight text-gray-900 dark:text-white drop-shadow-md transition-colors duration-300">
+              <h2 className="text-4xl md:text-6xl font-bold leading-tight text-gray-900 dark:text-white drop-shadow-md">
                 <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
                   NeoCloudz
                 </span>{" "}
@@ -527,16 +561,15 @@ const Index = () => {
 
             {/* Description */}
             <FadeIn delay={0.3} direction="up">
-              <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto transition-colors duration-300">
+              <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
                 Launching in <span className="text-[#01b4e5] font-medium">2026</span>,{" "}
                 <strong className="text-gray-900 dark:text-white">NeoCloudz</strong> is the consumer and enterprise-facing arm of
-                <strong className="text-[#245592] dark:text-[#01d3ff]"> DigiPowerX</strong>. It offers on-demand GPU and AI compute directly from our Tier III infrastructure —
-                empowering developers, startups, and enterprises with sustainable U.S.-based high-performance computing power.
+                <strong className="text-[#245592] dark:text-[#01d3ff]"> DigiPowerX</strong>. It offers on-demand GPU and AI compute directly from our Tier III infrastructure.
               </p>
             </FadeIn>
 
             {/* Highlights */}
-            <StaggerContainer staggerDelay={0.15} className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto text-left text-gray-600 dark:text-gray-300 text-sm md:text-base mt-6 transition-colors duration-300">
+            <StaggerContainer staggerDelay={0.15} className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto text-left text-gray-600 dark:text-gray-300 text-sm md:text-base mt-6">
               {[
                 "Instant GPU rentals through a cloud interface",
                 "Backed by DigiPowerX Tier III data centers",
@@ -545,48 +578,59 @@ const Index = () => {
               ].map((item, i) => (
                 <StaggerItem key={i}>
                   <motion.div
-                    className="flex items-start space-x-3 bg-gray-100 dark:bg-slate-800 rounded-xl p-4 border border-[#01d3ff]/20 hover:border-[#01d3ff]/40 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-slate-700 cursor-pointer"
+                    className="flex items-start space-x-3 bg-gray-100 dark:bg-slate-800 rounded-xl p-4 border border-[#01d3ff]/20 hover:border-[#01d3ff]/40 transition-all duration-300"
                     whileHover={{ scale: 1.02, translateY: -2 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    <div className="w-2 h-2 mt-2 rounded-full bg-[#01d3ff]"></div>
+                    <div className="w-2 h-2 mt-2 rounded-full bg-[#01d3ff]" />
                     <p>{item}</p>
                   </motion.div>
                 </StaggerItem>
               ))}
             </StaggerContainer>
 
-            {/* Sign-Up Form */}
+            {/* ✅ SIGNUP FORM — LIVE API POST */}
             <FadeIn delay={0.5} direction="up">
               <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto pt-10">
+
                 <Input
                   placeholder="Enter your email"
-                  className="bg-gray-50 border-[#01d3ff]/40 text-gray-900 placeholder:text-gray-400 rounded-xl focus:border-[#01d3ff]/60 focus:ring-2 focus:ring-[#01d3ff]/40"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-gray-50 border-[#01d3ff]/40 text-gray-900 placeholder:text-gray-400 rounded-xl"
                 />
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
+
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                   <Button
                     size="lg"
-                    className="rounded-xl bg-gradient-to-r from-[#245592] to-[#01d3ff] hover:from-[#01b4e5] hover:to-[#334152] text-white font-semibold whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300"
+                    disabled={loading}
+                    onClick={handleNotifySubmit}
+                    className="rounded-xl bg-gradient-to-r from-[#245592] to-[#01d3ff] text-white font-semibold shadow-lg"
                   >
-                    Sign Up for Updates
+                    {loading ? "Submitting..." : "Sign Up for Updates"}
                   </Button>
                 </motion.div>
               </div>
+
+              {message && (
+                <p className="text-sm mt-3 text-gray-600 dark:text-gray-300">
+                  {message}
+                </p>
+              )}
             </FadeIn>
 
-            {/* Teaser Text */}
+            {/* Teaser */}
             <FadeIn delay={0.6} direction="up">
               <p className="text-sm text-gray-500 italic mt-4 tracking-wide">
                 Launching Soon — Be the first to experience the power of NeoCloudz.
               </p>
             </FadeIn>
+
           </div>
         </div>
-      </section>
+      </>
+    );
+  })()}
+</section>
 
       {/* About Section with Enhanced Stats */}
       <section id="about" className="py-24 bg-white dark:bg-slate-950 transition-colors duration-300">
@@ -608,37 +652,36 @@ const Index = () => {
           </FadeIn>
 
           {/* Centered Stats Grid with Stagger */}
-         <div className="flex justify-center ">
+     <div className="flex justify-center">
   <StaggerContainer
     staggerDelay={0.2}
-    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 text-center w-full max-w-6xl"
+    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full max-w-6xl"
   >
     <StaggerItem>
-      <div className="h-full flex">
-        <StatCard
-          value="3"
-          label="United States-based mining sites"
-          delay={0}
-        />
-      </div>
+      <StatCard
+        value="3"
+        label="United States-based mining sites"
+        delay={0}
+        className="h-full"
+      />
     </StaggerItem>
+
     <StaggerItem>
-      <div className="h-full flex">
-        <StatCard
-          value="11.8k+"
-          label="miners under our domain"
-          delay={100}
-        />
-      </div>
+      <StatCard
+        value="11.8k+"
+        label="miners under our domain"
+        delay={100}
+        className="h-full"
+      />
     </StaggerItem>
+
     <StaggerItem>
-      <div className="h-full flex">
-        <StatCard
-          value="100"
-          label="megawatts of developed electrical infrastructure"
-          delay={200}
-        />
-      </div>
+      <StatCard
+        value="100"
+        label="electrical infrastructure"
+        delay={200}
+        className="h-full"
+      />
     </StaggerItem>
   </StaggerContainer>
 </div>
@@ -1118,72 +1161,224 @@ const Index = () => {
       </section>
 
       {/* Partnerships Section */}
-      <section
+     <section
   id="partners"
   className="py-24 bg-white dark:bg-slate-900 transition-colors duration-300"
 >
-<div className="container mx-auto px-6">
-<div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
- 
-      {/* LEFT: TEXT CONTENT */}
-<FadeIn direction="up" className="space-y-8">
-<div>
-<h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white transition-colors duration-300">
-            Trusted{" "}
-<span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
-              Partners
-</span>
-</h2>
- 
-          <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed transition-colors duration-300">
-            DigiPowerX is actively collaborating with global technology and
-            infrastructure leaders to accelerate the deployment of our
-            Tier III NeoCloud™ AI platform.  
-<br /><br />
-            Following our recent acquisition of Supermicro systems powered by
-            NVIDIA B200 GPUs, we are expanding strategic alliances that enable
-            high-density, energy-efficient AI compute within our ARMS 200
-            modular infrastructure pods.
-<br /><br />
-            If you are an energy producer, investor, or technology partner,
-<span className="text-[#245592] font-semibold"> DigiPowerX</span>
-            offers co-development opportunities that include joint ventures,
-            GPU cloud-compute revenue models, power-purchase agreements, and
-            colocation partnerships designed for scalable AI growth.
-<br /><br />
-            Join us as we build the next generation of sustainable, modular
-            AI infrastructure.
-</p>
-</div>
- 
-        {/* CTA Button */}
-<FadeIn delay={0.3} direction="up">
-<motion.div
-            whileHover={{ scale: 1.05, translateY: -2 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            className="inline-block"
->
-<Button
-              size="lg"
-              className="bg-gradient-to-r from-[#245592] to-[#01d3ff] hover:from-[#01b4e5] hover:to-[#334152] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 px-8 py-4"
->
-              Become a Partner
-</Button>
-</motion.div>
-</FadeIn>
-</FadeIn>
- 
-      {/* RIGHT: IMAGE */}
-<FadeIn direction="right">
-<img
-          src="/image.jpeg"
-          alt="Partner Collaboration"
-          className="w-full h-auto rounded-2xl shadow-xl object-cover"
-        />
-</FadeIn>
-</div>
-</div>
+  {(() => {
+    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
+
+    const [form, setForm] = useState({
+      name: "",
+      email: "",
+      phone: "",
+      company: "",
+    });
+
+    const handleChange = (e: any) => {
+      setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: any) => {
+      e.preventDefault();
+      setLoading(true);
+      setMessage("");
+
+      try {
+        const res = await fetch(
+          "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/partners",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              data: {
+                name: form.name,
+                email: form.email,
+                phoneNumber: form.phone,
+                companyName: form.company,
+              },
+            }),
+          }
+        );
+
+        if (!res.ok) throw new Error("Failed to submit");
+
+        setMessage("✅ Thank you! We will contact you soon.");
+        setForm({ name: "", email: "", phone: "", company: "" });
+
+        setTimeout(() => setOpen(false), 1200);
+      } catch (err) {
+        setMessage("❌ Failed to submit. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    return (
+      <>
+        {/* MAIN SECTION */}
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* LEFT: TEXT */}
+            <FadeIn direction="up" className="space-y-8">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+                  Trusted{" "}
+                  <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
+                    Partners
+                  </span>
+                </h2>
+
+                <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                  DigiPowerX is actively collaborating with global technology and
+                  infrastructure leaders to accelerate the deployment of our
+                  Tier III NeoCloud™ AI platform.
+                  <br />
+                  <br />
+                  Following our acquisition of Supermicro systems powered by
+                  NVIDIA B200 GPUs, we are expanding strategic alliances.
+                  <br />
+                  <br />
+                  If you are an energy producer, investor, or technology partner,
+                  <span className="text-[#245592] font-semibold"> DigiPowerX</span>
+                  offers co-development opportunities.
+                </p>
+              </div>
+
+              {/* CTA BUTTON */}
+              <FadeIn delay={0.3} direction="up">
+                <motion.div whileHover={{ scale: 1.05, translateY: -2 }}>
+                  <Button
+                    size="lg"
+                    onClick={() => setOpen(true)}
+                    className="bg-gradient-to-r from-[#245592] to-[#01d3ff] text-white font-semibold rounded-lg shadow-lg px-8 py-4"
+                  >
+                    Become a Partner
+                  </Button>
+                </motion.div>
+              </FadeIn>
+            </FadeIn>
+
+            {/* RIGHT IMAGE */}
+            <FadeIn direction="right">
+              <img
+                src="/image.jpeg"
+                alt="Partner Collaboration"
+                className="w-full h-auto rounded-2xl shadow-xl object-cover"
+              />
+            </FadeIn>
+          </div>
+        </div>
+
+        {/* MODAL FORM */}
+        {open && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+              className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-2xl shadow-xl p-8"
+            >
+              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                Partner With DigiPowerX
+              </h3>
+
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* NAME */}
+                <div>
+                  <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
+                    Full Name
+                  </label>
+                  <input
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="John Doe"
+                    className="w-full px-4 py-3 bg-gray-100 dark:bg-slate-800 border dark:border-slate-700 rounded-lg"
+                  />
+                </div>
+
+                {/* EMAIL */}
+                <div>
+                  <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="you@example.com"
+                    className="w-full px-4 py-3 bg-gray-100 dark:bg-slate-800 border dark:border-slate-700 rounded-lg"
+                  />
+                </div>
+
+                {/* PHONE */}
+                <div>
+                  <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
+                    Phone Number
+                  </label>
+                  <input
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    placeholder="+1 234 567 890"
+                    className="w-full px-4 py-3 bg-gray-100 dark:bg-slate-800 border dark:border-slate-700 rounded-lg"
+                  />
+                </div>
+
+                {/* COMPANY */}
+                <div>
+                  <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
+                    Company Name
+                  </label>
+                  <input
+                    name="company"
+                    value={form.company}
+                    onChange={handleChange}
+                    placeholder="Your Company"
+                    className="w-full px-4 py-3 bg-gray-100 dark:bg-slate-800 border dark:border-slate-700 rounded-lg"
+                  />
+                </div>
+
+                {/* BUTTONS */}
+                <div className="flex justify-end gap-3 pt-4">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setOpen(false)}
+                    className="px-6"
+                  >
+                    Cancel
+                  </Button>
+
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    className="bg-gradient-to-r from-[#245592] to-[#01d3ff] text-white px-6"
+                  >
+                    {loading ? "Submitting..." : "Submit"}
+                  </Button>
+                </div>
+              </form>
+
+              {message && (
+                <p className="text-sm text-center mt-3 text-gray-600 dark:text-gray-300">
+                  {message}
+                </p>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </>
+    );
+  })()}
 </section>
 
       {/* Contact Section (moved to reusable component) */}

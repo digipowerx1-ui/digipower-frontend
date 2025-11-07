@@ -15,6 +15,10 @@ const Navigation = () => {
   const navItems = [
     { label: "Projects", href: "/projects", isRoute: true },
     { label: "Investors", href: "/investor-relations", isRoute: true },
+
+    // ✅ ADDED SEC FILINGS
+    { label: "SEC Filings", href: "/sec", isRoute: true },
+
     { label: "Press Release", href: "/press-release", isRoute: true },
     { label: "Presentations & Events", href: "/presentations-events", isRoute: true },
     { label: "Leadership & Committees", href: "/leadership-committees", isRoute: true },
@@ -29,7 +33,7 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Close menu on location change
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
@@ -47,18 +51,19 @@ const Navigation = () => {
       aria-label="Main navigation"
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+        
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2 group">
           <motion.img
             whileHover={{ scale: 1.05, rotate: 2 }}
             whileTap={{ scale: 0.95 }}
             src={logo}
-            alt="DigiPowerX Logo - Return to homepage"
+            alt="DigiPowerX Logo"
             className="h-10 w-auto object-contain transition-all duration-300"
           />
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8">
           {navItems.map((item, index) => (
             <motion.div
@@ -87,13 +92,13 @@ const Navigation = () => {
             </motion.div>
           ))}
 
-          {/* Theme Toggle Button */}
+          {/* Theme Toggle */}
           <motion.button
             onClick={toggleTheme}
             whileHover={{ scale: 1.1, rotate: 15 }}
             whileTap={{ scale: 0.9 }}
             className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-200"
-            aria-label="Toggle theme"
+            aria-label="Toggle Theme"
           >
             <AnimatePresence mode="wait">
               {theme === "light" ? (
@@ -120,12 +125,8 @@ const Navigation = () => {
             </AnimatePresence>
           </motion.button>
 
-          {/* Contact Button (Desktop) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.7, duration: 0.3 }}
-          >
+          {/* Contact Button */}
+          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.7 }}>
             <Link to="/contact-us">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button
@@ -144,8 +145,7 @@ const Navigation = () => {
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors duration-200"
-          aria-label="Toggle mobile menu"
-          aria-expanded={isOpen}
+          aria-label="Toggle Mobile Menu"
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
@@ -173,14 +173,14 @@ const Navigation = () => {
         </motion.button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Nav */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden bg-slate-900/95 backdrop-blur-xl border-t border-gray-200/10"
           >
             <div className="px-6 py-6 space-y-4">
@@ -191,27 +191,17 @@ const Navigation = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05, duration: 0.3 }}
                 >
-                  {item.isRoute ? (
-                    <Link
-                      to={item.href}
-                      className="block text-white hover:text-brand-cyan transition-colors duration-200 font-medium py-2 px-4 hover:bg-white/5 rounded-lg"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  ) : (
-                    <a
-                      href={item.href}
-                      className="block text-white hover:text-brand-cyan transition-colors duration-200 font-medium py-2 px-4 hover:bg-white/5 rounded-lg"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.label}
-                    </a>
-                  )}
+                  <Link
+                    to={item.href}
+                    className="block text-white hover:text-brand-cyan transition-colors duration-200 font-medium py-2 px-4 hover:bg-white/5 rounded-lg"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
                 </motion.div>
               ))}
 
-              {/* Theme Toggle Button (Mobile) */}
+              {/* Theme Toggle Mobile */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -221,7 +211,6 @@ const Navigation = () => {
                 <button
                   onClick={toggleTheme}
                   className="flex items-center gap-2 w-full py-3 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-colors duration-200"
-                  aria-label="Toggle theme"
                 >
                   {theme === "light" ? (
                     <>
@@ -237,21 +226,15 @@ const Navigation = () => {
                 </button>
               </motion.div>
 
-              {/* Contact Button (Mobile) */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navItems.length * 0.05 + 0.15, duration: 0.3 }}
-              >
-                <Link to="/contact-us" onClick={() => setIsOpen(false)}>
-                  <Button
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-semibold rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
-                  >
-                    Contact Us
-                  </Button>
-                </Link>
-              </motion.div>
+              {/* Contact Button Mobile */}
+              <Link to="/contact-us" onClick={() => setIsOpen(false)}>
+                <Button
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-semibold rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+                >
+                  Contact Us
+                </Button>
+              </Link>
             </div>
           </motion.div>
         )}

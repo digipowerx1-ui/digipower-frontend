@@ -224,7 +224,7 @@ export default function InvestorRelations() {
             <motion.div whileHover={{ scale: 1.05 }}>
               <Button className="mt-8 bg-gradient-to-r from-brand-navy to-brand-cyan text-white px-8 py-6 text-lg rounded-full shadow-xl">
                 <FileDown className="w-5 h-5 mr-2" />
-                Download Investor Presentation
+                Latest Investor Presentation
               </Button>
             </motion.div>
           </Link>
@@ -257,62 +257,90 @@ export default function InvestorRelations() {
       </section>
 
       {/* ✅ PRESS RELEASES — UPDATED WITH LIVE API FETCH */}
-      <section className="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-950">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between mb-12">
-            <FadeIn direction="left">
-              <h2 className="text-4xl md:text-5xl font-bold">
-                <GradientText>Latest Press Releases</GradientText>
-              </h2>
-            </FadeIn>
+     <section className="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-950">
+  <div className="container mx-auto px-6">
 
-            <FadeIn direction="right">
-              <Link to="/press-release">
-                <motion.button
-                  whileHover={{ x: 5 }}
-                  className="text-brand-cyan hover:text-brand-navy font-semibold flex items-center gap-2"
-                >
-                  View all press releases →
-                </motion.button>
-              </Link>
-            </FadeIn>
-          </div>
+    {/* Heading + Link */}
+    <div className="flex items-center justify-between mb-12">
+      <FadeIn direction="left">
+        <h2 className="text-4xl md:text-5xl font-bold">
+          <GradientText>Latest Press Releases</GradientText>
+        </h2>
+      </FadeIn>
 
-          <StaggerContainer className="grid gap-6 md:grid-cols-2 max-w-7xl mx-auto">
-            {pressReleases.map((release) => (
-              <StaggerItem key={release.id}>
-                <motion.div
-                  whileHover={{ y: -8, scale: 1.01 }}
-                  onClick={() => release.pdf && window.open(release.pdf, "_blank")}
-                  className="group p-8 bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-md cursor-pointer relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 group-hover:from-brand-cyan/5 group-hover:to-brand-navy/5 transition-all duration-500" />
+      <FadeIn direction="right">
+        <Link to="/press-release">
+          <motion.button
+            whileHover={{ x: 5 }}
+            className="text-brand-cyan hover:text-brand-navy font-semibold flex items-center gap-2"
+          >
+            View all press releases →
+          </motion.button>
+        </Link>
+      </FadeIn>
+    </div>
 
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <Calendar className="w-5 h-5 text-brand-cyan" />
-                      <p className="text-sm text-slate-500 dark:text-gray-400">
-                        {release.date}
-                      </p>
-                    </div>
+    {/* Cards */}
+    <StaggerContainer className="grid gap-6 md:grid-cols-2 max-w-7xl mx-auto">
 
-                    <h3 className="font-bold text-xl leading-snug text-slate-900 dark:text-white group-hover:text-brand-navy dark:group-hover:text-brand-cyan">
-                      {release.title}
-                    </h3>
+      {pressReleases.map((release) => (
+        <StaggerItem key={release.id}>
+          <motion.div
+            whileHover={{ y: -8, scale: 1.01 }}
+            onClick={() => release.pdf && window.open(release.pdf, "_blank")}
+            className="
+              group 
+              p-8 
+              bg-white dark:bg-slate-800 
+              rounded-2xl 
+              border border-gray-200 dark:border-slate-700 
+              shadow-md 
+              cursor-pointer 
+              relative 
+              overflow-hidden 
+              flex flex-col 
+              h-full
+            "
+          >
+            {/* Hover gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 group-hover:from-brand-cyan/5 group-hover:to-brand-navy/5 transition-all duration-500" />
 
-                    <motion.div
-                      className="mt-4 text-brand-cyan font-semibold flex items-center gap-2"
-                      whileHover={{ x: 5 }}
-                    >
-                      Read more →
-                    </motion.div>
-                  </div>
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
+            <div className="relative z-10 flex flex-col h-full">
+
+              {/* Date */}
+              <div className="flex items-center gap-3 mb-4">
+                <Calendar className="w-5 h-5 text-brand-cyan" />
+                <p className="text-sm text-slate-500 dark:text-gray-400">
+                  {release.date}
+                </p>
+              </div>
+
+              {/* Title */}
+              <h3 className="font-bold text-xl leading-snug text-slate-900 dark:text-white group-hover:text-brand-navy dark:group-hover:text-brand-cyan">
+                {release.title}
+              </h3>
+
+              {/* Spacer pushes button down */}
+              <div className="flex-grow" />
+
+              {/* Read More */}
+              <motion.div
+                className="mt-6 text-brand-cyan font-semibold flex items-center gap-2"
+                whileHover={{ x: 5 }}
+              >
+                Read more →
+              </motion.div>
+
+            </div>
+          </motion.div>
+        </StaggerItem>
+      ))}
+
+    </StaggerContainer>
+
+  </div>
+</section>
+
 
       {/* ✅ INVESTOR LINKS — unchanged */}
       <section className="py-24 bg-gradient-to-b from-white to-gray-50 dark:from-slate-950 dark:to-slate-900">

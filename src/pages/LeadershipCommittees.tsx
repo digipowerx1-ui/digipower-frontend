@@ -339,7 +339,7 @@ export default function LeadershipCommittees() {
                     </div>
 
                     {/* Social Links */}
-                    <div className="flex justify-center gap-3">
+                    {/* <div className="flex justify-center gap-3">
                       {leader.linkedIn && (
                         <motion.a
                           href={leader.linkedIn}
@@ -362,7 +362,7 @@ export default function LeadershipCommittees() {
                           <Mail className="w-4 h-4 text-white" />
                         </motion.a>
                       )}
-                    </div>
+                    </div> */}
                   </div>
                 </motion.div>
               </StaggerItem>
@@ -462,15 +462,15 @@ export default function LeadershipCommittees() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button
+                {/* <Button
                   size="lg"
                   className="px-8 py-6 bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300"
                 >
                   View Open Positions
-                </Button>
+                </Button> */}
               </motion.a>
               <motion.a
-                href="/investor"
+                href="/investor-relations"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
