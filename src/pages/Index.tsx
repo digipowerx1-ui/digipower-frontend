@@ -19,14 +19,7 @@ import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerCo
 import WireLines from "@/components/WireLines";
 import backgroundVideo from "@/assets/background.mp4";
 import bannerLogo from "@/assets/USDC-logo.png";
-import aboutImage from "@/assets/aboutus.jpeg";
-import partnerImage from "@/assets/image.jpg";
-
-import sustainabilityImage from "@/assets/image.jpeg";
-
 import logo from "@/assets/logo.png";
-import usdcImage from "@/assets/usdc200.png";
-
 import Projects from "@/components/Projects";
 
 interface StockDataPoint {
@@ -898,12 +891,11 @@ const Index = () => {
                   whileHover={{ scale: 1.05, rotateY: 2 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                <img
-  src={aboutImage}
-  alt="DigiPowerX Data Center"
-  className="w-full h-[400px] object-cover"
-/>
-
+                  <img
+                    src="public/aboutus.jpeg"
+                    alt="DigiPowerX Data Center"
+                    className="w-full h-[400px] object-cover"
+                  />
                 </motion.div>
 
                 {/* Gradient Overlay */}
@@ -1058,12 +1050,11 @@ const Index = () => {
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
               >
                 {/* Image */}
-              <img
-  src={usdcImage}
-  alt="DigiPowerX Data Center"
-  className="w-full h-[400px] md:h-[500px] object-cover"
-/>
-
+                <img
+                  src="public/usdc200.png"
+                  alt="DigiPowerX Data Center"
+                  className="w-full h-[400px] md:h-[500px] object-cover"
+                />
 
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent rounded-2xl"></div>
@@ -1084,12 +1075,11 @@ const Index = () => {
                 whileHover={{ scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-               <img
-  src={sustainabilityImage}
-  alt="Sustainability"
-  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-/>
-
+                <img
+                  src="src/assets/image.jpeg"
+                  alt="Sustainability"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-white/40 via-transparent to-transparent rounded-2xl"></div>
               </motion.div>
             </SlideIn>
@@ -1186,11 +1176,11 @@ const Index = () => {
  
       {/* RIGHT: IMAGE */}
 <FadeIn direction="right">
- <img
-    src={partnerImage}
-    alt="Partner Collaboration"
-    className="w-full h-auto rounded-2xl shadow-xl object-cover"
-  />
+<img
+          src="public/image.jpg"
+          alt="Partner Collaboration"
+          className="w-full h-auto rounded-2xl shadow-xl object-cover"
+        />
 </FadeIn>
 </div>
 </div>
