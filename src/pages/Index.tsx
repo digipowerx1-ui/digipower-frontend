@@ -20,10 +20,6 @@ import WireLines from "@/components/WireLines";
 import backgroundVideo from "@/assets/background.mp4";
 import bannerLogo from "@/assets/USDC-logo.png";
 import logo from "@/assets/logo.png";
-import aboutUsImage from "@/assets/aboutus.jpeg";
-import arms200Image from "@/assets/usdc200.png";
-import sustainabilityImage from "@/assets/image.jpeg";
-import partnersImage from "@/assets/image.jpg";
 import Projects from "@/components/Projects";
 
 interface StockDataPoint {
@@ -98,6 +94,84 @@ const Index = () => {
             backgroundSize: '50px 50px'
           }}></div>
         </div>
+
+        {/* Logo 1 - Moving in Rectangular Path (Clockwise) */}
+        {/* <motion.div
+          className="absolute z-0"
+          animate={{
+            x: ["0%", "80%", "80%", "0%", "0%"],
+            y: ["20%", "20%", "70%", "70%", "20%"],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          <motion.div
+            className="relative"
+            animate={{
+              filter: [
+                "drop-shadow(0 0 20px rgba(1, 211, 255, 0.8)) drop-shadow(0 0 40px rgba(1, 211, 255, 0.5))",
+                "drop-shadow(0 0 30px rgba(1, 211, 255, 1)) drop-shadow(0 0 60px rgba(1, 211, 255, 0.7))",
+                "drop-shadow(0 0 20px rgba(1, 211, 255, 0.8)) drop-shadow(0 0 40px rgba(1, 211, 255, 0.5))",
+              ]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <img
+              src={logo}
+              alt="DigiPowerX Logo 1"
+              className="h-20 w-auto brightness-150 contrast-125"
+              style={{
+                filter: 'brightness(2) saturate(1.5)',
+              }}
+            />
+          </motion.div>
+        </motion.div> */}
+
+        {/* Logo 2 - Moving in Rectangular Path (Counter-clockwise) */}
+        {/* <motion.div
+          className="absolute z-0"
+          animate={{
+            x: ["80%", "80%", "0%", "0%", "80%"],
+            y: ["70%", "20%", "20%", "70%", "70%"],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          <motion.div
+            className="relative"
+            animate={{
+              filter: [
+                "drop-shadow(0 0 20px rgba(255, 94, 0, 0.8)) drop-shadow(0 0 40px rgba(255, 94, 0, 0.5))",
+                "drop-shadow(0 0 30px rgba(255, 94, 0, 1)) drop-shadow(0 0 60px rgba(255, 94, 0, 0.7))",
+                "drop-shadow(0 0 20px rgba(255, 94, 0, 0.8)) drop-shadow(0 0 40px rgba(255, 94, 0, 0.5))",
+              ]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <img
+              src={logo}
+              alt="DigiPowerX Logo 2"
+              className="h-20 w-auto brightness-150 contrast-125"
+              style={{
+                filter: 'brightness(2) saturate(1.5) hue-rotate(180deg)',
+              }}
+            />
+          </motion.div>
+        </motion.div> */}
 
         {/* Connection Point 1 - Top Right */}
         <motion.div
@@ -572,6 +646,185 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Stock Performance Section */}
+      {/* <section className="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-950 transition-colors duration-300">
+        <div className="container mx-auto px-6">
+          <FadeIn>
+            <div className="text-center mb-12">
+              <div className="inline-block p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-lg mb-4 transition-colors duration-300">
+                <TrendingUp className="w-10 h-10 text-brand-cyan" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white transition-colors duration-300">
+                <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
+                  Stock Performance
+                </span>
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors duration-300">
+                Track DigiPowerX's real-time stock performance | <span className="text-brand-cyan font-bold">Nasdaq: DGXX</span>
+              </p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.3}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-white dark:bg-slate-800 rounded-3xl shadow-xl p-6 md:p-8 max-w-6xl mx-auto border border-gray-100 dark:border-slate-700 transition-colors duration-300"
+            >
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
+                <div className="mb-4 md:mb-0">
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-1 transition-colors duration-300">Current Price</p>
+                  <p className="text-4xl font-bold text-slate-900 dark:text-white transition-colors duration-300">$24.50</p>
+                  <p className="text-sm text-green-500 mt-1">+2.5% Today</p>
+                </div>
+
+                {/* Time Period Selector */}
+                {/* <div className="flex gap-2 flex-wrap">
+                  {(['1D', '1W', '1M', '3M', '1Y', 'ALL'] as const).map((period) => (
+                    <motion.button
+                      key={period}
+                      onClick={() => setChartPeriod(period)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300 ${
+                        chartPeriod === period
+                          ? 'bg-gradient-to-r from-brand-navy to-brand-cyan text-white shadow-lg'
+                          : 'bg-gray-100 text-slate-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      {period}
+                    </motion.button>
+                  ))}
+                </div> */}
+              {/* </div> */}
+
+              {/* Chart */}
+              {/* <div className="h-[350px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart
+                    data={stockData}
+                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                  >
+                    <defs>
+                      <linearGradient id="colorPriceHome" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#01d3ff" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#01d3ff" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                    <XAxis
+                      dataKey="date"
+                      stroke="#64748b"
+                      style={{ fontSize: '12px' }}
+                      interval={Math.floor(stockData.length / 6)}
+                    />
+                    <YAxis
+                      stroke="#64748b"
+                      style={{ fontSize: '12px' }}
+                      domain={['auto', 'auto']}
+                      tickFormatter={(value) => `$${value.toFixed(2)}`}
+                    />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Area
+                      type="monotone"
+                      dataKey="price"
+                      stroke="#01d3ff"
+                      strokeWidth={3}
+                      fillOpacity={1}
+                      fill="url(#colorPriceHome)"
+                      animationDuration={1000}
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div> */}
+
+              {/* <div className="mt-6 pt-6 border-t border-gray-200">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <p className="text-sm text-slate-500">
+                    <span className="inline-block w-3 h-3 bg-brand-cyan rounded-full mr-2"></span>
+                    Live data powered by market providers
+                  </p>
+                  <a href="/investor" className="text-brand-cyan hover:text-brand-navy font-semibold text-sm transition-colors">
+                    View Full Investor Relations →
+                  </a>
+                </div>
+              </div> */}
+            {/* </motion.div>
+          </FadeIn>
+        </div>
+      </section>} */}
+
+      {/* Interactive Data Center Map Section */}
+      {/* <section className="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+        <div className="container mx-auto px-6">
+          <FadeIn>
+            <div className="text-center mb-12">
+              <div className="inline-block p-3 bg-white dark:bg-slate-800 rounded-2xl shadow-lg mb-4 transition-colors duration-300">
+                <MapPin className="w-10 h-10 text-brand-cyan" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white transition-colors duration-300">
+                <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
+                  Our Data Center Network
+                </span>
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors duration-300">
+                Explore our strategically located Tier III data centers across the United States
+              </p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.3}>
+            <DataCenterMap />
+          </FadeIn>
+
+          {/* Quick Stats Below Map */}
+          {/* <FadeIn delay={0.5}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mt-12">
+              <motion.div
+                className="bg-gradient-to-br from-brand-navy to-brand-cyan rounded-2xl p-6 text-white text-center shadow-xl"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <p className="text-3xl md:text-4xl font-bold mb-2">300+</p>
+                <p className="text-sm md:text-base opacity-90">Total MW</p>
+              </motion.div>
+
+              <motion.div
+                className="bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl p-6 text-white text-center shadow-xl"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <p className="text-3xl md:text-4xl font-bold mb-2">4</p>
+                <p className="text-sm md:text-base opacity-90">Locations</p>
+              </motion.div>
+
+              <motion.div
+                className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl p-6 text-white text-center shadow-xl"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <p className="text-3xl md:text-4xl font-bold mb-2">3</p>
+                <p className="text-sm md:text-base opacity-90">States</p>
+              </motion.div>
+
+              <motion.div
+                className="bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl p-6 text-white text-center shadow-xl"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <p className="text-3xl md:text-4xl font-bold mb-2">Tier III</p>
+                <p className="text-sm md:text-base opacity-90">Certified</p>
+              </motion.div>
+            </div>
+          </FadeIn> */}
+        {/* </div>
+      </section>} */}
+
+
+
+
      {/* ✅ PROJECTS SECTION (Replaces Data Center Network Section) */}
 <section className="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
  
@@ -579,6 +832,14 @@ const Index = () => {
     {/* ✅ Call the Projects Component */}
 <Projects />
 </section>
+
+
+
+
+
+
+
+
 
       {/* About Us Details Section */}
       <section id="solutions" className="bg-white dark:bg-slate-950 transition-colors duration-300">
@@ -631,7 +892,7 @@ const Index = () => {
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
                   <img
-                    src={aboutUsImage}
+                    src="public/aboutus.jpeg"
                     alt="DigiPowerX Data Center"
                     className="w-full h-[400px] object-cover"
                   />
@@ -790,8 +1051,8 @@ const Index = () => {
               >
                 {/* Image */}
                 <img
-                  src={arms200Image}
-                  alt="DigiPowerX ARMS 200 System"
+                  src="public/usdc200.png"
+                  alt="DigiPowerX Data Center"
                   className="w-full h-[400px] md:h-[500px] object-cover"
                 />
 
@@ -815,7 +1076,7 @@ const Index = () => {
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <img
-                  src={sustainabilityImage}
+                  src="src/assets/image.jpeg"
                   alt="Sustainability"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
                 />
@@ -916,7 +1177,7 @@ const Index = () => {
       {/* RIGHT: IMAGE */}
 <FadeIn direction="right">
 <img
-          src={partnersImage}
+          src="public/image.jpg"
           alt="Partner Collaboration"
           className="w-full h-auto rounded-2xl shadow-xl object-cover"
         />
