@@ -17,6 +17,7 @@ const InvestorRelations = lazy(() => import("./pages/Investor"));
 const Projects = lazy(() => import("./pages/Project"));
 const Sec = lazy(() => import("./pages/Sec"));
 const DocumentsAndCharters = lazy(() => import("./pages/Document"));
+const Career = lazy(() => import("./pages/Career"));   // ✅ ADDED CAREER PAGE
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -40,13 +41,12 @@ const App = () => (
               <Route path="/leadership-committees" element={<LeadershipCommittees />} />
               <Route path="/investor-relations" element={<InvestorRelations />} />
               <Route path="/projects" element={<Projects />} />
-   <Route path="/sec" element={<Sec />} />
+              <Route path="/sec" element={<Sec />} />
 
+              {/* ✅ CAREER PAGE ROUTE */}
+              <Route path="/career" element={<Career />} />
 
-
-
-
-              {/* ✅ NEW Documents & Charters Page */}
+              {/* ✅ Documents & Charters Page */}
               <Route path="/document" element={<DocumentsAndCharters />} />
 
               {/* 404 Page */}

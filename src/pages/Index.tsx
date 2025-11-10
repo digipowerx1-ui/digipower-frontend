@@ -725,12 +725,13 @@ const Index = () => {
         <div className="container mx-auto px-6">
           {/* Heading */}
           <FadeIn direction="up" className="max-w-4xl mx-auto text-center mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
-              DigiPowerX: Build Faster, Operate Smarter, <br />
-              <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
-                Deliver Sustainable Compute
-              </span>
-            </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white transition-colors duration-300 mb-10">
+  DigiPowerX: Build Faster, Operate Smarter, <br />
+  <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
+    Deliver Sustainable Compute
+  </span>
+</h2>
+
 
             <p className="text-xl text-gray-600 dark:text-gray-300 transition-colors duration-300">
               DigiPowerX delivers cutting-edge data infrastructure solutions powered by our revolutionary{" "}
@@ -740,7 +741,7 @@ const Index = () => {
           </FadeIn>
 
           {/* Centered Stats Grid with Stagger */}
-     <div className="flex justify-center">
+     {/* <div className="flex justify-center">
   <StaggerContainer
     staggerDelay={0.2}
     className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full max-w-6xl"
@@ -772,7 +773,7 @@ const Index = () => {
       />
     </StaggerItem>
   </StaggerContainer>
-</div>
+</div> */}
 
         </div>
       </section>
@@ -1309,58 +1310,65 @@ const Index = () => {
     return (
       <>
         {/* MAIN SECTION */}
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* LEFT: TEXT */}
-            <FadeIn direction="up" className="space-y-8">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-                  Trusted{" "}
-                  <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
-                    Partners
-                  </span>
-                </h2>
+     <section className="py-24 bg-white dark:bg-slate-950 transition-colors duration-300">
+  <div className="container mx-auto px-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
 
-                <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                  DigiPowerX is actively collaborating with global technology and
-                  infrastructure leaders to accelerate the deployment of our
-                  Tier III NeoCloud™ AI platform.
-                  <br />
-                  <br />
-                  Following our acquisition of Supermicro systems powered by
-                  NVIDIA B200 GPUs, we are expanding strategic alliances.
-                  <br />
-                  <br />
-                  If you are an energy producer, investor, or technology partner,
-                  <span className="text-[#245592] font-semibold"> DigiPowerX</span>
-                  offers co-development opportunities.
-                </p>
-              </div>
+      {/* LEFT TEXT */}
+      <FadeIn direction="up" className="space-y-8">
+        <div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white leading-tight">
+            Our{" "}
+            <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
+              Trusted Partners
+            </span>
+          </h2>
 
-              {/* CTA BUTTON */}
-              <FadeIn delay={0.3} direction="up">
-                <motion.div whileHover={{ scale: 1.05, translateY: -2 }}>
-                  <Button
-                    size="lg"
-                    onClick={() => setOpen(true)}
-                    className="bg-gradient-to-r from-[#245592] to-[#01d3ff] text-white font-semibold rounded-lg shadow-lg px-8 py-4"
-                  >
-                    Become a Partner
-                  </Button>
-                </motion.div>
-              </FadeIn>
-            </FadeIn>
+          <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+            DigiPowerX collaborates with globally recognized leaders in compute,
+            energy, and digital finance. Through strong alliances with
+            <span className="font-semibold text-[#245592]"> Neo Micro</span> for
+            next-generation micro-compute modules and
+            <span className="font-semibold text-[#245592]"> USDC ecosystem partners </span>
+            for secure, real-time digital transactions, we are accelerating the
+            growth of our Tier III
+            <span className="font-semibold text-[#245592]"> NeoCloud™ AI platform</span>.
+          </p>
 
-            {/* RIGHT IMAGE */}
-            <FadeIn direction="right">
-              <img
-                src="./super.jpg"
-                alt="Partner Collaboration"
-                className="w-full h-auto rounded-2xl shadow-xl object-cover"
-              />
-            </FadeIn>
-          </div>
+          <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
+            These partnerships enable DigiPowerX to deliver scalable, sustainable,
+            and enterprise-ready compute infrastructure. We continue expanding our
+            network of trusted collaborators across infrastructure, cloud, and
+            fintech sectors to drive innovation globally.
+          </p>
         </div>
+
+        {/* CTA BUTTON */}
+        <FadeIn delay={0.2} direction="up">
+          <motion.div whileHover={{ scale: 1.05, translateY: -2 }}>
+            <Button
+              size="lg"
+              onClick={() => setOpen(true)}
+              className="bg-gradient-to-r from-[#245592] to-[#01d3ff] text-white font-semibold rounded-xl shadow-lg px-10 py-4"
+            >
+              Become a DigiPowerX Partner
+            </Button>
+          </motion.div>
+        </FadeIn>
+      </FadeIn>
+
+      {/* RIGHT IMAGE */}
+      <FadeIn direction="right">
+        <img
+          src="./super.jpg"
+          alt="Trusted Partners"
+          className="w-full h-auto rounded-3xl shadow-2xl object-cover ring-1 ring-gray-200 dark:ring-slate-800"
+        />
+      </FadeIn>
+    </div>
+  </div>
+</section>
+
 
         {/* MODAL FORM */}
         {open && (

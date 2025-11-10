@@ -7,6 +7,8 @@ import { FadeIn } from "@/components/animations/FadeIn";
 import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+
 
 interface Presentation {
   id: number;
@@ -30,6 +32,50 @@ interface UpcomingEvent {
 }
 
 export default function PresentationsEvents() {
+
+   const [showEmailModal, setShowEmailModal] = useState(false);
+  const [notifyEmail, setNotifyEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleNotifySubmit = async () => {
+    if (!notifyEmail) {
+      alert("Please enter your email.");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const res = await fetch(
+        "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/notify-mes",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            data: { email: notifyEmail }
+          })
+        }
+      );
+
+      const result = await res.json();
+      console.log("NOTIFY RESULT:", result);
+
+      if (result?.data) {
+        alert("✅ You have been subscribed successfully!");
+        setNotifyEmail("");
+        setShowEmailModal(false);
+      } else {
+        alert("❌ Subscription failed. Check console.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("❌ Something went wrong.");
+    }
+
+    setSubmitting(false);
+  };
+
+
   const presentations: Presentation[] = [
     {
       id: 1,
@@ -336,11 +382,7 @@ export default function PresentationsEvents() {
                       {/* Registration Button */}
                       {event.registrationLink && (
                         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                          <Button
-                            className="w-full bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-semibold rounded-xl"
-                          >
-                            Register Now
-                          </Button>
+                       
                         </motion.div>
                       )}
                     </div>
@@ -410,13 +452,14 @@ export default function PresentationsEvents() {
                     Subscribe to receive notifications about new presentations, webcasts, and upcoming events.
                   </p>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button
-                      size="lg"
-                      className="bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-semibold shadow-lg shadow-brand-cyan/20"
-                    >
-                      Subscribe Now
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Button>
+                   <Button
+  size="lg"
+  onClick={() => setShowEmailModal(true)}
+  className="bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-semibold shadow-lg shadow-brand-cyan/20"
+>
+  Subscribe Now
+  <ArrowRight className="w-5 h-5 ml-2" />
+</Button>
                   </motion.div>
                 </div>
               </motion.div>
@@ -424,6 +467,46 @@ export default function PresentationsEvents() {
           </StaggerContainer>
         </div>
       </section>
+{showEmailModal && (
+  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-xl max-w-md w-full border dark:border-slate-700">
+
+      <h2 className="text-2xl font-bold mb-4 text-center text-slate-900 dark:text-white">
+        Subscribe to Alerts
+      </h2>
+
+      <p className="text-slate-600 dark:text-slate-300 text-center mb-6">
+        Enter your email to receive updates about presentations & events.
+      </p>
+
+      <input
+        type="email"
+        value={notifyEmail}
+        onChange={(e) => setNotifyEmail(e.target.value)}
+        placeholder="Enter your email"
+        className="w-full p-4 rounded-xl bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white border dark:border-slate-700 mb-6"
+      />
+
+      <div className="flex gap-4 justify-center">
+        <Button
+          onClick={() => setShowEmailModal(false)}
+          className="px-6 py-3 rounded-xl bg-gray-300 dark:bg-slate-700 text-black dark:text-white"
+        >
+          Cancel
+        </Button>
+
+        <Button
+          onClick={handleNotifySubmit}
+          disabled={submitting}
+          className="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-navy to-brand-cyan text-white"
+        >
+          {submitting ? "Submitting..." : "Subscribe"}
+        </Button>
+      </div>
+
+    </div>
+  </div>
+)}
 
       <Footer />
     </div>

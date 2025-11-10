@@ -135,24 +135,45 @@ export default function USDataCentersPage() {
       </section>
  
       {/* ✅ STATS */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <StaggerContainer className="grid md:grid-cols-4 gap-8">
-            {stats.map((stat, idx) => {
-              const Icon = stat.icon;
-              return (
-                <StaggerItem key={idx}>
-                  <motion.div className="bg-white dark:bg-slate-900 p-8 rounded-xl shadow-lg text-center">
-                    <Icon className="w-12 h-12 mb-4 text-brand-cyan" />
-                    <h3 className="text-4xl font-bold">{stat.value}</h3>
-                    <p className="text-gray-600 dark:text-gray-300">{stat.label}</p>
-                  </motion.div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
-        </div>
-      </section>
+     {/* ✅ STATS SECTION – Gradient Premium Cards */}
+<section className="py-20 px-6">
+  <div className="max-w-7xl mx-auto">
+    <StaggerContainer className="grid md:grid-cols-4 gap-8">
+
+      {stats.map((stat, idx) => {
+        const Icon = stat.icon;
+
+        return (
+          <StaggerItem key={idx}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="p-8 rounded-2xl text-center shadow-xl 
+                         bg-gradient-to-br from-[#245592] to-[#01d3ff]
+                         text-white border border-white/10 
+                         hover:scale-[1.03] transition-transform"
+            >
+              
+              <Icon className="w-12 h-12 mb-4 text-white opacity-90" />
+
+              <h3 className="text-4xl font-extrabold tracking-tight">
+                {stat.value}
+              </h3>
+
+              <p className="text-white/90 text-lg mt-2">
+                {stat.label}
+              </p>
+
+            </motion.div>
+          </StaggerItem>
+        );
+      })}
+
+    </StaggerContainer>
+  </div>
+</section>
+
       <Projects slides={slides} />
 
  

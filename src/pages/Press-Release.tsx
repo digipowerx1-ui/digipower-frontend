@@ -24,6 +24,39 @@ export default function PressRelease() {
   const [selectedYear, setSelectedYear] = useState<string>("All");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+   const handleSubscribe = async () => {
+    if (!email) return alert("Please enter your email");
+
+    setLoading(true);
+    try {
+      const res = await fetch(
+        "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/notify-mes",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ data: { email } }),
+        }
+      );
+
+      const json = await res.json();
+
+      if (json.data) {
+        alert("Subscribed successfully!");
+        setEmail("");
+      } else {
+        alert("Subscription failed");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
+    }
+
+    setLoading(false);
+  };
  
   // ✅ Fetch Strapi Data
   useEffect(() => {
@@ -306,9 +339,9 @@ export default function PressRelease() {
       </section>
  
       {/* ✅ Newsletter Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-brand-navy/5 to-brand-cyan/5 border-y border-brand-cyan/20">
+       <section className="py-20 px-6 bg-gradient-to-r from-brand-navy/5 to-brand-cyan/5 border-y border-brand-cyan/20">
         <div className="max-w-4xl mx-auto text-center">
- 
+
           <motion.div
             className="inline-block p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-lg mb-6"
             animate={{ scale: [1, 1.05, 1] }}
@@ -316,25 +349,35 @@ export default function PressRelease() {
           >
             <Newspaper className="w-12 h-12 text-brand-cyan" />
           </motion.div>
- 
+
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <GradientText>Stay Informed</GradientText>
           </h2>
- 
+
           <p className="text-lg text-slate-700 dark:text-slate-300 mb-8">
             Subscribe to get the latest updates straight to your inbox.
           </p>
- 
+
+          {/* ✅ Working Subscribe Box */}
           <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-            <Input type="email" placeholder="Your email address" className="flex-1 py-6" />
+            <Input
+              type="email"
+              placeholder="Your email address"
+              className="flex-1 py-6"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+
             <Button
               size="lg"
               className="bg-gradient-to-r from-brand-navy to-brand-cyan text-white px-8 py-6"
+              onClick={handleSubscribe}
+              disabled={loading}
             >
-              Subscribe Now
+              {loading ? "Subscribing..." : "Subscribe Now"}
             </Button>
           </div>
- 
+
         </div>
       </section>
  

@@ -50,7 +50,7 @@ const Navigation = () => {
       }`}
       aria-label="Main navigation"
     >
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-3 py-4 flex items-center justify-between">
         
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2 group">
