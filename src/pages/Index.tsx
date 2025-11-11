@@ -377,9 +377,13 @@ const Index = () => {
               </StaggerItem>
 
               <StaggerItem>
-                <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed transition-colors duration-300 text-center mx-auto">
-                  DigiPowerX architects Tier III modular campuses that deliver extreme density, sub-4ms latency, and turnkey immersion cooling so AI teams can deploy faster without compromising resiliency or sustainability.
-                </p>
+       <p className="text-sm md:text-base text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed transition-colors duration-300 text-center mx-auto">
+  At DigiPowerX, we design and deliver high-density, power-efficient data-center infrastructure that fuels AI, HPC, and enterprise workloads.
+  Our mission is simple: build faster, operate smarter, and deliver sustainable compute power through Tier III facilities connected to robust power infrastructure.
+  <br /><br />
+  With utility-scale generation assets and modular Tier III designs, DigiPowerX enables partners to deploy AI capacity in months—not years.
+</p>
+
               </StaggerItem>
 
               <StaggerItem>
@@ -1010,10 +1014,8 @@ const Index = () => {
                 </p>
 
                 <p>
-                  Every site we develop adheres to{" "}
-                  <strong className="text-[#245592]">TIA-942 Tier III standards</strong>,
-                  guaranteeing redundancy, uptime, and energy efficiency across our entire operational network.
-                </p>
+                  Every site we develop adheres to TIA-942 Tier III standards, guaranteeing redundancy, uptime, and energy efficiency.
+                    </p>
               </SlideIn>
 
               {/* RIGHT — Image */}
@@ -1056,31 +1058,31 @@ const Index = () => {
   {[
     {
       icon: Zap,
-      title: "Lightning-Fast Deployment",
-      description: "Modular Architecture: Our ARMS 200 pods deliver 200 kW – 5 MW units that scale seamlessly.",
+      title: "Modular Architecture:",
+      description: "Our ARMS 200 pods deliver 200 kW – 5 MW units that scale seamlessly.",
       delay: 0,
     },
     {
       icon: Shield,
-      title: "Enterprise Security",
-      description: "Tier III Certified Design: Concurrent maintainability and fault-tolerant infrastructure.",
+      title: "Tier III Certified Design",
+      description: "Concurrent maintainability and fault-tolerant infrastructure.",
       delay: 100,
     },
     {
       icon: Network,
-      title: "Carrier-Neutral Connectivity",
-      description: "Power Advantage: Direct connection to high-voltage substations and on-site generation.",
+      title: "Power Advantage",
+      description: "Direct connection to high-voltage substations and on-site generation.",
       delay: 200,
     },
     {
       icon: Boxes,
-      title: "Modular Scalability",
-      description: "Speed to Market: From permitting to commissioning in under 12 months.",
+      title: "Speed to Market",
+      description: "From permitting to commissioning in under 12 months..",
       delay: 300,
     },
     {
       icon: Leaf,
-      title: "Sustainable Operations",
+      title: "Sustainable Build Philosophy",
       description: "Sustainable Build Philosophy: Low PUE designs with optimized water and air systems.",
       delay: 400,
     },

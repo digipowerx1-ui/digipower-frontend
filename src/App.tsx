@@ -17,7 +17,8 @@ const InvestorRelations = lazy(() => import("./pages/Investor"));
 const Projects = lazy(() => import("./pages/Project"));
 const Sec = lazy(() => import("./pages/Sec"));
 const DocumentsAndCharters = lazy(() => import("./pages/Document"));
-const Career = lazy(() => import("./pages/Career"));   // ✅ ADDED CAREER PAGE
+const Career = lazy(() => import("./pages/Career"));
+const Partnerpage = lazy(() => import("./pages/Partnerpage"));   // ✅ NEW PARTNER PAGE
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -43,8 +44,9 @@ const App = () => (
               <Route path="/projects" element={<Projects />} />
               <Route path="/sec" element={<Sec />} />
 
-              {/* ✅ CAREER PAGE ROUTE */}
+              {/* ✅ Career & Partner Pages */}
               <Route path="/career" element={<Career />} />
+              <Route path="/partner" element={<Partnerpage />} />      {/* ✅ Added */}
 
               {/* ✅ Documents & Charters Page */}
               <Route path="/document" element={<DocumentsAndCharters />} />

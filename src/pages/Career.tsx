@@ -38,12 +38,19 @@ export default function Career() {
   // ✅ JOB SEARCH STATES
   const [searchTitle, setSearchTitle] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); // ✅ New main search bar
 
+  // ✅ FILTER JOBS
   const filteredJobs = jobs.filter((job) => {
     const title = job.title.toLowerCase();
     const location = job.location.toLowerCase();
 
+    const matchesMainQuery =
+      title.includes(searchQuery.toLowerCase()) ||
+      location.includes(searchQuery.toLowerCase());
+
     return (
+      matchesMainQuery &&
       title.includes(searchTitle.toLowerCase()) &&
       location.includes(searchLocation.toLowerCase())
     );
@@ -234,38 +241,54 @@ export default function Career() {
         </div>
       </section>
 
-      {/* ✅ SEARCH BAR */}
-      <section className="py-20 bg-gray-100 dark:bg-slate-900">
-        <div className="container mx-auto px-6 max-w-5xl">
-          <div className="bg-white dark:bg-slate-950 shadow-2xl rounded-3xl p-10 border dark:border-slate-800">
-            <h3 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-10">
-              Search Open Roles
-            </h3>
+      {/* ✅ SEARCH BAR SECTION */}
+     <section className="py-20 bg-gray-100 dark:bg-slate-900">
+  <div className="container mx-auto px-6 max-w-5xl">
+    <div className="bg-white dark:bg-slate-950 shadow-2xl rounded-3xl p-10 border dark:border-slate-800">
+      <h3 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-10">
+        Search Open Roles
+      </h3>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="relative">
-                <Search className="absolute left-4 top-[14px] text-gray-400" />
-                <input
-                  placeholder="Job title"
-                  value={searchTitle}
-                  onChange={(e) => setSearchTitle(e.target.value)}
-                  className="w-full pl-12 py-4 rounded-xl bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white border dark:border-slate-700"
-                />
-              </div>
-
-              <div className="relative">
-                <MapPin className="absolute left-4 top-[14px] text-gray-400" />
-                <input
-                  placeholder="Location"
-                  value={searchLocation}
-                  onChange={(e) => setSearchLocation(e.target.value)}
-                  className="w-full pl-12 py-4 rounded-xl bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-white border dark:border-slate-700"
-                />
-              </div>
-            </div>
-          </div>
+      {/* ✅ Combined Search Bar */}
+      <div className="flex items-center bg-white dark:bg-slate-800 rounded-full shadow-lg border dark:border-slate-700 overflow-hidden max-w-4xl mx-auto">
+        
+        {/* Left Input */}
+        <div className="flex items-center gap-3 px-4 py-3 w-1/2">
+          <Search className="text-gray-400 w-5 h-5" />
+          <input
+            placeholder="Job title, keywords, or company"
+            value={searchTitle}
+            onChange={(e) => setSearchTitle(e.target.value)}
+            className="w-full bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+          />
         </div>
-      </section>
+
+        {/* Divider */}
+        <div className="w-px h-8 bg-gray-300 dark:bg-slate-600"></div>
+
+        {/* Middle Input */}
+        <div className="flex items-center gap-3 px-4 py-3 w-1/2">
+          <MapPin className="text-gray-400 w-5 h-5" />
+          <input
+            placeholder='City, state, zip code, or "remote"'
+            value={searchLocation}
+            onChange={(e) => setSearchLocation(e.target.value)}
+            className="w-full bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+          />
+        </div>
+
+        {/* Button */}
+      <Button
+  className="rounded-none rounded-r-full bg-gradient-to-r from-[#245592] to-[#01d3ff] hover:from-[#01d3ff] hover:to-[#245592] text-white px-8 py-6 font-semibold h-full transition-all duration-300"
+>
+  Find Jobs
+</Button>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* ✅ OPEN POSITIONS — FETCHED FROM STRAPI */}
       <section className="py-20 bg-gray-100 dark:bg-slate-900">
@@ -321,10 +344,7 @@ export default function Career() {
       </section>
 
       {/* ✅ TALENT NETWORK FORM (SCROLL TARGET) */}
-      <section
-        ref={formRef}
-        className="py-24 bg-white dark:bg-slate-950"
-      >
+      <section ref={formRef} className="py-24 bg-white dark:bg-slate-950">
         <div className="container mx-auto px-6 max-w-4xl text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
             Join the DigiPowerX Talent Network
@@ -334,49 +354,50 @@ export default function Career() {
             Stay connected for future opportunities & updates.
           </p>
 
-          <div className="mt-12 bg-gray-100 dark:bg-slate-900 p-10 rounded-3xl shadow-xl border dark:border-slate-800">
-            <div className="grid md:grid-cols-2 gap-6">
-              <input
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                placeholder="Your full name"
-                className="w-full p-4 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white"
-              />
+        <div className="mt-12 bg-gray-100 dark:bg-slate-900 p-10 rounded-3xl shadow-xl border dark:border-slate-800">
+  <div className="grid md:grid-cols-2 gap-6">
+    <input
+      value={fullName}
+      onChange={(e) => setFullName(e.target.value)}
+      placeholder="Your full name"
+      className="w-full p-4 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-black dark:border-gray-600 focus:ring-2 focus:ring-[#01d3ff] focus:outline-none"
+    />
 
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email address"
-                className="w-full p-4 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white"
-              />
-            </div>
+    <input
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      placeholder="Your email address"
+      className="w-full p-4 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-black dark:border-gray-600 focus:ring-2 focus:ring-[#01d3ff] focus:outline-none"
+    />
+  </div>
 
-            <div className="grid md:grid-cols-2 gap-6 mt-6">
-              <input
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                placeholder="Interested Role (e.g., Frontend Developer)"
-                className="w-full p-4 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white"
-              />
+  <div className="grid md:grid-cols-2 gap-6 mt-6">
+    <input
+      value={role}
+      onChange={(e) => setRole(e.target.value)}
+      placeholder="Interested Role (e.g., Frontend Developer)"
+      className="w-full p-4 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-black dark:border-gray-600 focus:ring-2 focus:ring-[#01d3ff] focus:outline-none"
+    />
 
-              <input
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="Phone Number"
-                className="w-full p-4 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white"
-              />
-            </div>
+    <input
+      value={phone}
+      onChange={(e) => setPhone(e.target.value)}
+      placeholder="Phone Number"
+      className="w-full p-4 rounded-xl bg-white dark:bg-slate-800 text-gray-900 dark:text-white border border-black dark:border-gray-600 focus:ring-2 focus:ring-[#01d3ff] focus:outline-none"
+    />
+  </div>
 
-            <div className="mt-8">
-              <Button
-                onClick={handleSubmit}
-                disabled={loading}
-                className="px-10 py-4 rounded-full bg-gradient-to-r from-[#245592] to-[#01d3ff]"
-              >
-                {loading ? "Submitting..." : "Join Network"}
-              </Button>
-            </div>
-          </div>
+  <div className="mt-8">
+    <Button
+      onClick={handleSubmit}
+      disabled={loading}
+      className="px-10 py-4 rounded-full bg-gradient-to-r from-[#245592] to-[#01d3ff] hover:from-[#01d3ff] hover:to-[#245592] text-white font-semibold transition-all duration-300"
+    >
+      {loading ? "Submitting..." : "Join Network"}
+    </Button>
+  </div>
+</div>
+
         </div>
       </section>
 

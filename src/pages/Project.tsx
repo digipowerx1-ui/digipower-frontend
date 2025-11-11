@@ -129,7 +129,9 @@ export default function USDataCentersPage() {
             <GradientText>U.S. Data Centers</GradientText>
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-            Tier III-compliant, AI-ready digital infrastructure across the United States.
+         DigiPowerX develops and operates Tier III-compliant data-center campuses strategically located across the United States.
+Each facility integrates our ARMS 200 modular platform — a prefabricated, high-density system engineered for accelerated deployment and operational reliability.
+
           </p>
         </div>
       </section>

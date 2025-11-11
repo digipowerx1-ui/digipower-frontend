@@ -31,15 +31,26 @@ export default function Footer() {
               <li><Link to="/" className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300">Home</Link></li>
               <li><Link to="/investor-relations" className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300">Investor Relations</Link></li>
               <li><Link to="/press-release" className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300">News</Link></li>
-              <li><Link to="/presentations-events" className="hover:text-cyan-400 transition-colors duration-300">Presentations</Link></li>
-                <li>
-      <Link 
-        to="/career" 
-        className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300"
-      >
-        Career
-      </Link>
-    </li>
+              <li><Link to="/presentations-events" className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300">Presentations</Link></li>
+              
+              <li>
+                <Link 
+                  to="/career" 
+                  className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300"
+                >
+                  Career
+                </Link>
+              </li>
+
+              {/* ✅ Partner Link Added */}
+              <li>
+                <Link 
+                  to="/partner" 
+                  className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300"
+                >
+                  Partner
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -47,17 +58,15 @@ export default function Footer() {
           <div>
             <h3 className="font-bold mb-4 text-white transition-colors duration-300">Financials</h3>
             <ul className="space-y-2 text-gray-400 dark:text-gray-300 text-sm">
-              
               <li><Link to="/Investor#stock-info" className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300">Stock Information</Link></li>
               <li>
-  <Link 
-    to="/sec" 
-    className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300"
-  >
-    SEC Filings
-  </Link>
-</li>
-
+                <Link 
+                  to="/sec" 
+                  className="hover:text-white dark:hover:text-cyan-400 transition-colors duration-300"
+                >
+                  SEC Filings
+                </Link>
+              </li>
             </ul>
           </div>
 
