@@ -1128,7 +1128,7 @@ const Index = () => {
 
               <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
                 The <strong className="text-gray-900">ARMS 200</strong> is DigiPowerX's proprietary modular data-center platform.
-                Each module delivers up to <strong className="text-[#01b4e5]">200 kW</strong> of critical IT load and is designed for
+                Each module delivers up to <strong className="text-[#01b4e5]">600 kW</strong> of critical IT load and is designed for
                 <strong className="text-[#245592]"> Tier III redundancy</strong> (concurrent maintainability). The system's prefabricated
                 architecture allows rapid on-site assembly and integration with chilled-water or direct-to-chip cooling systems.
               </p>
@@ -1327,7 +1327,7 @@ const Index = () => {
           <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
             DigiPowerX collaborates with globally recognized leaders in compute,
             energy, and digital finance. Through strong alliances with
-            <span className="font-semibold text-[#245592]"> Neo Micro</span> for
+            <span className="font-semibold text-[#245592]"> SUPERMICRO</span> for
             next-generation micro-compute modules and
             <span className="font-semibold text-[#245592]"> USDC ecosystem partners </span>
             for secure, real-time digital transactions, we are accelerating the

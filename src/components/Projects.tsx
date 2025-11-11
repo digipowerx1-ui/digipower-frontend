@@ -55,7 +55,7 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
         "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672193ab70dde9c6e62ee75f_Unknown.avif",
       imageAlt: "North Tonawanda Power Plant",
       title: "North Tonawanda Power Plant",
-      capacity: "60 MW",
+      capacity: "123 MW",
       location: "New York",
       status: "Operational",
       description:
@@ -77,7 +77,7 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
         "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672533504e766ccec981b09a_Unknown.jpeg",
       imageAlt: "Alabama Data Center",
       title: "Alabama Utility-Powered Facility",
-      capacity: "22 MW",
+      capacity: " 55 MW",
       location: "Alabama",
       status: "Operational",
       description:
