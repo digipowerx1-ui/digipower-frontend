@@ -82,13 +82,13 @@ const Index = () => {
   const heroStats = [
     {
       icon: Zap,
-      label: "Power density",
+      label: " power assets",
       value: "400MW+",
       helper: "Available across campuses",
     },
     {
       icon: Shield,
-      label: "Tier III uptime",
+      label: "Rated 3 Certified",
       value: "99.998%",
       helper: "Backed by redundant grids",
     },
@@ -1124,16 +1124,15 @@ const Index = () => {
               </h2>
 
               <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
-                Revolutionary modular pod architecture designed for the AI era. Each ARMS 200 unit delivers
-                200kW of computing power in a compact, rapidly deployable package.
+              Revolutionary modular pod architecture designed for the AI era.
+Each ARMS 200 unit delivers up to 600 kW of computing power in a compact, rapidly deployable package.
               </p>
 
               <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
-                The <strong className="text-gray-900">ARMS 200</strong> is DigiPowerX's proprietary modular data-center platform.
-                Each module delivers up to <strong className="text-[#01b4e5]">600 kW</strong> of critical IT load and is designed for
-                <strong className="text-[#245592]"> Tier III redundancy</strong> (concurrent maintainability). The system's prefabricated
-                architecture allows rapid on-site assembly and integration with chilled-water or direct-to-chip cooling systems.
-              </p>
+                The ARMS 200 is DigiPowerX’s proprietary modular data-center platform.
+Each module delivers up to 600 kW of critical IT load and is designed for Tier III redundancy (concurrent maintainability).
+The system’s prefabricated architecture allows rapid on-site assembly and integration with chilled-water or direct-to-chip cooling systems.
+            </p>
 
               {/* ARMS 200 Advantages */}
               <FadeIn delay={0.3} direction="up">
@@ -1348,13 +1347,19 @@ const Index = () => {
         {/* CTA BUTTON */}
         <FadeIn delay={0.2} direction="up">
           <motion.div whileHover={{ scale: 1.05, translateY: -2 }}>
-            <Button
-              size="lg"
-              onClick={() => setOpen(true)}
-              className="bg-gradient-to-r from-[#245592] to-[#01d3ff] text-white font-semibold rounded-xl shadow-lg px-10 py-4"
-            >
-              Become a DigiPowerX Partner
-            </Button>
+         <a
+  href="/partner"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button
+    size="lg"
+    className="bg-gradient-to-r from-[#245592] to-[#01d3ff] text-white font-semibold rounded-xl shadow-lg px-10 py-4"
+  >
+    Become a DigiPowerX Partner
+  </Button>
+</a>
+
           </motion.div>
         </FadeIn>
       </FadeIn>
