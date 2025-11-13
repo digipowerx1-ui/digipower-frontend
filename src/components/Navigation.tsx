@@ -116,7 +116,7 @@ const Navigation = () => {
 
           {/* Theme Toggle */}
           <motion.button
-            onClick={toggleTheme}
+            onClick={toggleTheme}         
             whileHover={{ scale: 1.1, rotate: 15 }}
             whileTap={{ scale: 0.9 }}
             className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-200"
