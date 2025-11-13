@@ -82,22 +82,22 @@ const Index = () => {
   const heroStats = [
     {
       icon: Zap,
-      label: " power assets",
+      label: "Power Assets",
       value: "400MW+",
       helper: "Available across campuses",
     },
     {
       icon: Shield,
-      label: "Rated 3 Certified",
+      label: "Tier III Certified",
       value: "99.998%",
-      helper: "Backed by redundant grids",
+      helper: "TIA 942 certified",
     },
-    {
-      icon: TrendingUp,
-      label: "Latency",
-      value: "<4ms",
-      helper: "Avg. coast-to-core transit",
-    },
+    // {
+    //   icon: TrendingUp,
+    //   label: "Latency",
+    //   value: "<4ms",
+    //   helper: "Avg. coast-to-core transit",
+    // },
   ];
   return (
     <div className="min-h-screen bg-background scroll-smooth">
@@ -479,9 +479,9 @@ const Index = () => {
 
                   <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-900/10 to-transparent opacity-70 group-hover:opacity-40 transition-opacity duration-700"></div>
 
-                  <div className="absolute top-6 left-6 rounded-2xl border border-white/50 dark:border-white/10 bg-white/80 dark:bg-slate-900/70 px-5 py-4 backdrop-blur-md shadow-xl space-y-2 max-w-xl">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Live feed</p>
-                    <p className="text-lg font-semibold text-slate-900 dark:text-white">Phoenix Modular Campus</p>
+                  <div>
+                    {/* <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Live feed</p>
+                    <p className="text-lg font-semibold text-slate-900 dark:text-white">Phoenix Modular Campus</p> */}
                     <p className="flex items-center gap-2 text-xs font-medium text-emerald-500">
                       <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
                       Cooling load active · 72%
@@ -489,7 +489,7 @@ const Index = () => {
                   </div>
 
                   <div className="absolute bottom-6 right-6 w-60 rounded-2xl border border-white/40 dark:border-white/10 bg-slate-900/80 backdrop-blur-xl p-5 text-white shadow-2xl space-y-3">
-                    <p className="text-xs font-semibold uppercase tracking-[0.4em] text-white/70">Immersion ready</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.4em] text-white/70"></p>
                     <div className="flex items-end justify-between gap-4">
                       <div>
                         <p className="text-sm text-white/60">Instant capacity</p>
@@ -1059,7 +1059,7 @@ const Index = () => {
     {
       icon: Zap,
       title: "Modular Architecture:",
-      description: "Our ARMS 200 pods deliver 200 kW – 5 MW units that scale seamlessly.",
+      description: "Our ARMS 200 pods deliver 600 kW – 10 MW+ units that scale seamlessly.",
       delay: 0,
     },
     {
@@ -1184,9 +1184,9 @@ The system’s prefabricated architecture allows rapid on-site assembly and inte
               >
                 {/* Image */}
                 <img
-                  src="/usdc200.png"
+                  src="/usdc.jpg"
                   alt="DigiPowerX Data Center"
-                  className="w-full h-[400px] md:h-[500px] object-cover"
+                  className="w-full h-[100px] md:h-[400px] object-cover"
                 />
 
                 {/* Gradient Overlay */}
@@ -1249,240 +1249,6 @@ The system’s prefabricated architecture allows rapid on-site assembly and inte
           </div>
         </div>
       </section>
-
-      {/* Partnerships Section */}
-     <section
-  id="partners"
-  className="py-24 bg-white dark:bg-slate-900 transition-colors duration-300"
->
-  {(() => {
-    const [open, setOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("");
-
-    const [form, setForm] = useState({
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-    });
-
-    const handleChange = (e: any) => {
-      setForm({ ...form, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e: any) => {
-      e.preventDefault();
-      setLoading(true);
-      setMessage("");
-
-      try {
-        const res = await fetch(
-          "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/partners",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              data: {
-                name: form.name,
-                email: form.email,
-                phoneNumber: form.phone,
-                companyName: form.company,
-              },
-            }),
-          }
-        );
-
-        if (!res.ok) throw new Error("Failed to submit");
-
-        setMessage("✅ Thank you! We will contact you soon.");
-        setForm({ name: "", email: "", phone: "", company: "" });
-
-        setTimeout(() => setOpen(false), 1200);
-      } catch (err) {
-        setMessage("❌ Failed to submit. Please try again.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    return (
-      <>
-        {/* MAIN SECTION */}
-     <section className="py-24 bg-white dark:bg-slate-950 transition-colors duration-300">
-  <div className="container mx-auto px-6">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
-
-      {/* LEFT TEXT */}
-      <FadeIn direction="up" className="space-y-8">
-        <div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white leading-tight">
-            Our{" "}
-            <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
-              Trusted Partners
-            </span>
-          </h2>
-
-          <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-            DigiPowerX collaborates with globally recognized leaders in compute,
-            energy, and digital finance. Through strong alliances with
-            <span className="font-semibold text-[#245592]"> SUPERMICRO</span> for
-            next-generation micro-compute modules and
-            <span className="font-semibold text-[#245592]"> USDC ecosystem partners </span>
-            for secure, real-time digital transactions, we are accelerating the
-            growth of our Tier III
-            <span className="font-semibold text-[#245592]"> NeoCloud™ AI platform</span>.
-          </p>
-
-          <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mt-4">
-            These partnerships enable DigiPowerX to deliver scalable, sustainable,
-            and enterprise-ready compute infrastructure. We continue expanding our
-            network of trusted collaborators across infrastructure, cloud, and
-            fintech sectors to drive innovation globally.
-          </p>
-        </div>
-
-        {/* CTA BUTTON */}
-        <FadeIn delay={0.2} direction="up">
-          <motion.div whileHover={{ scale: 1.05, translateY: -2 }}>
-         <a
-  href="/partner"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <Button
-    size="lg"
-    className="bg-gradient-to-r from-[#245592] to-[#01d3ff] text-white font-semibold rounded-xl shadow-lg px-10 py-4"
-  >
-    Become a DigiPowerX Partner
-  </Button>
-</a>
-
-          </motion.div>
-        </FadeIn>
-      </FadeIn>
-
-      {/* RIGHT IMAGE */}
-      <FadeIn direction="right">
-        <img
-          src="./super.jpg"
-          alt="Trusted Partners"
-          className="w-full h-auto rounded-3xl shadow-2xl object-cover ring-1 ring-gray-200 dark:ring-slate-800"
-        />
-      </FadeIn>
-    </div>
-  </div>
-</section>
-
-
-        {/* MODAL FORM */}
-        {open && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25 }}
-              className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-2xl shadow-xl p-8"
-            >
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                Partner With DigiPowerX
-              </h3>
-
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* NAME */}
-                <div>
-                  <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
-                    Full Name
-                  </label>
-                  <input
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="John Doe"
-                    className="w-full px-4 py-3 bg-gray-100 dark:bg-slate-800 border dark:border-slate-700 rounded-lg"
-                  />
-                </div>
-
-                {/* EMAIL */}
-                <div>
-                  <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="you@example.com"
-                    className="w-full px-4 py-3 bg-gray-100 dark:bg-slate-800 border dark:border-slate-700 rounded-lg"
-                  />
-                </div>
-
-                {/* PHONE */}
-                <div>
-                  <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
-                    Phone Number
-                  </label>
-                  <input
-                    name="phone"
-                    value={form.phone}
-                    onChange={handleChange}
-                    placeholder="+1 234 567 890"
-                    className="w-full px-4 py-3 bg-gray-100 dark:bg-slate-800 border dark:border-slate-700 rounded-lg"
-                  />
-                </div>
-
-                {/* COMPANY */}
-                <div>
-                  <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
-                    Company Name
-                  </label>
-                  <input
-                    name="company"
-                    value={form.company}
-                    onChange={handleChange}
-                    placeholder="Your Company"
-                    className="w-full px-4 py-3 bg-gray-100 dark:bg-slate-800 border dark:border-slate-700 rounded-lg"
-                  />
-                </div>
-
-                {/* BUTTONS */}
-                <div className="flex justify-end gap-3 pt-4">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setOpen(false)}
-                    className="px-6"
-                  >
-                    Cancel
-                  </Button>
-
-                  <Button
-                    type="submit"
-                    disabled={loading}
-                    className="bg-gradient-to-r from-[#245592] to-[#01d3ff] text-white px-6"
-                  >
-                    {loading ? "Submitting..." : "Submit"}
-                  </Button>
-                </div>
-              </form>
-
-              {message && (
-                <p className="text-sm text-center mt-3 text-gray-600 dark:text-gray-300">
-                  {message}
-                </p>
-              )}
-            </motion.div>
-          </div>
-        )}
-      </>
-    );
-  })()}
-</section>
 
       {/* Contact Section (moved to reusable component) */}
       <ContactUs />

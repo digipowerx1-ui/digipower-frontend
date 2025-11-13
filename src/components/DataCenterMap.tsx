@@ -35,7 +35,7 @@ const dataCenters: DataCenter[] = [
     id: 3,
     name: 'Alabama Utility-Powered Facility',
     location: 'Alabama',
-    capacity: '22 MW',
+    capacity: '55 MW',
     coordinates: [32.3182, -86.9023],
     status: 'Operational',
   },
