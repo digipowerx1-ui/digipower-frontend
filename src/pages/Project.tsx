@@ -49,7 +49,7 @@ export default function USDataCentersPage() {
       location: "New York",
       status: "Operational",
       description:
-        "State-of-the-art 123 MW combined cycle power plant utilizing both gas and steam turbines for maximum efficiency.",
+        "State-of-the-art 123 MW + 63 MW combined cycle facility, combined with 60 MW utility power for maximum efficiency.",
     },
     {
       imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672193aa5666f763dd3c6466_Unknown-1.avif",
