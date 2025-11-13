@@ -3,33 +3,32 @@ import { motion } from "framer-motion";
 import Splide from "@splidejs/splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { FadeIn } from "@/components/animations/FadeIn";
-import { Zap, MapPin } from "lucide-react";
- 
+import { Zap } from "lucide-react";
+
 interface SlideData {
   imageUrl: string;
   imageAlt: string;
   title: string;
   description: string;
   capacity: string;
-  location: string;
   status: "Operational" | "Development" | "Expansion";
 }
- 
+
 interface ProjectsSliderProps {
   slides?: SlideData[];
 }
- 
+
 export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
   const splideRootRef = useRef<HTMLDivElement | null>(null);
   const splideInstanceRef = useRef<Splide | null>(null);
- 
+
   useEffect(() => {
     if (!splideRootRef.current) return;
- 
+
     splideInstanceRef.current = new Splide(splideRootRef.current, {
       type: "fade",
       rewind: true,
-      autoplay: true,
+      autoplay: false,
       interval: 4000,
       speed: 1000,
       pauseOnHover: true,
@@ -38,9 +37,9 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
       drag: true,
       keyboard: true,
     });
- 
+
     splideInstanceRef.current.mount();
- 
+
     return () => {
       if (splideInstanceRef.current) {
         splideInstanceRef.current.destroy();
@@ -48,7 +47,7 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
       }
     };
   }, []);
- 
+
   const defaultSlides: SlideData[] = [
     {
       imageUrl:
@@ -56,10 +55,9 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
       imageAlt: "North Tonawanda Power Plant",
       title: "North Tonawanda Power Plant",
       capacity: "123 MW",
-      location: "New York",
       status: "Operational",
       description:
-        "State-of-the-art 60 MW combined cycle power plant utilizing both gas and steam turbines for maximum efficiency.",
+        "State-of-the-art 123 MW + 63 MW combined cycle facility, combined with 60 MW utility power for maximum efficiency.",
     },
     {
       imageUrl:
@@ -67,37 +65,32 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
       imageAlt: "Buffalo Hydropower Facility",
       title: "Buffalo Hydropower Data Center",
       capacity: "18.7 MW",
-      location: "Buffalo, NY",
       status: "Operational",
       description:
         "Leverages sustainable hydropower infrastructure. Tier III-compliant with advanced cooling systems.",
     },
     {
-      imageUrl:
-        "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672533504e766ccec981b09a_Unknown.jpeg",
+      imageUrl: "/Alabama.png",
       imageAlt: "Alabama Data Center",
       title: "Alabama Utility-Powered Facility",
-      capacity: " 55 MW",
-      location: "Alabama",
+      capacity: "55 MW",
       status: "Operational",
       description:
-        "22 MW substation with direct utility connectivity, optimized for high-density AI workloads.",
+        "High-density AI-ready facility with direct substation connectivity and optimized power distribution.",
     },
     {
-      imageUrl:
-        "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672533504e766ccec981b09a_Unknown.jpeg",
+      imageUrl: "/north.png",
       imageAlt: "North Carolina Development Site",
       title: "North Carolina Development Site",
-      capacity: "200 MW",
-      location: "North Carolina",
+      capacity: "55 MW",
       status: "Development",
       description:
-        "200 MW flagship development project powered by ARMS 200 modular infrastructure.",
+        "55 MW large-scale development site for next-generation AI compute expansion.",
     },
   ];
- 
+
   const renderSlides = slides || defaultSlides;
- 
+
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
       Operational: "from-green-500 to-teal-500",
@@ -106,7 +99,7 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
     };
     return colors[status] || "from-gray-500 to-slate-500";
   };
- 
+
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-950 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
@@ -122,7 +115,7 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
             </p>
           </div>
         </FadeIn>
- 
+
         {/* SPLIDE SLIDER */}
         <FadeIn delay={0.3}>
           <motion.div
@@ -137,9 +130,8 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
                 <ul className="splide__list">
                   {renderSlides.map((slide, idx) => (
                     <li key={idx} className="splide__slide relative">
- 
                       {/* Image */}
-                      <div className="relative h-[500px] md:h-[600px]">
+                      <div className="relative h-[320px] sm:h-[400px] md:h-[600px]">
                         <img
                           src={slide.imageUrl}
                           alt={slide.imageAlt}
@@ -147,19 +139,12 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                       </div>
- 
+
                       {/* Text Overlay */}
                       <div className="absolute inset-0 flex items-end">
                         <div className="p-8 md:p-12 lg:p-16 w-full">
                           <div className="max-w-3xl">
- 
-                            {/* Badges */}
                             <div className="flex flex-wrap gap-3 mb-4">
-                              <div className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
-                                <MapPin className="w-4 h-4 text-brand-cyan" />
-                                <span className="text-white text-sm">{slide.location}</span>
-                              </div>
- 
                               <div
                                 className={`px-4 py-2 rounded-full bg-gradient-to-r ${getStatusColor(
                                   slide.status
@@ -170,23 +155,21 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
                                 </span>
                               </div>
                             </div>
- 
-                            {/* Title */}
+
                             <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">
                               {slide.title}
                             </h2>
- 
+
                             <div className="flex items-center gap-2 mb-4">
                               <Zap className="w-5 h-5 text-brand-cyan" />
                               <span className="text-2xl font-bold text-brand-cyan">
                                 {slide.capacity}
                               </span>
                             </div>
- 
+
                             <p className="text-gray-200 text-lg leading-relaxed">
                               {slide.description}
                             </p>
- 
                           </div>
                         </div>
                       </div>
@@ -198,7 +181,7 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
           </motion.div>
         </FadeIn>
       </div>
- 
+
       {/* Slider Styles */}
       <style>{`
         .splide__arrow {
@@ -235,8 +218,14 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
           border-radius: 12px;
           background: rgba(1,211,255,1);
         }
+
+        /* 🔥 Hide arrows only on mobile */
+        @media (max-width: 768px) {
+          .splide__arrow {
+            display: none !important;
+          }
+        }
       `}</style>
     </section>
   );
 }
- 

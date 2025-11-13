@@ -1,4 +1,4 @@
-import { Menu, X, Sun, Moon } from "lucide-react"; // 👈 Removed ChevronDown
+import { Menu, X, Sun, Moon } from "lucide-react"; 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
@@ -13,45 +13,31 @@ const Navigation = () => {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
 
-  // ✅ Navigation Items
   const navItems = [
-    // 🔹 Projects — simple link (no dropdown)
     { label: "Projects", href: "/projects", isRoute: true },
 
-    // 🔹 Investors — dropdown menu (no icon now)
     {
       label: "Investors",
       href: "/investor-relations",
       isRoute: true,
       dropdown: [
-        {
-          label: "Press Releases",
-          href: "/press-release",
-          desc: "Official investor announcements and news",
-        },
-        {
-          label: "Presentations & Events",
-          href: "/presentations-events",
-          desc: "Investor meetups, talks, and conferences",
-        },
+        { label: "Press Releases", href: "/press-release", desc: "Official investor announcements and news" },
+        { label: "Presentations & Events", href: "/presentations-events", desc: "Investor meetups, talks, and conferences" }
       ],
     },
 
-    // 🔹 Remaining links
     { label: "SEC Filings", href: "/sec", isRoute: true },
     { label: "Leadership & Committees", href: "/leadership-committees", isRoute: true },
     { label: "Careers", href: "/career", isRoute: true },
     { label: "Partnership", href: "/partner", isRoute: true },
   ];
 
-  // 🧭 Scroll behavior for sticky navbar
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 🔄 Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
     setOpenDropdown(null);
@@ -69,7 +55,8 @@ const Navigation = () => {
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        {/* 🌐 Logo */}
+
+        {/* Logo */}
         <Link to="/" className="flex items-center space-x-2 group">
           <motion.img
             whileHover={{ scale: 1.05 }}
@@ -80,7 +67,7 @@ const Navigation = () => {
           />
         </Link>
 
-        {/* 🖥️ Desktop Navigation */}
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           {navItems.map((item, index) => (
             <div
@@ -89,7 +76,6 @@ const Navigation = () => {
               onMouseEnter={() => setOpenDropdown(item.label)}
               onMouseLeave={() => setOpenDropdown(null)}
             >
-              {/* Main Nav Link (🔻 No ChevronDown icon now) */}
               <Link
                 to={item.href}
                 className="relative flex items-center gap-1 text-white hover:text-brand-cyan transition-colors duration-300 font-medium group"
@@ -98,7 +84,7 @@ const Navigation = () => {
                 <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-brand-navy to-brand-cyan transition-all duration-300 group-hover:w-full" />
               </Link>
 
-              {/* ✨ Dropdown Menu for Investors */}
+              {/* Desktop Dropdown */}
               <AnimatePresence>
                 {openDropdown === item.label && item.dropdown && (
                   <motion.div
@@ -112,11 +98,9 @@ const Navigation = () => {
                       <Link
                         key={idx}
                         to={dropItem.href}
-                        className="flex flex-col items-start px-5 py-4 text-left hover:bg-white/10 transition-all duration-300 group"
+                        className="flex flex-col items-start px-5 py-4 hover:bg-white/10 transition-all duration-300 group"
                       >
-                        <span className="text-white font-medium group-hover:text-brand-cyan">
-                          {dropItem.label}
-                        </span>
+                        <span className="text-white font-medium group-hover:text-brand-cyan">{dropItem.label}</span>
                         {dropItem.desc && (
                           <span className="text-gray-400 text-xs mt-1 group-hover:text-gray-200 transition-colors duration-300">
                             {dropItem.desc}
@@ -130,21 +114,17 @@ const Navigation = () => {
             </div>
           ))}
 
-          {/* 🌗 Theme Toggle */}
+          {/* Theme Toggle */}
           <motion.button
-            onClick={toggleTheme}
+            onClick={toggleTheme}         
             whileHover={{ scale: 1.1, rotate: 15 }}
             whileTap={{ scale: 0.9 }}
             className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-200"
           >
-            {theme === "light" ? (
-              <Moon size={20} className="text-white" />
-            ) : (
-              <Sun size={20} className="text-white" />
-            )}
+            {theme === "light" ? <Moon size={20} className="text-white" /> : <Sun size={20} className="text-white" />}
           </motion.button>
 
-          {/* 📞 Contact Button */}
+          {/* Contact Button */}
           <Link to="/contact-us">
             <Button className="bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-medium text-base px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
               Contact Us
@@ -152,7 +132,7 @@ const Navigation = () => {
           </Link>
         </div>
 
-        {/* 📱 Mobile Menu Toggle */}
+        {/* Mobile Toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors duration-200"
@@ -161,7 +141,7 @@ const Navigation = () => {
         </button>
       </div>
 
-      {/* 📱 Mobile Dropdown Menu */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -172,18 +152,31 @@ const Navigation = () => {
             className="md:hidden bg-slate-900/95 border-t border-gray-700/30"
           >
             <div className="px-6 py-6 space-y-4">
+
+              {/* Mobile Nav Items */}
               {navItems.map((item, index) => (
                 <div key={index}>
-                  <div
-                    className="flex justify-between items-center text-white py-2 px-4 rounded-lg hover:bg-white/5"
-                    onClick={() =>
-                      setOpenDropdown(openDropdown === item.label ? null : item.label)
-                    }
-                  >
-                    <span>{item.label}</span>
-                  </div>
+                  {/* Parent Item */}
+                  {item.dropdown ? (
+                    <div
+                      className="flex items-center text-white py-2 px-4 rounded-lg hover:bg-white/5"
+                      onClick={() =>
+                        setOpenDropdown(openDropdown === item.label ? null : item.label)
+                      }
+                    >
+                      <span>{item.label}</span>
+                    </div>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block text-white py-2 px-4 rounded-lg hover:bg-white/5"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
 
-                  {/* Mobile Dropdown Items */}
+                  {/* Dropdown Items */}
                   <AnimatePresence>
                     {openDropdown === item.label && item.dropdown && (
                       <motion.div
@@ -207,6 +200,26 @@ const Navigation = () => {
                   </AnimatePresence>
                 </div>
               ))}
+
+              {/* DARK MODE TOGGLE */}
+              <motion.button
+                onClick={toggleTheme}
+                whileTap={{ scale: 0.95 }}
+                className="w-full mt-5 flex items-center justify-center gap-2 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white transition"
+              >
+                {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+                <span className="text-sm font-medium">
+                  {theme === "light" ? "Enable Dark Mode" : "Disable Dark Mode"}
+                </span>
+              </motion.button>
+
+              {/* CONTACT US BUTTON */}
+              <Link to="/contact-us" onClick={() => setIsOpen(false)}>
+                <Button className="w-full mt-4 bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-medium text-base py-3 rounded-lg shadow-md hover:shadow-xl transition-all">
+                  Contact Us
+                </Button>
+              </Link>
+
             </div>
           </motion.div>
         )}

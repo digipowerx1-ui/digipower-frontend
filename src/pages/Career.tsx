@@ -253,42 +253,65 @@ export default function Career() {
 
       {/* ✅ SEARCH BAR SECTION */}
       <section className="py-20 bg-gray-100 dark:bg-slate-900">
-        <div className="container mx-auto px-6 max-w-5xl">
-          <div className="bg-white dark:bg-slate-950 shadow-2xl rounded-3xl p-10 border dark:border-slate-800">
-            <h3 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-10">
-              Search Open Roles
-            </h3>
+  <div className="container mx-auto px-6 max-w-5xl">
+    <div className="bg-white dark:bg-slate-950 shadow-2xl rounded-3xl p-10 border dark:border-slate-800">
+      <h3 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-10">
+        Search Open Roles
+      </h3>
 
-            <div className="flex items-center bg-white dark:bg-slate-800 rounded-full shadow-lg border dark:border-slate-700 overflow-hidden max-w-4xl mx-auto">
-              <div className="flex items-center gap-3 px-4 py-3 w-1/2">
-                <Search className="text-gray-400 w-5 h-5" />
-                <input
-                  placeholder="Job title, keywords, or company"
-                  value={searchTitle}
-                  onChange={(e) => setSearchTitle(e.target.value)}
-                  className="w-full bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
-                />
-              </div>
+      {/* 🔹 Desktop = row | Mobile = column */}
+      <div className="
+        flex max-md:flex-col 
+        items-stretch 
+        bg-white dark:bg-slate-800 
+        rounded-3xl md:rounded-full 
+        shadow-lg border dark:border-slate-700 
+        overflow-hidden max-w-4xl mx-auto
+      ">
 
-              <div className="w-px h-8 bg-gray-300 dark:bg-slate-600"></div>
-
-              <div className="flex items-center gap-3 px-4 py-3 w-1/2">
-                <MapPin className="text-gray-400 w-5 h-5" />
-                <input
-                  placeholder='City, state, zip code, or "remote"'
-                  value={searchLocation}
-                  onChange={(e) => setSearchLocation(e.target.value)}
-                  className="w-full bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
-                />
-              </div>
-
-              <Button className="rounded-none rounded-r-full bg-gradient-to-r from-[#245592] to-[#01d3ff] hover:from-[#01d3ff] hover:to-[#245592] text-white px-8 py-6 font-semibold h-full transition-all duration-300">
-                Find Jobs
-              </Button>
-            </div>
-          </div>
+        {/* 🔹 Input 1 */}
+        <div className="flex items-center gap-3 px-4 py-4 w-full md:w-1/2">
+          <Search className="text-gray-400 w-5 h-5" />
+          <input
+            placeholder="Job title, keywords, or company"
+            value={searchTitle}
+            onChange={(e) => setSearchTitle(e.target.value)}
+            className="w-full bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+          />
         </div>
-      </section>
+
+        {/* 🔹 Divider (hide in mobile) */}
+        <div className="hidden md:block w-px h-8 bg-gray-300 dark:bg-slate-600"></div>
+
+        {/* 🔹 Input 2 */}
+        <div className="flex items-center gap-3 px-4 py-4 w-full md:w-1/2">
+          <MapPin className="text-gray-400 w-5 h-5" />
+          <input
+            placeholder='City, state, zip code, or "remote"'
+            value={searchLocation}
+            onChange={(e) => setSearchLocation(e.target.value)}
+            className="w-full bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+          />
+        </div>
+
+        {/* 🔹 Button (Desktop → rounded-right | Mobile → full width square) */}
+        <Button
+          className="
+            bg-gradient-to-r from-[#245592] to-[#01d3ff]
+            hover:from-[#01d3ff] hover:to-[#245592]
+            text-white font-semibold transition-all duration-300
+
+            md:rounded-none md:rounded-r-full md:px-8 md:py-6 h-full
+            max-md:w-full max-md:rounded-none max-md:py-4
+          "
+        >
+          Find Jobs
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* ✅ OPEN POSITIONS SECTION */}
       <section className="py-20 bg-gray-100 dark:bg-slate-900">

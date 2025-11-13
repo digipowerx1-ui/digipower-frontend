@@ -45,11 +45,11 @@ export default function USDataCentersPage() {
       imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672193ab70dde9c6e62ee75f_Unknown.avif",
       imageAlt: "North Tonawanda Power Plant",
       title: "North Tonawanda Power Plant",
-      capacity: "60 MW",
+      capacity: "123 MW",
       location: "New York",
       status: "Operational",
       description:
-        "State-of-the-art 60 MW combined cycle power plant utilizing both gas and steam turbines for maximum efficiency.",
+        "State-of-the-art 123 MW + 63 MW combined cycle facility, combined with 60 MW utility power for maximum efficiency.",
     },
     {
       imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672193aa5666f763dd3c6466_Unknown-1.avif",
@@ -62,20 +62,20 @@ export default function USDataCentersPage() {
         "Powered by sustainable hydropower and built for Tier III compliance with advanced cooling technologies.",
     },
     {
-      imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672533504e766ccec981b09a_Unknown.jpeg",
+      imageUrl: "/Alabama.png",
       imageAlt: "Alabama Data Center",
       title: "Alabama Utility-Powered Facility",
-      capacity: "22 MW",
+      capacity: "55 MW",
       location: "Alabama",
       status: "Operational",
       description:
         "High-density AI-ready facility with direct substation connectivity and optimized power distribution.",
     },
     {
-      imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672533504e766ccec981b09a_Unknown.jpeg",
+      imageUrl: "/north.png",
       imageAlt: "North Carolina Development Site",
       title: "North Carolina Development Site",
-      capacity: "200 MW",
+      capacity: "55 MW",
       location: "North Carolina",
       status: "Development",
       description:

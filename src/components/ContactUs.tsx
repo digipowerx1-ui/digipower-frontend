@@ -92,13 +92,15 @@ export default function ContactUs() {
             <GradientText>Contact Us</GradientText>
           </h1>
 
-          <p className="text-lg max-w-2xl mx-auto">
-            <GradientText>
-              Please submit the form below or contact our investor relations team at{" "}
-              <span className="font-semibold">IR@digihostpower.com</span> or{" "}
-              <span className="font-semibold">888-474-9222</span>.
-            </GradientText>
-          </p>
+         <p className="text-lg max-w-2xl mx-auto">
+  <GradientText>
+    Please submit the form below or contact our investor relations team at{" "}
+    <span className="font-semibold">IR@digihostpower.com</span>
+    <br /> 
+    <span className="font-semibold">888-474-9222</span>.
+  </GradientText>
+</p>
+
         </div>
       </section>
 

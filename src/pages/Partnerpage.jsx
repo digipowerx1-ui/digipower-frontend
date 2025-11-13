@@ -283,37 +283,7 @@ export default function PartnerPage() {
       </AnimatePresence>
 
       {/* ===================== LOGO STRIP ===================== */}
-      <section className="bg-white py-24 border-t border-gray-100 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-20">
-            Trusted by{" "}
-            <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
-              Industry Leaders
-            </span>
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-            {partnerLogos.map((logo, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.06, y: -5 }}
-                transition={{ type: "spring", stiffness: 200 }}
-                className="relative group bg-white rounded-3xl p-10 flex items-center justify-center shadow-lg border border-gray-100 hover:border-transparent transition-all duration-500 overflow-hidden"
-              >
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-[#245592] to-[#01d3ff] opacity-0 group-hover:opacity-100 blur-[6px] transition-all duration-500"></div>
-                <div className="relative z-10 bg-white rounded-2xl p-8 flex items-center justify-center shadow-inner group-hover:shadow-2xl transition-all duration-500">
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    className="h-24 md:h-28 object-contain grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110"
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#01d3ff]/5 to-transparent pointer-events-none"></div>
-      </section>
+ 
 
       {/* ===================== WHY PARTNER ===================== */}
       <section className="py-24 bg-gray-50 relative overflow-hidden">
