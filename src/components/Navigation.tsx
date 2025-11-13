@@ -1,4 +1,4 @@
-import { Menu, X, Sun, Moon } from "lucide-react"; // 👈 Removed ChevronDown
+import { Menu, X, Sun, Moon } from "lucide-react"; 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
@@ -13,12 +13,10 @@ const Navigation = () => {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
 
-  // ✅ Navigation Items
+  // Navigation Items
   const navItems = [
-    // 🔹 Projects — simple link (no dropdown)
     { label: "Projects", href: "/projects", isRoute: true },
 
-    // 🔹 Investors — dropdown menu (no icon now)
     {
       label: "Investors",
       href: "/investor-relations",
@@ -37,21 +35,20 @@ const Navigation = () => {
       ],
     },
 
-    // 🔹 Remaining links
     { label: "SEC Filings", href: "/sec", isRoute: true },
     { label: "Leadership & Committees", href: "/leadership-committees", isRoute: true },
     { label: "Careers", href: "/career", isRoute: true },
     { label: "Partnership", href: "/partner", isRoute: true },
   ];
 
-  // 🧭 Scroll behavior for sticky navbar
+  // Sticky Scroll Effect
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 🔄 Close mobile menu on route change
+  // Close menu on route change
   useEffect(() => {
     setIsOpen(false);
     setOpenDropdown(null);
@@ -69,7 +66,8 @@ const Navigation = () => {
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        {/* 🌐 Logo */}
+        
+        {/* Logo */}
         <Link to="/" className="flex items-center space-x-2 group">
           <motion.img
             whileHover={{ scale: 1.05 }}
@@ -80,7 +78,7 @@ const Navigation = () => {
           />
         </Link>
 
-        {/* 🖥️ Desktop Navigation */}
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           {navItems.map((item, index) => (
             <div
@@ -89,7 +87,6 @@ const Navigation = () => {
               onMouseEnter={() => setOpenDropdown(item.label)}
               onMouseLeave={() => setOpenDropdown(null)}
             >
-              {/* Main Nav Link (🔻 No ChevronDown icon now) */}
               <Link
                 to={item.href}
                 className="relative flex items-center gap-1 text-white hover:text-brand-cyan transition-colors duration-300 font-medium group"
@@ -98,7 +95,7 @@ const Navigation = () => {
                 <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-gradient-to-r from-brand-navy to-brand-cyan transition-all duration-300 group-hover:w-full" />
               </Link>
 
-              {/* ✨ Dropdown Menu for Investors */}
+              {/* Desktop Dropdown */}
               <AnimatePresence>
                 {openDropdown === item.label && item.dropdown && (
                   <motion.div
@@ -130,7 +127,7 @@ const Navigation = () => {
             </div>
           ))}
 
-          {/* 🌗 Theme Toggle */}
+          {/* Theme Toggle */}
           <motion.button
             onClick={toggleTheme}
             whileHover={{ scale: 1.1, rotate: 15 }}
@@ -144,7 +141,7 @@ const Navigation = () => {
             )}
           </motion.button>
 
-          {/* 📞 Contact Button */}
+          {/* Contact Button */}
           <Link to="/contact-us">
             <Button className="bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-medium text-base px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
               Contact Us
@@ -152,7 +149,7 @@ const Navigation = () => {
           </Link>
         </div>
 
-        {/* 📱 Mobile Menu Toggle */}
+        {/* Mobile Toggle Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors duration-200"
@@ -161,7 +158,7 @@ const Navigation = () => {
         </button>
       </div>
 
-      {/* 📱 Mobile Dropdown Menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -174,16 +171,29 @@ const Navigation = () => {
             <div className="px-6 py-6 space-y-4">
               {navItems.map((item, index) => (
                 <div key={index}>
-                  <div
-                    className="flex justify-between items-center text-white py-2 px-4 rounded-lg hover:bg-white/5"
-                    onClick={() =>
-                      setOpenDropdown(openDropdown === item.label ? null : item.label)
-                    }
-                  >
-                    <span>{item.label}</span>
-                  </div>
+                  
+                  {/* If dropdown → clickable toggle */}
+                  {item.dropdown ? (
+                    <div
+                      className="flex justify-between items-center text-white py-2 px-4 rounded-lg hover:bg-white/5"
+                      onClick={() =>
+                        setOpenDropdown(openDropdown === item.label ? null : item.label)
+                      }
+                    >
+                      <span>{item.label}</span>
+                    </div>
+                  ) : (
+                    /* Direct Clickable Link (Projects, SEC, Careers, Partnership, etc.) */
+                    <Link
+                      to={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block text-white py-2 px-4 rounded-lg hover:bg-white/5"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
 
-                  {/* Mobile Dropdown Items */}
+                  {/* Mobile Dropdown */}
                   <AnimatePresence>
                     {openDropdown === item.label && item.dropdown && (
                       <motion.div
