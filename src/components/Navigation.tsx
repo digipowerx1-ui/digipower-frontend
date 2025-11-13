@@ -13,7 +13,6 @@ const Navigation = () => {
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
 
-  // Navigation Items
   const navItems = [
     { label: "Projects", href: "/projects", isRoute: true },
 
@@ -22,16 +21,8 @@ const Navigation = () => {
       href: "/investor-relations",
       isRoute: true,
       dropdown: [
-        {
-          label: "Press Releases",
-          href: "/press-release",
-          desc: "Official investor announcements and news",
-        },
-        {
-          label: "Presentations & Events",
-          href: "/presentations-events",
-          desc: "Investor meetups, talks, and conferences",
-        },
+        { label: "Press Releases", href: "/press-release", desc: "Official investor announcements and news" },
+        { label: "Presentations & Events", href: "/presentations-events", desc: "Investor meetups, talks, and conferences" }
       ],
     },
 
@@ -41,14 +32,12 @@ const Navigation = () => {
     { label: "Partnership", href: "/partner", isRoute: true },
   ];
 
-  // Sticky Scroll Effect
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu on route change
   useEffect(() => {
     setIsOpen(false);
     setOpenDropdown(null);
@@ -66,7 +55,7 @@ const Navigation = () => {
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        
+
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2 group">
           <motion.img
@@ -109,11 +98,9 @@ const Navigation = () => {
                       <Link
                         key={idx}
                         to={dropItem.href}
-                        className="flex flex-col items-start px-5 py-4 text-left hover:bg-white/10 transition-all duration-300 group"
+                        className="flex flex-col items-start px-5 py-4 hover:bg-white/10 transition-all duration-300 group"
                       >
-                        <span className="text-white font-medium group-hover:text-brand-cyan">
-                          {dropItem.label}
-                        </span>
+                        <span className="text-white font-medium group-hover:text-brand-cyan">{dropItem.label}</span>
                         {dropItem.desc && (
                           <span className="text-gray-400 text-xs mt-1 group-hover:text-gray-200 transition-colors duration-300">
                             {dropItem.desc}
@@ -134,11 +121,7 @@ const Navigation = () => {
             whileTap={{ scale: 0.9 }}
             className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors duration-200"
           >
-            {theme === "light" ? (
-              <Moon size={20} className="text-white" />
-            ) : (
-              <Sun size={20} className="text-white" />
-            )}
+            {theme === "light" ? <Moon size={20} className="text-white" /> : <Sun size={20} className="text-white" />}
           </motion.button>
 
           {/* Contact Button */}
@@ -149,7 +132,7 @@ const Navigation = () => {
           </Link>
         </div>
 
-        {/* Mobile Toggle Button */}
+        {/* Mobile Toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors duration-200"
@@ -158,7 +141,7 @@ const Navigation = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -169,13 +152,14 @@ const Navigation = () => {
             className="md:hidden bg-slate-900/95 border-t border-gray-700/30"
           >
             <div className="px-6 py-6 space-y-4">
+
+              {/* Mobile Nav Items */}
               {navItems.map((item, index) => (
                 <div key={index}>
-                  
-                  {/* If dropdown → clickable toggle */}
+                  {/* Parent Item */}
                   {item.dropdown ? (
                     <div
-                      className="flex justify-between items-center text-white py-2 px-4 rounded-lg hover:bg-white/5"
+                      className="flex items-center text-white py-2 px-4 rounded-lg hover:bg-white/5"
                       onClick={() =>
                         setOpenDropdown(openDropdown === item.label ? null : item.label)
                       }
@@ -183,7 +167,6 @@ const Navigation = () => {
                       <span>{item.label}</span>
                     </div>
                   ) : (
-                    /* Direct Clickable Link (Projects, SEC, Careers, Partnership, etc.) */
                     <Link
                       to={item.href}
                       onClick={() => setIsOpen(false)}
@@ -193,7 +176,7 @@ const Navigation = () => {
                     </Link>
                   )}
 
-                  {/* Mobile Dropdown */}
+                  {/* Dropdown Items */}
                   <AnimatePresence>
                     {openDropdown === item.label && item.dropdown && (
                       <motion.div
@@ -217,6 +200,26 @@ const Navigation = () => {
                   </AnimatePresence>
                 </div>
               ))}
+
+              {/* DARK MODE TOGGLE */}
+              <motion.button
+                onClick={toggleTheme}
+                whileTap={{ scale: 0.95 }}
+                className="w-full mt-5 flex items-center justify-center gap-2 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white transition"
+              >
+                {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+                <span className="text-sm font-medium">
+                  {theme === "light" ? "Enable Dark Mode" : "Disable Dark Mode"}
+                </span>
+              </motion.button>
+
+              {/* CONTACT US BUTTON */}
+              <Link to="/contact-us" onClick={() => setIsOpen(false)}>
+                <Button className="w-full mt-4 bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-medium text-base py-3 rounded-lg shadow-md hover:shadow-xl transition-all">
+                  Contact Us
+                </Button>
+              </Link>
+
             </div>
           </motion.div>
         )}
