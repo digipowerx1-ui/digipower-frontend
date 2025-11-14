@@ -37,7 +37,7 @@ export default function LeadershipCommittees() {
     {
       name: "Michel Amar",
       role: "Chief Executive Officer",
-      img: "https://digipower-x-frontend.vercel.app/images/Michel.png",
+      img: "/michal.jpeg",
       description:
         "Michel has over 20 years of experience leading tech companies and driving innovation in AI infrastructure and data center operations.",
       expertise: ["Strategic Planning", "AI Infrastructure", "Business Development"],
@@ -47,7 +47,7 @@ export default function LeadershipCommittees() {
     {
       name: "Alec Amar",
       role: "Chief Technology Officer",
-      img: "https://digipower-x-frontend.vercel.app/images/Alec%20Amar.png",
+      img: "/alec.jpeg",
       description:
         "Alec specializes in software architecture and cutting-edge technology solutions, leading the development of our ARMS 200 platform.",
       expertise: ["Software Architecture", "Cloud Computing", "Innovation"],
@@ -56,7 +56,7 @@ export default function LeadershipCommittees() {
     {
       name: "Paul Ciullo",
       role: "Chief Marketing Officer",
-      img: "https://digipower-x-frontend.vercel.app/images/Paul%20Ciullo%20.png",
+      img: "/Paul.jpeg",
       description:
         "Paul leads marketing strategies with a focus on growth, branding, and customer engagement across global markets.",
       expertise: ["Brand Strategy", "Growth Marketing", "Customer Engagement"],
@@ -65,7 +65,7 @@ export default function LeadershipCommittees() {
     {
       name: "Daniel Rotunno",
       role: "Chief Financial Officer",
-      img: "https://digipower-x-frontend.vercel.app/images/Daniel%20Rotunno.png",
+      img: "/danial.jpeg",
       description:
         "Daniel manages company finances and ensures sustainable growth through strategic financial planning and investor relations.",
       expertise: ["Financial Planning", "Investor Relations", "Risk Management"],
@@ -74,7 +74,7 @@ export default function LeadershipCommittees() {
     {
       name: "Luke Marchiori",
       role: "Chief Operating Officer",
-      img: "https://digipower-x-frontend.vercel.app/images/Luke%20Marchiori.png",
+      img: "/luke.jpeg",
       description:
         "Luke oversees day-to-day operations and ensures smooth workflow across departments, optimizing efficiency and performance.",
       expertise: ["Operations Management", "Process Optimization", "Team Leadership"],
@@ -83,7 +83,7 @@ export default function LeadershipCommittees() {
     {
       name: "Adam S. Rossman",
       role: "Chief Design Officer",
-      img: "https://digipower-x-frontend.vercel.app/images/Adam%20S.png",
+      img: "/adam.jpeg",
       description:
         "Adam crafts innovative and user-friendly designs for our products, ensuring exceptional user experiences across all platforms.",
       expertise: ["Product Design", "UX Strategy", "Design Systems"],

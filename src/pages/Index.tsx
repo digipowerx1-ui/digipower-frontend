@@ -354,10 +354,10 @@ const Index = () => {
           }}
         />
 
-        <div className="container mx-auto px-6 py-20 relative z-10">
-          <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center justify-center max-w-[1400px] mx-auto">
+        <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 relative z-10">
+          <div className="grid lg:grid-cols-[1fr_1fr] gap-8 md:gap-12 items-center justify-center max-w-[1400px] mx-auto">
             {/* Left Content with Stagger Animation */}
-            <StaggerContainer className="space-y-8 flex flex-col items-center justify-center text-center">
+            <StaggerContainer className="space-y-6 md:space-y-8 flex flex-col items-center justify-center text-center lg:text-left lg:items-start w-full">
               <StaggerItem>
                 <div className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 dark:border-white/10 bg-white/80 dark:bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] text-slate-600 dark:text-slate-200 shadow-lg shadow-brand-cyan/10 backdrop-blur">
                   <span className="inline-flex h-2 w-2 rounded-full bg-gradient-to-r from-brand-cyan to-brand-navy animate-pulse"></span>
@@ -365,9 +365,9 @@ const Index = () => {
                 </div>
               </StaggerItem>
               <StaggerItem>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight text-slate-900 dark:text-white transition-colors duration-300">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight text-slate-900 dark:text-white transition-colors duration-300 text-center lg:text-left">
                  <GradientText>Powering the Future of AI & Cloud Infrastructure</GradientText>
-                  <span className="block text-slate-500 dark:text-slate-300 text-base md:text-lg tracking-[0.4em] uppercase mt-3">
+                  <span className="block text-slate-500 dark:text-slate-300 text-sm md:text-base lg:text-lg tracking-[0.2em] md:tracking-[0.4em] uppercase mt-3">
                     data infrastructure
                   </span>
                   {/* <span className="block mt-4">
@@ -377,7 +377,7 @@ const Index = () => {
               </StaggerItem>
 
               <StaggerItem>
-       <p className="text-sm md:text-base text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed transition-colors duration-300 text-center mx-auto">
+       <p className="text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed transition-colors duration-300 text-center lg:text-left mx-auto lg:mx-0 px-2 sm:px-0">
   At DigiPowerX, we design and deliver high-density, power-efficient data-center infrastructure that fuels AI, HPC, and enterprise workloads.
   Our mission is simple: build faster, operate smarter, and deliver sustainable compute power through Tier III facilities connected to robust power infrastructure.
   <br /><br />
@@ -387,25 +387,27 @@ const Index = () => {
               </StaggerItem>
 
               <StaggerItem>
-                <div className="grid grid-cols-3 sm:grid-cols-2 gap-2 w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl mx-auto lg:mx-0">
                   {heroStats.map((stat) => {
                     const Icon = stat.icon;
                     return (
-                      <div
+                      <motion.div
                         key={stat.label}
-                        className="rounded-2xl border border-slate-200/60 dark:border-white/5 bg-white/80 dark:bg-slate-900/60 p-4 shadow-lg shadow-brand-cyan/5 backdrop-blur text-center"
+                        whileHover={{ scale: 1.05, y: -5 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        className="rounded-2xl border border-slate-200/60 dark:border-white/5 bg-white/80 dark:bg-slate-900/60 p-6 shadow-lg shadow-brand-cyan/5 backdrop-blur text-center hover:shadow-xl hover:border-brand-cyan/30 transition-all duration-300"
                       >
                         <div className="mb-3 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-300">
                           <Icon className="h-4 w-4 text-brand-cyan" />
                           {stat.label}
                         </div>
-                        <p className="text-2xl font-semibold text-slate-900 dark:text-white">
+                        <p className="text-3xl font-semibold text-slate-900 dark:text-white">
                           {stat.value}
                         </p>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
                           {stat.helper}
                         </p>
-                      </div>
+                      </motion.div>
                     );
                   })}
                 </div>
@@ -413,16 +415,17 @@ const Index = () => {
 
               {/* Enhanced Button Section */}
               <StaggerItem>
-                <div className="flex flex-col sm:flex-row gap-4 pt-6 justify-center items-center">
-                  <a href="/projects">
+                <div className="flex flex-col sm:flex-row gap-4 pt-6 justify-center lg:justify-start items-center w-full">
+                  <a href="/projects" className="w-full sm:w-auto">
                     <motion.div
                       whileHover={{ scale: 1.05, translateY: -2 }}
                       whileTap={{ scale: 0.98 }}
                       transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                      className="w-full"
                     >
                       <Button
                         size="md"
-                        className="bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-medium text-base px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+                        className="bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-medium text-base px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 w-full sm:w-auto"
                       >
                         Explore Our Data Centers
                         <ArrowRight className="ml-2 w-4 h-4 inline-block" />
@@ -434,6 +437,7 @@ const Index = () => {
                     whileHover={{ scale: 1.05, translateY: -2 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    className="w-full sm:w-auto"
                   >
                     <Button
                       size="md"
@@ -444,7 +448,7 @@ const Index = () => {
                           section.scrollIntoView({ behavior: "smooth" });
                         }
                       }}
-                      className="border border-blue-600 text-white hover:bg-blue-50 hover:border-blue-700 font-medium text-base px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-lg"
+                      className="border border-blue-600 text-white hover:bg-blue-50 hover:border-blue-700 font-medium text-base px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-lg w-full sm:w-auto"
                     >
                       Learn About ARMS 200 Modular Systems
                     </Button>
@@ -456,12 +460,12 @@ const Index = () => {
             {/* Right Video Section with Parallax Effect */}
             <SlideIn direction="right" delay={0.2}>
               <motion.div
-                className="relative"
+                className="relative w-full"
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <div className="pointer-events-none absolute -inset-6 rounded-[40px] bg-gradient-to-r from-brand-navy/30 via-brand-cyan/30 to-white/20 blur-3xl opacity-60 animate-pulse"></div>
-                <div className="relative rounded-[32px] overflow-hidden shadow-[0_25px_80px_rgba(15,23,42,0.45)] border border-slate-200/60 dark:border-white/10 bg-slate-900 group cursor-pointer h-[420px] sm:h-[520px] xl:h-[640px]">
+                <div className="relative rounded-[32px] overflow-hidden shadow-[0_25px_80px_rgba(15,23,42,0.45)] border border-slate-200/60 dark:border-white/10 bg-slate-900 group cursor-pointer h-[350px] sm:h-[420px] md:h-[520px] xl:h-[640px]">
                   <motion.video
                     src={backgroundVideo}
                     autoPlay

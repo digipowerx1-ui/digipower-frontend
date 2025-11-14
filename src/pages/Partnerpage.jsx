@@ -152,42 +152,47 @@ export default function PartnerPage() {
 
       {/* ===================== HERO SECTION ===================== */}
       <section className="relative w-full overflow-hidden min-h-screen flex items-center justify-center bg-white dark:bg-slate-950">
+        {/* Background Image Layer */}
         <div
-          className="absolute inset-0 bg-no-repeat bg-center bg-cover"
+          className="absolute inset-0 bg-no-repeat bg-right bg-cover opacity-40 dark:opacity-30"
           style={{
             backgroundImage: "url('/HANDS.png')",
-            filter: "brightness(0.85) contrast(1.1)",
           }}
         ></div>
 
+        {/* Gradient Overlay for Better Text Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/60 dark:from-slate-950/95 dark:via-slate-950/85 dark:to-slate-950/60"></div>
+
+        {/* Animated Accent Blur Elements */}
         <motion.div
-          className="absolute inset-0 
-             bg-[url('https://media.istockphoto.com/id/1293808248/photo/digital-information-travels-through-fiber-optic-cables-through-the-network-and-data-servers.webp')] 
-             bg-no-repeat bg-[position:center_top] bg-cover opacity-30"
-          style={{ filter: "brightness(0.9) contrast(1.05)" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          className="absolute top-20 left-20 w-96 h-96 bg-[#01d3ff]/10 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         ></motion.div>
 
-        <div className="absolute inset-0 bg-white/65 dark:bg-slate-950/65 backdrop-blur-[2px]"></div>
+        <motion.div
+          className="absolute bottom-20 right-20 w-96 h-96 bg-[#245592]/10 rounded-full blur-3xl"
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        ></motion.div>
 
+        {/* Content Container */}
         <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center text-center py-24 px-6 lg:px-12">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-gray-900 dark:text-white mb-6 max-w-4xl"
+            className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-gray-900 dark:text-white mb-6 max-w-4xl drop-shadow-sm"
           >
             Partner with{" "}
-            <span className="bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff] bg-clip-text text-transparent drop-shadow-lg">
               DigiPowerX
             </span>{" "}
             to Build Tomorrow
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-gray-700 dark:text-slate-300 leading-relaxed mb-10 max-w-2xl"
+            className="text-lg md:text-xl text-gray-800 dark:text-slate-200 leading-relaxed mb-10 max-w-2xl font-medium drop-shadow-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -200,8 +205,8 @@ export default function PartnerPage() {
           <motion.div whileHover={{ scale: 1.05 }}>
             <Button
               onClick={() => setIsPopupOpen(true)}
-              className="bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff] 
-              text-white px-10 py-6 text-lg font-semibold rounded-full shadow-lg 
+              className="bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff]
+              text-white px-10 py-6 text-lg font-semibold rounded-full shadow-lg
               hover:shadow-2xl hover:scale-105 transition-all duration-300 border border-transparent"
             >
               Become a Partner
