@@ -495,16 +495,16 @@ const Index = () => {
                         <p className="text-sm text-white/60">Instant capacity</p>
                         <p className="text-3xl font-semibold">123MW</p>
                       </div>
-                      <div className="flex items-center gap-1 text-emerald-400 text-sm font-semibold">
+                      {/* <div className="flex items-center gap-1 text-emerald-400 text-sm font-semibold">
                         <TrendingUp className="w-4 h-4" />
                         +12%
-                      </div>
+                      </div> */}
                     </div>
                     <div>
-                      <div className="mb-1 flex items-center justify-between text-[11px] text-white/50">
+                      {/* <div className="mb-1 flex items-center justify-between text-[11px] text-white/50">
                         <span>Deployment runway</span>
                         <span>72%</span>
-                      </div>
+                      </div> */}
                       <div className="h-1.5 rounded-full bg-white/15">
                         <span className="block h-full w-[72%] rounded-full bg-gradient-to-r from-brand-cyan to-brand-navy"></span>
                       </div>

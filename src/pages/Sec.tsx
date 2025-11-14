@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { FileDown, Download, Calendar, FileText, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
@@ -17,47 +17,106 @@ interface Filing {
   link: string;
 }
 
-export default function Sec() {
-  const [filings, setFilings] = useState<Filing[]>([]);
+interface PdfFile {
+  id: number;
+  documentId: string;
+  name: string;
+  url: string;
+  mime: string;
+  size: number;
+}
 
-  useEffect(() => {
-    const fetchFilings = async () => {
-      try {
-        const res = await fetch(
-          "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/sec-filings?populate=*",
-          { cache: "no-store" }
-        );
+interface StrapiFilingItem {
+  id: number;
+  documentId: string;
+  date?: string;
+  form_type?: string;
+  description?: string;
+  pdf_file?: PdfFile;
+}
 
-        const json = await res.json();
-        console.log("SEC API:", json);
+interface PaginationMeta {
+  page: number;
+  pageCount: number;
+  total: number;
+}
 
-        if (!json.data) return;
+interface SecQueryPage {
+  items: Filing[];
+  meta: PaginationMeta;
+}
 
-        const formatted = json.data
-          .map((item: any) => ({
-            id: item.id,
-            date: item.date,
-            form: item.form_type?.trim() || "N/A",
-            desc: item.description || "",
-            link: item.pdf_file?.url
-              ? item.pdf_file.url.startsWith("http")
-                ? item.pdf_file.url
-                : `https://thankful-miracle-1ed8bdfdaf.media.strapiapp.com${item.pdf_file.url}`
-              : "",
-          }))
-          .sort(
-            (a: Filing, b: Filing) =>
-              new Date(b.date).getTime() - new Date(a.date).getTime()
-          );
+const PAGE_SIZE = 9;
+const API_BASE = "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/sec-filings";
 
-        setFilings(formatted);
-      } catch (error) {
-        console.log("Error fetching SEC filings:", error);
-      }
+const mapFilings = (items: StrapiFilingItem[]): Filing[] =>
+  items.map((item) => {
+    const pdfUrl = item.pdf_file?.url || "";
+    return {
+      id: item.id,
+      date: item.date || "",
+      form: item.form_type?.trim() || "N/A",
+      desc: item.description || "",
+      link: pdfUrl,
     };
+  });
 
-    fetchFilings();
-  }, []);
+async function fetchSecFilings(pageParam: number): Promise<SecQueryPage> {
+  const params = new URLSearchParams();
+  params.set("populate", "*");
+  params.set("sort", "date:desc");
+  params.set("pagination[page]", pageParam.toString());
+  params.set("pagination[pageSize]", PAGE_SIZE.toString());
+
+  const res = await fetch(`${API_BASE}?${params.toString()}`);
+
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+
+  const json = await res.json();
+  const formatted = mapFilings(json.data || []);
+  const meta: PaginationMeta = json.meta?.pagination || {
+    page: pageParam,
+    pageCount: 1,
+    total: formatted.length,
+  };
+
+  return {
+    items: formatted,
+    meta,
+  };
+}
+
+export default function Sec() {
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isPending,
+    isError,
+    isFetchingNextPage,
+    refetch,
+  } = useInfiniteQuery<SecQueryPage, Error>({
+    queryKey: ["sec-filings"],
+    initialPageParam: 1,
+    queryFn: ({ pageParam = 1 }) => fetchSecFilings(pageParam),
+    getNextPageParam: (lastPage) => {
+      const { page, pageCount } = lastPage.meta;
+      return page < pageCount ? page + 1 : undefined;
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const filings = data?.pages.flatMap((page) => page.items) ?? [];
+  const totalCount = data?.pages?.[0]?.meta.total ?? filings.length;
+  const loadError = isError ? error?.message ?? "Failed to load filings" : null;
+
+  const loadMore = () => {
+    if (!hasNextPage || isFetchingNextPage) return;
+    fetchNextPage();
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900 transition-colors duration-300">
@@ -117,7 +176,60 @@ export default function Sec() {
           </div>
         </FadeIn>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* LOADING STATE */}
+        {isPending && (
+          <div className="flex justify-center items-center py-20">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-16 h-16 border-4 border-brand-cyan border-t-transparent rounded-full animate-spin" />
+              <p className="text-slate-600 dark:text-slate-300">Loading filings...</p>
+            </div>
+          </div>
+        )}
+
+        {/* ERROR STATE */}
+        {loadError && !isPending && (
+          <div className="text-center py-20">
+            <div className="inline-block p-4 bg-red-50 dark:bg-red-900/20 rounded-2xl mb-4">
+              <FileText className="w-12 h-12 text-red-500" />
+            </div>
+            <h3 className="text-xl font-bold text-red-600 dark:text-red-400 mb-2">
+              Error Loading Filings
+            </h3>
+            <p className="text-slate-600 dark:text-slate-300 mb-4">{loadError}</p>
+            <Button
+              onClick={() => refetch()}
+              className="bg-gradient-to-r from-brand-navy to-brand-cyan text-white px-6 py-3 rounded-lg"
+            >
+              Try Again
+            </Button>
+          </div>
+        )}
+
+        {/* EMPTY STATE */}
+        {!isPending && !loadError && filings.length === 0 && (
+          <div className="text-center py-20">
+            <div className="inline-block p-4 bg-slate-100 dark:bg-slate-800 rounded-2xl mb-4">
+              <FileText className="w-12 h-12 text-slate-400" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+              No Filings Available
+            </h3>
+            <p className="text-slate-600 dark:text-slate-300">
+              Check back later for new SEC filings.
+            </p>
+          </div>
+        )}
+
+        {/* FILINGS GRID */}
+        {!isPending && !loadError && filings.length > 0 && (
+        <div>
+          <p className="text-center text-sm text-slate-500 dark:text-slate-400 mb-6">
+            Displaying {filings.length} filing{filings.length !== 1 ? 's' : ''}
+          </p>
+        <StaggerContainer
+          key={filings.length}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {filings.map((filing) => (
             <StaggerItem key={filing.id}>
               <motion.div whileHover={{ y: -8, scale: 1.02 }} className="h-full">
@@ -141,11 +253,15 @@ export default function Sec() {
                       <div>
                         <p className="text-xs text-slate-500 dark:text-slate-400">Filing Date</p>
                         <p className="text-sm font-bold text-slate-900 dark:text-white">
-                          {new Date(filing.date).toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
+                          {filing.date ? (
+                            new Date(filing.date).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })
+                          ) : (
+                            <span className="text-slate-400 dark:text-slate-500 italic">Date not available</span>
+                          )}
                         </p>
                       </div>
                     </div>
@@ -194,15 +310,55 @@ export default function Sec() {
           ))}
         </StaggerContainer>
 
+        {/* Loading More Indicator */}
+        {isFetchingNextPage && (
+          <div className="flex justify-center items-center py-12">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-12 h-12 border-4 border-brand-cyan border-t-transparent rounded-full animate-spin" />
+              <p className="text-slate-600 dark:text-slate-300">Loading more filings...</p>
+            </div>
+          </div>
+        )}
+        </div>
+        )}
+
         {/* LOAD MORE */}
+        {!isPending && !loadError && filings.length > 0 && (
         <FadeIn delay={0.6}>
           <div className="text-center mt-16">
-            <Button className="bg-gradient-to-r from-brand-navy to-brand-cyan text-white px-10 py-6 text-lg rounded-full shadow-xl">
-              <FileDown className="w-5 h-5 mr-2" />
-              View All Filings
-            </Button>
+            {/* Show current count and total */}
+            <p className="text-slate-600 dark:text-slate-300 mb-4">
+              Showing {filings.length} of {totalCount} filings
+            </p>
+
+            {hasNextPage && (
+              <Button
+                onClick={loadMore}
+                disabled={isFetchingNextPage}
+                className="bg-gradient-to-r from-brand-navy to-brand-cyan text-white px-10 py-6 text-lg rounded-full shadow-xl disabled:opacity-50"
+              >
+                {isFetchingNextPage ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                    Loading...
+                  </>
+                ) : (
+                  <>
+                    <FileDown className="w-5 h-5 mr-2" />
+                    Load More Filings
+                  </>
+                )}
+              </Button>
+            )}
+
+            {!hasNextPage && (
+              <p className="text-slate-500 dark:text-slate-400 italic">
+                All filings loaded
+              </p>
+            )}
           </div>
         </FadeIn>
+        )}
       </section>
 
       <Footer />

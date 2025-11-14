@@ -84,8 +84,8 @@ export default function PartnerPage() {
   };
 
   const partnerLogos = [
-    { src: "public/banner-logo.png", alt: "IBM" },
-    { src: "public/supermicro.png", alt: "NVIDIA" },
+    { src: "/banner-logo.png", alt: "IBM" },
+    { src: "/supermicro.png", alt: "NVIDIA" },
     {
       src: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg",
       alt: "AWS",
@@ -151,11 +151,11 @@ export default function PartnerPage() {
       <Navigation />
 
       {/* ===================== HERO SECTION ===================== */}
-      <section className="relative w-full overflow-hidden min-h-screen flex items-center justify-center bg-white">
+      <section className="relative w-full overflow-hidden min-h-screen flex items-center justify-center bg-white dark:bg-slate-950">
         <div
           className="absolute inset-0 bg-no-repeat bg-center bg-cover"
           style={{
-            backgroundImage: "url('public/HANDS.png')",
+            backgroundImage: "url('/HANDS.png')",
             filter: "brightness(0.85) contrast(1.1)",
           }}
         ></div>
@@ -170,14 +170,14 @@ export default function PartnerPage() {
           transition={{ duration: 1 }}
         ></motion.div>
 
-        <div className="absolute inset-0 bg-white/65 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-white/65 dark:bg-slate-950/65 backdrop-blur-[2px]"></div>
 
         <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center text-center py-24 px-6 lg:px-12">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-gray-900 mb-6 max-w-4xl"
+            className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-gray-900 dark:text-white mb-6 max-w-4xl"
           >
             Partner with{" "}
             <span className="bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff] bg-clip-text text-transparent">
@@ -187,7 +187,7 @@ export default function PartnerPage() {
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-gray-700 leading-relaxed mb-10 max-w-2xl"
+            className="text-lg md:text-xl text-gray-700 dark:text-slate-300 leading-relaxed mb-10 max-w-2xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -224,9 +224,9 @@ export default function PartnerPage() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              className="bg-white rounded-3xl shadow-2xl p-10 w-[90%] max-w-lg relative"
+              className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-10 w-[90%] max-w-lg relative"
             >
-              <h3 className="text-3xl font-bold text-center mb-6 text-gray-900">
+              <h3 className="text-3xl font-bold text-center mb-6 text-gray-900 dark:text-white">
                 Become a Partner
               </h3>
 
@@ -238,7 +238,7 @@ export default function PartnerPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
+                  className="border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
                 />
                 <input
                   name="email"
@@ -247,7 +247,7 @@ export default function PartnerPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
+                  className="border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
                 />
                 <input
                   name="phoneNumber"
@@ -256,7 +256,7 @@ export default function PartnerPage() {
                   value={formData.phoneNumber}
                   onChange={handleChange}
                   required
-                  className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
+                  className="border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
                 />
                 <input
                   name="companyName"
@@ -265,7 +265,7 @@ export default function PartnerPage() {
                   value={formData.companyName}
                   onChange={handleChange}
                   required
-                  className="border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
+                  className="border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
                 />
 
                 <Button
@@ -279,14 +279,14 @@ export default function PartnerPage() {
               </form>
 
               {message && (
-                <p className="text-center mt-4 text-gray-700 font-medium">
+                <p className="text-center mt-4 text-gray-700 dark:text-slate-300 font-medium">
                   {message}
                 </p>
               )}
 
               <button
                 onClick={() => setIsPopupOpen(false)}
-                className="absolute top-4 right-5 text-gray-500 hover:text-gray-800 text-2xl font-bold"
+                className="absolute top-4 right-5 text-gray-500 dark:text-slate-400 hover:text-gray-800 dark:hover:text-white text-2xl font-bold"
               >
                 ✕
               </button>
@@ -300,13 +300,13 @@ export default function PartnerPage() {
 
       {/* ===================== WHY PARTNER ===================== */}
   {/* ===================== WHY PARTNER ===================== */}
-<section className="py-24 bg-gray-50 relative overflow-hidden">
+<section className="py-24 bg-gray-50 dark:bg-slate-900 relative overflow-hidden">
   <div className="max-w-6xl mx-auto px-6 text-center">
     <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
       Why Partner With Us
     </h2>
 
-    <p className="text-gray-600 max-w-3xl mx-auto mb-16 text-lg leading-relaxed">
+    <p className="text-gray-600 dark:text-slate-300 max-w-3xl mx-auto mb-16 text-lg leading-relaxed">
       Our partnership model is built on trust, innovation, and mutual success — enabling you to scale faster,
       reach wider audiences, and deliver greater impact.
     </p>
@@ -329,7 +329,7 @@ export default function PartnerPage() {
             key={i}
             whileHover={{ y: -6 }}
             transition={{ type: "spring", stiffness: 250 }}
-            className="bg-white border border-gray-200 rounded-2xl p-10 shadow-md hover:shadow-xl hover:border-[#01d3ff]/50 transition-all duration-500 relative overflow-hidden"
+            className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl p-10 shadow-md hover:shadow-xl hover:border-[#01d3ff]/50 transition-all duration-500 relative overflow-hidden"
           >
             <div className="flex flex-col items-center gap-4 text-center">
               {/* Icon wrapper */}
@@ -338,7 +338,7 @@ export default function PartnerPage() {
               </div>
 
               {/* Benefit text */}
-              <p className="relative z-10 text-gray-800 font-medium text-lg leading-snug">
+              <p className="relative z-10 text-gray-800 dark:text-slate-200 font-medium text-lg leading-snug">
                 {b}
               </p>
             </div>
@@ -364,7 +364,7 @@ export default function PartnerPage() {
 
 
       {/* ===================== PARTNERSHIP MODELS ===================== */}
-   <section className="py-24 bg-white">
+   <section className="py-24 bg-white dark:bg-slate-950">
   <div className="max-w-7xl mx-auto px-6 text-center">
     <h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff] bg-clip-text text-transparent">
       Partnership Models
@@ -386,7 +386,7 @@ export default function PartnerPage() {
             key={i}
             whileHover={{ y: -6 }}
             transition={{ type: "spring", stiffness: 250 }}
-            className="bg-white border border-gray-200 rounded-2xl p-10 shadow-md hover:shadow-xl hover:border-[#01d3ff]/50 transition-all duration-500"
+            className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl p-10 shadow-md hover:shadow-xl hover:border-[#01d3ff]/50 transition-all duration-500"
           >
             <div className="flex flex-col items-center gap-4 text-center">
 
@@ -395,11 +395,11 @@ export default function PartnerPage() {
                 <IconComp className="w-8 h-8 text-[#01d3ff]" />
               </div>
 
-              <h3 className="text-xl font-semibold text-gray-800">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
                 {m.title}
               </h3>
 
-              <p className="text-gray-600 text-[15px] leading-relaxed">
+              <p className="text-gray-600 dark:text-slate-300 text-[15px] leading-relaxed">
                 {m.desc}
               </p>
             </div>
@@ -413,7 +413,7 @@ export default function PartnerPage() {
 
 
       {/* ===================== SUCCESS STORIES ===================== */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-gray-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff] bg-clip-text text-transparent animate-gradient-x">
             Partner Success Stories
@@ -423,13 +423,13 @@ export default function PartnerPage() {
               <motion.div
                 key={i}
                 whileHover={{ y: -5 }}
-                className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all"
+                className="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all"
               >
                 <img src={s.logo} alt={s.company} className="h-10 mx-auto mb-6" />
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">
                   {s.company}
                 </h3>
-                <p className="text-gray-600">{s.story}</p>
+                <p className="text-gray-600 dark:text-slate-300">{s.story}</p>
               </motion.div>
             ))}
           </div>
@@ -437,7 +437,7 @@ export default function PartnerPage() {
       </section>
 
       {/* ===================== CTA SECTION ===================== */}
-      <section className="relative py-28 bg-gradient-to-b from-gray-50 via-white to-gray-100 text-center overflow-hidden">
+      <section className="relative py-28 bg-gradient-to-b from-gray-50 via-white to-gray-100 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 text-center overflow-hidden">
         <motion.div
           className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(200,200,200,0.15),_transparent_70%)]"
           initial={{ opacity: 0 }}
@@ -450,7 +450,7 @@ export default function PartnerPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6"
+            className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6"
           >
             Let’s Build the Future — Together
           </motion.h2>
@@ -459,7 +459,7 @@ export default function PartnerPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-600 mb-12 leading-relaxed"
+            className="text-lg md:text-xl text-gray-600 dark:text-slate-300 mb-12 leading-relaxed"
           >
             Join our global network of innovators, strategists, and technology
             leaders. Let’s shape the next era of digital infrastructure together.
