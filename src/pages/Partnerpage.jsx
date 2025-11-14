@@ -473,10 +473,11 @@ export default function PartnerPage() {
           <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 300 }}>
             <div className="flex justify-center">
               <Button
-                className="flex justify-center items-center text-center text-white 
-                bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff] 
-                text-lg font-semibold rounded-full shadow-lg 
-                hover:shadow-2xl hover:scale-105 transition-all duration-300 
+                onClick={() => setIsPopupOpen(true)}
+                className="flex justify-center items-center text-center text-white
+                bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff]
+                text-lg font-semibold rounded-full shadow-lg
+                hover:shadow-2xl hover:scale-105 transition-all duration-300
                 border border-transparent mt-8 mb-8 mx-auto px-10 py-6"
               >
                 Apply for Partnership

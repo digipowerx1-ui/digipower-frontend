@@ -85,7 +85,7 @@ export default function USDataCentersPage() {
  
   const stats: Stat[] = [
     { icon: Building2, value: "4", label: "Active Facilities", color: "from-blue-500 to-cyan-500" },
-    { icon: Zap, value: "300+", label: "Total MW Capacity", color: "from-green-500 to-teal-500" },
+    { icon: Zap, value: "400+", label: "Total MW Capacity", color: "from-green-500 to-teal-500" },
     { icon: Server, value: "99.982%", label: "Uptime SLA", color: "from-purple-500 to-pink-500" },
     { icon: Gauge, value: "Tier III", label: "Compliance Standard", color: "from-orange-500 to-red-500" },
   ];
@@ -205,8 +205,8 @@ Each facility integrates our ARMS 200 modular platform — a prefabricated, high
             return (
               <motion.div key={idx} className="bg-white dark:bg-slate-900 p-8 rounded-xl shadow-lg">
                 <Icon className="w-10 h-10 mb-4 text-brand-cyan" />
-                <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
+                <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{feature.title}</h3>
+                <p className="text-gray-700 dark:text-gray-300">{feature.description}</p>
               </motion.div>
             );
           })}

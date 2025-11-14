@@ -496,7 +496,7 @@ const Index = () => {
                     <p className="text-xs font-semibold uppercase tracking-[0.4em] text-white/70"></p>
                     <div className="flex items-end justify-between gap-4">
                       <div>
-                        <p className="text-sm text-white/60">Instant capacity</p>
+                        {/* <p className="text-sm text-white/60"></p> */}
                         <p className="text-3xl font-semibold">123MW</p>
                       </div>
                       {/* <div className="flex items-center gap-1 text-emerald-400 text-sm font-semibold">
