@@ -62,7 +62,7 @@ export default function USDataCentersPage() {
         "Powered by sustainable hydropower and built for Tier III compliance with advanced cooling technologies.",
     },
     {
-      imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672533504e766ccec981b09a_Unknown.jpeg",
+      imageUrl: "/Alabama.png",
       imageAlt: "Alabama Data Center",
       title: "Alabama Utility-Powered Facility",
       capacity: "55 MW",
@@ -72,7 +72,7 @@ export default function USDataCentersPage() {
         "High-density AI-ready facility with direct substation connectivity and optimized power distribution.",
     },
     {
-      imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672533504e766ccec981b09a_Unknown.jpeg",
+      imageUrl: "/north.png",
       imageAlt: "North Carolina Development Site",
       title: "North Carolina Development Site",
       capacity: "55 MW",

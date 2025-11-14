@@ -387,7 +387,7 @@ const Index = () => {
               </StaggerItem>
 
               <StaggerItem>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full">
+                <div className="grid grid-cols-3 sm:grid-cols-2 gap-2 w-full">
                   {heroStats.map((stat) => {
                     const Icon = stat.icon;
                     return (
@@ -1054,48 +1054,56 @@ const Index = () => {
             <div className="w-24 h-1 bg-gradient-to-r from-[#245592] to-[#01d3ff] rounded-full mx-auto mt-4"></div>
           </FadeIn>
 
-   <StaggerContainer staggerDelay={0.15} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+   <StaggerContainer
+  staggerDelay={0.15}
+  className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+>
   {[
     {
-      icon: Zap,
+      image: "/modular.png",
       title: "Modular Architecture:",
-      description: "Our ARMS 200 pods deliver 600 kW – 10 MW+ units that scale seamlessly.",
+      description:
+        "Our ARMS 200 pods deliver 600 kW – 10 MW+ units that scale seamlessly.",
       delay: 0,
     },
     {
-      icon: Shield,
+      image: "/certified.png",
       title: "Tier III Certified Design",
-      description: "Concurrent maintainability and fault-tolerant infrastructure.",
+      description:
+        "Concurrent maintainability and fault-tolerant infrastructure.",
       delay: 100,
     },
     {
-      icon: Network,
+      image: "/power.png",
       title: "Power Advantage",
-      description: "Direct connection to high-voltage substations and on-site generation.",
+      description:
+        "Direct connection to high-voltage substations and on-site generation.",
       delay: 200,
     },
     {
-      icon: Boxes,
+      image: "/speed.png",
       title: "Speed to Market",
-      description: "From permitting to commissioning in under 12 months..",
+      description: "From permitting to commissioning in under 12 months.",
       delay: 300,
     },
     {
-      icon: Leaf,
+      image: "/sustainable.png",
       title: "Sustainable Build Philosophy",
-      description: "Sustainable Build Philosophy: Low PUE designs with optimized water and air systems.",
+      description:
+        "Low PUE designs with optimized water and air systems.",
       delay: 400,
     },
     {
-      icon: Zap,
+      image: "/certified2.png",
       title: "AI-Optimized Infrastructure",
-      description: "Purpose-built for AI workloads with high-density compute, GPU support, and ultra-low latency networking.",
+      description:
+        "Purpose-built for AI workloads with high-density compute, GPU support, and ultra-low latency networking.",
       delay: 500,
     },
   ].map((feature, idx) => (
     <StaggerItem key={idx} className="flex">
       <FeatureCard
-        icon={feature.icon}
+        image={feature.image}    // <-- Using image instead of icon
         title={feature.title}
         description={feature.description}
         delay={feature.delay}
@@ -1106,96 +1114,116 @@ const Index = () => {
 </StaggerContainer>
 
 
+
         </div>
       </section>
 
       {/* ARMS 200 System Section */}
-      <section id="technology" className="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            {/* LEFT CONTENT */}
-            <SlideIn direction="left" className="space-y-5 text-justify">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white leading-tight text-left transition-colors duration-300">
-                The{" "}
-                <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
-                  ARMS 200
-                </span>{" "}
-                System
-              </h2>
+  <section
+  id="technology"
+  className="py-24 bg-white dark:bg-slate-900 transition-colors duration-300"
+>
+  <div className="container mx-auto px-6">
+    <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+      
+      {/* LEFT CONTENT */}
+      <SlideIn direction="left" className="space-y-5 text-justify">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white leading-tight text-left transition-colors duration-300">
+          The{" "}
+          <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
+            ARMS 200
+          </span>{" "}
+          System
+        </h2>
 
-              <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
-              Revolutionary modular pod architecture designed for the AI era.
-Each ARMS 200 unit delivers up to 600 kW of computing power in a compact, rapidly deployable package.
-              </p>
+        <p className="text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
+          Revolutionary modular pod architecture designed for the AI era. Each
+          ARMS 200 unit delivers up to 600 kW of computing power in a compact,
+          rapidly deployable package.
+        </p>
 
-              <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
-                The ARMS 200 is DigiPowerX’s proprietary modular data-center platform.
-Each module delivers up to 600 kW of critical IT load and is designed for Tier III redundancy (concurrent maintainability).
-The system’s prefabricated architecture allows rapid on-site assembly and integration with chilled-water or direct-to-chip cooling systems.
-            </p>
+        <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">
+          The ARMS 200 is DigiPowerX’s proprietary modular data-center platform.
+          Each module delivers up to 600 kW of critical IT load and is designed
+          for Tier III redundancy (concurrent maintainability). The system’s
+          prefabricated architecture allows rapid on-site assembly and
+          integration with chilled-water or direct-to-chip cooling systems.
+        </p>
 
-              {/* ARMS 200 Advantages */}
-              <FadeIn delay={0.3} direction="up">
-                <div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-[#245592] mt-6 mb-3 text-left">
-                    ARMS 200 Advantages:
-                  </h3>
-                  <StaggerContainer staggerDelay={0.1} className="space-y-3">
-                    {[
-                      "Tier III rated under TIA-942 design standards",
-                      "Pre-engineered for liquid or air-cooled workloads",
-                      "Fully integrated power, cooling, and network distribution",
-                      "Scalable from 200 kW to 50 MW+ campuses",
-                      "Deployable in ≤ 12 months",
-                    ].map((item, idx) => (
-                      <StaggerItem key={idx}>
-                        <motion.li
-                          className="flex items-start text-sm md:text-base text-gray-700 leading-relaxed"
-                          whileHover={{ x: 5 }}
-                          transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                        >
-                          <div className="w-5 h-5 rounded-full bg-[#01d3ff]/20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
-                            <div className="w-2 h-2 rounded-full bg-[#01d3ff]"></div>
-                          </div>
-                          <span className="text-justify">{item}</span>
-                        </motion.li>
-                      </StaggerItem>
-                    ))}
-                  </StaggerContainer>
-                </div>
-              </FadeIn>
-            </SlideIn>
+        <FadeIn delay={0.3} direction="up">
+          <div>
+            <h3 className="text-xl md:text-2xl font-semibold text-[#245592] mt-6 mb-3 text-left">
+              ARMS 200 Advantages:
+            </h3>
 
-            {/* RIGHT IMAGE / DIAGRAM */}
-            <SlideIn direction="right" className="flex justify-center lg:justify-end">
-              <motion.div
-                className="w-full max-w-xl relative rounded-2xl overflow-hidden border-gray-200 transition-transform duration-500"
-                style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
-                whileHover={{
-                  scale: 1.08,
-                  rotateY: 15,
-                  rotateX: 5,
-                  transition: {
-                    duration: 0.6,
-                    ease: "easeOut"
-                  }
-                }}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
-              >
-                {/* Image */}
-                <img
-                  src="/usdc.jpg"
-                  alt="DigiPowerX Data Center"
-                  className="w-full h-[100px] md:h-[400px] object-cover"
-                />
-
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent rounded-2xl"></div>
-              </motion.div>
-            </SlideIn>
+            <StaggerContainer staggerDelay={0.1} className="space-y-3">
+              {[
+                "Tier III rated under TIA-942 design standards",
+                "Pre-engineered for liquid or air-cooled workloads",
+                "Fully integrated power, cooling, and network distribution",
+                "Scalable from 200 kW to 50 MW+ campuses",
+                "Deployable in ≤ 12 months",
+              ].map((item, idx) => (
+                <StaggerItem key={idx}>
+                  <motion.li
+                    className="flex items-start text-sm md:text-base text-gray-700 leading-relaxed"
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <div className="w-5 h-5 rounded-full bg-[#01d3ff]/20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-[#01d3ff]" />
+                    </div>
+                    <span className="text-justify">{item}</span>
+                  </motion.li>
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
           </div>
-        </div>
-      </section>
+        </FadeIn>
+      </SlideIn>
+
+      {/* RIGHT IMAGE / DIAGRAM */}
+      <SlideIn direction="right" className="flex justify-center lg:justify-end">
+        <motion.div
+          className="w-full max-w-xl relative rounded-2xl overflow-hidden border border-gray-200 transition-transform duration-500"
+          style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+          whileHover={{
+            scale: 1.08,
+            rotateY: 15,
+            rotateX: 5,
+            transition: { duration: 0.6, ease: "easeOut" },
+          }}
+          transition={{ type: "spring", stiffness: 200, damping: 15 }}
+        >
+
+          {/* UPDATED IMAGE WITH BORDER-RADIUS */}
+          <img
+            src="/usdc.jpg"
+            alt="DigiPowerX Data Center"
+            className="
+              block
+              mx-auto
+              w-auto
+              max-w-[260px]
+              h-[220px]
+              sm:max-w-[340px]
+              sm:h-[260px]
+              md:mx-0
+              md:w-full
+              md:max-w-none
+              md:h-[400px]
+              object-cover
+              rounded-2xl     /* 🔥 Border Radius added */
+            "
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent rounded-2xl pointer-events-none" />
+        </motion.div>
+      </SlideIn>
+    </div>
+  </div>
+</section>
+
 
       {/* Sustainability Section */}
       <section id="sustainability" className="py-24 bg-white dark:bg-slate-950 w-full transition-colors duration-300">
@@ -1259,3 +1287,4 @@ The system’s prefabricated architecture allows rapid on-site assembly and inte
 };
 
 export default Index;
+
