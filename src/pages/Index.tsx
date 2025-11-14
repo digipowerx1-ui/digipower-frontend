@@ -1054,48 +1054,56 @@ const Index = () => {
             <div className="w-24 h-1 bg-gradient-to-r from-[#245592] to-[#01d3ff] rounded-full mx-auto mt-4"></div>
           </FadeIn>
 
-   <StaggerContainer staggerDelay={0.15} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+   <StaggerContainer
+  staggerDelay={0.15}
+  className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+>
   {[
     {
-      icon: Zap,
+      image: "/modular.png",
       title: "Modular Architecture:",
-      description: "Our ARMS 200 pods deliver 600 kW – 10 MW+ units that scale seamlessly.",
+      description:
+        "Our ARMS 200 pods deliver 600 kW – 10 MW+ units that scale seamlessly.",
       delay: 0,
     },
     {
-      icon: Shield,
+      image: "/certified.png",
       title: "Tier III Certified Design",
-      description: "Concurrent maintainability and fault-tolerant infrastructure.",
+      description:
+        "Concurrent maintainability and fault-tolerant infrastructure.",
       delay: 100,
     },
     {
-      icon: Network,
+      image: "/power.png",
       title: "Power Advantage",
-      description: "Direct connection to high-voltage substations and on-site generation.",
+      description:
+        "Direct connection to high-voltage substations and on-site generation.",
       delay: 200,
     },
     {
-      icon: Boxes,
+      image: "/speed.png",
       title: "Speed to Market",
-      description: "From permitting to commissioning in under 12 months..",
+      description: "From permitting to commissioning in under 12 months.",
       delay: 300,
     },
     {
-      icon: Leaf,
+      image: "/sustainable.png",
       title: "Sustainable Build Philosophy",
-      description: "Sustainable Build Philosophy: Low PUE designs with optimized water and air systems.",
+      description:
+        "Low PUE designs with optimized water and air systems.",
       delay: 400,
     },
     {
-      icon: Zap,
+      image: "/certified2.png",
       title: "AI-Optimized Infrastructure",
-      description: "Purpose-built for AI workloads with high-density compute, GPU support, and ultra-low latency networking.",
+      description:
+        "Purpose-built for AI workloads with high-density compute, GPU support, and ultra-low latency networking.",
       delay: 500,
     },
   ].map((feature, idx) => (
     <StaggerItem key={idx} className="flex">
       <FeatureCard
-        icon={feature.icon}
+        image={feature.image}    // <-- Using image instead of icon
         title={feature.title}
         description={feature.description}
         delay={feature.delay}
@@ -1104,6 +1112,7 @@ const Index = () => {
     </StaggerItem>
   ))}
 </StaggerContainer>
+
 
 
         </div>
@@ -1278,3 +1287,4 @@ const Index = () => {
 };
 
 export default Index;
+

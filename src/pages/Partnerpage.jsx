@@ -1,4 +1,17 @@
 import React, { useState } from "react";
+import {
+  Users,
+  Rocket,
+  ShieldCheck,
+  TrendingUp,
+  Layers,
+  Cpu,
+  Share2,
+  Handshake,
+  Plug,
+} from "lucide-react";
+
+
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
@@ -286,65 +299,118 @@ export default function PartnerPage() {
  
 
       {/* ===================== WHY PARTNER ===================== */}
-      <section className="py-24 bg-gray-50 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
-            Why Partner With Us
-          </h2>
+  {/* ===================== WHY PARTNER ===================== */}
+<section className="py-24 bg-gray-50 relative overflow-hidden">
+  <div className="max-w-6xl mx-auto px-6 text-center">
+    <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
+      Why Partner With Us
+    </h2>
 
-          <p className="text-gray-600 max-w-3xl mx-auto mb-16 text-lg leading-relaxed">
-            Our partnership model is built on trust, innovation, and mutual success — enabling you to scale faster, reach wider audiences, and deliver greater impact.
-          </p>
+    <p className="text-gray-600 max-w-3xl mx-auto mb-16 text-lg leading-relaxed">
+      Our partnership model is built on trust, innovation, and mutual success — enabling you to scale faster,
+      reach wider audiences, and deliver greater impact.
+    </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {benefits.map((b, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -6 }}
-                transition={{ type: "spring", stiffness: 250 }}
-                className="bg-white border border-gray-200 rounded-2xl p-10 shadow-md hover:shadow-xl hover:border-[#01d3ff]/50 transition-all duration-500 relative overflow-hidden"
-              >
-                <p className="relative z-10 text-gray-800 font-medium text-lg leading-snug">
-                  {b}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-        <motion.div
-          className="absolute -bottom-20 left-10 w-[400px] h-[400px] bg-[#01d3ff]/10 rounded-full blur-[120px]"
-          animate={{ y: [0, 20, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        ></motion.div>
-        <motion.div
-          className="absolute -top-32 right-16 w-[300px] h-[300px] bg-[#245592]/10 rounded-full blur-[120px]"
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        ></motion.div>
-      </section>
+    {/* Icons mapped according to benefits */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      {benefits.map((b, i) => {
+        const icons = [
+          ShieldCheck,    // Access to AI and data infra
+          Users,          // Joint marketing & visibility
+          Rocket,         // Partner growth programs
+          Layers,         // Training & certifications
+          TrendingUp,     // Revenue growth
+          Handshake       // 24/7 partner support
+        ];
+        const IconComp = icons[i];
+
+        return (
+          <motion.div
+            key={i}
+            whileHover={{ y: -6 }}
+            transition={{ type: "spring", stiffness: 250 }}
+            className="bg-white border border-gray-200 rounded-2xl p-10 shadow-md hover:shadow-xl hover:border-[#01d3ff]/50 transition-all duration-500 relative overflow-hidden"
+          >
+            <div className="flex flex-col items-center gap-4 text-center">
+              {/* Icon wrapper */}
+              <div className="w-16 h-16 rounded-xl bg-[#01d3ff]/10 flex items-center justify-center shadow-sm">
+                <IconComp className="w-8 h-8 text-[#01d3ff]" />
+              </div>
+
+              {/* Benefit text */}
+              <p className="relative z-10 text-gray-800 font-medium text-lg leading-snug">
+                {b}
+              </p>
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  </div>
+
+  {/* Background Effects */}
+  <motion.div
+    className="absolute -bottom-20 left-10 w-[400px] h-[400px] bg-[#01d3ff]/10 rounded-full blur-[120px]"
+    animate={{ y: [0, 20, 0] }}
+    transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+  ></motion.div>
+
+  <motion.div
+    className="absolute -top-32 right-16 w-[300px] h-[300px] bg-[#245592]/10 rounded-full blur-[120px]"
+    animate={{ y: [0, -20, 0] }}
+    transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+  ></motion.div>
+</section>
+
 
       {/* ===================== PARTNERSHIP MODELS ===================== */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff] bg-clip-text text-transparent">
-            Partnership Models
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {partnershipModels.map((m, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.03 }}
-                className="p-8 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-xl transition-all"
-              >
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">
-                  {m.title}
-                </h3>
-                <p className="text-gray-600">{m.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+   <section className="py-24 bg-white">
+  <div className="max-w-7xl mx-auto px-6 text-center">
+    <h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff] bg-clip-text text-transparent">
+      Partnership Models
+    </h2>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      {partnershipModels.map((m, i) => {
+        const icons = [
+          Cpu,      // Technology Alliance
+          Share2,   // Channel Partner
+          Handshake,// Strategic Partner
+          Plug      // Integration Partner
+        ];
+
+        const IconComp = icons[i];
+
+        return (
+          <motion.div
+            key={i}
+            whileHover={{ y: -6 }}
+            transition={{ type: "spring", stiffness: 250 }}
+            className="bg-white border border-gray-200 rounded-2xl p-10 shadow-md hover:shadow-xl hover:border-[#01d3ff]/50 transition-all duration-500"
+          >
+            <div className="flex flex-col items-center gap-4 text-center">
+
+              {/* ICON (same style as Why Partner With Us) */}
+              <div className="w-16 h-16 rounded-xl bg-[#01d3ff]/10 flex items-center justify-center shadow-sm">
+                <IconComp className="w-8 h-8 text-[#01d3ff]" />
+              </div>
+
+              <h3 className="text-xl font-semibold text-gray-800">
+                {m.title}
+              </h3>
+
+              <p className="text-gray-600 text-[15px] leading-relaxed">
+                {m.desc}
+              </p>
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+
 
       {/* ===================== SUCCESS STORIES ===================== */}
       <section className="py-24 bg-gray-50">
