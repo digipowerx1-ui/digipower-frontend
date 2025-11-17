@@ -10,6 +10,7 @@ import LoadingSpinner from "./components/LoadingSpinner";
 // ---------- LAZY LOADED PAGE IMPORTS ----------
 const Index = lazy(() => import("./pages/Index"));
 const PressRelease = lazy(() => import("./pages/Press-Release"));
+const PressReleaseDetail = lazy(() => import("./pages/PressReleaseDetail"));
 const PresentationsEvents = lazy(() => import("./pages/Presentations-Events"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 const LeadershipCommittees = lazy(() => import("./pages/LeadershipCommittees"));
@@ -41,6 +42,7 @@ const App = () => (
               {/* ----------- MAIN ROUTES ----------- */}
               <Route path="/" element={<Index />} />
               <Route path="/press-release" element={<PressRelease />} />
+              <Route path="/press-release/:id" element={<PressReleaseDetail />} />
               <Route path="/presentations-events" element={<PresentationsEvents />} />
 
               {/* ----------- NEW PAGES ----------- */}

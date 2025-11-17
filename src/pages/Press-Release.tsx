@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import Navigation from "@/components/Navigation";
 import { Calendar, Search, Filter, Newspaper, ArrowRight, Download } from 'lucide-react';
 import Footer from "@/components/Footer";
@@ -20,6 +21,7 @@ interface PressRelease {
 }
  
 export default function PressRelease() {
+  const navigate = useNavigate();
   const [pressReleases, setPressReleases] = useState<PressRelease[]>([]);
   const [selectedYear, setSelectedYear] = useState<string>("All");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -63,16 +65,23 @@ export default function PressRelease() {
     fetch("https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/press-releases?fields=title,date,content&populate[pdf_file][fields]=url,name&sort[0]=date:desc")
       .then(res => res.json())
       .then(data => {
-        const formatted = data.data.map((item: any) => ({
-          id: item.id,
-          title: item.title,
-          date: item.date,
-          category: "Corporate Update",
-          excerpt: item.content || "Click to view the full official press release PDF.",
-          pdfUrl: item.pdf_file?.url || null
-        }));
+        console.log('Press Releases Data:', data); // Debug log
+        const formatted = data.data.map((item: any) => {
+          // Support both id and documentId (for newer Strapi versions)
+          const releaseId = item.documentId || item.id;
+          console.log('Press Release ID:', releaseId, 'Title:', item.title); // Debug log
+          return {
+            id: releaseId,
+            title: item.title,
+            date: item.date,
+            category: "Corporate Update",
+            excerpt: item.content || "Click to view the full official press release PDF.",
+            pdfUrl: item.pdf_file?.url || null
+          };
+        });
         setPressReleases(formatted);
-      });
+      })
+      .catch(err => console.error('Error fetching press releases:', err));
   }, []);
  
   const years = ["All", "2022", "2023", "2024", "2025"];
@@ -254,7 +263,7 @@ export default function PressRelease() {
                 {filteredReleases.map((release) => (
                   <StaggerItem key={release.id}>
                     <motion.article
-                      onClick={() => release.pdfUrl && window.open(release.pdfUrl, "_blank")}
+                      onClick={() => navigate(`/press-release/${release.id}`)}
                       whileHover={{ y: -8, scale: 1.01 }}
                       className="group relative h-full bg-white dark:bg-slate-900 border border-gray-200
                       dark:border-slate-700 rounded-2xl p-6 shadow-md hover:shadow-2xl cursor-pointer overflow-hidden"
@@ -297,10 +306,6 @@ export default function PressRelease() {
  
                         {/* ✅ Read More */}
                         <motion.div
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            release.pdfUrl && window.open(release.pdfUrl, "_blank");
-                          }}
                           whileHover={{ x: 5 }}
                           className="flex items-center gap-2 text-brand-cyan font-semibold text-sm cursor-pointer"
                         >
@@ -309,7 +314,7 @@ export default function PressRelease() {
  
                       </div>
  
-                      {/* ✅ Download Button */}
+                      {/* ✅ Download Button - Always Visible */}
                       <motion.div
                         onClick={(e) => {
                           e.stopPropagation();
@@ -317,8 +322,7 @@ export default function PressRelease() {
                         }}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        className="absolute top-4 right-4 p-2 bg-white dark:bg-slate-900 rounded-lg shadow-md
-                        opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                        className="absolute top-4 right-4 p-2 bg-white dark:bg-slate-900 rounded-lg shadow-md cursor-pointer z-20"
                       >
                         <Download className="w-4 h-4 text-brand-cyan" />
                       </motion.div>
