@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import GradientText from "@/components/GradientText";
@@ -320,20 +321,22 @@ export default function ARMS() {
               Contact our team to learn more about ARMS deployment, technical specifications, and customization options.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button
-                size="lg"
-                className="bg-white text-slate-900 hover:bg-gray-100 font-semibold px-8 py-6 text-lg"
-              >
-                Request a Consultation
-              </Button>
-              <Button
+              <Link to="/contact-us">
+                <Button
+                  size="lg"
+                  className="bg-white text-slate-900 hover:bg-gray-100 font-semibold px-8 py-6 text-lg"
+                >
+                  Request a Consultation
+                </Button>
+              </Link>
+              {/* <Button
                 size="lg"
                 variant="outline"
                 className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg"
               >
                 <Download className="w-5 h-5 mr-2" />
                 Download Factsheet
-              </Button>
+              </Button> */}
             </div>
           </FadeIn>
         </div>
