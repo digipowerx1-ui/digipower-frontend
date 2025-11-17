@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import GradientText from "@/components/GradientText";
+import { useToast } from "@/hooks/use-toast";
 
 export default function EmailAlerts() {
   const [formData, setFormData] = useState({
@@ -10,11 +11,13 @@ export default function EmailAlerts() {
     firstName: "",
     lastName: "",
     company: "",
-    press: false,
-    sec: false,
-    stock: false,
-    unsubscribe: false,
+    pressReleases: false,
+    secFilings: false,
+    stockDetailEndOfDay: false,
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target;
@@ -23,6 +26,63 @@ export default function EmailAlerts() {
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(
+        "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/email-alerts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            data: {
+              email: formData.email,
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              company: formData.company,
+              pressReleases: formData.pressReleases,
+              secFilings: formData.secFilings,
+              stockDetailEndOfDay: formData.stockDetailEndOfDay,
+            },
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to subscribe");
+      }
+
+      toast({
+        title: "Successfully subscribed!",
+        description: "You'll receive email alerts based on your preferences.",
+      });
+
+      // Reset form
+      setFormData({
+        email: "",
+        firstName: "",
+        lastName: "",
+        company: "",
+        pressReleases: false,
+        secFilings: false,
+        stockDetailEndOfDay: false,
+      });
+    } catch (error) {
+      console.error("Subscription error:", error);
+      toast({
+        title: "Subscription failed",
+        description: "Please try again later or contact support.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -53,7 +113,7 @@ export default function EmailAlerts() {
             Stay Updated with DigiPowerX
           </h2>
 
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
 
             {/* EMAIL */}
             <div>
@@ -66,9 +126,9 @@ export default function EmailAlerts() {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-slate-700 
-                bg-white dark:bg-slate-800 text-slate-800 dark:text-white 
-                focus:ring-2 focus:ring-brand-cyan outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-slate-700
+                bg-white dark:bg-slate-800 !text-slate-900 dark:!text-white
+                focus:ring-2 focus:ring-brand-cyan outline-none placeholder:text-gray-400 dark:placeholder:text-gray-500"
                 placeholder="Enter your email"
               />
             </div>
@@ -83,9 +143,9 @@ export default function EmailAlerts() {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-slate-700 
-                bg-white dark:bg-slate-800 text-slate-800 dark:text-white 
-                focus:ring-2 focus:ring-brand-cyan outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-slate-700
+                bg-white dark:bg-slate-800 !text-slate-900 dark:!text-white
+                focus:ring-2 focus:ring-brand-cyan outline-none placeholder:text-gray-400 dark:placeholder:text-gray-500"
                 placeholder="Enter your first name"
               />
             </div>
@@ -100,9 +160,9 @@ export default function EmailAlerts() {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-slate-700 
-                bg-white dark:bg-slate-800 text-slate-800 dark:text-white 
-                focus:ring-2 focus:ring-brand-cyan outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-slate-700
+                bg-white dark:bg-slate-800 !text-slate-900 dark:!text-white
+                focus:ring-2 focus:ring-brand-cyan outline-none placeholder:text-gray-400 dark:placeholder:text-gray-500"
                 placeholder="Enter your last name"
               />
             </div>
@@ -117,9 +177,9 @@ export default function EmailAlerts() {
                 name="company"
                 value={formData.company}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-slate-700 
-                bg-white dark:bg-slate-800 text-slate-800 dark:text-white 
-                focus:ring-2 focus:ring-brand-cyan outline-none"
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-slate-700
+                bg-white dark:bg-slate-800 !text-slate-900 dark:!text-white
+                focus:ring-2 focus:ring-brand-cyan outline-none placeholder:text-gray-400 dark:placeholder:text-gray-500"
                 placeholder="Enter your company name"
               />
             </div>
@@ -133,53 +193,39 @@ export default function EmailAlerts() {
               <div className="space-y-4">
 
                 {/* Press Releases */}
-                <label className="flex items-center gap-3">
+                <label className="flex items-center gap-3 cursor-pointer">
                   <input
                     type="checkbox"
-                    name="press"
-                    checked={formData.press}
+                    name="pressReleases"
+                    checked={formData.pressReleases}
                     onChange={handleChange}
-                    className="w-5 h-5"
+                    className="w-5 h-5 cursor-pointer accent-brand-cyan"
                   />
                   <span className="text-slate-700 dark:text-gray-300">Press Releases</span>
                 </label>
 
                 {/* SEC Filings */}
-                <label className="flex items-center gap-3">
+                <label className="flex items-center gap-3 cursor-pointer">
                   <input
                     type="checkbox"
-                    name="sec"
-                    checked={formData.sec}
+                    name="secFilings"
+                    checked={formData.secFilings}
                     onChange={handleChange}
-                    className="w-5 h-5"
+                    className="w-5 h-5 cursor-pointer accent-brand-cyan"
                   />
                   <span className="text-slate-700 dark:text-gray-300">All SEC Filings</span>
                 </label>
 
                 {/* Stock End of Day */}
-                <label className="flex items-center gap-3">
+                <label className="flex items-center gap-3 cursor-pointer">
                   <input
                     type="checkbox"
-                    name="stock"
-                    checked={formData.stock}
+                    name="stockDetailEndOfDay"
+                    checked={formData.stockDetailEndOfDay}
                     onChange={handleChange}
-                    className="w-5 h-5"
+                    className="w-5 h-5 cursor-pointer accent-brand-cyan"
                   />
                   <span className="text-slate-700 dark:text-gray-300">Stock Detail – End of Day</span>
-                </label>
-
-                {/* Unsubscribe */}
-                <label className="flex items-center gap-3 mt-4">
-                  <input
-                    type="checkbox"
-                    name="unsubscribe"
-                    checked={formData.unsubscribe}
-                    onChange={handleChange}
-                    className="w-5 h-5"
-                  />
-                  <span className="text-red-500 font-semibold">
-                    Unsubscribe from all email communications
-                  </span>
                 </label>
 
               </div>
@@ -187,14 +233,16 @@ export default function EmailAlerts() {
 
             {/* SUBMIT BUTTON */}
             <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
+              whileHover={{ scale: isSubmitting ? 1 : 1.03 }}
+              whileTap={{ scale: isSubmitting ? 1 : 0.97 }}
               type="submit"
-              className="w-full py-4 px-6 rounded-xl 
-              bg-gradient-to-r from-brand-navy to-brand-cyan 
-              text-white font-semibold shadow-lg hover:shadow-xl transition-all"
+              disabled={isSubmitting}
+              className="w-full py-4 px-6 rounded-xl
+              bg-gradient-to-r from-brand-navy to-brand-cyan
+              text-white font-semibold shadow-lg hover:shadow-xl transition-all
+              disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit
+              {isSubmitting ? "Subscribing..." : "Submit"}
             </motion.button>
 
           </form>

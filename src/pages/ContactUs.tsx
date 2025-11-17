@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -104,7 +104,7 @@ export default function ContactUs() {
                 {...register("firstName")}
                 aria-required="true"
                 aria-invalid={!!errors.firstName}
-                className="border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300"
+                className="border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 !text-slate-900 dark:!text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               />
               {errors.firstName && (
                 <span className="text-red-500 text-xs mt-1" role="alert">
@@ -125,7 +125,7 @@ export default function ContactUs() {
                 {...register("lastName")}
                 aria-required="true"
                 aria-invalid={!!errors.lastName}
-                className="border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300"
+                className="border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 !text-slate-900 dark:!text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               />
               {errors.lastName && (
                 <span className="text-red-500 text-xs mt-1" role="alert">
@@ -146,7 +146,7 @@ export default function ContactUs() {
                 {...register("companyName")}
                 aria-required="true"
                 aria-invalid={!!errors.companyName}
-                className="border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300"
+                className="border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 !text-slate-900 dark:!text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               />
               {errors.companyName && (
                 <span className="text-red-500 text-xs mt-1" role="alert">
@@ -167,7 +167,7 @@ export default function ContactUs() {
                 {...register("email")}
                 aria-required="true"
                 aria-invalid={!!errors.email}
-                className="border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300"
+                className="border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 !text-slate-900 dark:!text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               />
               {errors.email && (
                 <span className="text-red-500 text-xs mt-1" role="alert">
@@ -188,7 +188,7 @@ export default function ContactUs() {
                 {...register("title")}
                 aria-required="true"
                 aria-invalid={!!errors.title}
-                className="border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300"
+                className="border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 !text-slate-900 dark:!text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               />
               {errors.title && (
                 <span className="text-red-500 text-xs mt-1" role="alert">
@@ -207,7 +207,7 @@ export default function ContactUs() {
                 type="tel"
                 placeholder="+1 415-123-4567"
                 {...register("phone")}
-                className="border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300"
+                className="border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 !text-slate-900 dark:!text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               />
             </div>
 
@@ -223,7 +223,7 @@ export default function ContactUs() {
                 {...register("message")}
                 aria-required="true"
                 aria-invalid={!!errors.message}
-                className="border border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300"
+                className="border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 !text-slate-900 dark:!text-white rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-colors duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               ></textarea>
               {errors.message && (
                 <span className="text-red-500 text-xs mt-1" role="alert">

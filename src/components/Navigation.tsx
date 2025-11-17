@@ -9,12 +9,13 @@ import { useTheme } from "@/contexts/ThemeContext";
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
 
   const navItems = [
     { label: "Projects", href: "/projects", isRoute: true },
+    { label: "ARMS", href: "/arms", isRoute: true },
 
     {
       label: "Investors",

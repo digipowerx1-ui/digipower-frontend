@@ -18,12 +18,12 @@ export default function Document() {
     {
       title: "Code of Business Conduct and Ethics",
       description: "Our company code of conduct for employees and leadership.",
-      link: "/documents/code-of-business-conduct.pdf",
+      link: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/671c292ecfdadc90273992ca_Code-of-Ethics-Digihost-Technology-Inc.pdf",
     },
     {
       title: "Disclosure and Confidentiality Policy",
       description: "Policies to ensure proper disclosure and confidentiality of information.",
-      link: "/documents/disclosure-confidentiality.pdf",
+      link: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/671c292a85ea2fd6d74bd46a_Disclosure-Policy-Digihost-Technology-Inc.pdf",
     },
   ];
 
@@ -58,12 +58,12 @@ export default function Document() {
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors duration-300">
           Access all official governance documents, charters, and policies for DigiPowerX.
         </p>
-        <div className="w-40 h-1 bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-full mx-auto mt-4 mb-20"></div>
+        <div className="w-40 h-1 bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-full mx-auto mt-4 "></div>
 
       </section>
 
       {/* Governance Documents Section */}
-      <section className="py-16 px-6 max-w-5xl mx-auto">
+      <section className="py-12 px-6 max-w-5xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-white mb-8 transition-colors duration-300">
           Governance Documents
         </h2>
@@ -79,7 +79,7 @@ export default function Document() {
                 <p className="text-gray-600 dark:text-gray-300 mb-4 transition-colors duration-300">{doc.description}</p>
                 <a href={doc.link} target="_blank" rel="noopener noreferrer">
                   <Button className="bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-[#01b4e5] hover:to-brand-navy text-white font-medium px-5 py-2 rounded-lg shadow-md transition-all duration-300">
-                    Download
+                    View Policies
                   </Button>
                 </a>
               </CardContent>
@@ -89,7 +89,7 @@ export default function Document() {
       </section>
 
       {/* Board Policies Section */}
-      <section className="py-16 px-6 max-w-5xl mx-auto">
+      {/* <section className="py-16 px-6 max-w-5xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-white mb-8 transition-colors duration-300">
           Board Policies
         </h2>
@@ -112,7 +112,7 @@ export default function Document() {
             </Card>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Footer */}
       <Footer />

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Shield, Network, Boxes, Leaf, Mail, MapPin, Phone, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
@@ -20,7 +21,6 @@ import WireLines from "@/components/WireLines";
 import backgroundVideo from "@/assets/background.mp4";
 import bannerLogo from "@/assets/USDC-logo.png";
 import logo from "@/assets/logo.png";
-import Projects from "@/components/Projects";
 
 interface StockDataPoint {   
   date: string;
@@ -965,12 +965,24 @@ const Index = () => {
 
 
 
-     {/* ✅ PROJECTS SECTION (Replaces Data Center Network Section) */}
+     {/* ✅ DATA CENTER MAP SECTION */}
 <section className="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
- 
- 
-    {/* ✅ Call the Projects Component */}
-<Projects />
+  <div className="max-w-7xl mx-auto px-6">
+    {/* Heading */}
+    <div className="text-center mb-12">
+      <h2 className="text-4xl md:text-5xl font-bold mb-4">
+        <GradientText>Nationwide Coverage</GradientText>
+      </h2>
+      <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        View our distributed U.S. footprint powering AI and cloud workloads.
+      </p>
+    </div>
+
+    {/* Map Component */}
+    <FadeIn delay={0.3}>
+      <DataCenterMap />
+    </FadeIn>
+  </div>
 </section>
 
 
@@ -1187,6 +1199,19 @@ const Index = () => {
               ))}
             </StaggerContainer>
           </div>
+        </FadeIn>
+
+        {/* Read More Button */}
+        <FadeIn delay={0.4} direction="up">
+          <Link to="/arms">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-6 px-8 py-3 bg-gradient-to-r from-[#245592] to-[#01d3ff] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              Learn More About ARMS
+            </motion.button>
+          </Link>
         </FadeIn>
       </SlideIn>
 

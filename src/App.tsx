@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import LoadingSpinner from "./components/LoadingSpinner";
+import ScrollToTop from "./components/ScrollToTop";
 
 // ---------- LAZY LOADED PAGE IMPORTS ----------
 const Index = lazy(() => import("./pages/Index"));
@@ -16,6 +17,7 @@ const ContactUs = lazy(() => import("./pages/ContactUs"));
 const LeadershipCommittees = lazy(() => import("./pages/LeadershipCommittees"));
 const InvestorRelations = lazy(() => import("./pages/Investor"));
 const Projects = lazy(() => import("./pages/Project"));
+const ARMS = lazy(() => import("./pages/ARMS"));
 const Sec = lazy(() => import("./pages/Sec"));
 const DocumentsAndCharters = lazy(() => import("./pages/Document"));
 const Career = lazy(() => import("./pages/Career"));
@@ -37,6 +39,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>
               {/* ----------- MAIN ROUTES ----------- */}
@@ -50,6 +53,7 @@ const App = () => (
               <Route path="/leadership-committees" element={<LeadershipCommittees />} />
               <Route path="/investor-relations" element={<InvestorRelations />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/arms" element={<ARMS />} />
               <Route path="/sec" element={<Sec />} />
 
               {/* ✅ Career & Partner Pages */}
