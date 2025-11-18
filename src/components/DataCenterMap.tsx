@@ -19,7 +19,7 @@ const dataCenters: DataCenter[] = [
     id: 1,
     name: 'North Tonawanda Power Plant',
     location: 'New York',
-    capacity: '60 MW',
+    capacity: '123 MW',
     coordinates: [43.0395, -78.8640],
     status: 'Operational',
   },

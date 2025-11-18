@@ -176,7 +176,7 @@ Each facility integrates our ARMS 200 modular platform — a prefabricated, high
   </div>
 </section>
 
-      <Projects slides={slides} />
+      {/* <Projects slides={slides} /> */}
 
  
       {/* ✅ MAP SECTION */}
