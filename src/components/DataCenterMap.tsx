@@ -21,7 +21,7 @@ const dataCenters: DataCenter[] = [
     location: 'New York',
     capacity: '123 MW',
     coordinates: [43.0395, -78.8640],
-    status: 'Operational',
+    status: 'Operational',   
   },
   {
     id: 2,
