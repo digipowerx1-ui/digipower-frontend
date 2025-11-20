@@ -40,12 +40,47 @@ interface StockDataPoint {
   volume: number;
 }
 
+interface StockAPIResponse {
+  status: string;
+  from: string;
+  symbol: string;
+  open: number;
+  high: number;
+  low: number;
+  close?: number;
+  volume: number;
+  afterHours?: number;
+  preMarket?: number;
+}
+
+interface StockData {
+  symbol: string;
+  price: number;
+  change: number;
+  changePercent: number;
+  volume: number;
+  high: number;
+  low: number;
+  open: number;
+  lastUpdated: string;
+  marketCap: string;
+  weekHigh52: string;
+  weekLow52: string;
+  avgVolume: string;
+}
+
 export default function InvestorRelations() {
   const [chartPeriod, setChartPeriod] = useState<
     "1D" | "1W" | "1M" | "3M" | "1Y" | "ALL"
   >("1M");
 
   const [pressReleases, setPressReleases] = useState<PressRelease[]>([]);
+  const [liveStockData, setLiveStockData] = useState<StockData | null>(null);
+  const [isLoadingStock, setIsLoadingStock] = useState(true);
+  const [stockError, setStockError] = useState<string | null>(null);
+  const [historicalData, setHistoricalData] = useState<StockDataPoint[]>([]);
+  const [cachedData, setCachedData] = useState<Record<string, StockDataPoint[]>>({});
+  const [isLoadingChart, setIsLoadingChart] = useState(false);
 
   // ✅ LIVE FETCH — TOP 4 PRESS RELEASES FROM STRAPI
   useEffect(() => {
@@ -78,57 +113,197 @@ export default function InvestorRelations() {
     fetchPressReleases();
   }, []);
 
-  // ✅ Dummy stock generator
-  const generateStockData = (period: string): StockDataPoint[] => {
-    const basePrice = 24.5;
-    const dataPoints: StockDataPoint[] = [];
+  // ✅ LIVE FETCH — STOCK DATA FROM MASSIVE API
+  useEffect(() => {
+    const fetchStockData = async () => {
+      try {
+        setIsLoadingStock(true);
+        setStockError(null);
 
-    const configs: any = {
-      "1D": {
-        points: 24,
-        format: (i: number) =>
-          `${9 + Math.floor(i / 2)}:${i % 2 === 0 ? "00" : "30"}`,
-      },
-      "1W": {
-        points: 7,
-        format: (i: number) =>
-          ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i],
-      },
-      "1M": {
-        points: 30,
-        format: (i: number) => `Day ${i + 1}`,
-      },
-      "3M": {
-        points: 90,
-        format: (i: number) => `Day ${i + 1}`,
-      },
-      "1Y": {
-        points: 52,
-        format: (i: number) => `Week ${i + 1}`,
-      },
-      ALL: {
-        points: 100,
-        format: (i: number) => `Period ${i + 1}`,
-      },
+        // Get current date in YYYY-MM-DD format
+        const today = new Date();
+        const dateString = today.toISOString().split('T')[0];
+
+        const apiUrl = `https://api.massive.com/v1/open-close/DGXX/${dateString}?adjusted=true&apiKey=YkYoy5TFxWSGWgO6cZmX57tjyBWSzb2p`;
+
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch stock data');
+        }
+
+        const data: StockAPIResponse = await response.json();
+
+        // Use close if available, otherwise use preMarket or high as current price
+        const currentPrice = data.close ?? data.preMarket ?? data.high;
+
+        // Calculate change and change percentage (comparing current price to open)
+        const change = currentPrice - data.open;
+        const changePercent = ((change / data.open) * 100);
+
+        const stockInfo: StockData = {
+          symbol: 'DGXX',
+          price: currentPrice,
+          change: change,
+          changePercent: changePercent,
+          volume: data.volume,
+          high: data.high,
+          low: data.low,
+          open: data.open,
+          lastUpdated: today.toLocaleString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+          }),
+          // Static values - these would need separate API calls or different endpoints
+          marketCap: '$450M',
+          weekHigh52: '$32.15',
+          weekLow52: '$18.40',
+          avgVolume: '1.8M'
+        };
+
+        setLiveStockData(stockInfo);
+      } catch (err) {
+        console.error('Error fetching stock data:', err);
+        setStockError('Unable to load stock data. Please try again later.');
+      } finally {
+        setIsLoadingStock(false);
+      }
     };
 
-    const config = configs[period];
+    fetchStockData();
 
-    for (let i = 0; i < config.points; i++) {
-      const variation = (Math.random() - 0.45) * 2;
-      const price = basePrice + variation + i * 0.05;
+    // Refresh stock data every 5 minutes
+    const interval = setInterval(fetchStockData, 5 * 60 * 1000);
 
-      dataPoints.push({
-        date: config.format(i),
-        price: Number(price.toFixed(2)),
-        volume: Math.floor(1500000 + Math.random() * 2000000),
-      });
-    }
+    return () => clearInterval(interval);
+  }, []);
 
-    return dataPoints;
-  };
+  // ✅ FETCH HISTORICAL STOCK DATA FOR CHART
+  useEffect(() => {
+    const fetchHistoricalData = async () => {
+      try {
+        // Check if data is already cached for this period
+        if (cachedData[chartPeriod]) {
+          setHistoricalData(cachedData[chartPeriod]);
+          return;
+        }
 
-  const stockData = generateStockData(chartPeriod);
+        setIsLoadingChart(true);
+        const today = new Date();
+        const dataPoints: StockDataPoint[] = [];
+
+        // For 1D, simulate intraday data using today's data (no API calls needed)
+        if (chartPeriod === "1D") {
+          if (liveStockData) {
+            const intervals = 14; // 30-minute intervals
+            for (let i = 0; i <= intervals; i++) {
+              const time = 9.5 + (i * 0.5);
+              const hour = Math.floor(time);
+              const minute = (time % 1) * 60;
+              const timeStr = `${hour}:${minute === 0 ? '00' : '30'}`;
+
+              // Interpolate price between open, high, low, and current
+              const progress = i / intervals;
+              let price;
+              if (progress < 0.3) {
+                price = liveStockData.open + (liveStockData.high - liveStockData.open) * (progress / 0.3);
+              } else if (progress < 0.7) {
+                price = liveStockData.high - (liveStockData.high - liveStockData.low) * ((progress - 0.3) / 0.4);
+              } else {
+                price = liveStockData.low + (liveStockData.price - liveStockData.low) * ((progress - 0.7) / 0.3);
+              }
+
+              dataPoints.push({
+                date: timeStr,
+                price: Number(price.toFixed(2)),
+                volume: Math.floor(liveStockData.volume / intervals),
+              });
+            }
+            setHistoricalData(dataPoints);
+            setCachedData(prev => ({ ...prev, [chartPeriod]: dataPoints }));
+          }
+          setIsLoadingChart(false);
+          return;
+        }
+
+        // Optimize number of days and interval for different periods
+        let daysToFetch: number;
+        let intervalDays: number; // Sample every N days
+
+        switch (chartPeriod) {
+          case "1W":
+            daysToFetch = 7;
+            intervalDays = 1; // Daily
+            break;
+          case "1M":
+            daysToFetch = 30;
+            intervalDays = 1; // Daily
+            break;
+          case "3M":
+            daysToFetch = 90;
+            intervalDays = 3; // Every 3 days
+            break;
+          case "1Y":
+            daysToFetch = 365;
+            intervalDays = 7; // Weekly
+            break;
+          case "ALL":
+            daysToFetch = 730; // 2 years
+            intervalDays = 14; // Bi-weekly
+            break;
+          default:
+            daysToFetch = 30;
+            intervalDays = 1;
+        }
+
+        // Fetch data with optimized intervals
+        const promises = [];
+        for (let i = daysToFetch - 1; i >= 0; i -= intervalDays) {
+          const date = new Date(today);
+          date.setDate(date.getDate() - i);
+          const dateString = date.toISOString().split('T')[0];
+
+          promises.push(
+            fetch(`https://api.massive.com/v1/open-close/DGXX/${dateString}?adjusted=true&apiKey=YkYoy5TFxWSGWgO6cZmX57tjyBWSzb2p`)
+              .then(res => res.ok ? res.json() : null)
+              .catch(() => null)
+          );
+        }
+
+        const results = await Promise.all(promises);
+
+        // Process results
+        results.forEach((data, index) => {
+          if (data && data.status === 'OK') {
+            const date = new Date(today);
+            date.setDate(date.getDate() - (daysToFetch - 1 - (index * intervalDays)));
+
+            const currentPrice = data.close ?? data.preMarket ?? data.high;
+
+            dataPoints.push({
+              date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+              price: Number(currentPrice.toFixed(2)),
+              volume: data.volume,
+            });
+          }
+        });
+
+        setHistoricalData(dataPoints);
+        setCachedData(prev => ({ ...prev, [chartPeriod]: dataPoints }));
+        setIsLoadingChart(false);
+      } catch (err) {
+        console.error('Error fetching historical data:', err);
+        setIsLoadingChart(false);
+      }
+    };
+
+    fetchHistoricalData();
+  }, [chartPeriod, liveStockData, cachedData]);
 
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
@@ -210,14 +385,45 @@ export default function InvestorRelations() {
           <div className="w-32 md:w-40 h-1.5 bg-gradient-to-r from-brand-navy to-brand-cyan rounded-full mx-auto mt-6 mb-10" />
         </FadeIn>
 
-        <FadeIn delay={0.6}>
+        {/* <FadeIn delay={0.6}>
           <p className="text-lg md:text-xl text-slate-600 dark:text-gray-300 max-w-3xl mx-auto px-4">
             <span className="text-brand-cyan font-bold text-xl md:text-2xl">Nasdaq: DGXX</span>
+            {!isLoadingStock && liveStockData && (
+              <>
+                <span className="text-slate-900 dark:text-white font-bold text-2xl md:text-3xl ml-4">
+                  ${liveStockData.price.toFixed(2)}
+                </span>
+                <br />
+                <span className={`text-base md:text-lg font-semibold mt-2 inline-block ${
+                  liveStockData.changePercent >= 0 ? 'text-green-500' : 'text-red-500'
+                }`}>
+                  {liveStockData.lastUpdated}
+                  <br />
+                  Change {liveStockData.changePercent >= 0 ? '▲' : '▼'} ${Math.abs(liveStockData.change).toFixed(2)}
+                  <br />
+                  Change % {liveStockData.changePercent.toFixed(2)}%
+                  <br />
+                  Volume {(liveStockData.volume / 1_000_000).toFixed(3).replace(/\.?0+$/, '')}M
+                  <br />
+                  <span className="text-slate-600 dark:text-gray-300">
+                    Today's High ${liveStockData.high.toFixed(2)}
+                  </span>
+                  <br />
+                  <span className="text-slate-600 dark:text-gray-300">
+                    Today's Low ${liveStockData.low.toFixed(2)}
+                  </span>
+                  <br />
+                  <span className="text-slate-600 dark:text-gray-300">
+                    Open ${liveStockData.open.toFixed(2)}
+                  </span>
+                </span>
+              </>
+            )}
           </p>
           <p className="text-base md:text-lg text-slate-600 dark:text-gray-300 max-w-2xl mx-auto mt-4 px-4">
             Leader in Energy Assets and Data Center Infrastructure
           </p>
-        </FadeIn>
+        </FadeIn> */}
 
         <FadeIn delay={0.8}>
           <Link to="/presentations-events">
@@ -241,13 +447,113 @@ export default function InvestorRelations() {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center px-4">
               <GradientText>Stock Information</GradientText>
             </h2>
-            <p className="text-center text-slate-600 dark:text-gray-300 text-base md:text-lg mt-4 mb-8 md:mb-16 px-4">
+            <p className="text-center text-slate-600 dark:text-gray-300 text-base md:text-lg mt-4 mb-8 md:mb-12 px-4">
               Track DigiPowerX's real-time stock performance and key financial metrics
             </p>
           </FadeIn>
 
+          {/* Live Stock Details Banner */}
+          <FadeIn delay={0.2}>
+            <div className="max-w-4xl mx-auto mb-12 px-4">
+              <motion.div
+                whileHover={{ scale: 1.01 }}
+                className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8 border border-gray-200 dark:border-slate-700"
+              >
+                {isLoadingStock ? (
+                  <div className="text-center py-8">
+                    <p className="text-xl font-semibold text-slate-600 dark:text-gray-300">Loading stock data...</p>
+                  </div>
+                ) : stockError ? (
+                  <div className="text-center py-8">
+                    <p className="text-xl font-semibold text-red-500">{stockError}</p>
+                  </div>
+                ) : liveStockData ? (
+                  <div className="space-y-4">
+                    {/* Header with Symbol and Price */}
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-4 border-b border-gray-200 dark:border-slate-700">
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-bold text-brand-cyan mb-1">
+                          Nasdaq: {liveStockData.symbol}
+                        </h3>
+                        <p className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
+                          ${liveStockData.price.toFixed(2)}
+                        </p>
+                      </div>
+                      <div className="text-left md:text-right">
+                        <p className="text-sm text-slate-500 dark:text-gray-400 mb-1">
+                          {liveStockData.lastUpdated}
+                        </p>
+                        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold ${
+                          liveStockData.changePercent >= 0
+                            ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
+                            : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
+                        }`}>
+                          <span className="text-xl">
+                            {liveStockData.changePercent >= 0 ? '▲' : '▼'}
+                          </span>
+                          <span>
+                            {liveStockData.changePercent >= 0 ? '+' : ''}${liveStockData.change.toFixed(2)} ({liveStockData.changePercent.toFixed(2)}%)
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Stock Details Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+                      <div className="space-y-1">
+                        <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 font-medium">Change</p>
+                        <p className={`text-lg md:text-xl font-bold ${
+                          liveStockData.changePercent >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+                        }`}>
+                          {liveStockData.changePercent >= 0 ? '▲' : '▼'} ${Math.abs(liveStockData.change).toFixed(2)}
+                        </p>
+                      </div>
+
+                      <div className="space-y-1">
+                        <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 font-medium">Change %</p>
+                        <p className={`text-lg md:text-xl font-bold ${
+                          liveStockData.changePercent >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+                        }`}>
+                          {liveStockData.changePercent.toFixed(2)}%
+                        </p>
+                      </div>
+
+                      <div className="space-y-1">
+                        <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 font-medium">Volume</p>
+                        <p className="text-lg md:text-xl font-bold text-slate-900 dark:text-white">
+                          {(liveStockData.volume / 1_000_000).toFixed(3)}M
+                        </p>
+                      </div>
+
+                      <div className="space-y-1">
+                        <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 font-medium">Open</p>
+                        <p className="text-lg md:text-xl font-bold text-slate-900 dark:text-white">
+                          ${liveStockData.open.toFixed(2)}
+                        </p>
+                      </div>
+
+                      <div className="space-y-1">
+                        <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 font-medium">Today's High</p>
+                        <p className="text-lg md:text-xl font-bold text-slate-900 dark:text-white">
+                          ${liveStockData.high.toFixed(2)}
+                        </p>
+                      </div>
+
+                      <div className="space-y-1">
+                        <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 font-medium">Today's Low</p>
+                        <p className="text-lg md:text-xl font-bold text-slate-900 dark:text-white">
+                          ${liveStockData.low.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+              </motion.div>
+            </div>
+          </FadeIn>
+
           {/* Stock Overview Cards */}
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto mb-12 px-4">
+          {/* <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto mb-12 px-4">
             <StaggerItem>
               <motion.div
                 whileHover={{ y: -5, scale: 1.02 }}
@@ -255,8 +561,24 @@ export default function InvestorRelations() {
               >
                 <DollarSign className="w-8 h-8 md:w-10 md:h-10 text-green-500 mb-3" />
                 <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 mb-1">Stock Price</p>
-                <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">$24.50</p>
-                <p className="text-xs md:text-sm text-green-500 mt-2">+2.5% Today</p>
+                {isLoadingStock ? (
+                  <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">Loading...</p>
+                ) : stockError ? (
+                  <p className="text-lg md:text-xl font-bold text-red-500">Error</p>
+                ) : (
+                  <>
+                    <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">
+                      ${liveStockData?.price.toFixed(2)}
+                    </p>
+                    <p className={`text-xs md:text-sm mt-2 ${
+                      liveStockData && liveStockData.changePercent >= 0 ? 'text-green-500' : 'text-red-500'
+                    }`}>
+                      {liveStockData && liveStockData.changePercent >= 0 ? '▲' : '▼'}
+                      {liveStockData && liveStockData.changePercent >= 0 ? '+' : ''}
+                      ${liveStockData?.change.toFixed(2)} ({liveStockData?.changePercent.toFixed(2)}%) Today
+                    </p>
+                  </>
+                )}
               </motion.div>
             </StaggerItem>
 
@@ -267,8 +589,16 @@ export default function InvestorRelations() {
               >
                 <TrendingUp className="w-8 h-8 md:w-10 md:h-10 text-blue-500 mb-3" />
                 <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 mb-1">Market Cap</p>
-                <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">$450M</p>
-                <p className="text-xs md:text-sm text-slate-600 dark:text-gray-300 mt-2">As of today</p>
+                {isLoadingStock ? (
+                  <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">Loading...</p>
+                ) : (
+                  <>
+                    <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">
+                      {liveStockData?.marketCap}
+                    </p>
+                    <p className="text-xs md:text-sm text-slate-600 dark:text-gray-300 mt-2">As of today</p>
+                  </>
+                )}
               </motion.div>
             </StaggerItem>
 
@@ -279,8 +609,18 @@ export default function InvestorRelations() {
               >
                 <LineChart className="w-8 h-8 md:w-10 md:h-10 text-purple-500 mb-3" />
                 <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 mb-1">52 Week High</p>
-                <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">$32.15</p>
-                <p className="text-xs md:text-sm text-slate-600 dark:text-gray-300 mt-2">52W Low: $18.40</p>
+                {isLoadingStock ? (
+                  <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">Loading...</p>
+                ) : (
+                  <>
+                    <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">
+                      {liveStockData?.weekHigh52}
+                    </p>
+                    <p className="text-xs md:text-sm text-slate-600 dark:text-gray-300 mt-2">
+                      52W Low: {liveStockData?.weekLow52}
+                    </p>
+                  </>
+                )}
               </motion.div>
             </StaggerItem>
 
@@ -291,11 +631,21 @@ export default function InvestorRelations() {
               >
                 <Building2 className="w-8 h-8 md:w-10 md:h-10 text-orange-500 mb-3" />
                 <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 mb-1">Volume</p>
-                <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">2.5M</p>
-                <p className="text-xs md:text-sm text-slate-600 dark:text-gray-300 mt-2">Avg: 1.8M</p>
+                {isLoadingStock ? (
+                  <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">Loading...</p>
+                ) : (
+                  <>
+                    <p className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">
+                      {liveStockData && (liveStockData.volume / 1_000_000).toFixed(2)}M
+                    </p>
+                    <p className="text-xs md:text-sm text-slate-600 dark:text-gray-300 mt-2">
+                      Avg: {liveStockData?.avgVolume}
+                    </p>
+                  </>
+                )}
               </motion.div>
             </StaggerItem>
-          </StaggerContainer>
+          </StaggerContainer> */}
 
           {/* Stock Chart */}
           <FadeIn delay={0.4}>
@@ -330,25 +680,38 @@ export default function InvestorRelations() {
               </div>
 
               {/* Chart */}
-              <div className="h-[300px] md:h-[400px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart
-                    data={stockData}
-                    margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
-                  >
-                    <defs>
-                      <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#01d3ff" stopOpacity={0.8}/>
-                        <stop offset="95%" stopColor="#01d3ff" stopOpacity={0}/>
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                    <XAxis
-                      dataKey="date"
-                      stroke="#64748b"
-                      style={{ fontSize: '10px' }}
-                      interval={Math.floor(stockData.length / (window.innerWidth < 768 ? 4 : 6))}
-                    />
+              <div className="h-[300px] md:h-[400px] w-full relative">
+                {isLoadingChart && historicalData.length === 0 && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-white/50 dark:bg-slate-800/50 z-10">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-cyan mx-auto mb-2"></div>
+                      <p className="text-sm text-slate-500 dark:text-gray-400">Loading chart data...</p>
+                    </div>
+                  </div>
+                )}
+                {historicalData.length === 0 && !isLoadingChart ? (
+                  <div className="flex items-center justify-center h-full">
+                    <p className="text-slate-500 dark:text-gray-400">No chart data available</p>
+                  </div>
+                ) : historicalData.length > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart
+                      data={historicalData}
+                      margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+                    >
+                      <defs>
+                        <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#01d3ff" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="#01d3ff" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                      <XAxis
+                        dataKey="date"
+                        stroke="#64748b"
+                        style={{ fontSize: '10px' }}
+                        interval={Math.floor(historicalData.length / (window.innerWidth < 768 ? 4 : 6))}
+                      />
                     <YAxis
                       stroke="#64748b"
                       style={{ fontSize: '10px' }}
@@ -367,26 +730,27 @@ export default function InvestorRelations() {
                     />
                   </AreaChart>
                 </ResponsiveContainer>
+                ) : null}
               </div>
 
               <div className="mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 flex items-center">
                     <span className="inline-block w-3 h-3 bg-brand-cyan rounded-full mr-2"></span>
-                    Live data powered by market providers
+                    Live data powered by DigipowerX
                   </p>
                   <p className="text-xs text-slate-400 dark:text-gray-500">
-                    Last updated: {new Date().toLocaleTimeString()}
+                    Last updated: {liveStockData?.lastUpdated || new Date().toLocaleTimeString()}
                   </p>
                 </div>
               </div>
 
               {/* API Integration Note */}
-              <div className="mt-4 p-3 md:p-4 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-slate-900 dark:to-slate-800 rounded-xl border border-brand-cyan/20">
+              {/* <div className="mt-4 p-3 md:p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-slate-900 dark:to-slate-800 rounded-xl border border-green-500/20">
                 <p className="text-xs text-slate-600 dark:text-gray-300 leading-relaxed">
-                  <strong className="text-brand-navy dark:text-brand-cyan">📊 API Integration Ready:</strong> Replace the <code className="px-2 py-0.5 bg-white dark:bg-slate-700 rounded text-brand-cyan font-mono text-xs">generateStockData()</code> function with your API endpoint to display real-time stock data.
+                  <strong className="text-green-600 dark:text-green-400">✓ Live API Integration:</strong> Stock data is now fetched from <code className="px-2 py-0.5 bg-white dark:bg-slate-700 rounded text-brand-cyan font-mono text-xs">Massive.com API</code> and refreshes automatically every 5 minutes.
                 </p>
-              </div>
+              </div> */}
             </motion.div>
           </FadeIn>
         </div>
