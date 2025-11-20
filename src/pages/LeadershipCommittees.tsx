@@ -64,14 +64,14 @@ const leaders: Leader[] = [
   },
   {
     name: "Daniel Rotunno",
-    role: "Board Member",
+    role: "VP of Operations",
     img: "/danial.jpeg",
     description: "",
     linkedIn: "#",
   },
   {
     name: "Luke Marchiori",
-    role: "Board Member",
+    role: "Chief Renewable Energy Officer",
     img: "/luke.jpeg",
     description: "",
     linkedIn: "#",
