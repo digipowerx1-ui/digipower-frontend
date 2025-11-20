@@ -1299,11 +1299,11 @@ const Index = () => {
       />
 
       {/* Nano Nuclear */}
-      <img
+      {/* <img
         src="/nano.png"
         alt="Nano Nuclear"
         className="h-24 md:h-28 object-contain"
-      />
+      /> */}
 
     </div>
 
