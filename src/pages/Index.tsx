@@ -1298,7 +1298,7 @@ const Index = () => {
         className="h-24 md:h-28 object-contain"
       />
 
-      {/* Nano Nuclear */}
+      {/* Nano Nuclear */}.    
       {/* <img
         src="/nano.png"
         alt="Nano Nuclear"
