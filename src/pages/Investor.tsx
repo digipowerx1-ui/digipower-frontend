@@ -124,7 +124,8 @@ export default function InvestorRelations() {
         const today = new Date();
         const dateString = today.toISOString().split('T')[0];
 
-        const apiUrl = `https://api.massive.com/v1/open-close/DGXX/${dateString}?adjusted=true&apiKey=YkYoy5TFxWSGWgO6cZmX57tjyBWSzb2p`;
+        // Use our API proxy to keep the API key secure
+        const apiUrl = `/api/stock?date=${dateString}`;
 
         const response = await fetch(apiUrl);
 
@@ -269,7 +270,7 @@ export default function InvestorRelations() {
           const dateString = date.toISOString().split('T')[0];
 
           promises.push(
-            fetch(`https://api.massive.com/v1/open-close/DGXX/${dateString}?adjusted=true&apiKey=YkYoy5TFxWSGWgO6cZmX57tjyBWSzb2p`)
+            fetch(`/api/stock?date=${dateString}`)
               .then(res => res.ok ? res.json() : null)
               .catch(() => null)
           );

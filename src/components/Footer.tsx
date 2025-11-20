@@ -21,10 +21,10 @@ export default function Footer() {
             </p>
 
             <a
-              href="mailto:IR@digihostpower.com"
+              href="mailto:ir@digipowerx.com.com"
               className="text-sm text-gray-300 hover:text-cyan-400 transition-colors duration-300"
             >
-              IR@digihostpower.com
+              ir@digipowerx.com.com
             </a>
           </div>
 

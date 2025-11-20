@@ -95,7 +95,7 @@ export default function ContactUs() {
          <p className="text-lg max-w-2xl mx-auto">
   <GradientText>
     Please submit the form below or contact our investor relations team at{" "}
-    <span className="font-semibold">IR@digihostpower.com</span>
+    <span className="font-semibold">ir@digipowerx.com.com</span>
     <br /> 
     <span className="font-semibold">888-474-9222</span>.
   </GradientText>
