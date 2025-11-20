@@ -419,7 +419,7 @@ export default function PartnerPage() {
 
 
       {/* ===================== SUCCESS STORIES ===================== */}
-      <section className="py-24 bg-gray-50 dark:bg-slate-900">
+      {/* <section className="py-24 bg-gray-50 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff] bg-clip-text text-transparent animate-gradient-x">
             Partner Success Stories
@@ -445,7 +445,7 @@ export default function PartnerPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ===================== CTA SECTION ===================== */}
       <section className="relative py-28 bg-gradient-to-b from-gray-50 via-white to-gray-100 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 text-center overflow-hidden">

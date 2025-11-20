@@ -138,7 +138,7 @@ export default function ARMS() {
                       <Zap className="w-5 h-5 text-brand-cyan" />
                       <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Power Capacity</span>
                     </div>
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white">600 kW</p>
+                    <p className="text-2xl font-bold text-slate-900 dark:text-white">40 MW</p>
                   </div>
 
                   <div className="bg-gradient-to-br from-brand-cyan/10 to-brand-navy/10 border border-brand-cyan/20 rounded-xl p-4">
