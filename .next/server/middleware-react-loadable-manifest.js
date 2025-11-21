@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST="{\"src/pages/Index.tsx -> @/components/DataCenterMap\":{\"id\":\"src/pages/Index.tsx -> @/components/DataCenterMap\",\"files\":[\"static/chunks/src_components_DataCenterMap_tsx.js\"]}}"
