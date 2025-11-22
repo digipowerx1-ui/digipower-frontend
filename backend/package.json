@@ -1,0 +1,29 @@
+{
+  "name": "digipowerx-stock-api",
+  "version": "1.0.0",
+  "description": "DigiPowerX Stock API - Real-time stock data API with WebSocket support",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "stock",
+    "api",
+    "websocket",
+    "real-time",
+    "dgxx"
+  ],
+  "author": "DigiPowerX",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "ws": "^8.18.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

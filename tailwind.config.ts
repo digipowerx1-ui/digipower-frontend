@@ -118,6 +118,10 @@ export default {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-20px)" },
         },
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
       },
 
       animation: {
@@ -129,6 +133,7 @@ export default {
         "slide-in-right": "slide-in-right 0.6s ease-out",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         float: "float 6s ease-in-out infinite",
+        shimmer: "shimmer 2s ease-in-out infinite",
       },
     },
   },

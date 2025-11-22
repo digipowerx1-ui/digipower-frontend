@@ -40,17 +40,18 @@ interface StockDataPoint {
   volume: number;
 }
 
-interface StockAPIResponse {
-  status: string;
-  from: string;
+interface LiveStockAPIResponse {
   symbol: string;
-  open: number;
-  high: number;
-  low: number;
-  close?: number;
+  price: number;
+  change: number;
+  changePercent: number;
   volume: number;
-  afterHours?: number;
-  preMarket?: number;
+  high: number | null;
+  low: number | null;
+  open: number | null;
+  previousClose?: number | null;
+  lastUpdated: string;
+  source?: string;
 }
 
 interface StockData {
@@ -70,8 +71,14 @@ interface StockData {
 }
 
 export default function InvestorRelations() {
+  const apiBase = (import.meta.env.VITE_API_BASE_URL as string | undefined) || '';
+  const api = (path: string) => {
+    const trimmed = path.startsWith('/') ? path : `/${path}`;
+    return `${apiBase}${trimmed}`;
+  };
+
   const [chartPeriod, setChartPeriod] = useState<
-    "1D" | "1W" | "1M" | "3M" | "1Y" | "ALL"
+    "1D" | "1W" | "1M" | "3M" | "6M" | "ALL"
   >("1M");
 
   const [pressReleases, setPressReleases] = useState<PressRelease[]>([]);
@@ -120,46 +127,43 @@ export default function InvestorRelations() {
         setIsLoadingStock(true);
         setStockError(null);
 
-        // Get current date in YYYY-MM-DD format
-        const today = new Date();
-        const dateString = today.toISOString().split('T')[0];
-
-        // Use our API proxy to keep the API key secure
-        const apiUrl = `/api/stock?date=${dateString}`;
-
-        const response = await fetch(apiUrl);
+        const response = await fetch(api('/api/live-stock'));
 
         if (!response.ok) {
           throw new Error('Failed to fetch stock data');
         }
 
-        const data: StockAPIResponse = await response.json();
+        const contentType = response.headers.get('content-type') || '';
+        if (!contentType.includes('application/json')) {
+          const text = await response.text();
+          throw new Error(`Unexpected response from /api/live-stock: ${text.slice(0, 120)}`);
+        }
 
-        // Use close if available, otherwise use preMarket or high as current price
-        const currentPrice = data.close ?? data.preMarket ?? data.high;
+        const data: LiveStockAPIResponse = await response.json();
 
-        // Calculate change and change percentage (comparing current price to open)
-        const change = currentPrice - data.open;
-        const changePercent = ((change / data.open) * 100);
-
-        const stockInfo: StockData = {
-          symbol: 'DGXX',
-          price: currentPrice,
-          change: change,
-          changePercent: changePercent,
-          volume: data.volume,
-          high: data.high,
-          low: data.low,
-          open: data.open,
-          lastUpdated: today.toLocaleString('en-US', {
+        const lastUpdated = new Date(data.lastUpdated || Date.now()).toLocaleString(
+          'en-US',
+          {
             month: '2-digit',
             day: '2-digit',
             year: 'numeric',
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit',
-            hour12: true
-          }),
+            hour12: true,
+          }
+        );
+
+        const stockInfo: StockData = {
+          symbol: data.symbol || 'DGXX',
+          price: Number(data.price),
+          change: Number(data.change),
+          changePercent: Number(data.changePercent),
+          volume: Number(data.volume),
+          high: Number(data.high ?? data.price),
+          low: Number(data.low ?? data.price),
+          open: Number(data.open ?? data.price),
+          lastUpdated,
           // Static values - these would need separate API calls or different endpoints
           marketCap: '$450M',
           weekHigh52: '$32.15',
@@ -178,8 +182,8 @@ export default function InvestorRelations() {
 
     fetchStockData();
 
-    // Refresh stock data every 5 minutes
-    const interval = setInterval(fetchStockData, 5 * 60 * 1000);
+    // Refresh stock data every 5 seconds for real-time updates
+    const interval = setInterval(fetchStockData, 5 * 1000);
 
     return () => clearInterval(interval);
   }, []);
@@ -243,59 +247,108 @@ export default function InvestorRelations() {
             break;
           case "1M":
             daysToFetch = 30;
-            intervalDays = 1; // Daily
+            intervalDays = 2; // Every 2 days (15 points)
             break;
           case "3M":
             daysToFetch = 90;
-            intervalDays = 3; // Every 3 days
+            intervalDays = 4; // Every 4 days (~22 points)
             break;
-          case "1Y":
-            daysToFetch = 365;
-            intervalDays = 7; // Weekly
+          case "6M":
+            daysToFetch = 180;
+            intervalDays = 7; // Every week (~26 points)
             break;
           case "ALL":
             daysToFetch = 730; // 2 years
-            intervalDays = 14; // Bi-weekly
+            intervalDays = 21; // Every 3 weeks (~35 points)
             break;
           default:
             daysToFetch = 30;
-            intervalDays = 1;
+            intervalDays = 2;
         }
 
-        // Fetch data with optimized intervals
-        const promises = [];
+        // Fetch data with optimized intervals - batch processing to avoid rate limits
+        // Only request weekdays (Mon-Fri) to avoid unnecessary API calls
+        const dates: string[] = [];
         for (let i = daysToFetch - 1; i >= 0; i -= intervalDays) {
           const date = new Date(today);
           date.setDate(date.getDate() - i);
-          const dateString = date.toISOString().split('T')[0];
 
-          promises.push(
-            fetch(`/api/stock?date=${dateString}`)
-              .then(res => res.ok ? res.json() : null)
-              .catch(() => null)
-          );
+          // Skip weekends (0 = Sunday, 6 = Saturday)
+          const dayOfWeek = date.getDay();
+          if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+            dates.push(date.toISOString().split('T')[0]);
+          }
         }
 
-        const results = await Promise.all(promises);
+        // Process in batches of 10 to avoid overwhelming the API
+        const batchSize = 10;
+        const results: (unknown | null)[] = [];
+
+        for (let i = 0; i < dates.length; i += batchSize) {
+          const batch = dates.slice(i, i + batchSize);
+          const batchPromises = batch.map(dateString =>
+            fetch(api(`/api/stock?date=${dateString}`))
+              .then(res => res.ok ? res.json() : null)
+              .catch(err => {
+                console.warn(`Failed to fetch data for ${dateString}:`, err);
+                return null;
+              })
+          );
+
+          const batchResults = await Promise.all(batchPromises);
+          results.push(...batchResults);
+
+          // Small delay between batches to be nice to the API
+          if (i + batchSize < dates.length) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+          }
+        }
 
         // Process results
+        let successCount = 0;
+        let failCount = 0;
+
         results.forEach((data, index) => {
-          if (data && data.status === 'OK') {
-            const date = new Date(today);
-            date.setDate(date.getDate() - (daysToFetch - 1 - (index * intervalDays)));
+          if (data && typeof data === 'object' && 'status' in data && data.status === 'OK') {
+            // Use the date from the dates array directly
+            const dateStr = dates[index];
+            const date = new Date(dateStr);
 
-            const currentPrice = data.close ?? data.preMarket ?? data.high;
+            const apiData = data as {
+              status: string;
+              close?: number;
+              preMarket?: number;
+              high?: number;
+              open?: number;
+              volume?: number;
+            };
 
-            dataPoints.push({
-              date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-              price: Number(currentPrice.toFixed(2)),
-              volume: data.volume,
-            });
+            const currentPrice = apiData.close ?? apiData.preMarket ?? apiData.high ?? apiData.open;
+
+            if (currentPrice) {
+              dataPoints.push({
+                date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                price: Number(currentPrice.toFixed(2)),
+                volume: apiData.volume || 0,
+              });
+              successCount++;
+            }
+          } else {
+            failCount++;
           }
         });
 
-        setHistoricalData(dataPoints);
-        setCachedData(prev => ({ ...prev, [chartPeriod]: dataPoints }));
+        console.log(`[${chartPeriod}] Chart data: ${successCount} successful, ${failCount} failed (${dataPoints.length} points)`);
+
+        // Show chart even if we have limited data
+        if (dataPoints.length > 0) {
+          setHistoricalData(dataPoints);
+          setCachedData(prev => ({ ...prev, [chartPeriod]: dataPoints }));
+        } else {
+          console.warn(`No data points available for ${chartPeriod} chart`);
+          setHistoricalData([]);
+        }
+
         setIsLoadingChart(false);
       } catch (err) {
         console.error('Error fetching historical data:', err);
@@ -309,15 +362,12 @@ export default function InvestorRelations() {
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-xl border-2 border-brand-cyan/20">
-          <p className="text-sm text-slate-600 dark:text-gray-300 mb-1">
+        <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg p-3 shadow-lg">
+          <p className="text-sm font-semibold text-slate-900 dark:text-white">
             {payload[0].payload.date}
           </p>
-          <p className="text-lg font-bold text-slate-900 dark:text-white">
+          <p className="text-lg font-bold text-brand-cyan">
             ${payload[0].value.toFixed(2)}
-          </p>
-          <p className="text-xs text-slate-500 dark:text-gray-400 mt-1">
-            Volume: {(payload[0].payload.volume / 1_000_000).toFixed(2)}M
           </p>
         </div>
       );
@@ -461,8 +511,31 @@ export default function InvestorRelations() {
                 className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-8 border border-gray-200 dark:border-slate-700"
               >
                 {isLoadingStock ? (
-                  <div className="text-center py-8">
-                    <p className="text-xl font-semibold text-slate-600 dark:text-gray-300">Loading stock data...</p>
+                  <div className="space-y-4 relative overflow-hidden">
+                    {/* Shimmer overlay effect */}
+                    <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
+
+                    {/* Header skeleton */}
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-4 border-b border-gray-200 dark:border-slate-700">
+                      <div className="space-y-2">
+                        <div className="h-6 bg-gray-200 dark:bg-slate-700 rounded w-32 animate-pulse"></div>
+                        <div className="h-12 bg-gray-300 dark:bg-slate-600 rounded w-40 animate-pulse"></div>
+                      </div>
+                      <div className="space-y-2 text-left md:text-right">
+                        <div className="h-4 bg-gray-200 dark:bg-slate-700 rounded w-36 animate-pulse"></div>
+                        <div className="h-10 bg-gray-300 dark:bg-slate-600 rounded w-32 ml-auto animate-pulse"></div>
+                      </div>
+                    </div>
+
+                    {/* Details grid skeleton */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+                      {[...Array(6)].map((_, i) => (
+                        <div key={i} className="space-y-2">
+                          <div className="h-3 bg-gray-200 dark:bg-slate-700 rounded w-16 animate-pulse"></div>
+                          <div className="h-6 bg-gray-300 dark:bg-slate-600 rounded w-20 animate-pulse"></div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 ) : stockError ? (
                   <div className="text-center py-8">
@@ -655,23 +728,26 @@ export default function InvestorRelations() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white dark:bg-slate-800 rounded-3xl shadow-xl p-4 md:p-8 max-w-6xl mx-auto border border-gray-100 dark:border-slate-700"
+              className="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl p-4 md:p-8 max-w-6xl mx-auto border-2 border-gray-200 dark:border-slate-700 backdrop-blur-sm"
+              style={{
+                boxShadow: '0 20px 60px -15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(1, 211, 255, 0.1)'
+              }}
             >
               <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
                 <h3 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Stock Performance</h3>
 
                 {/* Time Period Selector */}
-                <div className="flex gap-2 flex-wrap w-full md:w-auto">
-                  {(['1D', '1W', '1M', '3M', '1Y', 'ALL'] as const).map((period) => (
+                <div className="flex gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl w-full md:w-auto">
+                  {(['1D', '1W', '1M', '3M', '6M', 'ALL'] as const).map((period) => (
                     <motion.button
                       key={period}
                       onClick={() => setChartPeriod(period)}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`px-3 md:px-4 py-2 rounded-lg font-semibold text-xs md:text-sm transition-all duration-300 ${
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`flex-1 md:flex-none px-4 md:px-5 py-2 rounded-lg font-bold text-xs md:text-sm transition-all duration-300 ${
                         chartPeriod === period
-                          ? 'bg-gradient-to-r from-brand-navy to-brand-cyan text-white shadow-lg'
-                          : 'bg-gray-100 dark:bg-slate-700 text-slate-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-600'
+                          ? 'bg-white dark:bg-slate-800 text-brand-cyan shadow-lg shadow-brand-cyan/20 border border-brand-cyan/20'
+                          : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-slate-800/50'
                       }`}
                     >
                       {period}
@@ -681,9 +757,9 @@ export default function InvestorRelations() {
               </div>
 
               {/* Chart */}
-              <div className="h-[300px] md:h-[400px] w-full relative">
+              <div className="h-[400px] md:h-[500px] w-full relative bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/50 dark:to-slate-950/50 rounded-xl p-4">
                 {isLoadingChart && historicalData.length === 0 && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-white/50 dark:bg-slate-800/50 z-10">
+                  <div className="absolute inset-0 flex items-center justify-center bg-white/50 dark:bg-slate-800/50 z-10 rounded-xl">
                     <div className="text-center">
                       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-cyan mx-auto mb-2"></div>
                       <p className="text-sm text-slate-500 dark:text-gray-400">Loading chart data...</p>
@@ -691,58 +767,75 @@ export default function InvestorRelations() {
                   </div>
                 )}
                 {historicalData.length === 0 && !isLoadingChart ? (
-                  <div className="flex items-center justify-center h-full">
-                    <p className="text-slate-500 dark:text-gray-400">No chart data available</p>
+                  <div className="flex flex-col items-center justify-center h-full space-y-3 px-4">
+                    <div className="text-slate-400 dark:text-gray-500">
+                      <svg className="w-16 h-16 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      </svg>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-slate-600 dark:text-gray-400 font-medium mb-1">No historical data available</p>
+                      <p className="text-sm text-slate-500 dark:text-gray-500">
+                        Historical data for {chartPeriod} period is not yet available. <br className="hidden md:block" />
+                        Try a shorter time period (1D, 1W, or 1M).
+                      </p>
+                    </div>
                   </div>
                 ) : historicalData.length > 0 ? (
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart
-                      data={historicalData}
-                      margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
-                    >
+                    <AreaChart data={historicalData}>
                       <defs>
                         <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#01d3ff" stopOpacity={0.8}/>
-                          <stop offset="95%" stopColor="#01d3ff" stopOpacity={0}/>
+                          <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.3} />
+                          <stop offset="95%" stopColor="#06b6d4" stopOpacity={0} />
                         </linearGradient>
                       </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-slate-700" />
                       <XAxis
                         dataKey="date"
-                        stroke="#64748b"
-                        style={{ fontSize: '10px' }}
-                        interval={Math.floor(historicalData.length / (window.innerWidth < 768 ? 4 : 6))}
+                        stroke="#94a3b8"
+                        style={{ fontSize: "12px" }}
                       />
-                    <YAxis
-                      stroke="#64748b"
-                      style={{ fontSize: '10px' }}
-                      domain={['auto', 'auto']}
-                      tickFormatter={(value) => `$${value.toFixed(2)}`}
-                    />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Area
-                      type="monotone"
-                      dataKey="price"
-                      stroke="#01d3ff"
-                      strokeWidth={3}
-                      fillOpacity={1}
-                      fill="url(#colorPrice)"
-                      animationDuration={1000}
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
+                      <YAxis
+                        stroke="#94a3b8"
+                        style={{ fontSize: "12px" }}
+                        domain={["auto", "auto"]}
+                        tickFormatter={(value) => `$${value.toFixed(2)}`}
+                      />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Area
+                        type="monotone"
+                        dataKey="price"
+                        stroke="#06b6d4"
+                        strokeWidth={3}
+                        fill="url(#colorPrice)"
+                        animationDuration={1000}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 ) : null}
               </div>
 
               <div className="mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 flex items-center">
-                    <span className="inline-block w-3 h-3 bg-brand-cyan rounded-full mr-2"></span>
-                    Live data powered by DigipowerX
-                  </p>
-                  <p className="text-xs text-slate-400 dark:text-gray-500">
-                    Last updated: {liveStockData?.lastUpdated || new Date().toLocaleTimeString()}
-                  </p>
+                {/* Chart Legend */}
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-brand-cyan"></div>
+                    <span className="text-sm text-slate-600 dark:text-slate-400">Stock Price (USD)</span>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Last Updated</p>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-white">
+                      {liveStockData?.lastUpdated ? new Date(liveStockData.lastUpdated).toLocaleString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: true,
+                      }) : "Waiting for live data..."}
+                    </p>
+                  </div>
                 </div>
               </div>
 
