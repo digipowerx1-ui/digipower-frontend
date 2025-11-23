@@ -44,10 +44,11 @@ const formatVolume = (value: number | null | undefined) => {
 };
 
 export default function StockInformation() {
-  const apiBase = (import.meta.env.VITE_API_BASE_URL as string | undefined) || "";
+  // Use Vercel serverless functions (same domain, HTTPS)
+  // This avoids mixed content issues when calling HTTP backend from HTTPS frontend
   const api = (path: string) => {
     const trimmed = path.startsWith("/") ? path : `/${path}`;
-    return `${apiBase}${trimmed}`;
+    return trimmed;
   };
 
   const [timeRange, setTimeRange] = useState<RangeKey>("3M");

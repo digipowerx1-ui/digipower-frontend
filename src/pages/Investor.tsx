@@ -71,10 +71,11 @@ interface StockData {
 }
 
 export default function InvestorRelations() {
-  const apiBase = (import.meta.env.VITE_API_BASE_URL as string | undefined) || '';
+  // Use Vercel serverless functions (same domain, HTTPS)
+  // This avoids mixed content issues when calling HTTP backend from HTTPS frontend
   const api = (path: string) => {
     const trimmed = path.startsWith('/') ? path : `/${path}`;
-    return `${apiBase}${trimmed}`;
+    return trimmed;
   };
 
   const [chartPeriod, setChartPeriod] = useState<
