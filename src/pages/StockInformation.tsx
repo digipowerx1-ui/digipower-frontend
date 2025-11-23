@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import GradientText from "@/components/GradientText";
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts";
+import { DollarSign, TrendingUp, TrendingDown, BarChart3, ArrowUp, ArrowDown, Clock } from "lucide-react";
 
 type RangeKey = "1M" | "3M" | "6M" | "1Y";
 
@@ -251,9 +252,14 @@ export default function StockInformation() {
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
             )}
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
-              Nasdaq: {liveStock?.symbol || "DGXX"}
-            </h3>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-cyan/10 to-brand-navy/10 flex items-center justify-center">
+                <DollarSign className="w-6 h-6 text-brand-cyan" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                Nasdaq: {liveStock?.symbol || "DGXX"}
+              </h3>
+            </div>
             {isLoadingLive ? (
               <div className="space-y-3">
                 <div className="h-10 bg-gray-200 dark:bg-slate-700 rounded w-32 animate-pulse"></div>
@@ -281,7 +287,16 @@ export default function StockInformation() {
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
             )}
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Price Change</h3>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-cyan/10 to-brand-navy/10 flex items-center justify-center">
+                {changePositive ? (
+                  <TrendingUp className="w-6 h-6 text-green-500" />
+                ) : (
+                  <TrendingDown className="w-6 h-6 text-red-500" />
+                )}
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Price Change</h3>
+            </div>
             {isLoadingLive ? (
               <div className="space-y-3">
                 <div className="h-10 bg-gray-200 dark:bg-slate-700 rounded w-28 animate-pulse"></div>
@@ -313,7 +328,12 @@ export default function StockInformation() {
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
             )}
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Volume</h3>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-cyan/10 to-brand-navy/10 flex items-center justify-center">
+                <BarChart3 className="w-6 h-6 text-brand-cyan" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Volume</h3>
+            </div>
             {isLoadingLive ? (
               <div className="space-y-3">
                 <div className="h-10 bg-gray-200 dark:bg-slate-700 rounded w-36 animate-pulse"></div>
@@ -339,7 +359,12 @@ export default function StockInformation() {
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
             )}
-            <h3 className="font-bold text-slate-900 dark:text-white mb-3">Today's High</h3>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500/10 to-green-600/10 flex items-center justify-center">
+                <ArrowUp className="w-6 h-6 text-green-500" />
+              </div>
+              <h3 className="font-bold text-slate-900 dark:text-white">Today's High</h3>
+            </div>
             {isLoadingLive ? (
               <div className="h-10 bg-gray-200 dark:bg-slate-700 rounded w-28 animate-pulse"></div>
             ) : (
@@ -356,7 +381,12 @@ export default function StockInformation() {
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
             )}
-            <h3 className="font-bold text-slate-900 dark:text-white mb-3">Today's Low</h3>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/10 to-red-600/10 flex items-center justify-center">
+                <ArrowDown className="w-6 h-6 text-red-500" />
+              </div>
+              <h3 className="font-bold text-slate-900 dark:text-white">Today's Low</h3>
+            </div>
             {isLoadingLive ? (
               <div className="h-10 bg-gray-200 dark:bg-slate-700 rounded w-28 animate-pulse"></div>
             ) : (
@@ -373,7 +403,12 @@ export default function StockInformation() {
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
             )}
-            <h3 className="font-bold text-slate-900 dark:text-white mb-3">Open</h3>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-cyan/10 to-brand-navy/10 flex items-center justify-center">
+                <Clock className="w-6 h-6 text-brand-cyan" />
+              </div>
+              <h3 className="font-bold text-slate-900 dark:text-white">Open</h3>
+            </div>
             {isLoadingLive ? (
               <div className="h-10 bg-gray-200 dark:bg-slate-700 rounded w-28 animate-pulse"></div>
             ) : (

@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   // Handle preflight
   if (req.method === 'OPTIONS') {
     res.status(200).end();
-    return;
+    return;    
   }
 
   // Only allow GET requests
