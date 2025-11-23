@@ -66,19 +66,20 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
-    proxy: {
-      // Forward API requests to the Node.js API server
-      "/api": {
-        target: process.env.VITE_API_PROXY || "http://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com",
-        changeOrigin: true,
-      },
-      // Forward WebSocket connections to the Node.js API server
-      "/ws": {
-        target: process.env.VITE_API_PROXY || "ws://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com",
-        ws: true,
-        changeOrigin: true,
-      },
-    },
+    // Proxy configuration disabled - using direct API URLs via VITE_API_BASE_URL
+    // proxy: {
+    //   // Forward API requests to the Node.js API server
+    //   "/api": {
+    //     target: process.env.VITE_API_PROXY || "http://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com",
+    //     changeOrigin: true,
+    //   },
+    //   // Forward WebSocket connections to the Node.js API server
+    //   "/ws": {
+    //     target: process.env.VITE_API_PROXY || "ws://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com",
+    //     ws: true,
+    //     changeOrigin: true,
+    //   },
+    // },
   },
   plugins: [
     react(),
