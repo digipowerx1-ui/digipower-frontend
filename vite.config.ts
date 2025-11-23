@@ -67,14 +67,14 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     proxy: {
-      // Forward API requests to the Node.js API server on port 3000
+      // Forward API requests to the Node.js API server
       "/api": {
-        target: process.env.VITE_API_PROXY || "http://localhost:3000",
+        target: process.env.VITE_API_PROXY || "http://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com",
         changeOrigin: true,
       },
       // Forward WebSocket connections to the Node.js API server
       "/ws": {
-        target: process.env.VITE_API_PROXY || "ws://localhost:3000",
+        target: process.env.VITE_API_PROXY || "ws://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com",
         ws: true,
         changeOrigin: true,
       },
