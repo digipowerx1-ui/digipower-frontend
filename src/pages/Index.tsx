@@ -1293,7 +1293,7 @@ const Index = () => {
 
       {/* Supermicro */}
       <img
-        src="/supermicro.png"
+        src="/supermicro.svg"
         alt="Supermicro"
         className="h-24 md:h-28 object-contain"
       />
