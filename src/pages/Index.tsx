@@ -393,7 +393,7 @@ const Index = () => {
                     return (
                       <motion.div
                         key={stat.label}
-                        whileHover={{ scale: 1.05, y: -5 }}
+                        whileHover={{ scale: 1.02 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                         className="rounded-2xl border border-slate-200/60 dark:border-white/5 bg-white/80 dark:bg-slate-900/60 p-6 shadow-lg shadow-brand-cyan/5 backdrop-blur text-center hover:shadow-xl hover:border-brand-cyan/30 transition-all duration-300"
                       >

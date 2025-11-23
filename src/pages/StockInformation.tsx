@@ -247,7 +247,7 @@ export default function StockInformation() {
           {/* CARD 1 – Price */}
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="bg-white dark:bg-slate-900 shadow-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-8 relative overflow-hidden"
+            className="group h-full p-8 bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/50 hover:border-brand-cyan/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(1,211,255,0.15)] relative overflow-hidden rounded-2xl dark:from-slate-900 dark:to-slate-800 dark:border-slate-700"
           >
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
@@ -282,7 +282,7 @@ export default function StockInformation() {
           {/* CARD 2 – Price Change */}
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="bg-white dark:bg-slate-900 shadow-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-8 relative overflow-hidden"
+            className="group h-full p-8 bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/50 hover:border-brand-cyan/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(1,211,255,0.15)] relative overflow-hidden rounded-2xl dark:from-slate-900 dark:to-slate-800 dark:border-slate-700"
           >
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
@@ -323,7 +323,7 @@ export default function StockInformation() {
           {/* CARD 3 – Volume */}
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="bg-white dark:bg-slate-900 shadow-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-8 relative overflow-hidden"
+            className="group h-full p-8 bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/50 hover:border-brand-cyan/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(1,211,255,0.15)] relative overflow-hidden rounded-2xl dark:from-slate-900 dark:to-slate-800 dark:border-slate-700"
           >
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
@@ -354,7 +354,7 @@ export default function StockInformation() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 mt-10">
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="bg-white dark:bg-slate-900 shadow-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-8 relative overflow-hidden"
+            className="group h-full p-8 bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/50 hover:border-brand-cyan/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(1,211,255,0.15)] relative overflow-hidden rounded-2xl dark:from-slate-900 dark:to-slate-800 dark:border-slate-700"
           >
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
@@ -376,7 +376,7 @@ export default function StockInformation() {
 
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="bg-white dark:bg-slate-900 shadow-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-8 relative overflow-hidden"
+            className="group h-full p-8 bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/50 hover:border-brand-cyan/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(1,211,255,0.15)] relative overflow-hidden rounded-2xl dark:from-slate-900 dark:to-slate-800 dark:border-slate-700"
           >
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
@@ -398,7 +398,7 @@ export default function StockInformation() {
 
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="bg-white dark:bg-slate-900 shadow-xl border border-gray-200 dark:border-slate-700 rounded-2xl p-8 relative overflow-hidden"
+            className="group h-full p-8 bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/50 hover:border-brand-cyan/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(1,211,255,0.15)] relative overflow-hidden rounded-2xl dark:from-slate-900 dark:to-slate-800 dark:border-slate-700"
           >
             {isLoadingLive && (
               <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent pointer-events-none"></div>
