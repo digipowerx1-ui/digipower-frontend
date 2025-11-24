@@ -1,25 +1,29 @@
-
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useMemo } from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
-import { Calendar, Search, Filter, Newspaper, ArrowRight, Download } from 'lucide-react';
+import {
+  Calendar,
+  Search,
+  Filter,
+  Newspaper,
+  ArrowRight,
+  Download,
+} from "lucide-react";
 import Footer from "@/components/Footer";
 import GradientText from "@/components/GradientText";
-import { FadeIn } from "@/components/animations/FadeIn";
-import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
- 
+
 interface PressRelease {
-  id: number;
+  id: number | string;
   title: string;
   date: string;
   category: string;
   excerpt: string;
   pdfUrl: string | null;
 }
- 
+
 export default function PressRelease() {
   const navigate = useNavigate();
   const [pressReleases, setPressReleases] = useState<PressRelease[]>([]);
@@ -30,7 +34,14 @@ export default function PressRelease() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-   const handleSubscribe = async () => {
+  // Pagination
+  const PAGE_SIZE = 9;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  // ---------------------------------------
+  // 🔔 Newsletter Subscribe
+  // ---------------------------------------
+  const handleSubscribe = async () => {
     if (!email) return alert("Please enter your email");
 
     setLoading(true);
@@ -59,334 +70,351 @@ export default function PressRelease() {
 
     setLoading(false);
   };
- 
-  // ✅ Fetch Strapi Data
+
+  // ---------------------------------------
+  // 🚀 FETCH ALL PAGES FROM STRAPI
+  // ---------------------------------------
   useEffect(() => {
-    fetch("https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/press-releases?fields=title,date,content&populate[pdf_file][fields]=url,name&sort[0]=date:desc")
-      .then(res => res.json())
-      .then(data => {
-        console.log('Press Releases Data:', data); // Debug log
-        const formatted = data.data.map((item: any) => {
-          // Support both id and documentId (for newer Strapi versions)
-          const releaseId = item.documentId || item.id;
-          console.log('Press Release ID:', releaseId, 'Title:', item.title); // Debug log
+    let cancelled = false;
+
+    async function fetchAll() {
+      const baseURL =
+        "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/press-releases";
+      const pageSize = 100; // fetch 100 per page
+
+      const buildURL = (page: number) =>
+        `${baseURL}?fields=title,date,content&populate[pdf_file][fields]=url,name&sort[0]=date:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
+
+      try {
+        let all: any[] = [];
+
+        // first page
+        const first = await fetch(buildURL(1)).then((r) => r.json());
+        const firstData = first?.data || [];
+        const pageCount = first?.meta?.pagination?.pageCount || 1;
+        all.push(...firstData);
+
+        // fetch remaining
+        for (let p = 2; p <= pageCount; p++) {
+          const next = await fetch(buildURL(p)).then((r) => r.json());
+          all.push(...(next?.data || []));
+        }
+
+        if (cancelled) return;
+
+        // normalize formatting
+        const formatted = all.map((item: any) => {
+          const attrs = item.attributes ?? item;
+          const id = item.documentId ?? item.id;
+
+          let pdfUrl = null;
+          try {
+            if (attrs.pdf_file?.data?.attributes?.url)
+              pdfUrl = attrs.pdf_file.data.attributes.url;
+            else if (attrs.pdf_file?.url) pdfUrl = attrs.pdf_file.url;
+            else if (item.pdf_file?.url) pdfUrl = item.pdf_file.url;
+          } catch {}
+
           return {
-            id: releaseId,
-            title: item.title,
-            date: item.date,
+            id,
+            title: attrs.title ?? "Untitled",
+            date: attrs.date ?? "",
             category: "Corporate Update",
-            excerpt: item.content || "Click to view the full official press release PDF.",
-            pdfUrl: item.pdf_file?.url || null
+            excerpt:
+              attrs.content ??
+              "Click to view the full official press release PDF.",
+            pdfUrl,
           };
         });
+
         setPressReleases(formatted);
-      })
-      .catch(err => console.error('Error fetching press releases:', err));
+      } catch (err) {
+        console.error("Error fetching FULL press release list:", err);
+      }
+    }
+
+    fetchAll();
+    return () => {
+      cancelled = true;
+    };
   }, []);
- 
+
+  // ---------------------------------------
+  // Filters
+  // ---------------------------------------
   const years = ["All", "2022", "2023", "2024", "2025"];
   const categories = [
-    "All", "Corporate Update", "Financial", "Leadership",
-    "Strategy", "Expansion", "Technology", "Awards", "Partnership", "Product Update"
+    "All",
+    "Corporate Update",
+    "Financial",
+    "Leadership",
+    "Strategy",
+    "Expansion",
+    "Technology",
+    "Awards",
+    "Partnership",
+    "Product Update",
   ];
- 
-  // ✅ Category Colors
+
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
       "Corporate Update": "from-blue-500 to-cyan-500",
-      "Financial": "from-green-500 to-teal-500",
-      "Leadership": "from-purple-500 to-pink-500",
-      "Strategy": "from-orange-500 to-red-500",
-      "Expansion": "from-indigo-500 to-blue-500",
-      "Technology": "from-cyan-500 to-blue-500",
-      "Awards": "from-yellow-500 to-orange-500",
-      "Partnership": "from-pink-500 to-rose-500",
+      Financial: "from-green-500 to-teal-500",
+      Leadership: "from-purple-500 to-pink-500",
+      Strategy: "from-orange-500 to-red-500",
+      Expansion: "from-indigo-500 to-blue-500",
+      Technology: "from-cyan-500 to-blue-500",
+      Awards: "from-yellow-500 to-orange-500",
+      Partnership: "from-pink-500 to-rose-500",
       "Product Update": "from-violet-500 to-purple-500",
     };
     return colors[category] || "from-gray-500 to-slate-500";
   };
- 
-  // ✅ Filters
-  const filteredReleases = pressReleases.filter(release => {
-    const matchesYear = selectedYear === "All" || release.date.includes(selectedYear);
-    const matchesCategory = selectedCategory === "All" || release.category === selectedCategory;
-    const matchesSearch =
-      searchQuery === "" ||
-      release.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      release.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
- 
-    return matchesYear && matchesCategory && matchesSearch;
-  });
- 
+
+  const filteredReleases = useMemo(() => {
+    return pressReleases.filter((r) => {
+      const matchesYear =
+        selectedYear === "All" || r.date.includes(selectedYear);
+      const matchesCategory =
+        selectedCategory === "All" || r.category === selectedCategory;
+      const matchesSearch =
+        searchQuery === "" ||
+        r.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        r.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+
+      return matchesYear && matchesCategory && matchesSearch;
+    });
+  }, [pressReleases, selectedYear, selectedCategory, searchQuery]);
+
+  // reset page on filter change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedYear, selectedCategory, searchQuery]);
+
+  // pagination logic
+  const totalItems = filteredReleases.length;
+  const totalPages = Math.max(1, Math.ceil(totalItems / PAGE_SIZE));
+
+  useEffect(() => {
+    if (currentPage > totalPages) setCurrentPage(totalPages);
+  }, [totalPages]);
+
+  const paginatedReleases = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return filteredReleases.slice(start, start + PAGE_SIZE);
+  }, [filteredReleases, currentPage]);
+
+  const handleGoToPage = (p: number) => {
+    const newPage = Math.max(1, Math.min(p, totalPages));
+    setCurrentPage(newPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const renderPageButtons = () => {
+    const btns: (number | -1)[] = [];
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) btns.push(i);
+    } else {
+      const left = Math.max(2, currentPage - 1);
+      const right = Math.min(totalPages - 1, currentPage + 1);
+
+      btns.push(1);
+      if (left > 2) btns.push(-1);
+      for (let i = left; i <= right; i++) btns.push(i);
+      if (right < totalPages - 1) btns.push(-1);
+      btns.push(totalPages);
+    }
+
+    return btns.map((b, idx) =>
+      b === -1 ? (
+        <span key={idx} className="px-3">…</span>
+      ) : (
+        <Button
+          key={b}
+          size="sm"
+          onClick={() => handleGoToPage(b)}
+          className={
+            b === currentPage
+              ? "bg-brand-navy text-white"
+              : "bg-white dark:bg-slate-800"
+          }
+          disabled={b === currentPage}
+        >
+          {b}
+        </Button>
+      )
+    );
+  };
+
+  const showingStart = totalItems === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
+  const showingEnd = Math.min(totalItems, currentPage * PAGE_SIZE);
+
+  // ---------------------------------------
+  // UI Rendering
+  // ---------------------------------------
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900">
       <Navigation />
- 
-      {/* ✅ HERO SECTION */}
+
+      {/* HERO */}
       <section className="relative py-32 px-6 bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 overflow-hidden">
- 
-        <motion.div
-          className="absolute top-20 left-20 w-72 h-72 bg-brand-cyan/10 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
- 
-        <motion.div
-          className="absolute bottom-20 right-20 w-72 h-72 bg-brand-navy/10 rounded-full blur-3xl"
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
- 
+        <motion.div className="absolute top-20 left-20 w-72 h-72 bg-brand-cyan/10 rounded-full blur-3xl pointer-events-none" />
+        <motion.div className="absolute bottom-20 right-20 w-72 h-72 bg-brand-navy/10 rounded-full blur-3xl pointer-events-none" />
+
         <div className="max-w-7xl mx-auto text-center relative z-10">
-          <FadeIn delay={0.2}>
-            <motion.div
-              className="inline-block p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-lg mb-6"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-            >
-              <Newspaper className="w-12 h-12 text-brand-cyan" />
-            </motion.div>
-          </FadeIn>
- 
-          <FadeIn delay={0.3}>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <GradientText>Press Releases</GradientText>
-            </h1>
-          </FadeIn>
- 
-          <FadeIn delay={0.4}>
-            <div className="w-40 h-1.5 bg-gradient-to-r from-brand-navy to-brand-cyan rounded-full mx-auto mb-8" />
-          </FadeIn>
- 
-          <FadeIn delay={0.5}>
-            <p className="text-xl text-slate-700 dark:text-slate-300 max-w-3xl mx-auto mb-10">
-              Stay updated with the latest official announcements and updates.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
- 
-      {/* ✅ Filters Section */}
-     <section className="py-12 px-6 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
-  <div className="max-w-7xl mx-auto">
-    <FadeIn delay={0.2}>
-      <div className="grid md:grid-cols-3 gap-6">
-
-        {/* Search */}
-        <div className="relative flex items-center w-full">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-
-          {/* If your Input is a custom component it will accept className */}
-          <Input
-            type="text"
-            placeholder="Search press releases..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className={
-              "w-full pl-12 pr-4 h-14 rounded-xl border-2 bg-white dark:bg-slate-900 " +
-              "text-slate-800 dark:text-white text-sm leading-tight focus:outline-none"
-            }
-          />
-        </div>
-
-        {/* Year */}
-        <div className="relative flex items-center w-full">
-          <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-
-          <select
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
-            className={
-              "w-full pl-12 pr-10 h-14 rounded-xl border-2 bg-white dark:bg-slate-900 " +
-              "text-slate-800 dark:text-white text-sm leading-tight appearance-none focus:outline-none"
-            }
-          >
-            {years.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-
-          {/* Right chevron to match native arrow and stay consistent */}
-          <svg
-            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-          </svg>
-        </div>
-
-        {/* Category */}
-        <div className="relative flex items-center w-full">
-          <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className={
-              "w-full pl-12 pr-10 h-14 rounded-xl border-2 bg-white dark:bg-slate-900 " +
-              "text-slate-800 dark:text-white text-sm leading-tight appearance-none focus:outline-none"
-            }
-          >
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-
-          <svg
-            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-          </svg>
-        </div>
-
-      </div>
-    </FadeIn>
-  </div>
-</section>
-
-      {/* ✅ Press Release Cards */}
-      <section className="py-20 px-6 bg-gradient-to-b from-white to-gray-50 dark:from-slate-900 dark:to-slate-950">
-        <div className="max-w-7xl mx-auto">
-          <AnimatePresence mode="wait">
-            {filteredReleases.length > 0 ? (
-              <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
- 
-                {filteredReleases.map((release) => (
-                  <StaggerItem key={release.id}>
-                    <motion.article
-                      onClick={() => navigate(`/press-releases/${release.id}`)}
-                      whileHover={{ y: -8, scale: 1.01 }}
-                      className="group relative h-full bg-white dark:bg-slate-900 border border-gray-200
-                      dark:border-slate-700 rounded-2xl p-6 shadow-md hover:shadow-2xl cursor-pointer overflow-hidden"
-                    >
- 
-                      {/* ✅ No overlay dimming */}
-                      <div className="absolute inset-0 bg-transparent pointer-events-none" />
- 
-                      <div className="relative z-10">
- 
-                        {/* ✅ Date */}
-                        <div className="flex items-center gap-2 mb-4">
-                          <motion.div
-                            className="p-2 bg-brand-cyan/10 rounded-lg"
-                            whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                          >
-                            <Calendar className="w-4 h-4 text-brand-cyan" />
-                          </motion.div>
- 
-                          <span className="text-sm text-slate-700 dark:text-slate-300">
-                            {release.date}
-                          </span>
-                        </div>
- 
-                        {/* ✅ Category */}
-                        <span className={`inline-block px-3 py-1.5 text-xs font-bold text-white
-                        bg-gradient-to-r ${getCategoryColor(release.category)} rounded-full shadow-md mb-4`}>
-                          {release.category}
-                        </span>
- 
-                        {/* ✅ Title (ALWAYS VISIBLE) */}
-                        <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">
-                          {release.title}
-                        </h3>
- 
-                        {/* ✅ Excerpt */}
-                        <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed line-clamp-3 mb-4">
-                          {release.excerpt}
-                        </p>
- 
-                        {/* ✅ Read More */}
-                        <motion.div
-                          whileHover={{ x: 5 }}
-                          className="flex items-center gap-2 text-brand-cyan font-semibold text-sm cursor-pointer"
-                        >
-                          Read full release <ArrowRight className="w-4 h-4" />
-                        </motion.div>
- 
-                      </div>
- 
-                      {/* ✅ Download Button - Always Visible */}
-                      <motion.div
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          release.pdfUrl && window.open(release.pdfUrl, "_blank");
-                        }}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="absolute top-4 right-4 p-2 bg-white dark:bg-slate-900 rounded-lg shadow-md cursor-pointer z-20"
-                      >
-                        <Download className="w-4 h-4 text-brand-cyan" />
-                      </motion.div>
- 
-                    </motion.article>
-                  </StaggerItem>
-                ))}
- 
-              </StaggerContainer>
-            ) : (
-              <div className="text-center py-20">
-                <Search className="w-16 h-16 text-gray-400 mx-auto" />
-                <h3 className="text-2xl font-bold mt-4">No press releases found</h3>
-              </div>
-            )}
-          </AnimatePresence>
-        </div>
-      </section>
- 
-      {/* ✅ Newsletter Section */}
-       <section className="py-20 px-6 bg-gradient-to-r from-brand-navy/5 to-brand-cyan/5 border-y border-brand-cyan/20">
-        <div className="max-w-4xl mx-auto text-center">
-
-          <motion.div
-            className="inline-block p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-lg mb-6"
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
+          <div className="inline-block p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-lg mb-6">
             <Newspaper className="w-12 h-12 text-brand-cyan" />
-          </motion.div>
-
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <GradientText>Stay Informed</GradientText>
-          </h2>
-
-          <p className="text-lg text-slate-700 dark:text-slate-300 mb-8">
-            Subscribe to get the latest updates straight to your inbox.
-          </p>
-
-          {/* ✅ Working Subscribe Box */}
-          <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-            <Input
-              type="email"
-              placeholder="Your email address"
-              className="flex-1 py-6"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-brand-navy to-brand-cyan text-white px-8 py-6"
-              onClick={handleSubscribe}
-              disabled={loading}
-            >
-              {loading ? "Subscribing..." : "Subscribe Now"}
-            </Button>
           </div>
 
+          <h1 className="text-6xl font-bold mb-6">
+            <GradientText>Press Releases</GradientText>
+          </h1>
+
+          <p className="text-xl text-slate-700 dark:text-slate-300 max-w-3xl mx-auto">
+            Stay updated with the latest official announcements and updates.
+          </p>
         </div>
       </section>
- 
+
+      {/* FILTERS */}
+      <section className="py-12 px-6 bg-white dark:bg-slate-900 border-b">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-6">
+          {/* Search */}
+          <div className="relative">
+            <Search className="absolute left-4 top-4 text-slate-400" />
+            <Input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search press releases..."
+              className="pl-12 h-14"
+            />
+          </div>
+
+          {/* Year */}
+          <div className="relative">
+            <Filter className="absolute left-4 top-4 text-slate-400" />
+            <select
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(e.target.value)}
+              className="w-full pl-12 h-14 rounded-xl border-2 dark:bg-slate-900"
+            >
+              {years.map((y) => (
+                <option key={y}>{y}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Category */}
+          <div className="relative">
+            <Filter className="absolute left-4 top-4 text-slate-400" />
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full pl-12 h-14 rounded-xl border-2 dark:bg-slate-900"
+            >
+              {categories.map((c) => (
+                <option key={c}>{c}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </section>
+
+      {/* CARDS */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          {totalItems > 0 ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {paginatedReleases.map((r) => (
+                  <article
+                    key={r.id}
+                    onClick={() => navigate(`/press-releases/${r.id}`)}
+                    className="bg-white dark:bg-slate-800 border dark:border-slate-700 rounded-2xl p-6 shadow-md hover:shadow-xl cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="p-2 bg-brand-cyan/10 rounded-lg">
+                        <Calendar className="w-4 h-4 text-brand-cyan" />
+                      </div>
+                      <span className="text-sm dark:text-slate-300">
+                        {r.date}
+                      </span>
+                    </div>
+
+                    <span
+                      className={`inline-block mb-3 px-3 py-1.5 text-xs text-white font-bold rounded-full bg-gradient-to-r ${getCategoryColor(
+                        r.category
+                      )}`}
+                    >
+                      {r.category}
+                    </span>
+
+                    <h3 className="text-xl font-bold dark:text-white mb-3">
+                      {r.title}
+                    </h3>
+
+                    <p className="text-sm dark:text-slate-300 line-clamp-3 mb-4">
+                      {r.excerpt}
+                    </p>
+
+                    <div className="flex items-center gap-2 text-brand-cyan font-semibold">
+                      Read full release <ArrowRight className="w-4 h-4" />
+                    </div>
+
+                    {r.pdfUrl && (
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(r.pdfUrl, "_blank");
+                        }}
+                        className="absolute top-4 right-4 p-2 bg-white dark:bg-slate-900 rounded-lg shadow-md cursor-pointer"
+                      >
+                        <Download className="w-4 h-4 text-brand-cyan" />
+                      </div>
+                    )}
+                  </article>
+                ))}
+              </div>
+
+              {/* Pagination */}
+              <div className="mt-10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="text-sm dark:text-slate-300">
+                  Showing {showingStart} — {showingEnd} of {totalItems}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Button
+                    size="sm"
+                    disabled={currentPage === 1}
+                    onClick={() => handleGoToPage(currentPage - 1)}
+                  >
+                    Prev
+                  </Button>
+
+                  {renderPageButtons()}
+
+                  <Button
+                    size="sm"
+                    disabled={currentPage === totalPages}
+                    onClick={() => handleGoToPage(currentPage + 1)}
+                  >
+                    Next
+                  </Button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="text-center py-20">
+              <Search className="w-16 h-16 mx-auto text-gray-400" />
+              <h3 className="text-xl font-bold mt-4">
+                No press releases found
+              </h3>
+            </div>
+          )}
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
 }
- 
