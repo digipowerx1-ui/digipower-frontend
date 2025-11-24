@@ -104,7 +104,7 @@ export default function PressReleaseDetail() {
         <div className="flex items-center justify-center h-screen">
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Press Release Not Found</h2>
-            <Button onClick={() => navigate('/press-release')}>
+            <Button onClick={() => navigate('/press-releases')}>
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Press Releases
             </Button>
@@ -124,7 +124,7 @@ export default function PressReleaseDetail() {
           <FadeIn delay={0.1}>
             <Button
               variant="outline"
-              onClick={() => navigate('/press-release')}
+              onClick={() => navigate('/press-releases')}
               className="mb-6"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />

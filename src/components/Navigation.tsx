@@ -22,7 +22,7 @@ const Navigation = () => {
       href: "/investor-relations",
       isRoute: true,
       dropdown: [
-        { label: "Press Releases", href: "/press-release", desc: "Official investor announcements and news" },
+        { label: "Press Releases", href: "/press-releases", desc: "Official investor announcements and news" },
         { label: "Presentations & Events", href: "/presentations-events", desc: "Investor meetups, talks, and conferences" }
       ],
     },

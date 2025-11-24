@@ -44,8 +44,8 @@ const App = () => (
             <Routes>
               {/* ----------- MAIN ROUTES ----------- */}
               <Route path="/" element={<Index />} />
-              <Route path="/press-release" element={<PressRelease />} />
-              <Route path="/press-release/:id" element={<PressReleaseDetail />} />
+              <Route path="/press-releases" element={<PressRelease />} />
+              <Route path="/press-releases/:id" element={<PressReleaseDetail />} />
               <Route path="/presentations-events" element={<PresentationsEvents />} />
 
               {/* ----------- NEW PAGES ----------- */}

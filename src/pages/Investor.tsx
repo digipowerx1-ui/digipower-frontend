@@ -402,7 +402,7 @@ export default function InvestorRelations() {
       icon: Newspaper,
       title: "Press Releases",
       description: "Latest news and announcements from DigiPowerX.",
-      link: "/press-release",
+      link: "/press-releases",
       color: "from-orange-500 to-red-500",
     },
     {
@@ -864,7 +864,7 @@ export default function InvestorRelations() {
       </FadeIn>
 
       <FadeIn direction="right">
-        <Link to="/press-release">
+        <Link to="/press-releases">
           <motion.button
             whileHover={{ x: 5 }}
             className="text-brand-cyan hover:text-brand-navy font-semibold flex items-center gap-2 text-sm md:text-base"

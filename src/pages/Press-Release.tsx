@@ -263,7 +263,7 @@ export default function PressRelease() {
                 {filteredReleases.map((release) => (
                   <StaggerItem key={release.id}>
                     <motion.article
-                      onClick={() => navigate(`/press-release/${release.id}`)}
+                      onClick={() => navigate(`/press-releases/${release.id}`)}
                       whileHover={{ y: -8, scale: 1.01 }}
                       className="group relative h-full bg-white dark:bg-slate-900 border border-gray-200
                       dark:border-slate-700 rounded-2xl p-6 shadow-md hover:shadow-2xl cursor-pointer overflow-hidden"
