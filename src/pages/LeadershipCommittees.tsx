@@ -76,6 +76,13 @@ const leaders: Leader[] = [
     description: "",
     linkedIn: "#",
   },
+  {
+    name: "Edward Karr",
+    role: "Head of Capital Markets and Investor Relations",
+    img: "/edward.png",
+    description: "",
+    linkedIn: "#",
+  },
 
   // {
   //   name: "Ajay Gupta",
@@ -94,8 +101,9 @@ const boardMembers: BoardMember[] = [
   {
     name: "Michel Amar",
     title: "Chairman ",
+    img: "/michal.jpeg",
     bio:
-      "Michel Amar is a French-American businessman and entrepreneur known for his success in innovative technology, such as blockchain and electronics, as well as developing branded fashion. With a Bachelor’s degree in accounting and business management, Michel has worked and consulted with some of the most famous international brands, playing a vital role in their profitability and continued relevance. In 2019, Michel partnered with Brookstone, a novelty retailer, in developing exclusive, technologically advanced products for their consumer electronics market.",
+      "Michel Amar is a French-American businessman and entrepreneur known for his success in innovative technology, such as blockchain and electronics, as well as developing branded fashion. With a Bachelor's degree in accounting and business management, Michel has worked and consulted with some of the most famous international brands, playing a vital role in their profitability and continued relevance. In 2019, Michel partnered with Brookstone, a novelty retailer, in developing exclusive, technologically advanced products for their consumer electronics market.",
 committees: [
   { name: "Disclosure Committee", role: "Chair" },
   { name: "Governance and Nominating Committee", role: "Member" },
@@ -106,10 +114,11 @@ committees: [
   {
     name: "Alec Amar",
     title: "Director",
+    img: "/alec.jpeg",
     bio:
-      "Alec Amar is an entrepreneur who has achieved success in both product development and licensing, as well as blockchain solutions. After graduating from the University of Southern California with a degree in economics and digital entrepreneurship, Alec devised and headed a blockchain operation, building out highly efficient and productive mining facilities. Alec’s product licensing company, MAT, has partnered with notable brands such as Brookstone, developing innovative electronics and proprietary consumer products.",
+      "Alec Amar is an entrepreneur who has achieved success in both product development and licensing, as well as blockchain solutions. After graduating from the University of Southern California with a degree in economics and digital entrepreneurship, Alec devised and headed a blockchain operation, building out highly efficient and productive mining facilities. Alec's product licensing company, MAT, has partnered with notable brands such as Brookstone, developing innovative electronics and proprietary consumer products.",
     committees: [
-     
+
       { name: "Compensation Committee", role: "Member" },
     ],
   },
@@ -117,14 +126,16 @@ committees: [
   {
     name: "Dennis Elsenbeck",
     title: "Director",
+    img: "/dennis.jpeg",
     bio:
-      "Mr. Elsenbeck provides consulting services on energy-related opportunities as Head of Energy and Sustainability at Phillips Lytle LLP and as owner of ElsEnergy LLC. With nearly 30 years of leadership at a major U.S. utility and roles as President and Chief Sustainability Officer at Viridi Parente, he brings expertise in long-term energy policy, markets, and infrastructure.\n\nHe advises clients on due diligence, regulatory compliance, procurement strategies, utility negotiations, economic incentives, and resource planning. He is a member of Aion 1901 LLC and HM 1901 LLC, focusing on revitalizing disadvantaged communities through energy infrastructure.\n\nHe serves on New York’s Climate Action Council, helping develop the Scoping Document for the state's Climate Leadership and Community Protection Act. He is Board Chair for the Northland Workforce Training Center, a Board Member for the Buffalo Urban Development Corporation, and a member of the University at Buffalo School of Engineering Dean’s Council. He holds degrees in Industrial Engineering Technology, an MBA, and a Master’s in Engineering.\n\nMr. Elsenbeck is a recognized expert and lecturer in the energy field.",
-  
+      "Mr. Elsenbeck provides consulting services on energy-related opportunities as Head of Energy and Sustainability at Phillips Lytle LLP and as owner of ElsEnergy LLC. With nearly 30 years of leadership at a major U.S. utility and roles as President and Chief Sustainability Officer at Viridi Parente, he brings expertise in long-term energy policy, markets, and infrastructure.\n\nHe advises clients on due diligence, regulatory compliance, procurement strategies, utility negotiations, economic incentives, and resource planning. He is a member of Aion 1901 LLC and HM 1901 LLC, focusing on revitalizing disadvantaged communities through energy infrastructure.\n\nHe serves on New York's Climate Action Council, helping develop the Scoping Document for the state's Climate Leadership and Community Protection Act. He is Board Chair for the Northland Workforce Training Center, a Board Member for the Buffalo Urban Development Corporation, and a member of the University at Buffalo School of Engineering Dean's Council. He holds degrees in Industrial Engineering Technology, an MBA, and a Master's in Engineering.\n\nMr. Elsenbeck is a recognized expert and lecturer in the energy field.",
+    committees: []
   },
 
   {
     name: "Gerard Rotonda",
     title: "Director",
+    img: "/gerard.jpeg",
     bio:
       "Mr. Rotonda was the Chief Financial Officer and Executive Committee Member for Deutsche Bank Wealth Management Americas from 2011 through 2018. He has over 30 years of experience in business development, financial analysis, and real estate investment as Co-Founder and Partner at MMR Development. He has also served in leadership roles at MasterCard, Credit Suisse, and Citigroup. Mr. Rotonda holds a BSBA in Accounting and an MBA from Boston University.",
     committees: [
@@ -137,6 +148,7 @@ committees: [
   {
     name: "Adam S. Rossman",
     title: "Director",
+    img: "/adam.jpeg",
     bio:
       "Mr. Rossman is a business and real estate attorney.  He has been a member of the California Bar since 1995.  Mr. Rossman has handled transactions throughout the United States relating to commercial real estate and trademark licensing.  Mr. Rossman maintains offices in Beverly Hills, CA.  Mr. Rossman received his JD from Loyola Law School, Los Angeles in 1994, a MA in Rhetoric in 1990 and a BA in Rhetoric in 1988 both from University of California at Berkeley",
   committees: [
@@ -151,11 +163,19 @@ committees: [
  {
   name: "Ajay Gupta",
   title: "Director",
+  img: "/Ajay.jpeg",
   bio:
-    "Mr. Gupta is a seasoned wealth management executive, investor, and family office principal known for his leadership in building, scaling, and advising some of the most respected financial organizations in the United States. He currently serves as Principal of Robbins Gupta Holdings, the exclusive family office for Tony Robbins and the Gupta family.\n\nAfter founding and scaling Gupta Wealth Management into one of the industry’s premier firms, Mr. Gupta merged with Creative Planning, a $390 billion registered investment advisor, where he served as Chief Investment Strategist before retiring in 2020 following the sale of his equity stake to private equity investors.\n\nHis expertise led to a featured role in Tony Robbins’ #1 New York Times bestseller *Money: Master the Game*, where he and Robbins interviewed 50 of the world’s top financial minds, including Ray Dalio, Warren Buffett, Carl Icahn, and Charles Schwab — a collective 150 hours of insight Mr. Gupta calls among the most transformative experiences of his 25-year career.\n\nIn addition to his new role with DigiPowerX, Mr. Gupta serves on the boards of CAZ Investments, a $10 billion alternative investment firm; the Tony Robbins Foundation; the Baptist Health Foundation; and The Chopra Foundation, where he previously served as President and continues to collaborate closely with his longtime friend and founder, Dr. Deepak Chopra.\n\nMr. Gupta holds a Bachelor of Commerce in Finance from Concordia University and has completed advanced executive programs through the Wharton School of Business, the University of Chicago Booth School of Business, and Harvard Business School.\n\n“Ajay’s exceptional track record in wealth management, family office strategy, and alternative investments makes him an outstanding addition to our Board,” said Michel Amar, Chairman and Chief Executive Officer of DigiPowerX. “His strategic insight and global relationships will be invaluable as we accelerate DigiPowerX’s mission to lead the intersection of clean power, AI, and digital infrastructure.”\n\n“DigiPowerX is uniquely positioned at the convergence of two powerful trends — AI compute growth and the global shift toward energy efficiency,” said Ajay Gupta. “I’m honored to join the Board and support the company’s vision of building transformative, sustainable technology infrastructure.”\n\nThrough the Ajay Gupta Family Foundation, Mr. Gupta and his family actively support global philanthropic initiatives focused on education, health, and empowerment.",
-  committees: [
-  
-  ]
+    "Mr. Gupta is a seasoned wealth management executive, investor, and family office principal known for his leadership in building, scaling, and advising some of the most respected financial organizations in the United States. He currently serves as Principal of Robbins Gupta Holdings, the exclusive family office for Tony Robbins and the Gupta family.\n\nAfter founding and scaling Gupta Wealth Management into one of the industry's premier firms, Mr. Gupta merged with Creative Planning, a $390 billion registered investment advisor, where he served as Chief Investment Strategist before retiring in 2020 following the sale of his equity stake to private equity investors.\n\nHis expertise led to a featured role in Tony Robbins' #1 New York Times bestseller Money: Master the Game, where he and Robbins interviewed 50 of the world's top financial minds, including Ray Dalio, Warren Buffett, Carl Icahn, and Charles Schwab — a collective 150 hours of insight Mr. Gupta calls among the most transformative experiences of his 25-year career.\n\nIn addition to his new role with DigiPowerX, Mr. Gupta serves on the boards of CAZ Investments, a $10 billion alternative investment firm; the Tony Robbins Foundation; the Baptist Health Foundation; and The Chopra Foundation, where he previously served as President and continues to collaborate closely with his longtime friend and founder, Dr. Deepak Chopra.\n\nMr. Gupta holds a Bachelor of Commerce in Finance from Concordia University and has completed advanced executive programs through the Wharton School of Business, the University of Chicago Booth School of Business, and Harvard Business School.\n\nMr. Gupta's exceptional track record in wealth management, family office strategy, and alternative investments makes him an outstanding addition to the Board. His strategic insight and global relationships are invaluable as DigiPowerX accelerates its mission to lead the intersection of clean power, AI, and digital infrastructure.\n\nDigiPowerX is uniquely positioned at the convergence of two powerful trends — AI compute growth and the global shift toward energy efficiency. Mr. Gupta is honored to join the Board and support the company's vision of building transformative, sustainable technology infrastructure.\n\nThrough the Ajay Gupta Family Foundation, Mr. Gupta and his family actively support global philanthropic initiatives focused on education, health, and empowerment.",
+  committees: []
+},
+
+{
+  name: "Edward Karr",
+  title: "Director",
+  img: "/edward.jpeg",
+  bio:
+    "Edward Karr is an international entrepreneur and founder of several investment management companies. Mr. Karr has more than 30 years of capital markets experience as an executive manager, financial analyst, money manager and investor. Mr. Karr was the founder, former President, CEO and Executive Chairman of U.S. Gold Corp. He was a former Director and Chair of the Audit Committee of Levon Resources, until its merger with Discovery Metals. Mr. Karr previously served on the boards of numerous publicly traded companies including Dataram, Inc., Pershing Gold Corp., PolarityTE, Inc. and Spherix Inc. Mr. Karr is a prior board member and past President of the American International Club of Geneva and Chairman of Republican's Overseas Switzerland. He is a frequent contributor to the financial press. Mr. Karr previously worked for Prudential Securities in the United States. Before his entry into the financial services arena, Mr. Karr was affiliated with the United States Antarctic Program and spent thirteen consecutive months working in the Antarctic, receiving the Antarctic Service Medal for winter over contributions of courage, sacrifice and devotion.",
+  committees: []
 },
 
 ];
