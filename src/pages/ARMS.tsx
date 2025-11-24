@@ -67,50 +67,35 @@ export default function ARMS() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative py-24 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-brand-cyan rounded-full blur-[100px] animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-navy rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
-        </div>
+   <section className="relative py-24 px-6 text-white overflow-hidden">
+  {/* Animated Background Elements */}
+  <div className="absolute inset-0 opacity-20">
+    <div className="absolute top-20 left-10 w-72 h-72 bg-brand-cyan rounded-full blur-[100px] animate-pulse" />
+    <div
+      className="absolute bottom-20 right-10 w-96 h-96 bg-brand-navy rounded-full blur-[120px] animate-pulse"
+      style={{ animationDelay: "1s" }}
+    />
+  </div>
 
-        <div className="relative max-w-7xl mx-auto">
-          <FadeIn>
-            <div className="inline-block px-4 py-2 bg-gradient-to-r from-brand-navy/30 to-brand-cyan/30 border border-brand-cyan/30 rounded-full mb-6">
-              <span className="text-sm font-bold text-brand-cyan">Proprietary Technology</span>
-            </div>
+  <div className="relative max-w-7xl mx-auto text-center">
+    <FadeIn>
+      <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4 mt-20">
+        <GradientText>The ARMS System</GradientText>
+      </h1>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6">
-              <GradientText>The ARMS System</GradientText>
-            </h1>
+      {/* Underline */}
+      <div className="w-40 h-1.5 bg-gradient-to-r from-brand-navy to-brand-cyan rounded-full mx-auto mb-8"></div>
 
-            <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mb-4">
-              Revolutionary modular pod architecture designed for the AI era.
-            </p>
+    
 
-            <p className="text-lg md:text-xl text-gray-400 max-w-4xl mb-8">
-              Each ARMS 200 unit delivers up to 600 kW of computing power in a compact, rapidly deployable package.
-            </p>
+      <p className="text-lg md:text-xl text-gray-500 max-w-4xl mx-auto mb-8">
+        Each ARMS 200 unit delivers up to 600 kW of computing power in a compact, rapidly deployable package.
+      </p>
+    </FadeIn>
+  </div>
+</section>
 
-            {/* <div className="flex flex-wrap gap-4">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-brand-navy to-brand-cyan hover:opacity-90 text-white font-semibold px-8 py-6 text-lg"
-              >
-                <Download className="w-5 h-5 mr-2" />
-                Download Tech Specs
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg"
-              >
-                Contact Sales
-              </Button>
-            </div> */}
-          </FadeIn>
-        </div>
-      </section>
+
 
       {/* ARMS 200 Overview */}
       <section className="py-20 px-6">
@@ -193,33 +178,62 @@ export default function ARMS() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {advantages.map((advantage, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  className="bg-gradient-to-br from-gray-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-lg hover:shadow-xl transition-all"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 p-3 bg-gradient-to-br from-brand-cyan/20 to-brand-navy/20 rounded-xl">
-                      <advantage.icon className="w-6 h-6 text-brand-cyan" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
-                        {advantage.title}
-                      </h3>
-                      <p className="text-slate-600 dark:text-slate-400">
-                        {advantage.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {advantages.map((advantage, index) => (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      whileHover={{ y: -8, scale: 1.03 }}
+      className="
+        relative p-[2px] rounded-2xl overflow-hidden
+        bg-gradient-to-br from-brand-cyan/20 to-brand-navy/20
+        hover:from-brand-cyan/40 hover:to-brand-navy/40
+        transition-all duration-500
+      "
+    >
+      <div
+        className="
+          rounded-2xl p-6 h-full
+          bg-white/40 dark:bg-slate-900/30 
+          backdrop-blur-xl
+          border border-white/20 dark:border-slate-700/40
+          shadow-[0_4px_40px_rgba(0,0,0,0.15)]
+          transition-all duration-500
+        "
+      >
+        <div className="flex items-start gap-4">
+          
+          {/* Icon Box */}
+          <div
+            className="
+              p-4 rounded-xl
+              bg-gradient-to-br from-brand-cyan/20 to-brand-navy/20
+              shadow-inner shadow-black/10
+            "
+          >
+            <advantage.icon className="w-7 h-7 text-brand-cyan drop-shadow-[0_0_8px_rgba(34,197,252,0.6)]" />
+          </div>
+
+          <div>
+            {/* Title with correct light + dark text colors */}
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+              {advantage.title}
+            </h3>
+
+            {/* Description with correct light + dark theme text */}
+            <p className="text-slate-700 dark:text-gray-300 leading-relaxed">
+              {advantage.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  ))}
+</div>
+
           </FadeIn>
         </div>
       </section>

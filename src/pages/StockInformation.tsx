@@ -221,25 +221,34 @@ export default function StockInformation() {
       <Navigation />
 
       {/* ======================= HERO SECTION ======================= */}
-      <section className="py-24 px-6 text-center bg-gradient-to-br from-slate-900 to-slate-800 text-white">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-5xl md:text-6xl font-bold mb-4"
-        >
-          <GradientText>Stock Information</GradientText>
-        </motion.h1>
+    <section className="py-24 px-6 text-center text-white">
+  <motion.h1
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="text-5xl md:text-6xl font-bold mb-4 mt-20"
+  >
+    <GradientText>Stock Information</GradientText>
+  </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-lg text-gray-300 max-w-2xl mx-auto"
-        >
-          Stay up to date with DigiPowerX (Nasdaq: DGXX) stock performance, trends, and key trading metrics.
-        </motion.p>
-      </section>
+  {/* Underline */}
+  <motion.div
+    initial={{ opacity: 0, width: 0 }}
+    animate={{ opacity: 1, width: "160px" }}
+    transition={{ duration: 0.6, delay: 0.2 }}
+    className="h-1.5 bg-gradient-to-r from-brand-navy to-brand-cyan mx-auto rounded-full mb-8"
+  />
+
+  <motion.p
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.3, duration: 0.6 }}
+    className="text-lg text-gray-500 max-w-2xl mx-auto"
+  >
+    Stay up to date with DigiPowerX (Nasdaq: DGXX) stock performance, trends, and key trading metrics.
+  </motion.p>
+</section>
+
 
       {/* ======================= STOCK CARDS ======================= */}
       <section className="py-16 px-6">

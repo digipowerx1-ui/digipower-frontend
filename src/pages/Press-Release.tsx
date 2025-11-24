@@ -9,6 +9,8 @@ import {
   Newspaper,
   ArrowRight,
   Download,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import Footer from "@/components/Footer";
 import GradientText from "@/components/GradientText";
@@ -105,7 +107,7 @@ export default function PressRelease() {
         // normalize formatting
         const formatted = all.map((item: any) => {
           const attrs = item.attributes ?? item;
-          const id = item.documentId ?? item.id;
+          const id = item.documentId ?? item.id ?? attrs.id;
 
           let pdfUrl = null;
           try {
@@ -124,7 +126,7 @@ export default function PressRelease() {
               attrs.content ??
               "Click to view the full official press release PDF.",
             pdfUrl,
-          };
+          } as PressRelease;
         });
 
         setPressReleases(formatted);
@@ -174,7 +176,7 @@ export default function PressRelease() {
   const filteredReleases = useMemo(() => {
     return pressReleases.filter((r) => {
       const matchesYear =
-        selectedYear === "All" || r.date.includes(selectedYear);
+        selectedYear === "All" || (r.date && r.date.includes(selectedYear));
       const matchesCategory =
         selectedCategory === "All" || r.category === selectedCategory;
       const matchesSearch =
@@ -207,7 +209,19 @@ export default function PressRelease() {
   const handleGoToPage = (p: number) => {
     const newPage = Math.max(1, Math.min(p, totalPages));
     setCurrentPage(newPage);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Scroll to the press releases section
+    const pressSection = document.getElementById("press-releases-section");
+    if (pressSection) {
+      const offset = 100; // Offset from top for better visibility
+      const elementPosition = pressSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
   };
 
   const renderPageButtons = () => {
@@ -227,18 +241,19 @@ export default function PressRelease() {
 
     return btns.map((b, idx) =>
       b === -1 ? (
-        <span key={idx} className="px-3">…</span>
+        <span key={idx} className="px-3 text-slate-400">
+          …
+        </span>
       ) : (
         <Button
           key={b}
           size="sm"
           onClick={() => handleGoToPage(b)}
           className={
-            b === currentPage
-              ? "bg-brand-navy text-white"
-              : "bg-white dark:bg-slate-800"
+            currentPage === b
+              ? "bg-gradient-to-r from-brand-navy to-brand-cyan text-white"
+              : "bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
           }
-          disabled={b === currentPage}
         >
           {b}
         </Button>
@@ -246,14 +261,12 @@ export default function PressRelease() {
     );
   };
 
-  const showingStart = totalItems === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
-  const showingEnd = Math.min(totalItems, currentPage * PAGE_SIZE);
-
   // ---------------------------------------
   // UI Rendering
   // ---------------------------------------
+  // Important: provide explicit light & dark text color defaults
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900 text-slate-900 dark:text-white">
       <Navigation />
 
       {/* HERO */}
@@ -266,7 +279,7 @@ export default function PressRelease() {
             <Newspaper className="w-12 h-12 text-brand-cyan" />
           </div>
 
-          <h1 className="text-6xl font-bold mb-6">
+          <h1 className="text-6xl font-bold mb-6 text-slate-900 dark:text-white">
             <GradientText>Press Releases</GradientText>
           </h1>
 
@@ -281,39 +294,43 @@ export default function PressRelease() {
         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-6">
           {/* Search */}
           <div className="relative">
-            <Search className="absolute left-4 top-4 text-slate-400" />
+            <Search className="absolute left-4 top-4 text-slate-400 pointer-events-none" />
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search press releases..."
-              className="pl-12 h-14"
+              className="w-full pl-12 h-14 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:border-brand-cyan focus:ring-2 focus:ring-brand-cyan/20 transition-all"
             />
           </div>
 
           {/* Year */}
           <div className="relative">
-            <Filter className="absolute left-4 top-4 text-slate-400" />
+            <Filter className="absolute left-4 top-4 text-slate-400 pointer-events-none" />
             <select
               value={selectedYear}
               onChange={(e) => setSelectedYear(e.target.value)}
-              className="w-full pl-12 h-14 rounded-xl border-2 dark:bg-slate-900"
+              className="w-full pl-12 h-14 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white text-slate-900 dark:bg-slate-900 dark:text-white focus:border-brand-cyan focus:ring-2 focus:ring-brand-cyan/20 transition-all cursor-pointer"
             >
               {years.map((y) => (
-                <option key={y}>{y}</option>
+                <option key={y} value={y} className="text-slate-900 dark:text-white">
+                  {y}
+                </option>
               ))}
             </select>
           </div>
 
           {/* Category */}
           <div className="relative">
-            <Filter className="absolute left-4 top-4 text-slate-400" />
+            <Filter className="absolute left-4 top-4 text-slate-400 pointer-events-none" />
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full pl-12 h-14 rounded-xl border-2 dark:bg-slate-900"
+              className="w-full pl-12 h-14 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-white text-slate-900 dark:bg-slate-900 dark:text-white focus:border-brand-cyan focus:ring-2 focus:ring-brand-cyan/20 transition-all cursor-pointer"
             >
               {categories.map((c) => (
-                <option key={c}>{c}</option>
+                <option key={c} value={c} className="text-slate-900 dark:text-white">
+                  {c}
+                </option>
               ))}
             </select>
           </div>
@@ -321,92 +338,113 @@ export default function PressRelease() {
       </section>
 
       {/* CARDS */}
-      <section className="py-20 px-6">
+      <section id="press-releases-section" className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           {totalItems > 0 ? (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {paginatedReleases.map((r) => (
-                  <article
+                  <motion.article
                     key={r.id}
                     onClick={() => navigate(`/press-releases/${r.id}`)}
-                    className="bg-white dark:bg-slate-800 border dark:border-slate-700 rounded-2xl p-6 shadow-md hover:shadow-xl cursor-pointer"
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    className="group relative bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-2xl p-6 shadow-md hover:shadow-2xl cursor-pointer transition-all duration-500 flex flex-col h-full"
                   >
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="p-2 bg-brand-cyan/10 rounded-lg">
-                        <Calendar className="w-4 h-4 text-brand-cyan" />
+                    {/* Hover gradient background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0
+                                    group-hover:from-brand-cyan/5 group-hover:to-brand-navy/5
+                                    transition-all duration-500 pointer-events-none rounded-2xl" />
+
+                    {/* Content wrapper with flex-grow */}
+                    <div className="flex-grow relative z-10">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="p-2 bg-brand-cyan/10 rounded-lg group-hover:bg-brand-cyan/20 transition-colors">
+                          <Calendar className="w-4 h-4 text-brand-cyan" />
+                        </div>
+                        <span className="text-sm text-slate-700 dark:text-slate-300">
+                          {r.date}
+                        </span>
                       </div>
-                      <span className="text-sm dark:text-slate-300">
-                        {r.date}
+
+                      <span
+                        className={`inline-block mb-3 px-3 py-1.5 text-xs text-white font-bold rounded-full bg-gradient-to-r ${getCategoryColor(
+                          r.category
+                        )}`}
+                      >
+                        {r.category}
                       </span>
+
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-brand-cyan transition-colors">
+                        {r.title}
+                      </h3>
+
+                      <p className="text-sm text-slate-700 dark:text-slate-300 line-clamp-3 mb-4">
+                        {r.excerpt}
+                      </p>
                     </div>
 
-                    <span
-                      className={`inline-block mb-3 px-3 py-1.5 text-xs text-white font-bold rounded-full bg-gradient-to-r ${getCategoryColor(
-                        r.category
-                      )}`}
-                    >
-                      {r.category}
-                    </span>
-
-                    <h3 className="text-xl font-bold dark:text-white mb-3">
-                      {r.title}
-                    </h3>
-
-                    <p className="text-sm dark:text-slate-300 line-clamp-3 mb-4">
-                      {r.excerpt}
-                    </p>
-
-                    <div className="flex items-center gap-2 text-brand-cyan font-semibold">
-                      Read full release <ArrowRight className="w-4 h-4" />
+                    {/* Bottom button - Fixed position */}
+                    <div className="relative z-10 pt-4 border-t border-slate-100 dark:border-slate-700 mt-auto">
+                      <div className="flex items-center gap-2 text-brand-cyan font-semibold group-hover:gap-3 transition-all">
+                        Read full release <ArrowRight className="w-4 h-4" />
+                      </div>
                     </div>
 
                     {r.pdfUrl && (
                       <div
                         onClick={(e) => {
                           e.stopPropagation();
-                          window.open(r.pdfUrl, "_blank");
+                          if (r.pdfUrl) window.open(r.pdfUrl, "_blank");
                         }}
-                        className="absolute top-4 right-4 p-2 bg-white dark:bg-slate-900 rounded-lg shadow-md cursor-pointer"
+                        className="absolute top-4 right-4 p-2 bg-white dark:bg-slate-900 rounded-lg shadow-md cursor-pointer hover:bg-brand-cyan/10 transition-colors z-20"
                       >
                         <Download className="w-4 h-4 text-brand-cyan" />
                       </div>
                     )}
-                  </article>
+                  </motion.article>
                 ))}
               </div>
 
               {/* Pagination */}
-              <div className="mt-10 flex flex-col md:flex-row justify-between items-center gap-4">
-                <div className="text-sm dark:text-slate-300">
-                  Showing {showingStart} — {showingEnd} of {totalItems}
+              {totalPages > 1 && (
+                <div className="flex flex-col items-center gap-6 mt-16">
+                  {/* Page Info */}
+                  <p className="text-slate-600 dark:text-slate-300">
+                    Page {currentPage} of {totalPages}
+                  </p>
+
+                  {/* Pagination Controls */}
+                  <div className="flex items-center gap-2 flex-wrap justify-center">
+                    {/* Previous Button */}
+                    <Button
+                      size="sm"
+                      onClick={() => handleGoToPage(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </Button>
+
+                    {/* Page Numbers */}
+                    {renderPageButtons()}
+
+                    {/* Next Button */}
+                    <Button
+                      size="sm"
+                      onClick={() => handleGoToPage(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                      className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
-
-                <div className="flex items-center gap-2">
-                  <Button
-                    size="sm"
-                    disabled={currentPage === 1}
-                    onClick={() => handleGoToPage(currentPage - 1)}
-                  >
-                    Prev
-                  </Button>
-
-                  {renderPageButtons()}
-
-                  <Button
-                    size="sm"
-                    disabled={currentPage === totalPages}
-                    onClick={() => handleGoToPage(currentPage + 1)}
-                  >
-                    Next
-                  </Button>
-                </div>
-              </div>
+              )}
             </>
           ) : (
             <div className="text-center py-20">
               <Search className="w-16 h-16 mx-auto text-gray-400" />
-              <h3 className="text-xl font-bold mt-4">
+              <h3 className="text-xl font-bold mt-4 text-slate-900 dark:text-white">
                 No press releases found
               </h3>
             </div>

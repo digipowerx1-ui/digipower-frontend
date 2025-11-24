@@ -372,9 +372,12 @@ export default function PartnerPage() {
       {/* ===================== PARTNERSHIP MODELS ===================== */}
    <section className="py-24 bg-white dark:bg-slate-950">
   <div className="max-w-7xl mx-auto px-6 text-center">
-    <h2 className="text-4xl font-bold mb-12 bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff] bg-clip-text text-transparent">
-      Partnership Models
-    </h2>
+<h2 className="text-5xl font-bold mb-12 
+ bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent"
+>
+  Partnership Models
+</h2>
+
 
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
       {partnershipModels.map((m, i) => {

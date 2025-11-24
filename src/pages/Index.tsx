@@ -732,7 +732,7 @@ const Index = () => {
       <section id="about" className="py-24 bg-white dark:bg-slate-950 transition-colors duration-300">
         <div className="container mx-auto px-6">
           {/* Heading */}
-          <FadeIn direction="up" className="max-w-4xl mx-auto text-center mb-16 space-y-4">
+          <FadeIn direction="up" className="max-w-4xl mx-auto text-center mb-3 space-y-4">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white transition-colors duration-300 mb-10">
   DigiPowerX: Build Faster, Operate Smarter, <br />
   <span className="bg-gradient-to-r from-[#245592] to-[#01d3ff] bg-clip-text text-transparent">
@@ -966,7 +966,7 @@ const Index = () => {
 
 
      {/* ✅ DATA CENTER MAP SECTION */}
-<section className="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+<section className="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
   <div className="max-w-7xl mx-auto px-6">
     {/* Heading */}
     <div className="text-center mb-12">
@@ -1272,13 +1272,15 @@ const Index = () => {
   <div className="max-w-6xl mx-auto px-6 text-center">
 
     {/* Title */}
-    <h2
-      className="text-2xl md:text-3xl font-bold mb-6
-      bg-gradient-to-r from-[#245592] via-[#3b82f6] to-[#01d3ff]
-      bg-clip-text text-transparent"
-    >
-      Strategic Partnerships & Collaborations
-    </h2>
+<h2
+  className="text-2xl md:text-3xl font-bold mb-6
+  bg-gradient-to-r from-[#245592] to-[#01d3ff]
+  bg-clip-text text-transparent"
+>
+  Strategic Partnerships & Collaborations
+</h2>
+
+
 
     {/* Description */}
     <p className="text-gray-700 dark:text-gray-300 text-base md:text-lg max-w-3xl mx-auto leading-relaxed mb-10">

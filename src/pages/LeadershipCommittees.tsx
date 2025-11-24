@@ -416,70 +416,79 @@ committees: [
     <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
 
       {/* ====================== CARD 1 — CONTACT US ====================== */}
-      <motion.div
-        whileHover={{ y: -6, scale: 1.01 }}
-        className="group bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 
-                   dark:border-slate-700 shadow-md hover:shadow-2xl transition-all duration-500 
-                   p-10 relative overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 
-                        group-hover:from-brand-cyan/10 group-hover:to-brand-navy/10
-                        transition-all duration-500" />
+  <motion.div
+  whileHover={{ y: -6, scale: 1.01 }}
+  className="group rounded-2xl border border-gray-200 dark:border-slate-700 
+             shadow-md hover:shadow-2xl transition-all duration-500 
+             p-10 relative overflow-hidden
+             bg-gradient-to-br from-[#0A1A2F] via-[#102C45] to-[#1A4B6E]"
+>
+  {/* Hover overlay */}
+  <div
+    className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 
+               group-hover:from-brand-cyan/10 group-hover:to-brand-navy/10
+               transition-all duration-500"
+  />
 
-        <div className="relative z-10 flex flex-col space-y-4">
-          <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Contact Us
-          </h3>
+  <div className="relative z-10 flex flex-col space-y-4">
+    <h3 className="text-2xl font-bold text-white">
+      Contact Us
+    </h3>
 
-          <p className="text-slate-600 dark:text-gray-300 leading-relaxed">
-            We value your engagement and are committed to fostering strong relationships with our stakeholders.
-          </p>
+    <p className="text-gray-300 leading-relaxed">
+      We value your engagement and are committed to fostering strong relationships with our stakeholders.
+    </p>
 
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="/contact-us"
-            className="inline-block px-6 py-3 rounded-full font-semibold 
-                      bg-gradient-to-r from-brand-navy to-brand-cyan text-white 
-                      shadow-md hover:shadow-xl transition-all duration-300 w-fit"
-          >
-            Get in touch
-          </motion.a>
-        </div>
-      </motion.div>
+    <motion.a
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      href="/contact-us"
+      className="inline-block px-6 py-3 rounded-full font-semibold 
+                bg-gradient-to-r from-brand-navy to-brand-cyan 
+                text-white shadow-md hover:shadow-xl transition-all duration-300 w-fit"
+    >
+      Get in touch
+    </motion.a>
+  </div>
+</motion.div>
+
 
       {/* =================== CARD 2 — EMAIL ALERTS SIGNUP ================== */}
-      <motion.div
-        whileHover={{ y: -6, scale: 1.01 }}
-        className="group bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 
-                   dark:border-slate-700 shadow-md hover:shadow-2xl transition-all duration-500 
-                   p-10 relative overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 
-                        group-hover:from-brand-cyan/10 group-hover:to-brand-navy/10
-                        transition-all duration-500" />
+<motion.div
+  whileHover={{ y: -6, scale: 1.01 }}
+  className="group rounded-2xl border border-gray-200 dark:border-slate-700 
+             shadow-md hover:shadow-2xl transition-all duration-500 
+             p-10 relative overflow-hidden
+             bg-gradient-to-br from-[#0A1A2F] via-[#102C45] to-[#1A4B6E]"
+>
+  <div
+    className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 
+               group-hover:from-brand-cyan/10 group-hover:to-brand-navy/10
+               transition-all duration-500"
+  />
 
-        <div className="relative z-10 flex flex-col space-y-4">
-          <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-            Sign up for Email Alerts
-          </h3>
+  <div className="relative z-10 flex flex-col space-y-4">
+    <h3 className="text-2xl font-bold text-white">
+      Sign up for Email Alerts
+    </h3>
 
-          <p className="text-slate-600 dark:text-gray-300 leading-relaxed">
-            Receive updates in real-time about company activities and stay up to date with business developments.
-          </p>
+    <p className="text-gray-300 leading-relaxed">
+      Receive updates in real-time about company activities and stay up to date with business developments.
+    </p>
 
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="/email-alerts"
-            className="inline-block px-6 py-3 rounded-full font-semibold 
-                      bg-gradient-to-r from-brand-cyan to-brand-navy text-white 
-                      shadow-md hover:shadow-xl transition-all duration-300 w-fit"
-          >
-            Sign Up
-          </motion.a>
-        </div>
-      </motion.div>
+    <motion.a
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      href="/email-alerts"
+      className="inline-block px-6 py-3 rounded-full font-semibold 
+                bg-gradient-to-r from-brand-cyan to-brand-navy text-white 
+                shadow-md hover:shadow-xl transition-all duration-300 w-fit"
+    >
+      Sign Up
+    </motion.a>
+  </div>
+</motion.div>
+
 
     </div>
   </div>
