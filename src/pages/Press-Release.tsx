@@ -144,7 +144,7 @@ export default function PressRelease() {
   // ---------------------------------------
   // Filters
   // ---------------------------------------
-  const years = ["All", "2022", "2023", "2024", "2025"];
+  const years = ["All",  "2020" ,"2021", "2022", "2023", "2024", "2025"];
   const categories = [
     "All",
     "Corporate Update",
