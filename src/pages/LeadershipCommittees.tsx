@@ -88,7 +88,7 @@ const leaders: Leader[] = [
   //   name: "Ajay Gupta",
   //   role: "Board Member",
   //   img: "/Ajay.jpeg",
-  //   description: "",
+  //   description: "",    
   // },
 ];
 
