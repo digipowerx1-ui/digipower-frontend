@@ -76,13 +76,13 @@ const leaders: Leader[] = [
     description: "",
     linkedIn: "#",
   },
-  {
-    name: "Edward Karr",
-    role: "Head of Capital Markets and Investor Relations",
-    img: "/edward.png",
-    description: "",
-    linkedIn: "#",
-  },
+  // {
+  //   name: "Edward Karr",
+  //   role: "Head of Capital Markets and Investor Relations",
+  //   img: "/edward.png",
+  //   description: "",
+  //   linkedIn: "#",
+  // },
 
   // {
   //   name: "Ajay Gupta",
