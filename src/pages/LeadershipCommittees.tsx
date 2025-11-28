@@ -50,7 +50,7 @@ const leaders: Leader[] = [
   },
   {
     name: "Alec Amar",
-    role: "President",
+    role: "Capital Markets and Investor Relations Advisor",
     img: "/alec.jpeg",
     description: "",
     linkedIn: "#",
