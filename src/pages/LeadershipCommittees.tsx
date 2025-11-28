@@ -50,7 +50,7 @@ const leaders: Leader[] = [
   },
   {
     name: "Alec Amar",
-    role: "Capital Markets and Investor Relations Advisor",
+    role: "President",
     img: "/alec.jpeg",
     description: "",
     linkedIn: "#",
@@ -76,13 +76,13 @@ const leaders: Leader[] = [
     description: "",
     linkedIn: "#",
   },
-  // {
-  //   name: "Edward Karr",
-  //   role: "Head of Capital Markets and Investor Relations",
-  //   img: "/edward.png",
-  //   description: "",
-  //   linkedIn: "#",
-  // },
+  {
+    name: "Edward Karr",
+    role: "Capital Markets and Investor Relations Advisor",
+    img: "/edward.png",
+    description: "",
+    linkedIn: "#",
+  },
 
   // {
   //   name: "Ajay Gupta",
@@ -169,14 +169,14 @@ committees: [
   committees: []
 },
 
-{
-  name: "Edward Karr",
-  title: "Director",
-  img: "/edward.jpeg",
-  bio:
-    "Edward Karr is an international entrepreneur and founder of several investment management companies. Mr. Karr has more than 30 years of capital markets experience as an executive manager, financial analyst, money manager and investor. Mr. Karr was the founder, former President, CEO and Executive Chairman of U.S. Gold Corp. He was a former Director and Chair of the Audit Committee of Levon Resources, until its merger with Discovery Metals. Mr. Karr previously served on the boards of numerous publicly traded companies including Dataram, Inc., Pershing Gold Corp., PolarityTE, Inc. and Spherix Inc. Mr. Karr is a prior board member and past President of the American International Club of Geneva and Chairman of Republican's Overseas Switzerland. He is a frequent contributor to the financial press. Mr. Karr previously worked for Prudential Securities in the United States. Before his entry into the financial services arena, Mr. Karr was affiliated with the United States Antarctic Program and spent thirteen consecutive months working in the Antarctic, receiving the Antarctic Service Medal for winter over contributions of courage, sacrifice and devotion.",
-  committees: []
-},
+// {
+//   name: "Edward Karr",
+//   title: "Director",
+//   img: "/edward.jpeg",
+//   bio:
+//     "Edward Karr is an international entrepreneur and founder of several investment management companies. Mr. Karr has more than 30 years of capital markets experience as an executive manager, financial analyst, money manager and investor. Mr. Karr was the founder, former President, CEO and Executive Chairman of U.S. Gold Corp. He was a former Director and Chair of the Audit Committee of Levon Resources, until its merger with Discovery Metals. Mr. Karr previously served on the boards of numerous publicly traded companies including Dataram, Inc., Pershing Gold Corp., PolarityTE, Inc. and Spherix Inc. Mr. Karr is a prior board member and past President of the American International Club of Geneva and Chairman of Republican's Overseas Switzerland. He is a frequent contributor to the financial press. Mr. Karr previously worked for Prudential Securities in the United States. Before his entry into the financial services arena, Mr. Karr was affiliated with the United States Antarctic Program and spent thirteen consecutive months working in the Antarctic, receiving the Antarctic Service Medal for winter over contributions of courage, sacrifice and devotion.",
+//   committees: []
+// },
 
 ];
 
