@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
-import { ComponentType, SVGProps } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ComponentType, SVGProps, useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import GradientText from "@/components/GradientText";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
-import { Users, Award, Target, TrendingUp } from "lucide-react";
+import { Users, Award, Target, TrendingUp, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface Leader {
@@ -39,12 +39,14 @@ interface BoardMember {
 }
 
 export default function LeadershipCommittees() {
+  const [selectedLeader, setSelectedLeader] = useState<Leader | null>(null);
+
 const leaders: Leader[] = [
   {
     name: "Michel Amar",
     role: "Chief Executive Officer",
     img: "/michal.jpeg",
-    description: "",
+    description: "Michel Amar is a French-American businessman and entrepreneur known for his success in innovative technology, such as blockchain and electronics, as well as developing branded fashion. With a Bachelor's degree in accounting and business management, Michel has worked and consulted with some of the most famous international brands, playing a vital role in their profitability and continued relevance. In 2019, Michel partnered with Brookstone, a novelty retailer, in developing exclusive, technologically advanced products for their consumer electronics market.",
     linkedIn: "#",
     email: "michel@digipowerx.com",
   },
@@ -52,44 +54,44 @@ const leaders: Leader[] = [
     name: "Alec Amar",
     role: "President",
     img: "/alec.jpeg",
-    description: "",
+    description: "Mr. Amar is an entrepreneur and infrastructure executive with deep experience in energy, high-density data-center development, and advanced digital infrastructure. Under Mr. Amar's leadership, DigiPowerX has expanded into multiple U.S. markets with a growing portfolio of high-power data-center properties, including the development of a Tier III campus in Columbiana, Alabama; the modernization and repurposing of critical-power infrastructure in New York; and a national pipeline tied to power-station redevelopment, modular AI-ready facilities, and long-term energy-backed compute sites.\n\nMr. Amar guided the creation of DigiPowerX's proprietary ARMS 200 modular Tier III data-center system, engineered specifically for ultra-dense GPU clusters such as Nvidia B200/B300 deployments. His work bridges the gap between power system design, mission-critical facility engineering, and the rapidly accelerating demands of AI and high-performance computing.",
     linkedIn: "#",
   },
   {
     name: "Paul Ciullo",
     role: "Chief Financial Officer",
     img: "/Paul.jpeg",
-    description: "",
+    description: "Paul Ciullo serves as Chief Financial Officer at DigiPowerX, bringing extensive experience in financial management and corporate strategy to the executive team.",
     linkedIn: "#",
   },
   {
     name: "Daniel Rotunno",
     role: "VP of Operations",
     img: "/danial.jpeg",
-    description: "",
+    description: "Daniel Rotunno serves as VP of Operations at DigiPowerX, overseeing the company's operational excellence and ensuring efficient execution of strategic initiatives across all business units.",
     linkedIn: "#",
   },
   {
     name: "Luke Marchiori",
     role: "Chief Renewable Energy Officer",
     img: "/luke.jpeg",
-    description: "",
+    description: "Luke Marchiori serves as Chief Renewable Energy Officer at DigiPowerX, leading the company's sustainable energy initiatives and driving the integration of renewable power solutions into data center operations.",
     linkedIn: "#",
   },
   {
     name: "Edward Karr",
     role: "Capital Markets and Investor Relations Advisor",
     img: "/edward.png",
-    description: "",
+    description: "Edward Karr is an international entrepreneur and founder of several investment management companies. Mr. Karr has more than 30 years of capital markets experience as an executive manager, financial analyst, money manager and investor. Mr. Karr was the founder, former President, CEO and Executive Chairman of U.S. Gold Corp. He was a former Director and Chair of the Audit Committee of Levon Resources, until its merger with Discovery Metals. Mr. Karr previously served on the boards of numerous publicly traded companies including Dataram, Inc., Pershing Gold Corp., PolarityTE, Inc. and Spherix Inc.",
     linkedIn: "#",
   },
-
-  // {
-  //   name: "Ajay Gupta",
-  //   role: "Board Member",
-  //   img: "/Ajay.jpeg",
-  //   description: "",    
-  // },
+  {
+    name: "Eddie Cloud",
+    role: "Infrastructure and Development Lead",
+    img: "/eddie.jpeg",
+    description: "Eddie Cloud serves as an Infrastructure and Development Lead for DigiPowerX, overseeing large-scale site development, power-delivery coordination, and the deployment of high-density AI compute facilities. With 23 years of experience in electrical construction, power systems, and industrial infrastructure, Eddie manages end-to-end execution across utility negotiations, modular facility design, construction oversight, and Tier-3 secure-lot infrastructure.\n\nHe is recognized for his hands-on leadership style, ability to move projects from concept to operational readiness quickly, and deep experience with multi-MW power systems, cooling architectures, and UL/NRTL compliance. Eddie works directly with engineering teams, utilities, and municipal partners to ensure DigiPowerX delivers reliable, scalable AI infrastructure for enterprise clients.",
+    linkedIn: "#",
+  },
 ];
 
 
@@ -270,13 +272,14 @@ committees: [
       </div>
     </FadeIn>
 
-    <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    <StaggerContainer className="flex flex-wrap justify-center gap-10">
       {leaders.map((leader, index) => (
-        <StaggerItem key={index}>
+        <StaggerItem key={index} className="w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.75rem)]">
           <motion.div
             whileHover={{ y: -8, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="group h-full bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-500 p-8 relative overflow-hidden"
+            onClick={() => setSelectedLeader(leader)}
+            className="group h-full bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-500 p-8 relative overflow-hidden cursor-pointer"
           >
             {/* Hover Background Glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 group-hover:from-brand-cyan/10 group-hover:to-brand-navy/10 transition-all duration-500" />
@@ -312,17 +315,77 @@ committees: [
                 {leader.role}
               </p>
 
-              {/* Optional Description */}
-              {leader.description && (
-                <p className="text-slate-600 dark:text-gray-300 text-sm leading-relaxed text-center transition-colors duration-300">
-                  {leader.description}
-                </p>
-              )}
+              {/* Click to view bio hint */}
+              <p className="text-slate-400 dark:text-gray-500 text-xs text-center mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Click to view bio
+              </p>
             </div>
           </motion.div>
         </StaggerItem>
       ))}
     </StaggerContainer>
+
+    {/* Bio Modal */}
+    <AnimatePresence>
+      {selectedLeader && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setSelectedLeader(null)}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative"
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setSelectedLeader(null)}
+              className="absolute top-4 right-4 p-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors z-10"
+            >
+              <X className="w-5 h-5 text-slate-600 dark:text-gray-300" />
+            </button>
+
+            <div className="p-8">
+              {/* Profile Image */}
+              <div className="relative w-32 h-32 mx-auto mb-6">
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-navy to-brand-cyan blur-2xl opacity-40"
+                />
+                <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white dark:border-slate-700 shadow-xl mx-auto">
+                  <img
+                    src={selectedLeader.img}
+                    alt={selectedLeader.name}
+                    className="w-full h-full object-cover bg-white dark:bg-slate-700"
+                  />
+                </div>
+              </div>
+
+              {/* Name + Role */}
+              <h3 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-2">
+                {selectedLeader.name}
+              </h3>
+
+              <p className="text-brand-cyan font-semibold text-center text-lg mb-6">
+                {selectedLeader.role}
+              </p>
+
+              {/* Divider */}
+              <div className="h-[1px] bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-600 to-transparent mb-6" />
+
+              {/* Bio */}
+              <p className="text-slate-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">
+                {selectedLeader.description}
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   </div>
 </section>
 
