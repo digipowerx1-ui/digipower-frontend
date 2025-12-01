@@ -92,6 +92,13 @@ const leaders: Leader[] = [
     description: "Eddie Cloud serves as an Infrastructure and Development Lead for DigiPowerX, overseeing large-scale site development, power-delivery coordination, and the deployment of high-density AI compute facilities. With 23 years of experience in electrical construction, power systems, and industrial infrastructure, Eddie manages end-to-end execution across utility negotiations, modular facility design, construction oversight, and Tier-3 secure-lot infrastructure.\n\nHe is recognized for his hands-on leadership style, ability to move projects from concept to operational readiness quickly, and deep experience with multi-MW power systems, cooling architectures, and UL/NRTL compliance. Eddie works directly with engineering teams, utilities, and municipal partners to ensure DigiPowerX delivers reliable, scalable AI infrastructure for enterprise clients.",
     linkedIn: "#",
   },
+  {
+    name: "David Harley",
+    role: "Director of Manufacturing, Operations & Systems Integration",
+    img: "/david.jpeg",
+    description: "Mr. Harley is a veteran engineering, manufacturing, and operations executive with nearly 40 years of experience driving performance, systems integration, infrastructure reliability, and lean transformation across aerospace, defense, power systems, and advanced manufacturing environments. His extensive technical leadership spans high-reliability environments supporting NASA, Blue Origin, BAE Systems, U.S. defense platforms, and high-voltage industrial operations.\n\nAt DigiPowerX, Mr. Harley oversees mission-critical infrastructure operations at the North Tonawanda facility, including high-voltage electrical distribution, uptime optimization, and the operational execution required to support large-scale AI and data-center workloads. He leads site technicians, contractors, and operational partners while driving KPI reporting, maintenance programs, SOP execution, and 24/7 incident response.\n\nAt Blue Origin, Mr. Harley played a pivotal role in the production of avionics systems for NASA's MK1 and MK2 Lunar Lander programs, supporting the next generation of U.S. lunar exploration. He led avionics manufacturing engineering for spacecraft harnessing, fluid systems, and electromechanical assemblies; conducted engineering design-release reviews to ensure aerospace-grade quality, reliability, and system integrity; and provided mentorship, technical training, and daily support to engineering and production teams.\n\nHis Blue Origin experience brings DigiPowerX a rare level of mission-critical assembly discipline, directly applicable to high-density power systems, advanced electrical integration, and Tier-level data-center infrastructure.",
+    linkedIn: "#",
+  },
 ];
 
 
@@ -340,17 +347,17 @@ committees: [
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative"
+            className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] lg:h-[540px] overflow-y-auto relative"
           >
             {/* Close button */}
             <button
               onClick={() => setSelectedLeader(null)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors z-10"
+              className="sticky top-4 float-right mr-4 mt-4 p-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors z-10"
             >
               <X className="w-5 h-5 text-slate-600 dark:text-gray-300" />
             </button>
 
-            <div className="p-8">
+            <div className="p-8 pt-2">
               {/* Profile Image */}
               <div className="relative w-32 h-32 mx-auto mb-6">
                 <motion.div
