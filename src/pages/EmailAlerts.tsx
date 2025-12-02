@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import GradientText from "@/components/GradientText";
 import { useToast } from "@/hooks/use-toast";
-
+import { Helmet } from "react-helmet-async";
 export default function EmailAlerts() {
   const [formData, setFormData] = useState({
     email: "",
@@ -87,6 +87,17 @@ export default function EmailAlerts() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
+       {/* ⭐ PAGE TITLE ADDED HERE */}
+                  <Helmet>
+                    <title>DigiPowerX Email Sign-Up | Cloud Infrastructure News & Alerts
+
+      
+            </title>
+                    <meta
+                      name="description"
+                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                    />
+                  </Helmet>
       <Navigation />
 
       {/* ======================= HERO SECTION ======================= */}

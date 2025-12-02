@@ -5,7 +5,7 @@ import GradientText from "@/components/GradientText";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileDown } from "lucide-react";
-
+import { Helmet } from "react-helmet-async";
 interface DocumentItem {
   title: string;
   description: string;
@@ -43,6 +43,18 @@ export default function Document() {
 
   return (
     <div className="w-full bg-gray-50 dark:bg-slate-950 min-h-screen transition-colors duration-300">
+       {/* ⭐ PAGE TITLE ADDED HERE */}
+                        <Helmet>
+                          <title>DigiPowerX Documents | Cloud & AI Infrastructure Resources
+
+      
+            
+                  </title>
+                          <meta
+                            name="description"
+                            content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                          />
+                        </Helmet>
       {/* Navigation */}
       <Navigation />
 

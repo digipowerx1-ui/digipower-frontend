@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import GradientText from "@/components/GradientText";
 import { FadeIn } from "@/components/animations/FadeIn";
+import { Helmet } from "react-helmet-async";
 import {
   Zap,
   Server,
@@ -64,6 +65,18 @@ export default function ARMS() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950 transition-colors duration-300">
+       {/* ⭐ PAGE TITLE ADDED HERE */}
+                        <Helmet>
+                          <title>DigiPowerX ARMS | Modular AI Cloud Infrastructure Solutions
+
+      
+            
+                  </title>
+                          <meta
+                            name="description"
+                            content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                          />
+                        </Helmet>
       <Navigation />
 
       {/* Hero Section */}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import {
   Users,
   Rocket,
@@ -148,6 +149,18 @@ export default function PartnerPage() {
 
   return (
     <>
+     {/* ⭐ PAGE TITLE ADDED HERE */}
+                      <Helmet>
+                        <title>Partner With DigiPowerX | Cloud Infrastructure & AI Solutions
+
+    
+          
+                </title>
+                        <meta
+                          name="description"
+                          content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                        />
+                      </Helmet>
       {/* ✅ NAVIGATION BAR */}
       <Navigation />
 

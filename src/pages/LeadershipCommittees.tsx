@@ -7,6 +7,7 @@ import { FadeIn } from "@/components/animations/FadeIn";
 import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
 import { Users, Award, Target, TrendingUp, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Helmet } from "react-helmet-async";
 
 interface Leader {
   name: string;
@@ -192,6 +193,17 @@ committees: [
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900 scroll-smooth transition-colors duration-300">
+         {/* ⭐ PAGE TITLE ADDED HERE */}
+                  <Helmet>
+                    <title>DigiPowerX Leadership & Committees | AI Cloud Vision
+
+      
+            </title>
+                    <meta
+                      name="description"
+                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                    />
+                  </Helmet>
       <Navigation />
 
       {/* Hero Section */}

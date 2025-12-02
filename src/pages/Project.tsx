@@ -1,18 +1,20 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import "@splidejs/splide/dist/css/splide.min.css";
- 
+
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import GradientText from "@/components/GradientText";
 import { FadeIn } from "@/components/animations/FadeIn";
 import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
 import DataCenterMap from "@/components/DataCenterMap";
-import Projects from "@/components/Projects";   // ✅ REUSABLE COMPONENT
- 
-import { Building2, Zap, Server, Gauge, MapPin, TrendingUp, Shield, Leaf } from "lucide-react";
- 
-// ✅ Interface stays same
+import Projects from "@/components/Projects";
+
+import { Building2, Zap, Server, Gauge, TrendingUp, Shield, Leaf } from "lucide-react";
+
+//  ADD THIS IMPORT
+import { Helmet } from "react-helmet-async";
+
 interface SlideData {
   imageUrl: string;
   imageAlt: string;
@@ -22,24 +24,22 @@ interface SlideData {
   location: string;
   status: 'Operational' | 'Development' | 'Expansion';
 }
- 
+
 interface Stat {
   icon: typeof Building2;
   value: string;
   label: string;
   color: string;
 }
- 
+
 interface Feature {
   icon: typeof Shield;
   title: string;
   description: string;
   color: string;
 }
- 
+
 export default function USDataCentersPage() {
- 
-  // ✅ DATA FOR REUSABLE PROJECTS COMPONENT
   const slides: SlideData[] = [
     {
       imageUrl: "https://cdn.prod.website-files.com/66f727b0f2cf943df67f3121/672193ab70dde9c6e62ee75f_Unknown.avif",
@@ -82,14 +82,14 @@ export default function USDataCentersPage() {
         "200MW large-scale development site for next-generation AI compute expansion.",
     },
   ];
- 
+
   const stats: Stat[] = [
     { icon: Building2, value: "4", label: "Active Facilities", color: "from-blue-500 to-cyan-500" },
     { icon: Zap, value: "400+", label: "Total MW Capacity", color: "from-green-500 to-teal-500" },
     { icon: Server, value: "99.982%", label: "Uptime SLA", color: "from-purple-500 to-pink-500" },
     { icon: Gauge, value: "Tier III", label: "Compliance Standard", color: "from-orange-500 to-red-500" },
   ];
- 
+
   const features: Feature[] = [
     {
       icon: Shield,
@@ -116,70 +116,61 @@ export default function USDataCentersPage() {
       color: "from-orange-500 to-red-500",
     },
   ];
- 
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900">
- 
+
+      {/* ⭐ PAGE TITLE ADDED HERE */}
+      <Helmet>
+        <title>DigiPowerX Projects | AI Cloud & Advanced Infrastructure Builds
+</title>
+        <meta
+          name="description"
+          content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+        />
+      </Helmet>
+
       <Navigation />
- 
-      {/* ✅ HERO SECTION */}
+
+      {/* HERO SECTION */}
       <section className="relative py-32 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-6xl font-bold mb-6">
             <GradientText>U.S. Data Centers</GradientText>
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-         DigiPowerX develops and operates Tier III-compliant data-center campuses strategically located across the United States.
-Each facility integrates our ARMS 200 modular platform — a prefabricated, high-density system engineered for accelerated deployment and operational reliability.
-
+            DigiPowerX develops and operates Tier III-compliant data-center campuses strategically located across the United States.
+            Each facility integrates our ARMS 200 modular platform — engineered for accelerated deployment and operational reliability.
           </p>
         </div>
       </section>
- 
-      {/* ✅ STATS */}
-     {/* ✅ STATS SECTION – Gradient Premium Cards */}
-<section className="py-20 px-6">
-  <div className="max-w-7xl mx-auto">
-    <StaggerContainer className="grid md:grid-cols-4 gap-8">
 
-      {stats.map((stat, idx) => {
-        const Icon = stat.icon;
+      {/* STATS */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <StaggerContainer className="grid md:grid-cols-4 gap-8">
+            {stats.map((stat, idx) => {
+              const Icon = stat.icon;
+              return (
+                <StaggerItem key={idx}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: idx * 0.1 }}
+                    className="p-8 rounded-2xl text-center shadow-xl bg-gradient-to-br from-[#245592] to-[#01d3ff] text-white border border-white/10 hover:scale-[1.03] transition-transform"
+                  >
+                    <Icon className="w-12 h-12 mb-4 opacity-90" />
+                    <h3 className="text-4xl font-extrabold tracking-tight">{stat.value}</h3>
+                    <p className="text-white/90 text-lg mt-2">{stat.label}</p>
+                  </motion.div>
+                </StaggerItem>
+              );
+            })}
+          </StaggerContainer>
+        </div>
+      </section>
 
-        return (
-          <StaggerItem key={idx}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="p-8 rounded-2xl text-center shadow-xl 
-                         bg-gradient-to-br from-[#245592] to-[#01d3ff]
-                         text-white border border-white/10 
-                         hover:scale-[1.03] transition-transform"
-            >
-              
-              <Icon className="w-12 h-12 mb-4 text-white opacity-90" />
-
-              <h3 className="text-4xl font-extrabold tracking-tight">
-                {stat.value}
-              </h3>
-
-              <p className="text-white/90 text-lg mt-2">
-                {stat.label}
-              </p>
-
-            </motion.div>
-          </StaggerItem>
-        );
-      })}
-
-    </StaggerContainer>
-  </div>
-</section>
-
-      {/* <Projects slides={slides} /> */}
-
- 
-      {/* ✅ MAP SECTION */}
+      {/* MAP */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-4">
@@ -189,15 +180,13 @@ Each facility integrates our ARMS 200 modular platform — a prefabricated, high
             View our distributed U.S. footprint powering AI and cloud workloads.
           </p>
         </div>
- 
+
         <FadeIn delay={0.3}>
           <DataCenterMap />
         </FadeIn>
       </section>
- 
-      {/* ✅ ✅ ✅ USE THE COMPONENT HERE */}
- 
-      {/* ✅ FEATURES */}
+
+      {/* FEATURES */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
           {features.map((feature, idx) => {
@@ -212,9 +201,8 @@ Each facility integrates our ARMS 200 modular platform — a prefabricated, high
           })}
         </div>
       </section>
- 
+
       <Footer />
     </div>
   );
 }
- 

@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import {
   Briefcase,
   Rocket,
@@ -129,6 +130,18 @@ export default function Career() {
 
   return (
     <>
+     {/* ⭐ PAGE TITLE ADDED HERE */}
+                      <Helmet>
+                        <title>DigiPowerX Careers | Opportunities in Cloud Infrastructure & AI
+
+    
+          
+                </title>
+                        <meta
+                          name="description"
+                          content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                        />
+                      </Helmet>
       <Navigation />
 
       {/* ✅ HERO SECTION */}

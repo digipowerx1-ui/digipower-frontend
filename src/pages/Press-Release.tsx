@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
+import { Helmet } from "react-helmet-async";
 import {
   Calendar,
   Search,
@@ -267,6 +268,19 @@ export default function PressRelease() {
   // Important: provide explicit light & dark text color defaults
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900 text-slate-900 dark:text-white">
+        {/* ⭐ PAGE TITLE ADDED HERE */}
+                              <Helmet>
+                                <title>DigiPowerX Press Releases | Cloud AI & Infrastructure News
+
+      
+            
+                  
+                        </title>
+                                <meta
+                                  name="description"
+                                  content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                                />
+                              </Helmet>
       <Navigation />
 
       {/* HERO */}

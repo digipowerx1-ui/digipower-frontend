@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import {
   FileDown,
   Newspaper,
@@ -423,6 +424,17 @@ export default function InvestorRelations() {
 
   return (
     <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
+         {/* ⭐ PAGE TITLE ADDED HERE */}
+                  <Helmet>
+                    <title>Investor Relations | DigiPowerX High-Performance Cloud & AI
+
+      
+            </title>
+                    <meta
+                      name="description"
+                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                    />
+                  </Helmet>
       <Navigation />
 
       {/* ✅ HERO SECTION */}

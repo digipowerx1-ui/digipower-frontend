@@ -8,6 +8,7 @@ import GradientText from "@/components/GradientText";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/animations/FadeIn";
+import { Helmet } from "react-helmet-async";
 import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
 
 interface Filing {
@@ -168,6 +169,17 @@ export default function Sec() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900 transition-colors duration-300">
+         {/* ⭐ PAGE TITLE ADDED HERE */}
+                  <Helmet>
+                    <title>DigiPowerX SEC Filings | AI Cloud & Infrastructure Disclosures
+
+      
+            </title>
+                    <meta
+                      name="description"
+                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                    />
+                  </Helmet>
       <Navigation />
 
       {/* HERO SECTION */}

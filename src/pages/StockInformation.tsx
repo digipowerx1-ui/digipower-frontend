@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import GradientText from "@/components/GradientText";
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts";
 import { DollarSign, TrendingUp, TrendingDown, BarChart3, ArrowUp, ArrowDown, Clock } from "lucide-react";
@@ -218,6 +219,17 @@ export default function StockInformation() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
+         {/* ⭐ PAGE TITLE ADDED HERE */}
+                  <Helmet>
+                    <title>DigiPowerX Share Information | AI Cloud Infrastructure Company
+
+      
+            </title>
+                    <meta
+                      name="description"
+                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                    />
+                  </Helmet>
       <Navigation />
 
       {/* ======================= HERO SECTION ======================= */}

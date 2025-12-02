@@ -10,7 +10,7 @@ import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerCo
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
+import { Helmet } from "react-helmet-async";
 
 interface Presentation {
   id: number;
@@ -147,6 +147,17 @@ export default function PresentationsEvents() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900 scroll-smooth transition-colors duration-300">
+        {/* ⭐ PAGE TITLE ADDED HERE */}
+                  <Helmet>
+                    <title>DigiPowerX Press Releases | AI Cloud & Data Center Reports
+
+      
+            </title>
+                    <meta
+                      name="description"
+                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                    />
+                  </Helmet>
       <Navigation />
 
       {/* Hero Section */}

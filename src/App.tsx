@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
 import LoadingSpinner from "./components/LoadingSpinner";
 import ScrollToTop from "./components/ScrollToTop";
+import { HelmetProvider } from "react-helmet-async";  // ✅ IMPORTANT
 
 // ---------- LAZY LOADED PAGE IMPORTS ----------
 const Index = lazy(() => import("./pages/Index"));
@@ -21,60 +22,60 @@ const ARMS = lazy(() => import("./pages/ARMS"));
 const Sec = lazy(() => import("./pages/Sec"));
 const DocumentsAndCharters = lazy(() => import("./pages/Document"));
 const Career = lazy(() => import("./pages/Career"));
-const EmailAlerts = lazy(() => import("./pages/EmailAlerts"));   // ✅ NEW EMAIL ALERTS PAGE
+const EmailAlerts = lazy(() => import("./pages/EmailAlerts"));
 const StockInformation = lazy(() => import("./pages/StockInformation"));
 const TermsOfUse = lazy(() => import("./pages/TermsOfUse"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-
-const Partnerpage = lazy(() => import("./pages/Partnerpage"));   // ✅ NEW PARTNER PAGE
-
+const Partnerpage = lazy(() => import("./pages/Partnerpage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              {/* ----------- MAIN ROUTES ----------- */}
-              <Route path="/" element={<Index />} />
-              <Route path="/press-releases" element={<PressRelease />} />
-              <Route path="/press-releases/:id" element={<PressReleaseDetail />} />
-              <Route path="/presentations-events" element={<PresentationsEvents />} />
+  <HelmetProvider>   {/* ✅ WRAPPING START */}
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
+                {/* ----------- MAIN ROUTES ----------- */}
+                <Route path="/" element={<Index />} />
+                <Route path="/press-releases" element={<PressRelease />} />
+                <Route path="/press-releases/:id" element={<PressReleaseDetail />} />
+                <Route path="/presentations-events" element={<PresentationsEvents />} />
 
-              {/* ----------- NEW PAGES ----------- */}
-              <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="/leadership-committees" element={<LeadershipCommittees />} />
-              <Route path="/investor-relations" element={<InvestorRelations />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/arms" element={<ARMS />} />
-              <Route path="/sec" element={<Sec />} />
+                {/* ----------- NEW PAGES ----------- */}
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/leadership-committees" element={<LeadershipCommittees />} />
+                <Route path="/investor-relations" element={<InvestorRelations />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/arms" element={<ARMS />} />
+                <Route path="/sec" element={<Sec />} />
 
-              {/* ✅ Career & Partner Pages */}
-              <Route path="/career" element={<Career />} />
-              <Route path="/partner" element={<Partnerpage />} />      {/* ✅ Added */}
+                {/* Career & Partner Pages */}
+                <Route path="/career" element={<Career />} />
+                <Route path="/partner" element={<Partnerpage />} />
 
-              {/* ✅ Documents & Charters Page */}
-              <Route path="/document" element={<DocumentsAndCharters />} />
-        <Route path="/email-alerts" element={<EmailAlerts />} />
-             <Route path="/stock-information" element={<StockInformation />} />
-             <Route path="/terms-of-use" element={<TermsOfUse />} />
-             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                {/* Documents & Charters */}
+                <Route path="/document" element={<DocumentsAndCharters />} />
+                <Route path="/email-alerts" element={<EmailAlerts />} />
+                <Route path="/stock-information" element={<StockInformation />} />
+                <Route path="/terms-of-use" element={<TermsOfUse />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
-              {/* 404 Page */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </ErrorBoundary>
+                {/* 404 Page */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
+  </HelmetProvider>  
 );
 
 export default App;

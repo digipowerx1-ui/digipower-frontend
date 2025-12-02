@@ -6,7 +6,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import GradientText from "@/components/GradientText";
 import { useToast } from "@/hooks/use-toast";
-
+import { Helmet } from "react-helmet-async";
 const contactFormSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
   lastName: z.string().min(2, "Last name must be at least 2 characters"),
@@ -60,6 +60,18 @@ export default function ContactUs() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950 transition-colors duration-300">
+        {/* ⭐ PAGE TITLE ADDED HERE */}
+                        <Helmet>
+                          <title>Contact DigiPowerX | AI Cloud & Infrastructure Solutions
+
+      
+            
+                  </title>
+                          <meta
+                            name="description"
+                            content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                          />
+                        </Helmet>
       <Navigation />
 
       {/* ---------- HERO SECTION ---------- */}
