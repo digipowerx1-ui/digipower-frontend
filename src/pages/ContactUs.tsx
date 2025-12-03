@@ -69,7 +69,8 @@ export default function ContactUs() {
                   </title>
                           <meta
                             name="description"
-                            content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                            content="Contact DigiPowerX | Speak With Our AI Cloud & Advanced Cloud Infrastructure Specialists for Enterprise Data Center Solutions
+."
                           />
                         </Helmet>
       <Navigation />

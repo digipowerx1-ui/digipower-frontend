@@ -52,7 +52,9 @@ export default function Document() {
                   </title>
                           <meta
                             name="description"
-                            content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                            content="DigiPowerX Resources & Documents | Advanced AI Cloud Infrastructure, Cloud Solutions, and Next-Gen Data Center Capabilities for Modern Enterprise Demands
+
+."
                           />
                         </Helmet>
       {/* Navigation */}

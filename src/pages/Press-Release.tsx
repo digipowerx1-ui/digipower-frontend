@@ -278,7 +278,8 @@ export default function PressRelease() {
                         </title>
                                 <meta
                                   name="description"
-                                  content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                                  content="DigiPowerX Press Releases | Updates on AI Cloud Solutions, Data Center Infrastructure, Cloud Innovation, and Enterprise-Grade Cloud Development
+."
                                 />
                               </Helmet>
       <Navigation />
@@ -297,9 +298,9 @@ export default function PressRelease() {
             <GradientText>Press Releases</GradientText>
           </h1>
 
-          <p className="text-xl text-slate-700 dark:text-slate-300 max-w-3xl mx-auto">
+          <h2 className="text-xl text-slate-700 dark:text-slate-300 max-w-3xl mx-auto">
             Stay updated with the latest official announcements and updates.
-          </p>
+          </h2>
         </div>
       </section>
 

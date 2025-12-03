@@ -158,7 +158,8 @@ export default function PartnerPage() {
                 </title>
                         <meta
                           name="description"
-                          content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                          content="Partner with DigiPowerX to co-build enterprise-grade AI cloud & data-centre infrastructure. Join our global network to scale modular, Tier-3-ready solutions.
+."
                         />
                       </Helmet>
       {/* ✅ NAVIGATION BAR */}

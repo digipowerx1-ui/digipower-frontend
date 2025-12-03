@@ -21,6 +21,7 @@ import WireLines from "@/components/WireLines";
 import backgroundVideo from "@/assets/background.mp4";
 import bannerLogo from "@/assets/USDC-logo.png";
 import logo from "@/assets/logo.png";
+import { Helmet } from "react-helmet";
 
 interface StockDataPoint {   
   date: string;
@@ -101,6 +102,7 @@ const Index = () => {
   ];
   return (
     <div className="min-h-screen bg-background scroll-smooth">
+     
       <Navigation />
 
       {/* Hero Section with Enhanced Animations */}
@@ -367,9 +369,9 @@ const Index = () => {
               <StaggerItem>
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight text-slate-900 dark:text-white transition-colors duration-300 text-center lg:text-left">
                  <GradientText>Powering the Future of AI & Cloud Infrastructure</GradientText>
-                  <span className="block text-slate-500 dark:text-slate-300 text-sm md:text-base lg:text-lg tracking-[0.2em] md:tracking-[0.4em] uppercase mt-3">
+                  <h1 className="block text-slate-500 dark:text-slate-300 text-sm md:text-base lg:text-lg tracking-[0.2em] md:tracking-[0.4em] uppercase mt-3">
                     data infrastructure
-                  </span>
+                  </h1>
                   {/* <span className="block mt-4">
                     <GradientText>Built for hyperscale AI velocity.</GradientText>
                   </span> */}

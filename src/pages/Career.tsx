@@ -139,7 +139,9 @@ export default function Career() {
                 </title>
                         <meta
                           name="description"
-                          content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                          content="Join DigiPowerX | Shape the Future of AI Cloud, Cloud Infrastructure & High-Density Data Centers with a Global Leader in Advanced Technology
+
+."
                         />
                       </Helmet>
       <Navigation />

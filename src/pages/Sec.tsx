@@ -177,7 +177,8 @@ export default function Sec() {
             </title>
                     <meta
                       name="description"
-                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                      content="DigiPowerX SEC Filings | Transparent Financial Statements, Regulatory Disclosures & Compliance Updates for AI and Cloud Infrastructure Investors
+."
                     />
                   </Helmet>
       <Navigation />

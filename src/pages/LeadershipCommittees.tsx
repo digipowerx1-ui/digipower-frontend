@@ -201,7 +201,9 @@ committees: [
             </title>
                     <meta
                       name="description"
-                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                      content="DigiPowerX SEC Filings | AI Cloud Infrastructure, Data Center Compliance, Corporate Governance & Regulatory Disclosures for Global Growth
+
+."
                     />
                   </Helmet>
       <Navigation />

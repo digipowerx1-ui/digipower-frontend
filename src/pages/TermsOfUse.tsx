@@ -16,7 +16,8 @@ export default function TermsOfUse() {
             </title>
                     <meta
                       name="description"
-                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                      content="DigiPowerX Terms of Use | Official Policies Governing AI Cloud, Cloud Infrastructure & Secure Data Center Services for Global Enterprise Operations
+."
                     />
                   </Helmet>
       <Navigation />
@@ -32,14 +33,14 @@ export default function TermsOfUse() {
           <GradientText>Terms of Use</GradientText>
         </motion.h1>
 
-        <motion.p
+        <motion.h2
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
           className="text-lg text-gray-300 max-w-2xl mx-auto"
         >
           Please read these Terms carefully before using DigiPowerX.com.
-        </motion.p>
+        </motion.h2>
       </section>
 
       {/* ======================= CONTENT SECTION ======================= */}

@@ -126,7 +126,8 @@ export default function USDataCentersPage() {
 </title>
         <meta
           name="description"
-          content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+          content="Explore DigiPowerX’s projects featuring cloud infrastructure, AI-ready data centres, and enterprise solutions built for secure, high-performance workloads.
+."
         />
       </Helmet>
 

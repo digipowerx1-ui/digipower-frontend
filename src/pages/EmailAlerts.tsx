@@ -95,7 +95,8 @@ export default function EmailAlerts() {
             </title>
                     <meta
                       name="description"
-                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                      content="Sign Up for DigiPowerX Alerts | Updates on AI Cloud Innovation, Cloud Infrastructure Projects, High-Density Data Centers and Advanced Cloud Technology
+."
                     />
                   </Helmet>
       <Navigation />

@@ -16,7 +16,8 @@ export default function PrivacyPolicy() {
       </title>
               <meta
                 name="description"
-                content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                content="DigiPowerX Privacy Policy | Protecting Your Data Across AI Cloud Platforms, Secure Cloud Infrastructure, and Enterprise-Grade Digital Systems Worldwide
+."
               />
             </Helmet>
       <Navigation />
@@ -32,14 +33,14 @@ export default function PrivacyPolicy() {
           <GradientText>Privacy Policy</GradientText>
         </motion.h1>
 
-        <motion.p
+        <motion.h2
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
           className="text-lg text-gray-300 max-w-2xl mx-auto"
         >
           Learn how DigiPowerX collects, uses, and protects your information.
-        </motion.p>
+        </motion.h2>
       </section>
 
       {/* ================= CONTENT SECTION ================= */}

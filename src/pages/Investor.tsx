@@ -432,7 +432,8 @@ export default function InvestorRelations() {
             </title>
                     <meta
                       name="description"
-                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                      content="DigiPowerX Investor Relations | Advanced AI Cloud Infrastructure, Scalable Cloud Solutions & High-Density Data Centers for Global Investors
+."
                     />
                   </Helmet>
       <Navigation />

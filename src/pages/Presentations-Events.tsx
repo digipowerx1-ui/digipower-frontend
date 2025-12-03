@@ -155,7 +155,8 @@ export default function PresentationsEvents() {
             </title>
                     <meta
                       name="description"
-                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                      content="DigiPowerX | Global Events & Presentations on AI Cloud Infrastructure, Cloud Solutions, Data Center Expansion and High-Performance Compute Innovation
+."
                     />
                   </Helmet>
       <Navigation />

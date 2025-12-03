@@ -74,7 +74,8 @@ export default function ARMS() {
                   </title>
                           <meta
                             name="description"
-                            content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                            content="DigiPowerX ARMS delivers modular, Tier III-ready AI cloud pods with 600 kW high-density compute and rapid deployment for enterprise AI and cloud workloads.
+."
                           />
                         </Helmet>
       <Navigation />

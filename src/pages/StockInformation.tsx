@@ -227,7 +227,9 @@ export default function StockInformation() {
             </title>
                     <meta
                       name="description"
-                      content="Explore DigiPowerX’s Tier III U.S. data centers powering AI and high-density compute workloads."
+                      content="DigiPowerX Stock Information | Investor Insights on AI Cloud, Scalable Cloud Infrastructure, and High-Density Data Center Expansion
+
+."
                     />
                   </Helmet>
       <Navigation />
