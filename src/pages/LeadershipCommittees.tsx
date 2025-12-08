@@ -200,19 +200,19 @@ export default function LeadershipCommittees() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-slate-950 dark:to-slate-900 scroll-smooth transition-colors duration-300">
-         {/* ⭐ PAGE TITLE ADDED HERE */}
-                  <Helmet>
-                    <title>DigiPowerX Leadership & Committees | AI Cloud Vision
+      {/* ⭐ PAGE TITLE ADDED HERE */}
+      <Helmet>
+        <title>DigiPowerX Leadership & Committees | AI Cloud Vision
 
-      
-            </title>
-                    <meta
-                      name="description"
-                      content="DigiPowerX SEC Filings | AI Cloud Infrastructure, Data Center Compliance, Corporate Governance & Regulatory Disclosures for Global Growth
+
+        </title>
+        <meta
+          name="description"
+          content="DigiPowerX SEC Filings | AI Cloud Infrastructure, Data Center Compliance, Corporate Governance & Regulatory Disclosures for Global Growth
 
 ."
-                    />
-                  </Helmet>
+        />
+      </Helmet>
       <Navigation />
 
       {/* Hero Section */}
