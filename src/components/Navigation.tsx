@@ -1,4 +1,4 @@
-import { Menu, X, Sun, Moon } from "lucide-react"; 
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
@@ -27,7 +27,7 @@ const Navigation = () => {
       ],
     },
 
-    { label: "SEC Filings", href: "/sec", isRoute: true },
+    { label: "SEC Filings", href: "/sec-filings", isRoute: true },
     { label: "Leadership & Committees", href: "/leadership-committees", isRoute: true },
     { label: "Careers", href: "/career", isRoute: true },
     { label: "Partnership", href: "/partner", isRoute: true },
@@ -49,11 +49,10 @@ const Navigation = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${scrolled
           ? "border-b border-gray-200/20 backdrop-blur-xl bg-slate-900/95 shadow-lg"
           : "border-b border-gray-200/20 backdrop-blur-xl bg-slate-900/80"
-      }`}
+        }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
 

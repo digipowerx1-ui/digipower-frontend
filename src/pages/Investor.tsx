@@ -96,22 +96,25 @@ export default function InvestorRelations() {
     const fetchPressReleases = async () => {
       try {
         const res = await fetch(
-          "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/press-releases?populate=*"
+          "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/press-releases?fields=title,date&populate[pdf_file][fields]=url&sort[0]=date:desc&pagination[pageSize]=4"
         );
         const json = await res.json();
 
-        const sorted = json.data.sort(
-          (a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()
-        );
+        // Data is already sorted and limited by API
+        const topFour = json.data;
 
-        const topFour = sorted.slice(0, 4);
+        const cleaned = topFour.map((item: any) => {
+          // Handle both flattened and nested Strapi structures just in case
+          const attrs = item.attributes || item;
+          const pdfUrl = attrs.pdf_file?.url || attrs.pdf_file?.data?.attributes?.url || item.pdf_file?.url || "";
 
-        const cleaned = topFour.map((item: any) => ({
-          id: item.id,
-          title: item.title,
-          date: item.date,
-          pdf: item.pdf_file?.url || "",
-        }));
+          return {
+            id: item.id || item.documentId,
+            title: attrs.title,
+            date: attrs.date,
+            pdf: pdfUrl,
+          };
+        });
 
         setPressReleases(cleaned);
       } catch (err) {
@@ -389,7 +392,7 @@ export default function InvestorRelations() {
       icon: FileDown,
       title: "SEC Filings",
       description: "Access financial statements, reports, and compliance documents.",
-      link: "/sec",
+      link: "/sec-filings",
       color: "from-purple-500 to-pink-500",
     },
     {
@@ -424,18 +427,18 @@ export default function InvestorRelations() {
 
   return (
     <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors duration-300">
-         {/* ⭐ PAGE TITLE ADDED HERE */}
-                  <Helmet>
-                    <title>Investor Relations | DigiPowerX High-Performance Cloud & AI
+      {/* ⭐ PAGE TITLE ADDED HERE */}
+      <Helmet>
+        <title>Investor Relations | DigiPowerX High-Performance Cloud & AI
 
-      
-            </title>
-                    <meta
-                      name="description"
-                      content="DigiPowerX Investor Relations | Advanced AI Cloud Infrastructure, Scalable Cloud Solutions & High-Density Data Centers for Global Investors
+
+        </title>
+        <meta
+          name="description"
+          content="DigiPowerX Investor Relations | Advanced AI Cloud Infrastructure, Scalable Cloud Solutions & High-Density Data Centers for Global Investors
 ."
-                    />
-                  </Helmet>
+        />
+      </Helmet>
       <Navigation />
 
       {/* ✅ HERO SECTION */}
@@ -571,11 +574,10 @@ export default function InvestorRelations() {
                         <p className="text-sm text-slate-500 dark:text-gray-400 mb-1">
                           {liveStockData.lastUpdated}
                         </p>
-                        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold ${
-                          liveStockData.changePercent >= 0
-                            ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
-                            : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
-                        }`}>
+                        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold ${liveStockData.changePercent >= 0
+                          ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
+                          : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
+                          }`}>
                           <span className="text-xl">
                             {liveStockData.changePercent >= 0 ? '▲' : '▼'}
                           </span>
@@ -590,18 +592,16 @@ export default function InvestorRelations() {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
                       <div className="space-y-1">
                         <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 font-medium">Change</p>
-                        <p className={`text-lg md:text-xl font-bold ${
-                          liveStockData.changePercent >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
-                        }`}>
+                        <p className={`text-lg md:text-xl font-bold ${liveStockData.changePercent >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+                          }`}>
                           {liveStockData.changePercent >= 0 ? '▲' : '▼'} ${Math.abs(liveStockData.change).toFixed(2)}
                         </p>
                       </div>
 
                       <div className="space-y-1">
                         <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400 font-medium">Change %</p>
-                        <p className={`text-lg md:text-xl font-bold ${
-                          liveStockData.changePercent >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
-                        }`}>
+                        <p className={`text-lg md:text-xl font-bold ${liveStockData.changePercent >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+                          }`}>
                           {liveStockData.changePercent.toFixed(2)}%
                         </p>
                       </div>
@@ -758,11 +758,10 @@ export default function InvestorRelations() {
                       onClick={() => setChartPeriod(period)}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className={`flex-1 md:flex-none px-4 md:px-5 py-2 rounded-lg font-bold text-xs md:text-sm transition-all duration-300 ${
-                        chartPeriod === period
-                          ? 'bg-white dark:bg-slate-800 text-brand-cyan shadow-lg shadow-brand-cyan/20 border border-brand-cyan/20'
-                          : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-slate-800/50'
-                      }`}
+                      className={`flex-1 md:flex-none px-4 md:px-5 py-2 rounded-lg font-bold text-xs md:text-sm transition-all duration-300 ${chartPeriod === period
+                        ? 'bg-white dark:bg-slate-800 text-brand-cyan shadow-lg shadow-brand-cyan/20 border border-brand-cyan/20'
+                        : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-slate-800/50'
+                        }`}
                     >
                       {period}
                     </motion.button>
@@ -865,38 +864,38 @@ export default function InvestorRelations() {
       </section>
 
       {/* ✅ PRESS RELEASES — UPDATED WITH LIVE API FETCH */}
-     <section className="py-12 md:py-24 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-950">
-  <div className="container mx-auto px-4 md:px-6">
+      <section className="py-12 md:py-24 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-950">
+        <div className="container mx-auto px-4 md:px-6">
 
-    {/* Heading + Link */}
-    <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 md:mb-12 gap-4">
-      <FadeIn direction="left">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-          <GradientText>Latest Press Releases</GradientText>
-        </h2>
-      </FadeIn>
+          {/* Heading + Link */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 md:mb-12 gap-4">
+            <FadeIn direction="left">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+                <GradientText>Latest Press Releases</GradientText>
+              </h2>
+            </FadeIn>
 
-      <FadeIn direction="right">
-        <Link to="/press-releases">
-          <motion.button
-            whileHover={{ x: 5 }}
-            className="text-brand-cyan hover:text-brand-navy font-semibold flex items-center gap-2 text-sm md:text-base"
-          >
-            View all press releases →
-          </motion.button>
-        </Link>
-      </FadeIn>
-    </div>
+            <FadeIn direction="right">
+              <Link to="/press-releases">
+                <motion.button
+                  whileHover={{ x: 5 }}
+                  className="text-brand-cyan hover:text-brand-navy font-semibold flex items-center gap-2 text-sm md:text-base"
+                >
+                  View all press releases →
+                </motion.button>
+              </Link>
+            </FadeIn>
+          </div>
 
-    {/* Cards */}
-    <StaggerContainer className="grid gap-4 md:gap-6 md:grid-cols-2 max-w-7xl mx-auto">
+          {/* Cards */}
+          <StaggerContainer className="grid gap-4 md:gap-6 md:grid-cols-2 max-w-7xl mx-auto">
 
-      {pressReleases.map((release) => (
-        <StaggerItem key={release.id}>
-          <motion.div
-            whileHover={{ y: -8, scale: 1.01 }}
-            onClick={() => release.pdf && window.open(release.pdf, "_blank")}
-            className="
+            {pressReleases.map((release) => (
+              <StaggerItem key={release.id}>
+                <motion.div
+                  whileHover={{ y: -8, scale: 1.01 }}
+                  onClick={() => release.pdf && window.open(release.pdf, "_blank")}
+                  className="
               group
               p-6 md:p-8
               bg-white dark:bg-slate-800
@@ -909,45 +908,45 @@ export default function InvestorRelations() {
               flex flex-col
               h-full
             "
-          >
-            {/* Hover gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 group-hover:from-brand-cyan/5 group-hover:to-brand-navy/5 transition-all duration-500" />
+                >
+                  {/* Hover gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 group-hover:from-brand-cyan/5 group-hover:to-brand-navy/5 transition-all duration-500" />
 
-            <div className="relative z-10 flex flex-col h-full">
+                  <div className="relative z-10 flex flex-col h-full">
 
-              {/* Date */}
-              <div className="flex items-center gap-3 mb-4">
-                <Calendar className="w-4 h-4 md:w-5 md:h-5 text-brand-cyan" />
-                <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400">
-                  {release.date}
-                </p>
-              </div>
+                    {/* Date */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <Calendar className="w-4 h-4 md:w-5 md:h-5 text-brand-cyan" />
+                      <p className="text-xs md:text-sm text-slate-500 dark:text-gray-400">
+                        {release.date}
+                      </p>
+                    </div>
 
-              {/* Title */}
-              <h3 className="font-bold text-lg md:text-xl leading-snug text-slate-900 dark:text-white group-hover:text-brand-navy dark:group-hover:text-brand-cyan">
-                {release.title}
-              </h3>
+                    {/* Title */}
+                    <h3 className="font-bold text-lg md:text-xl leading-snug text-slate-900 dark:text-white group-hover:text-brand-navy dark:group-hover:text-brand-cyan">
+                      {release.title}
+                    </h3>
 
-              {/* Spacer pushes button down */}
-              <div className="flex-grow" />
+                    {/* Spacer pushes button down */}
+                    <div className="flex-grow" />
 
-              {/* Read More */}
-              <motion.div
-                className="mt-6 text-brand-cyan font-semibold flex items-center gap-2 text-sm md:text-base"
-                whileHover={{ x: 5 }}
-              >
-                Read more →
-              </motion.div>
+                    {/* Read More */}
+                    <motion.div
+                      className="mt-6 text-brand-cyan font-semibold flex items-center gap-2 text-sm md:text-base"
+                      whileHover={{ x: 5 }}
+                    >
+                      Read more →
+                    </motion.div>
 
-            </div>
-          </motion.div>
-        </StaggerItem>
-      ))}
+                  </div>
+                </motion.div>
+              </StaggerItem>
+            ))}
 
-    </StaggerContainer>
+          </StaggerContainer>
 
-  </div>
-</section>
+        </div>
+      </section>
 
 
       {/* ✅ INVESTOR RESOURCES */}

@@ -6,9 +6,9 @@ export default function Footer() {
   return (
     <footer className="bg-slate-900 dark:bg-slate-950 text-white transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 py-12">
-        
+
         <div className="grid md:grid-cols-5 gap-8 mb-12">
-          
+
           {/* Company Info */}
           <div className="md:col-span-2">
             <div className="flex items-center">
@@ -16,7 +16,7 @@ export default function Footer() {
             </div>
 
             <p className="text-gray-400 dark:text-gray-300 text-sm mb-4 transition-colors duration-300">
-              DigiPowerX is an innovative energy infrastructure company that develops cutting-edge data centers 
+              DigiPowerX is an innovative energy infrastructure company that develops cutting-edge data centers
               to drive the expansion of sustainable energy assets.
             </p>
 
@@ -46,7 +46,7 @@ export default function Footer() {
             <h3 className="font-bold mb-4">Financials</h3>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li><Link to="/stock-information" className="hover:text-white transition-colors">Stock Information</Link></li>
-              <li><Link to="/sec" className="hover:text-white transition-colors">SEC Filings</Link></li>
+              <li><Link to="/sec-filings" className="hover:text-white transition-colors">SEC Filings</Link></li>
             </ul>
           </div>
 
@@ -88,7 +88,7 @@ export default function Footer() {
               </a>
               <a href="https://x.com/DigipowerX" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </a>
               <a href="https://www.youtube.com/@DigiPowerX" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">

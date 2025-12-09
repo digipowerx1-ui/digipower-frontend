@@ -19,7 +19,7 @@ const LeadershipCommittees = lazy(() => import("./pages/LeadershipCommittees"));
 const InvestorRelations = lazy(() => import("./pages/Investor"));
 const Projects = lazy(() => import("./pages/Project"));
 const ARMS = lazy(() => import("./pages/ARMS"));
-const Sec = lazy(() => import("./pages/Sec"));
+const SecFilings = lazy(() => import("./pages/sec-filings"));
 const DocumentsAndCharters = lazy(() => import("./pages/Document"));
 const Career = lazy(() => import("./pages/Career"));
 const EmailAlerts = lazy(() => import("./pages/EmailAlerts"));
@@ -54,7 +54,7 @@ const App = () => (
                 <Route path="/investor-relations" element={<InvestorRelations />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/arms" element={<ARMS />} />
-                <Route path="/sec" element={<Sec />} />
+                <Route path="/sec-filings" element={<SecFilings />} />
 
                 {/* Career & Partner Pages */}
                 <Route path="/career" element={<Career />} />
@@ -75,7 +75,7 @@ const App = () => (
         </TooltipProvider>
       </QueryClientProvider>
     </ErrorBoundary>
-  </HelmetProvider>  
+  </HelmetProvider>
 );
 
 export default App;
