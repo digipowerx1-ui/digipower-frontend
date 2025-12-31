@@ -60,7 +60,7 @@ export default function LeadershipCommittees() {
     },
     {
       name: "Jagan Jeyapal",
-      role: "Chief Technical Officer",
+      role: "Chief Technology Officer",
       img: "/cto.jpeg",
       description: "Jag is a seasoned engineering leader with deep experience in Silicon Valley at Oracle, Equinix and VeriSign. Throughout his career, he has modernized and operated large-scale cloud and data-center platforms, automated 200+ data centers, built machine learning-driven observability systems, led global engineering teams and developed secure interconnection and API ecosystems supporting hyperscalers and mission-critical enterprise workloads. At VeriSign, he worked on foundational PKI, SSL and cryptographic infrastructure.\n\nAs CTO, Jag will lead Digi Power X's full technology roadmap, overseeing the ARMS 200 Tier-3 modular data-center platform, scaling AI infrastructure deployments and managing the NeoCloudz GPU-as-a-Service platform. He will also direct the development of customer integration software, ensuring seamless onboarding, API enablement and enterprise-grade performance as Digi Power X prepares to begin AI data processing in 2026.",
       linkedIn: "#",
