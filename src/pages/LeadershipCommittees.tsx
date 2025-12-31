@@ -138,16 +138,6 @@ export default function LeadershipCommittees() {
         { name: "Compensation Committee", role: "Member" },
       ],
     },
-
-    {
-      name: "Dennis Elsenbeck",
-      title: "Director",
-      img: "/dennis.jpeg",
-      bio:
-        "Mr. Elsenbeck provides consulting services on energy-related opportunities as Head of Energy and Sustainability at Phillips Lytle LLP and as owner of ElsEnergy LLC. With nearly 30 years of leadership at a major U.S. utility and roles as President and Chief Sustainability Officer at Viridi Parente, he brings expertise in long-term energy policy, markets, and infrastructure.\n\nHe advises clients on due diligence, regulatory compliance, procurement strategies, utility negotiations, economic incentives, and resource planning. He is a member of Aion 1901 LLC and HM 1901 LLC, focusing on revitalizing disadvantaged communities through energy infrastructure.\n\nHe serves on New York's Climate Action Council, helping develop the Scoping Document for the state's Climate Leadership and Community Protection Act. He is Board Chair for the Northland Workforce Training Center, a Board Member for the Buffalo Urban Development Corporation, and a member of the University at Buffalo School of Engineering Dean's Council. He holds degrees in Industrial Engineering Technology, an MBA, and a Master's in Engineering.\n\nMr. Elsenbeck is a recognized expert and lecturer in the energy field.",
-      committees: []
-    },
-
     {
       name: "Gerard Rotonda",
       title: "Director",
