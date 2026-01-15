@@ -94,6 +94,13 @@ export default function LeadershipCommittees() {
       linkedIn: "#",
     },
     {
+      name: "Jim McCabe",
+      role: "Advisor",
+      img: "https://www.lasolascapital.com/wp-content/uploads/2021/01/jim.jpg",
+      description: "Jim McCabe is a seasoned entrepreneur, investor, and operator with extensive experience scaling businesses. Jim was an early investor in U.S. Bitcoin Corp which completed a merger with Hut 8 Corp (Ticker: Hut) in November of 2023 which was the largest M&A deal within the bitcoin mining industry at that time.\n\nJim also has extensive private equity experience and has successfully closed or participated in multiple private and public market mergers, acquisitions, and sales transactions. He founded Las Olas Capital, LLC - a multi-strategy private investment firm located in South Florida. Prior to creating Las Olas Capital, Jim was the founder and CEO of Liberty Settlement Funding, LLC and Liberty Legal Funding, LLC where he was responsible for financing over $1 billion dollars in investment-grade receivables and alternative assets. After selling those businesses, Jim launched Las Olas Capital, LLC to focus on providing venture capital to early stage, high growth companies with innovative technology.\n\nHe has a B.A. in Economics from the University of Florida.",
+      linkedIn: "#",
+    },
+    {
       name: "Eddie Cloud",
       role: "Infrastructure and Development Lead",
       img: "/eddie.jpeg",
