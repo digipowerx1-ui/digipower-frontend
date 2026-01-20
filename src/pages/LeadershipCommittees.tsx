@@ -86,13 +86,13 @@ export default function LeadershipCommittees() {
       description: "Luke Marchiori serves as Chief Renewable Energy Officer at DigiPowerX, leading the company's sustainable energy initiatives and driving the integration of renewable power solutions into data center operations.",
       linkedIn: "#",
     },
-    {
-      name: "Edward Karr",
-      role: "Capital Markets and Investor Relations Advisor",
-      img: "/edward.png",
-      description: "Edward Karr is an international entrepreneur and founder of several investment management companies. Mr. Karr has more than 30 years of capital markets experience as an executive manager, financial analyst, money manager and investor. Mr. Karr was the founder, former President, CEO and Executive Chairman of U.S. Gold Corp. He was a former Director and Chair of the Audit Committee of Levon Resources, until its merger with Discovery Metals. Mr. Karr previously served on the boards of numerous publicly traded companies including Dataram, Inc., Pershing Gold Corp., PolarityTE, Inc. and Spherix Inc.",
-      linkedIn: "#",
-    },
+    // {
+    //   name: "Edward Karr",
+    //   role: "Capital Markets and Investor Relations Advisor",
+    //   img: "/edward.png",
+    //   description: "Edward Karr is an international entrepreneur and founder of several investment management companies. Mr. Karr has more than 30 years of capital markets experience as an executive manager, financial analyst, money manager and investor. Mr. Karr was the founder, former President, CEO and Executive Chairman of U.S. Gold Corp. He was a former Director and Chair of the Audit Committee of Levon Resources, until its merger with Discovery Metals. Mr. Karr previously served on the boards of numerous publicly traded companies including Dataram, Inc., Pershing Gold Corp., PolarityTE, Inc. and Spherix Inc.",
+    //   linkedIn: "#",
+    // },
     {
       name: "Jim McCabe",
       role: "Advisor",
