@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
@@ -47,6 +48,7 @@ export default function RootLayout({
                         <SonnerToaster />
                     </TooltipProvider>
                 </ThemeProvider>
+                <Analytics />
             </body>
         </html>
     );
