@@ -2,6 +2,19 @@
  * Vercel Serverless Function - Proxy for historical stock data
  * This proxies requests to the EC2 backend to avoid mixed content issues
  */
+
+function getBackendUrl() {
+  const url = process.env.BACKEND_API_URL;
+  if (!url) {
+    throw new Error('BACKEND_API_URL environment variable is not configured');
+  }
+  // Enforce HTTPS in production
+  if (process.env.NODE_ENV === 'production' && !url.startsWith('https://')) {
+    console.warn('Warning: BACKEND_API_URL should use HTTPS in production');
+  }
+  return url;
+}
+
 export default async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -28,8 +41,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Date parameter is required' });
     }
 
-    // Call EC2 backend (server-to-server, no mixed content issues)
-    const backendUrl = process.env.BACKEND_API_URL || 'http://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com';
+    const backendUrl = getBackendUrl();
     const response = await fetch(`${backendUrl}/api/stock?symbol=${symbol}&date=${date}`, {
       method: 'GET',
       headers: {

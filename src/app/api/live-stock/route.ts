@@ -1,9 +1,20 @@
 import { NextResponse } from 'next/server';
 
-const BACKEND_API_URL = process.env.BACKEND_API_URL || 'http://ec2-51-20-254-227.eu-north-1.compute.amazonaws.com';
+function getBackendUrl(): string {
+  const url = process.env.BACKEND_API_URL;
+  if (!url) {
+    throw new Error('BACKEND_API_URL environment variable is not configured');
+  }
+  // Enforce HTTPS in production
+  if (process.env.NODE_ENV === 'production' && !url.startsWith('https://')) {
+    console.warn('Warning: BACKEND_API_URL should use HTTPS in production');
+  }
+  return url;
+}
 
 export async function GET(request: Request) {
   try {
+    const BACKEND_API_URL = getBackendUrl();
     const { searchParams } = new URL(request.url);
     const symbol = searchParams.get('symbol')?.toUpperCase() || 'DGXX';
 
