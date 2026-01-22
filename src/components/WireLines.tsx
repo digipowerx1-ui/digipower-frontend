@@ -354,7 +354,7 @@ const WireLines = () => {
           />
 
           <motion.img
-            src={logo}
+            src={logo.src}
             alt="DigiPowerX Logo Generating Power"
             className="w-full h-full object-contain drop-shadow-lg relative z-10"
             animate={{

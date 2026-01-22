@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/c7542caa9066774b.js"],"ViewportBoundary"]
+3:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/c7542caa9066774b.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+0:{"buildId":"7UDYBNAGvYkBoLO9qNEfu","rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Digihost Achieves Milestone of 1 EH/s in  Hashrate and Announces Bitcoin Dividend  Policy  | DigiPowerX Press Release"}],["$","meta","1",{"name":"description","content":"TORONTO, April 04, 2022 (GLOBE NEWSWIRE) -- Digihost Technology Inc. \n(“Digihost” or the “Company”) (Nasdaq: DGHI; TSXV: DGHI), an innovative U.S. \nbased Bitcoi"}],["$","meta","2",{"name":"google-site-verification","content":"up7xHoLHfsB_lpzujMgWum-a6HW8pzTxTIR5YWspXrU"}]]}]}]}],null]}],"loading":null,"isPartial":false}

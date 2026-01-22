@@ -1,6 +1,8 @@
 import { LucideIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface FeatureCardProps {
   icon?: LucideIcon;
@@ -8,9 +10,9 @@ interface FeatureCardProps {
   title: string;
   description: string;
   delay?: number;
+  className?: string;
 }
-
-const FeatureCard = ({ icon: Icon, image, title, description, delay = 0 }: FeatureCardProps) => {
+const FeatureCard = ({ icon: Icon, image, title, description, delay = 0, className }: FeatureCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -23,9 +25,10 @@ const FeatureCard = ({ icon: Icon, image, title, description, delay = 0 }: Featu
       }}
       whileHover={{ y: -8, scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
+      className={cn(className)}
     >
       <Card className="group h-full p-8 bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/50 hover:border-brand-cyan/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(1,211,255,0.15)] relative overflow-hidden">
-        
+
         {/* Hover Background Effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-cyan/0 to-brand-navy/0 group-hover:from-brand-cyan/5 group-hover:to-brand-navy/5 transition-all duration-500" />
 
@@ -36,7 +39,7 @@ const FeatureCard = ({ icon: Icon, image, title, description, delay = 0 }: Featu
           transition={{ duration: 0.5 }}
         >
           {image ? (
-            <img src={image} alt={title} className="w-10 h-10 object-contain" />
+            <Image src={image} alt={title} width={40} height={40} className="object-contain" />
           ) : Icon ? (
             <Icon className="w-8 h-8 text-brand-cyan group-hover:text-brand-navy transition-colors duration-500" />
           ) : null}

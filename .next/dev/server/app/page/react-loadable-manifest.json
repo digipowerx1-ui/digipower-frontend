@@ -1,0 +1,11 @@
+{
+  "[project]/src/components/DataCenterMap.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/src/components/DataCenterMap.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/node_modules_1d5a99d2._.js",
+      "static/chunks/src_components_DataCenterMap_tsx_3f393e05._.js",
+      "static/chunks/node_modules_leaflet_dist_leaflet_ef5f0413.css",
+      "static/chunks/src_components_DataCenterMap_tsx_2b34a77e._.js"
+    ]
+  }
+}

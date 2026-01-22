@@ -1,17 +1,26 @@
-import { Menu, X, Sun, Moon } from "lucide-react";
+"use client";
+
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X, Sun, Moon, ChevronDown, ChevronRight, Globe, BarChart, Phone, FileText } from "lucide-react";
+import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/Group1.png";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useTheme } from "next-themes";
+import Image from "next/image";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const location = useLocation();
-  const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname();
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   const navItems = [
     { label: "Projects", href: "/projects", isRoute: true },
@@ -34,15 +43,21 @@ const Navigation = () => {
   ];
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     setIsOpen(false);
     setOpenDropdown(null);
-  }, [location]);
+  }, [pathname]);
+
+  const isLinkActive = (path: string) => {
+    return pathname === path;
+  };
 
   return (
     <motion.nav
@@ -50,21 +65,26 @@ const Navigation = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${scrolled
-          ? "border-b border-gray-200/20 backdrop-blur-xl bg-slate-900/95 shadow-lg"
-          : "border-b border-gray-200/20 backdrop-blur-xl bg-slate-900/80"
+        ? "border-b border-gray-200/20 backdrop-blur-xl bg-slate-900/95 shadow-lg"
+        : "border-b border-gray-200/20 backdrop-blur-xl bg-slate-900/80"
         }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
 
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2 group">
-          <motion.img
+        <Link href="/" className="flex items-center space-x-2 group">
+          <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            src={logo}
-            alt="DigiPowerX Logo"
-            className="h-10 w-auto object-contain transition-all duration-300"
-          />
+            className="relative h-10 w-auto"
+          >
+            {/* Using Next.js Image for optimization, assuming imported asset works */}
+            <Image
+              src={logo}
+              alt="DigiPowerX Logo"
+              className="h-10 w-auto object-contain transition-all duration-300"
+            />
+          </motion.div>
         </Link>
 
         {/* Desktop Navigation */}
@@ -77,7 +97,7 @@ const Navigation = () => {
               onMouseLeave={() => setOpenDropdown(null)}
             >
               <Link
-                to={item.href}
+                href={item.href}
                 className="relative flex items-center gap-1 text-white hover:text-brand-cyan transition-colors duration-300 font-medium group"
               >
                 {item.label}
@@ -97,7 +117,7 @@ const Navigation = () => {
                     {item.dropdown.map((dropItem, idx) => (
                       <Link
                         key={idx}
-                        to={dropItem.href}
+                        href={dropItem.href}
                         className="flex flex-col items-start px-5 py-4 hover:bg-white/10 transition-all duration-300 group"
                       >
                         <span className="text-white font-medium group-hover:text-brand-cyan">{dropItem.label}</span>
@@ -125,7 +145,7 @@ const Navigation = () => {
           </motion.button>
 
           {/* Contact Button */}
-          <Link to="/contact-us">
+          <Link href="/contact-us">
             <Button className="bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-medium text-base px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
               Contact Us
             </Button>
@@ -158,7 +178,7 @@ const Navigation = () => {
                 <div key={index}>
                   {/* Parent Item - Always a link */}
                   <Link
-                    to={item.href}
+                    href={item.href}
                     onClick={() => setIsOpen(false)}
                     className="block text-white py-2 px-4 rounded-lg hover:bg-white/5"
                   >
@@ -171,7 +191,7 @@ const Navigation = () => {
                       {item.dropdown.map((dropItem, idx) => (
                         <Link
                           key={idx}
-                          to={dropItem.href}
+                          href={dropItem.href}
                           onClick={() => setIsOpen(false)}
                           className="block text-gray-300 hover:text-white transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-white/5"
                         >
@@ -196,7 +216,7 @@ const Navigation = () => {
               </motion.button>
 
               {/* CONTACT US BUTTON */}
-              <Link to="/contact-us" onClick={() => setIsOpen(false)}>
+              <Link href="/contact-us" onClick={() => setIsOpen(false)}>
                 <Button className="w-full mt-4 bg-gradient-to-r from-brand-navy to-brand-cyan hover:from-brand-cyan hover:to-brand-navy text-white font-medium text-base py-3 rounded-lg shadow-md hover:shadow-xl transition-all">
                   Contact Us
                 </Button>

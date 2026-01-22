@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Splide from "@splidejs/splide";
 import "@splidejs/splide/dist/css/splide.min.css";
@@ -110,9 +111,9 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
                 Our Facilities
               </span>
             </h2>
-         <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
- Experience Our Next-Generation Data Centers
-</p>
+            <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+              Experience Our Next-Generation Data Centers
+            </p>
           </div>
         </FadeIn>
 
@@ -132,10 +133,11 @@ export default function ProjectsSlider({ slides }: ProjectsSliderProps) {
                     <li key={idx} className="splide__slide relative">
                       {/* Image */}
                       <div className="relative h-[320px] sm:h-[400px] md:h-[600px]">
-                        <img
+                        <Image
                           src={slide.imageUrl}
                           alt={slide.imageAlt}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                       </div>

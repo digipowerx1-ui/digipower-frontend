@@ -6,6 +6,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import GradientText from "@/components/GradientText";
 import { useToast } from "@/hooks/use-toast";
+import { STRAPI_API } from "@/lib/strapi";
 
 const contactFormSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -38,7 +39,7 @@ export default function ContactUs() {
 
     try {
       const response = await fetch(
-        "https://thankful-miracle-1ed8bdfdaf.strapiapp.com/api/contact-forms",
+        STRAPI_API.contactForms,
         {
           method: "POST",
           headers: {
