@@ -18,9 +18,12 @@
   "author": "DigiPowerX",
   "license": "MIT",
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "cors": "^2.8.5",
+    "date-fns-tz": "^2.0.1",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "node-cron": "^3.0.3",
     "ws": "^8.18.3"
   },
   "engines": {

@@ -3,6 +3,7 @@ import cors from 'cors';
 import { WebSocketServer } from 'ws';
 import { createServer } from 'http';
 import dotenv from 'dotenv';
+import { initializeCronJobs, triggerManual } from './cron/index.js';
 
 dotenv.config();
 
@@ -288,6 +289,36 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Manual cron trigger endpoint (for testing)
+app.post('/api/cron/stock-eod/trigger', async (req, res) => {
+  const apiKey = req.headers['x-api-key'];
+
+  // Check API key for authentication
+  if (!process.env.CRON_API_KEY || apiKey !== process.env.CRON_API_KEY) {
+    return res.status(401).json({ error: 'Unauthorized - Invalid API key' });
+  }
+
+  try {
+    const result = await triggerManual({
+      dryRun: req.query.dryRun === 'true',
+      testEmail: req.query.testEmail || null
+    });
+
+    res.json({
+      success: true,
+      message: 'Stock EOD job triggered successfully',
+      result
+    });
+  } catch (error) {
+    console.error('Manual trigger error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message,
+      message: 'Failed to trigger stock EOD job'
+    });
+  }
+});
+
 // Create HTTP server
 const server = createServer(app);
 
@@ -371,4 +402,7 @@ server.listen(PORT, () => {
   console.log(`🔌 WebSocket: ws://localhost:${PORT}/ws/stock`);
   console.log(`❤️  Health Check: http://localhost:${PORT}/api/health`);
   console.log(`💰 Real-time Plan: ACTIVE - Using paid tier endpoints\n`);
+
+  // Initialize cron jobs after server starts
+  initializeCronJobs();
 });
